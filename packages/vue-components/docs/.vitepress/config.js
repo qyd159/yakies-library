@@ -13,7 +13,7 @@ export default defineConfig({
   title: '组件库文档',
   description: '整理日常前端组件',
   themeConfig: {
-    repo: 'https://gitlab.yakies.cn/chumahtung/universal-vite-vue3.git',
+    repo: 'https://gitlab.yakies.cn/chumahtung/yakies-library.git',
     sidebar: [
       {
         text: '介绍',
