@@ -61,18 +61,6 @@
           "path": "./snippets/vbForm.json"
         },
         {
-          "language": "vue",
-          "path": "./snippets/vbTable.json"
-        },
-        {
-          "language": "vue-html",
-          "path": "./snippets/vbTable.json"
-        },
-        {
-          "language": "vue",
-          "path": "./snippets/vbModal.json"
-        },
-        {
           "language": "vue-html",
           "path": "./snippets/vbForm.json"
         },
@@ -96,7 +84,7 @@
       "url": "https://github.com/qyd159/yakies-library.git"
     },
     "bugs": {
-      "email": "echolaotou@gmail.com"
+      "email": "qyd159@163.com"
     },
     "license": "MIT License"
   }
