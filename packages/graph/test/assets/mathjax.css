@@ -1,0 +1,26 @@
+mjx-container {
+  font-size: 1.45em;
+}
+
+mjx-container mjx-math {
+  padding: 1px;
+}
+
+mjx-container mjx-assistive-mml {
+  /* mathjax会创建一个svg/chtml来显示渲染效果；并且有一个元素存放原始mathml内容。而这个元素中的原始mathml内容可能会很多，它又是以行为顶向下渲染的，就会导致整个元素下沉，ABC的表格等出现一个空滚动条 */
+  transform: scale(0.01);
+}
+
+mjx-container + mjx-container {
+  margin-left: 1px;
+}
+
+mjx-container.high-light mjx-math {
+  background-color: #f1f1f1;
+  border: solid 1px #b6b6b6;
+}
+
+/* 表达式根式中，次方根出现在块内首个元素时，会消失。待官方更新。MathJax@0.3.1、0.3.2。 @detail: https://gitlab.dm-ai.cn/AIT/apps/ait-author-board-confluence/issues/585 */
+mjx-root {
+  min-width: 0.5px;
+}

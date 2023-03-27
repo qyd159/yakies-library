@@ -1,0 +1,22 @@
+{
+  "name": "yakies-library",
+  "version": "0.1.0-alpha",
+  "main": "main/index.js",
+  "author": "qinyadong <qyd159@163.com>",
+  "private": true,
+  "license": "MIT",
+  "description": "公共工具、组件库",
+  "scripts": {
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.26.0",
+    "vitest": "^0.25.1"
+  },
+  "keywords": [
+    "components",
+    "utilities"
+  ]
+}

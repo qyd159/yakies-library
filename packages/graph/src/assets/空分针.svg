@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="100px" viewBox="0 0 8 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>矩形备份 102</title>
+    <defs>
+        <polygon id="path-fen" points="222 83.2631579 226 78 230 83.2631579 230 178 222 178"></polygon>
+        <mask id="mask-fen" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="8" height="100" fill="white">
+            <use xlink:href="#path-fen"></use>
+        </mask>
+    </defs>
+    <g id="正式版1.1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-dasharray="2,2" stroke-opacity="0.445940778">
+        <g id="画板" transform="translate(-222.000000, -78.000000)" stroke="#000000" stroke-width="2">
+            <use id="矩形备份-102" mask="url(#mask-fen)" transform="translate(226.000000, 128.000000) rotate(-360.000000) translate(-226.000000, -128.000000) " xlink:href="#path-fen"></use>
+        </g>
+    </g>
+</svg>

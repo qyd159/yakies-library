@@ -1,0 +1,10 @@
+node_modules
+*.log
+dist
+package-lock.json
+.history
+coverage
+yarn.lock
+tmp
+uploads
+generated_models

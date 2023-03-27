@@ -1,0 +1,134 @@
+.aid-container {
+  text-align: center;
+}
+
+.node-wrapper {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-overflow: ellipsis;
+  /* Needed to make it work */
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: PingFangSC-Regular, PingFang SC;
+}
+
+.text-node-light {
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.text-node-dark {
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.arrow-line-light {
+  stroke: rgba(0, 0, 0, 0.45);
+}
+
+.arrow-line-dark {
+  stroke: rgba(255, 255, 255, 0.65);
+}
+
+.arrow-light {
+  fill: rgba(0, 0, 0, 0.45);
+  stroke: rgba(0, 0, 0, 0.45);
+}
+
+.arrow-dark {
+  fill: rgba(255, 255, 255, 0.65);
+  stroke: rgba(255, 255, 255, 0.65);
+}
+
+.text-wrap {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  white-space: normal !important;
+}
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.aid-table {
+  padding: 2px 2px;
+}
+
+.aid-table table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  display: inline-block;
+}
+
+.aid-table table th,
+.aid-table table td {
+  border: 1px solid #51a0ff;
+  text-align: center;
+  vertical-align: top;
+  box-sizing: border-box;
+}
+
+.aid-table table th {
+  background-color: #d3e7ff;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 1;
+  }
+
+  10% {
+    opacity: 0.4;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  30% {
+    opacity: 0.4;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.4;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.svg-font1 {
+  fill: none;
+  stroke: red;
+  stroke-width: 10;
+  stroke-dasharray: 880 330;
+  animation: flicker 1s infinite;
+}

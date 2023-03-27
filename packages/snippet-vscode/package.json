@@ -1,0 +1,102 @@
+{
+    "name": "yakies-snippet",
+    "description": "代码辅助,代码片段自动完成",
+    "version": "0.1.0",
+    "publisher": "qinyadong",
+    "engines": {
+      "vscode": "^1.63.0"
+    },
+    "scripts": {
+      "build": "vsce package",
+      "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    },
+    "categories": [
+      "Snippets"
+    ],
+    "keywords": [
+      "vben",
+      "ant design vue",
+      "vite vue3 ts"
+    ],
+    "contributes": {
+      "languages": [
+        {
+          "id": "vue",
+          "extensions": [
+            ".vue"
+          ]
+        },
+        {
+          "id": "json",
+          "extensions": [
+            ".json"
+          ]
+        },
+        {
+          "id": "typescript",
+          "extensions": [
+            ".ts"
+          ]
+        }
+      ],
+      "snippets": [
+        {
+          "language": "vue",
+          "path": "./snippets/basicSnippet.json"
+        },
+        {
+          "language": "vue-html",
+          "path": "./snippets/basicSnippet.json"
+        },
+        {
+          "language": "vue-html",
+          "path": "./snippets/vbForm.json"
+        },
+        {
+          "language": "typescript",
+          "path": "./snippets/vbForm.json"
+        },
+        {
+          "language": "vue",
+          "path": "./snippets/vbForm.json"
+        },
+        {
+          "language": "vue",
+          "path": "./snippets/vbTable.json"
+        },
+        {
+          "language": "vue-html",
+          "path": "./snippets/vbTable.json"
+        },
+        {
+          "language": "vue",
+          "path": "./snippets/vbModal.json"
+        },
+        {
+          "language": "vue-html",
+          "path": "./snippets/vbForm.json"
+        },
+        {
+          "language": "vue-html",
+          "path": "./snippets/hooks.json"
+        },
+        {
+          "language": "vue-html",
+          "path": "./snippets/setup.json"
+        },
+        {
+          "language": "typescript",
+          "path": "./snippets/hooks.json"
+        }
+      ]
+    },
+    "icon": "assets/image/logo.png",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/qyd159/yakies-library.git"
+    },
+    "bugs": {
+      "email": "echolaotou@gmail.com"
+    },
+    "license": "MIT License"
+  }

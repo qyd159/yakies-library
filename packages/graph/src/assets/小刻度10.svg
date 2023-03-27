@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="296px" height="300px" viewBox="0 0 296 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>外圈读数与刻度</title>
+    <g id="正式版1.1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="画板" transform="translate(-40.000000, -214.000000)">
+            <g id="外圈读数与刻度" transform="translate(40.000000, 214.000000)">
+                <g id="刻度线" transform="translate(16.000000, 18.000000)" stroke="#000000" stroke-dasharray="2,2" stroke-opacity="0.445722247">
+                    <line x1="222.057023" y1="72.5" x2="248.057023" y2="72.5" id="路径-16" transform="translate(235.057023, 72.500000) rotate(330.000000) translate(-235.057023, -72.500000) "></line>
+                    //11-15
+                    <line x1="227.711909" y1="83.5983395" x2="253.711909" y2="83.5983395" id="路径-16" transform="translate(240.711909, 83.598339) rotate(336.000000) translate(-240.711909, -83.598339) "></line>
+                    <line x1="232.175725" y1="95.2269777" x2="258.175725" y2="95.2269777" id="路径-16" transform="translate(245.175725, 95.226978) rotate(342.000000) translate(-245.175725, -95.226978) "></line>
+                    <line x1="235.399564" y1="107.258509" x2="261.399564" y2="107.258509" id="路径-16" transform="translate(248.399564, 107.258509) rotate(348.000000) translate(-248.399564, -107.258509) "></line>
+                    <line x1="237.348106" y1="119.561113" x2="263.348106" y2="119.561113" id="路径-16" transform="translate(250.348106, 119.561113) rotate(354.000000) translate(-250.348106, -119.561113) "></line>
+                    <line x1="238" y1="132" x2="264" y2="132" id="路径-16"></line>
+                </g>
+                <g id="外圈数字" fill="#000000" fill-opacity="0.652671547" font-family="MathJax_Main-Regular, MathJax_Main" font-weight="normal">
+                    <text id="11备份" font-size="12">
+                        <tspan x="271" y="97">11</tspan>
+                    </text>
+                    <text id="12备份" font-size="12">
+                        <tspan x="276" y="111">12</tspan>
+                    </text>
+                    <text id="13备份" font-size="12">
+                        <tspan x="280" y="125">13</tspan>
+                    </text>
+                    <text id="14" font-size="12">
+                        <tspan x="282" y="139">14</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

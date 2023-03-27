@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="296px" height="300px" viewBox="0 0 296 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>外圈读数与刻度</title>
+    <g id="正式版1.1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="画板" transform="translate(-40.000000, -214.000000)">
+            <g id="外圈读数与刻度" transform="translate(40.000000, 214.000000)">
+                <g id="刻度线" transform="translate(16.000000, 18.000000)" stroke="#000000" stroke-dasharray="2,2" stroke-opacity="0.445722247">
+                    <line x1="119" y1="13" x2="145" y2="13" id="路径-16" transform="translate(132.000000, 13.000000) rotate(270.000000) translate(-132.000000, -13.000000) "></line>
+                    //1-5
+                    <line x1="131.438887" y1="13.6518945" x2="157.438887" y2="13.6518945" id="路径-16" transform="translate(144.438887, 13.651894) rotate(276.000000) translate(-144.438887, -13.651894) "></line>
+                    <line x1="143.741491" y1="15.6004355" x2="169.741491" y2="15.6004355" id="路径-16" transform="translate(156.741491, 15.600436) rotate(282.000000) translate(-156.741491, -15.600436) "></line>
+                    <line x1="155.773022" y1="18.8242746" x2="181.773022" y2="18.8242746" id="路径-16" transform="translate(168.773022, 18.824275) rotate(288.000000) translate(-168.773022, -18.824275) "></line>
+                    <line x1="167.401661" y1="23.2880905" x2="193.401661" y2="23.2880905" id="路径-16" transform="translate(180.401661, 23.288091) rotate(294.000000) translate(-180.401661, -23.288091) "></line>
+                    <line x1="178.5" y1="28.9429769" x2="204.5" y2="28.9429769" id="路径-16" transform="translate(191.500000, 28.942977) rotate(300.000000) translate(-191.500000, -28.942977) "></line>
+                </g>
+                <g id="外圈数字" fill="#000000" fill-opacity="0.652671547" font-family="MathJax_Main-Regular, MathJax_Main" font-weight="normal">
+                    <text id="4" font-size="12">
+                        <tspan x="202" y="25">4</tspan>
+                    </text>
+                    <text id="3" font-size="12">
+                        <tspan x="188" y="20">3</tspan>
+                    </text>
+                    <text id="2" font-size="12">
+                        <tspan x="174" y="16">2</tspan>
+                    </text>
+                    <text id="1" font-size="12">
+                        <tspan x="160" y="14">1</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

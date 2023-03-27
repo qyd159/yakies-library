@@ -1,0 +1,14 @@
+{
+  "watch": [
+    "**/*.js"
+  ],
+  "ext": "js",
+  "ignore": [
+    "./test/*.js",
+    "./generated_models/**"
+  ],
+  "exec": "node bin/ya.js",
+  "env": {
+    "NODE_ENV": "development"
+  }
+}

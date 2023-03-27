@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="236px" height="236px" viewBox="0 0 236 236" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>表盘</title>
+    <g id="正式版1.1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- <g id="认识时钟备份" transform="translate(-70.000000, -436.000000)">
+            <g id="表盘" transform="translate(70.000000, 436.000000)"> -->
+                <circle stroke-opacity="0.797967657" stroke="#51A0FF" stroke-width="12" cx="118" cy="118" r="112"></circle>
+                <g id="刻度线" transform="translate(12.000000, 12.000000)">
+                    <g id="刻度线大" fill="#000000" fill-opacity="0.648191652">
+                        <rect id="矩形" x="105" y="0" width="2" height="8"></rect>
+                        <rect id="矩形" transform="translate(157.000000, 17.665409) rotate(30.000000) translate(-157.000000, -17.665409) " x="156" y="13.6654088" width="2" height="8"></rect>
+                        <rect id="矩形" transform="translate(194.334591, 55.000000) rotate(60.000000) translate(-194.334591, -55.000000) " x="193.334591" y="51" width="2" height="8"></rect>
+                        <rect id="矩形" transform="translate(208.000000, 106.000000) rotate(90.000000) translate(-208.000000, -106.000000) " x="207" y="102" width="2" height="8"></rect>
+                        <rect id="矩形" transform="translate(194.334591, 157.000000) rotate(120.000000) translate(-194.334591, -157.000000) " x="193.334591" y="153" width="2" height="8"></rect>
+                        <rect id="矩形" transform="translate(157.000000, 194.334591) rotate(150.000000) translate(-157.000000, -194.334591) " x="156" y="190.334591" width="2" height="8"></rect>
+                        <rect id="矩形" transform="translate(106.000000, 208.000000) rotate(180.000000) translate(-106.000000, -208.000000) " x="105" y="204" width="2" height="8"></rect>
+                        <rect id="矩形" transform="translate(55.000000, 194.334591) rotate(210.000000) translate(-55.000000, -194.334591) " x="54" y="190.334591" width="2" height="8"></rect>
+                        <rect id="矩形" transform="translate(17.665409, 157.000000) rotate(240.000000) translate(-17.665409, -157.000000) " x="16.6654088" y="153" width="2" height="8"></rect>
+                        <rect id="矩形" transform="translate(4.000000, 106.000000) rotate(270.000000) translate(-4.000000, -106.000000) " x="3" y="102" width="2" height="8"></rect>
+                        <rect id="矩形" transform="translate(17.665409, 55.000000) rotate(300.000000) translate(-17.665409, -55.000000) " x="16.6654088" y="51" width="2" height="8"></rect>
+                        <rect id="矩形" transform="translate(55.000000, 17.665409) rotate(330.000000) translate(-55.000000, -17.665409) " x="54" y="13.6654088" width="2" height="8"></rect>
+                    </g>
+                    <g id="刻度线小" stroke="#000000" stroke-opacity="0.451540647">
+                        <line x1="116.266432" y1="0.564244777" x2="116.266432" y2="6.56424478" id="路径-11" transform="translate(116.266432, 3.564245) rotate(6.000000) translate(-116.266432, -3.564245) "></line>
+                        <line x1="126.914904" y1="2.25079712" x2="126.914904" y2="8.25079712" id="路径-11" transform="translate(126.914904, 5.250797) rotate(12.000000) translate(-126.914904, -5.250797) "></line>
+                        <line x1="137.32875" y1="5.04117882" x2="137.32875" y2="11.0411788" id="路径-11" transform="translate(137.328750, 8.041179) rotate(18.000000) translate(-137.328750, -8.041179) "></line>
+                        <line x1="147.393874" y1="8.90481786" x2="147.393874" y2="14.9048179" id="路径-11" transform="translate(147.393874, 11.904818) rotate(24.000000) translate(-147.393874, -11.904818) "></line>
+                        <line x1="166.041881" y1="19.6712496" x2="166.041881" y2="25.6712496" id="路径-11" transform="translate(166.041881, 22.671250) rotate(36.000000) translate(-166.041881, -22.671250) "></line>
+                        <line x1="174.420452" y1="26.456083" x2="174.420452" y2="32.456083" id="路径-11" transform="translate(174.420452, 29.456083) rotate(42.000000) translate(-174.420452, -29.456083) "></line>
+                        <line x1="182.043917" y1="34.0795475" x2="182.043917" y2="40.0795475" id="路径-11" transform="translate(182.043917, 37.079548) rotate(48.000000) translate(-182.043917, -37.079548) "></line>
+                        <line x1="188.82875" y1="42.458119" x2="188.82875" y2="48.458119" id="路径-11" transform="translate(188.828750, 45.458119) rotate(54.000000) translate(-188.828750, -45.458119) "></line>
+                        <line x1="199.595182" y1="61.1061258" x2="199.595182" y2="67.1061258" id="路径-11" transform="translate(199.595182, 64.106126) rotate(66.000000) translate(-199.595182, -64.106126) "></line>
+                        <line x1="203.458821" y1="71.1712496" x2="203.458821" y2="77.1712496" id="路径-11" transform="translate(203.458821, 74.171250) rotate(72.000000) translate(-203.458821, -74.171250) "></line>
+                        <line x1="206.249203" y1="81.5850958" x2="206.249203" y2="87.5850958" id="路径-11" transform="translate(206.249203, 84.585096) rotate(78.000000) translate(-206.249203, -84.585096) "></line>
+                        <line x1="207.935755" y1="92.2335683" x2="207.935755" y2="98.2335683" id="路径-11" transform="translate(207.935755, 95.233568) rotate(84.000000) translate(-207.935755, -95.233568) "></line>
+                        <line x1="207.935755" y1="113.766432" x2="207.935755" y2="119.766432" id="路径-11" transform="translate(207.935755, 116.766432) rotate(96.000000) translate(-207.935755, -116.766432) "></line>
+                        <line x1="206.249203" y1="124.414904" x2="206.249203" y2="130.414904" id="路径-11" transform="translate(206.249203, 127.414904) rotate(102.000000) translate(-206.249203, -127.414904) "></line>
+                        <line x1="203.458821" y1="134.82875" x2="203.458821" y2="140.82875" id="路径-11" transform="translate(203.458821, 137.828750) rotate(108.000000) translate(-203.458821, -137.828750) "></line>
+                        <line x1="199.595182" y1="144.893874" x2="199.595182" y2="150.893874" id="路径-11" transform="translate(199.595182, 147.893874) rotate(114.000000) translate(-199.595182, -147.893874) "></line>
+                        <line x1="188.82875" y1="163.541881" x2="188.82875" y2="169.541881" id="路径-11" transform="translate(188.828750, 166.541881) rotate(126.000000) translate(-188.828750, -166.541881) "></line>
+                        <line x1="182.043917" y1="171.920452" x2="182.043917" y2="177.920452" id="路径-11" transform="translate(182.043917, 174.920452) rotate(132.000000) translate(-182.043917, -174.920452) "></line>
+                        <line x1="174.420452" y1="179.543917" x2="174.420452" y2="185.543917" id="路径-11" transform="translate(174.420452, 182.543917) rotate(138.000000) translate(-174.420452, -182.543917) "></line>
+                        <line x1="166.041881" y1="186.32875" x2="166.041881" y2="192.32875" id="路径-11" transform="translate(166.041881, 189.328750) rotate(144.000000) translate(-166.041881, -189.328750) "></line>
+                        <line x1="147.393874" y1="197.095182" x2="147.393874" y2="203.095182" id="路径-11" transform="translate(147.393874, 200.095182) rotate(156.000000) translate(-147.393874, -200.095182) "></line>
+                        <line x1="137.32875" y1="200.958821" x2="137.32875" y2="206.958821" id="路径-11" transform="translate(137.328750, 203.958821) rotate(162.000000) translate(-137.328750, -203.958821) "></line>
+                        <line x1="126.914904" y1="203.749203" x2="126.914904" y2="209.749203" id="路径-11" transform="translate(126.914904, 206.749203) rotate(168.000000) translate(-126.914904, -206.749203) "></line>
+                        <line x1="116.266432" y1="205.435755" x2="116.266432" y2="211.435755" id="路径-11" transform="translate(116.266432, 208.435755) rotate(174.000000) translate(-116.266432, -208.435755) "></line>
+                        <line x1="94.7335683" y1="205.435755" x2="94.7335683" y2="211.435755" id="路径-11" transform="translate(94.733568, 208.435755) rotate(186.000000) translate(-94.733568, -208.435755) "></line>
+                        <line x1="84.0850958" y1="203.749203" x2="84.0850958" y2="209.749203" id="路径-11" transform="translate(84.085096, 206.749203) rotate(192.000000) translate(-84.085096, -206.749203) "></line>
+                        <line x1="73.6712496" y1="200.958821" x2="73.6712496" y2="206.958821" id="路径-11" transform="translate(73.671250, 203.958821) rotate(198.000000) translate(-73.671250, -203.958821) "></line>
+                        <line x1="63.6061258" y1="197.095182" x2="63.6061258" y2="203.095182" id="路径-11" transform="translate(63.606126, 200.095182) rotate(204.000000) translate(-63.606126, -200.095182) "></line>
+                        <line x1="44.958119" y1="186.32875" x2="44.958119" y2="192.32875" id="路径-11" transform="translate(44.958119, 189.328750) rotate(216.000000) translate(-44.958119, -189.328750) "></line>
+                        <line x1="36.5795475" y1="179.543917" x2="36.5795475" y2="185.543917" id="路径-11" transform="translate(36.579548, 182.543917) rotate(222.000000) translate(-36.579548, -182.543917) "></line>
+                        <line x1="28.956083" y1="171.920452" x2="28.956083" y2="177.920452" id="路径-11" transform="translate(28.956083, 174.920452) rotate(228.000000) translate(-28.956083, -174.920452) "></line>
+                        <line x1="22.1712496" y1="163.541881" x2="22.1712496" y2="169.541881" id="路径-11" transform="translate(22.171250, 166.541881) rotate(234.000000) translate(-22.171250, -166.541881) "></line>
+                        <line x1="11.4048179" y1="144.893874" x2="11.4048179" y2="150.893874" id="路径-11" transform="translate(11.404818, 147.893874) rotate(246.000000) translate(-11.404818, -147.893874) "></line>
+                        <line x1="7.54117882" y1="134.82875" x2="7.54117882" y2="140.82875" id="路径-11" transform="translate(7.541179, 137.828750) rotate(252.000000) translate(-7.541179, -137.828750) "></line>
+                        <line x1="4.75079712" y1="124.414904" x2="4.75079712" y2="130.414904" id="路径-11" transform="translate(4.750797, 127.414904) rotate(258.000000) translate(-4.750797, -127.414904) "></line>
+                        <line x1="3.06424478" y1="113.766432" x2="3.06424478" y2="119.766432" id="路径-11" transform="translate(3.064245, 116.766432) rotate(264.000000) translate(-3.064245, -116.766432) "></line>
+                        <line x1="3.06424478" y1="92.2335683" x2="3.06424478" y2="98.2335683" id="路径-11" transform="translate(3.064245, 95.233568) rotate(276.000000) translate(-3.064245, -95.233568) "></line>
+                        <line x1="4.75079712" y1="81.5850958" x2="4.75079712" y2="87.5850958" id="路径-11" transform="translate(4.750797, 84.585096) rotate(282.000000) translate(-4.750797, -84.585096) "></line>
+                        <line x1="7.54117882" y1="71.1712496" x2="7.54117882" y2="77.1712496" id="路径-11" transform="translate(7.541179, 74.171250) rotate(288.000000) translate(-7.541179, -74.171250) "></line>
+                        <line x1="11.4048179" y1="61.1061258" x2="11.4048179" y2="67.1061258" id="路径-11" transform="translate(11.404818, 64.106126) rotate(294.000000) translate(-11.404818, -64.106126) "></line>
+                        <line x1="22.1712496" y1="42.458119" x2="22.1712496" y2="48.458119" id="路径-11" transform="translate(22.171250, 45.458119) rotate(306.000000) translate(-22.171250, -45.458119) "></line>
+                        <line x1="28.956083" y1="34.0795475" x2="28.956083" y2="40.0795475" id="路径-11" transform="translate(28.956083, 37.079548) rotate(312.000000) translate(-28.956083, -37.079548) "></line>
+                        <line x1="36.5795475" y1="26.456083" x2="36.5795475" y2="32.456083" id="路径-11" transform="translate(36.579548, 29.456083) rotate(318.000000) translate(-36.579548, -29.456083) "></line>
+                        <line x1="44.958119" y1="19.6712496" x2="44.958119" y2="25.6712496" id="路径-11" transform="translate(44.958119, 22.671250) rotate(324.000000) translate(-44.958119, -22.671250) "></line>
+                        <line x1="63.6061258" y1="8.90481786" x2="63.6061258" y2="14.9048179" id="路径-11" transform="translate(63.606126, 11.904818) rotate(336.000000) translate(-63.606126, -11.904818) "></line>
+                        <line x1="73.6712496" y1="5.04117882" x2="73.6712496" y2="11.0411788" id="路径-11" transform="translate(73.671250, 8.041179) rotate(342.000000) translate(-73.671250, -8.041179) "></line>
+                        <line x1="84.0850958" y1="2.25079712" x2="84.0850958" y2="8.25079712" id="路径-11" transform="translate(84.085096, 5.250797) rotate(348.000000) translate(-84.085096, -5.250797) "></line>
+                        <line x1="94.7335683" y1="0.564244777" x2="94.7335683" y2="6.56424478" id="路径-11" transform="translate(94.733568, 3.564245) rotate(354.000000) translate(-94.733568, -3.564245) "></line>
+                    </g>
+                </g>
+                <g id="数字" transform="translate(25.000000, 20.000000)" fill="#000000" fill-opacity="0.85" font-family="MathJax_Main-Regular, MathJax_Main" font-size="16" font-weight="normal">
+                    <text id="12备份-4">
+                        <tspan x="85" y="14">12</tspan>
+                    </text>
+                    <text id="1备份-4">
+                        <tspan x="133.5" y="26">1</tspan>
+                    </text>
+                    <text id="5备份-4">
+                        <tspan x="133.5" y="180">5</tspan>
+                    </text>
+                    <text id="2备份-4">
+                        <tspan x="166" y="59">2</tspan>
+                    </text>
+                    <text id="4备份-4">
+                        <tspan x="166" y="147">4</tspan>
+                    </text>
+                    <text id="8备份-4">
+                        <tspan x="12" y="147">8</tspan>
+                    </text>
+                    <text id="10备份-4">
+                        <tspan x="8" y="59">10</tspan>
+                    </text>
+                    <text id="11备份-4">
+                        <tspan x="40.5" y="26">11</tspan>
+                    </text>
+                    <text id="7备份-4">
+                        <tspan x="44.5" y="180">7</tspan>
+                    </text>
+                    <text id="6备份-4">
+                        <tspan x="89" y="192">6</tspan>
+                    </text>
+                    <text id="3备份-4">
+                        <tspan x="178" y="103">3</tspan>
+                    </text>
+                    <text id="9备份-4">
+                        <tspan x="0" y="103">9</tspan>
+                    </text>
+                </g>
+            </g>
+        <!-- </g>
+    </g> -->
+</svg>

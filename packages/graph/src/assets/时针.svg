@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="76px" viewBox="0 0 8 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>时针</title>
+    <g id="正式版1.1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="认识时钟备份" transform="translate(-184.000000, -498.000000)">
+            <g id="时针" transform="translate(188.000000, 536.000000) rotate(-90.000000) translate(-188.000000, -536.000000) translate(150.000000, 532.000000)">
+                <path d="M72,-7.07697762e-15 L76,4 L72,8 L7.81597009e-12,8 L7.81597009e-12,-2.03031631e-14 L72,-7.07697762e-15 Z M71,2 L49,2 L49,6 L71,6 L71,2 Z" id="形状结合" fill="#000000"></path>
+                <path d="M76,4 L72,8 L-5.68434189e-14,8 L-2.84217094e-14,4 L49,4 L49,6 L71,6 L71,4 L76,4 Z" id="形状结合" fill-opacity="0.151305726" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>

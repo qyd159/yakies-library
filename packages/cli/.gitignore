@@ -1,0 +1,11 @@
+node_modules
+.idea
+.vscode/**
+!.vscode/launch.json
+.DS_Store
+.history
+template
+yarn-error.log
+tmp
+config.js
+dist

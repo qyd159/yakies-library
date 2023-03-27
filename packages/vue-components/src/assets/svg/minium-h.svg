@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>最小化-悬停点击</title>
+    <g id="评审改图" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="切图及按钮状态合集" transform="translate(-714.000000, -404.000000)">
+            <g id="最小化" transform="translate(714.000000, 404.000000)">
+                <circle id="椭圆形" fill="#008AD9" cx="15" cy="15" r="15"></circle>
+                <rect id="矩形" fill="#FFFFFF" x="6" y="13" width="18" height="4" rx="2"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
