@@ -1,5 +1,5 @@
 {"vbsetupTable": {
-    "prefix": "vbsetupTable",
+    "prefix": "vb-setup-table",
     "body": [
       "<template>",
       "  <div>",
@@ -65,7 +65,7 @@
   },
     "vue-vben-Page": {
     "scope": "javascript,typescript,vue",
-    "prefix": "vue-vben-page",
+    "prefix": "vb-setup-page",
     "body": [
       "<template>",
       "  <PageWrapper>",
@@ -74,10 +74,8 @@
       "</template>",
       "<script lang=\"ts\" setup>",
       "  import { PageWrapper } from '/@/components/Page';",
-      "  import { useI18n } from '/@/hooks/web/useI18n';",
       "  import { useDesign } from '/@/hooks/web/useDesign';",
       "  const { prefixCls } = useDesign('${1:Template}');",
-      "  const { t } = useI18n();",
       "</script>",
       "<style lang=\"less\" scoped>",
       "  @prefix-cls: ~'@{namespace}-${1:Template}';",
@@ -91,16 +89,14 @@
   },
   "vue-components-base": {
     "scope": "javascript,typescript,vue",
-    "prefix": "vue-vben-component",
+    "prefix": "vb-setup-component",
     "body": [
       "<template>",
       "  <div :class=\"`\\${prefixCls}`\"> ${1:Template} </div>",
       "</template>",
       "<script lang=\"ts\" setup>",
-      "  import { useI18n } from '/@/hooks/web/useI18n';",
       "  import { useDesign } from '/@/hooks/web/useDesign';",
       "  const { prefixCls } = useDesign('${1:Template}');",
-      "  const { t } = useI18n();",
       "</script>",
       "<style lang=\"less\" scoped>",
       "  @prefix-cls: ~'@{namespace}-${1:Template}';",
