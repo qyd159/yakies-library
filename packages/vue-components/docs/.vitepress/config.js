@@ -3,8 +3,8 @@ import purgeIcons from 'vite-plugin-purge-icons';
 import path from 'path';
 import SvgIconsPlugin from 'vite-plugin-svg-icons';
 import mdItCustomAttrs  from 'markdown-it-custom-attrs'
-import { configStyleImportPlugin } from '../../../../script/vite/plugin/styleImport';
-import { generateModifyVars } from '../../../../src/common/config/generate/generateModifyVars';
+import { configStyleImportPlugin } from '../../build/vite/plugin/styleImport';
+import { generateModifyVars } from '../../build/generate/generateModifyVars';
 
 function pathResolve(dir) {
   return path.resolve(process.cwd(), '.', dir);
