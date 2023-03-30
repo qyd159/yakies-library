@@ -13,6 +13,6 @@ git push origin main
 if [ $1 = "all" ]; then
   pnpm publish -r --registry='https://nexus.yakies.cn/repository/hosted/'
 else
-  echo 'pnpm --dir packages/$1 publish --registry='https://nexus.yakies.cn/repository/hosted/' --access=public'
+  echo 'pnpm --dir packages/{$1} publish --registry='https://nexus.yakies.cn/repository/hosted/' --access=public'
   pnpm --dir packages/$1 publish --registry='https://nexus.yakies.cn/repository/hosted/' --access=public
 fi
