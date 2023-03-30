@@ -1,7 +1,7 @@
 import { Subscription, Observable } from 'rxjs';
 import { share, switchMap, retryWhen, delay } from 'rxjs/operators';
 import makeWebSocketObservable, { GetWebSocketResponses, normalClosureMessage } from 'rxjs-websockets';
-
+type WebSocketPayload = string | ArrayBuffer | Blob;
 let socket$;
 let messages$!: Observable<WebSocketPayload>;
 let messagesSubscription!: Subscription;

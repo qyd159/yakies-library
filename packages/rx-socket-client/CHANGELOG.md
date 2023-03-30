@@ -1,5 +1,11 @@
 # @yakies/rx-socket-client
 
+## 1.6.0
+
+### Minor Changes
+
+- rx-socket-client 构建优化
+
 ## 1.5.0
 
 ### Minor Changes
