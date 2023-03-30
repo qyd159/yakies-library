@@ -10,8 +10,8 @@ else
   echo "There are no changes to commit"
 fi
 if [ $1 = "all" ]; then
-  pnpm publish -r --registry='https://nexus.yakies.cn/repository/hosted/'
+  pnpm publish -r
 else
-  echo 'pnpm --dir packages/$1 publish --registry='https://nexus.yakies.cn/repository/hosted/' --access=public'
-  pnpm --dir packages/$1 publish --registry='https://nexus.yakies.cn/repository/hosted/' --access=public
+  echo 'pnpm --dir packages/'$1' publish --access=public'
+  pnpm --dir packages/$1 publish --access=public
 fi
