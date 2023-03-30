@@ -8,10 +8,13 @@ class RxSocketClient {
   pending = false;
   toSend: any[] = [];
   sent: any[] = [];
-  constructor(hostPath, options?: Partial<ManagerOptions & SocketOptions>) {
-    this.subject = new QueueingSubject<string>();
-    connect(hostPath, options);
+  constructor(hostPath, options?: Partial<ManagerOptions & SocketOptions>, connectedCb?: () => void) {
+    this.subject = new QueueingSubject<[string, any]>();
+    const connect$ = connect(hostPath, options);
     emitOnConnect(this.subject);
+    if (connectedCb) {
+      connect$.subscribe(connectedCb)
+    }
   }
   emit(message) {
     this.subject.next(message);

@@ -19,6 +19,7 @@ export function connect(hostPath, options: Partial<ManagerOptions & SocketOption
       )
     )
   );
+  return connect$
 }
 
 // Stream of connections
@@ -41,7 +42,7 @@ export function emitOnConnect(observable$) {
           );
         })
       )
-      .subscribe(({ socket, data }) => {
+      .subscribe(({ socket, data }: any) => {
         const [type, message] = data;
         socket.emit(type, message);
       });
