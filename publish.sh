@@ -12,6 +12,5 @@ fi
 if [ $1 = "all" ]; then
   pnpm publish -r
 else
-  echo 'pnpm --dir packages/'$1' publish --access=public'
-  pnpm --dir packages/$1 publish --access=public
+  pnpm publish --filter $1 --registry='https://nexus.yakies.cn/repository/hosted/' --access public --no-git-checks
 fi
