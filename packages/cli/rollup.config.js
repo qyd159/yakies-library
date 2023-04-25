@@ -2,10 +2,11 @@ import { terser } from 'rollup-plugin-terser'
 import commonjs from '@rollup/plugin-commonjs'
 import shebang from 'rollup-plugin-preserve-shebang'
 import json from '@rollup/plugin-json'
+import typescript from 'rollup-plugin-typescript2';
 import fs from 'fs-extra'
 import path from 'path'
 
-const { getAllFiles } = require('./lib/util')
+const { getAllFiles } = require('./src/lib/util')
 fs.ensureDirSync('dist')
 fs.ensureDirSync('dist/widgets')
 fs.ensureDirSync('dist/mock')
@@ -13,11 +14,9 @@ fs.copyFileSync('server/mock/server.conf', 'dist/mock/server.conf')
 
 const widgets = getAllFiles('./widgets', null, '.js', {})
 
-console.log(widgets)
-
 export default [
   {
-    input: 'index',
+    input: 'src/index.ts',
     external(id) {
       return id.indexOf('node_modules') >= 0
     },
@@ -32,6 +31,7 @@ export default [
         sourceMap: false,
       }),
       terser(),
+      typescript()
     ],
     output: {
       file: 'dist/bundle.js',

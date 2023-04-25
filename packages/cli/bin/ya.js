@@ -1,3 +1,3 @@
-#!/usr/bin/env node
+#!/usr/bin/env ts-node
 const argv = require('minimist')(process.argv.slice(2))
-argv.dev ? require('..')(argv) : require('../dist/bundle')(argv)
+argv.dev ? require('../src/index.ts')(argv) : require('../dist/bundle')(argv)

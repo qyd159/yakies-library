@@ -1,6 +1,6 @@
 import { QueueingSubject } from 'queueing-subject';
 import { emitOnConnect, listenOnConnect, connect } from './socket.io';
-import io, { SocketOptions, ManagerOptions } from 'socket.io-client';
+import { Socket, SocketOptions, ManagerOptions } from 'socket.io-client';
 
 // this subject queues as necessary to ensure every message is delivered
 class RxSocketClient {
@@ -8,7 +8,7 @@ class RxSocketClient {
   pending = false;
   toSend: any[] = [];
   sent: any[] = [];
-  constructor(hostPath, options?: Partial<ManagerOptions & SocketOptions>, connectedCb?: () => void) {
+  constructor(hostPath, options?: Partial<ManagerOptions & SocketOptions>, connectedCb?: (socket: Socket) => void) {
     this.subject = new QueueingSubject<[string, any]>();
     const connect$ = connect(hostPath, options);
     emitOnConnect(this.subject);
