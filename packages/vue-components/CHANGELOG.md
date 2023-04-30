@@ -1,5 +1,11 @@
 # @yakies/vue-components
 
+## 0.4.0
+
+### Minor Changes
+
+- 添加 Recorder 录音组件,对接 asr 功能
+
 ## 0.3.0
 
 ### Minor Changes
