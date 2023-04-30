@@ -14,7 +14,7 @@ module.exports = async function (argv) {
   argv.r = argv.root = user_path ? user_path : '.';
 
   //读取settings.js配置文件
-  await new Promise(resolve => {
+  await new Promise((resolve) => {
     require('walk-up')(process.cwd(), 'settings.js', (err, result) => {
       if (result && result.found) {
         merge(settings, require(path.join(result.path, 'settings')));
@@ -26,10 +26,10 @@ module.exports = async function (argv) {
   /*根据ya默认配置来执行外部脚本*/
   if (argv._[0] === 'exec') {
     const widgets = require('./widgets');
-    const mode = argv._[1].toLowerCase()
+    const mode = argv._[1].toLowerCase();
     if (mode === 'list') {
       for (let widget in widgets) {
-        console.log(widget)
+        console.log(widget);
       }
     } else {
       require(widgets[mode])(argv);
@@ -45,7 +45,7 @@ module.exports = async function (argv) {
         }
         // @ts-ignore
         settings.browserSyncPort = port;
-        resolve();
+        resolve(null);
       });
     });
   }
@@ -59,13 +59,13 @@ module.exports = async function (argv) {
         }
         // @ts-ignore
         settings.port = port;
-        resolve();
+        resolve(null);
       });
     });
   }
 
   // 配置文件查找和解析
-  let configFile = await new Promise(resolve => {
+  let configFile: string = await new Promise((resolve) => {
     new Liftoff({
       name: 'ya', // 命令名字
       processTitle: 'ya',
@@ -76,24 +76,24 @@ module.exports = async function (argv) {
             path: '.',
             findUp: true,
             extensions: {
-              '.js': null
-            }
-          }
+              '.js': null,
+            },
+          },
         },
         config: {
           cwd: {
             path: '.',
             findUp: true,
             extensions: {
-              '.js': null
-            }
-          }
-        }
-      }
+              '.js': null,
+            },
+          },
+        },
+      },
     }).launch(
       {
         cwd: argv.r || argv.root,
-        configPath: argv.f || argv.file
+        configPath: argv.f || argv.file,
       },
       function (env) {
         const configFile =
@@ -110,7 +110,7 @@ module.exports = async function (argv) {
     // electron命令模式，读取sevice环境变量
     // @ts-ignore
     global.wwwFileMap = merge(global.wwwFileMap, {
-      proxy: JSON.parse(process.env.service)
+      proxy: JSON.parse(process.env.service),
     });
   }
 
@@ -125,7 +125,7 @@ module.exports = async function (argv) {
       open: false,
       proxy: {
         target: 'http://' + settings.dev_ip + ':' + port,
-        ws: true
+        ws: true,
       },
       files: [
         path.posix.join(newPath, '**/*.css'),
@@ -135,25 +135,25 @@ module.exports = async function (argv) {
         path.posix.join(newPath, '**/*.gif'),
         {
           match: [path.posix.join(newPath, '**/*.js')],
-          options: { ignored: ['ya-conf.js', 'config.js'] }
+          options: { ignored: ['ya-conf.js', 'config.js'] },
         },
-        path.posix.join(newPath, '**/*.html')
+        path.posix.join(newPath, '**/*.html'),
       ],
       ignore: [
         path.posix.join(newPath, 'node_modules/**'),
-        path.posix.join(newPath, '**/node_modules/**')
+        path.posix.join(newPath, '**/node_modules/**'),
       ],
       logFileChanges: true,
       logSnippet: false,
       /**
        * Can be either "info", "debug", "warn", or "silent"
        */
-      logLevel: 'info'
+      logLevel: 'info',
     };
     if (argv.log) {
       Object.assign(bsConfig, {
         debug: true,
-        logLevel: 'debug'
+        logLevel: 'debug',
       });
     }
     browserSync.init(bsConfig, function (err) {

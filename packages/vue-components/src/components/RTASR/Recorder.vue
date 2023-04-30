@@ -1,15 +1,15 @@
 <template>
   <div class="recorder-wrap disable-selection">
     <div class="py-10 flex justify-center">
-      <Button type="primary" class="recorder-btn" ref="recordBtn" v-touch:press="startHandler" v-touch:release="stopHandler" @contextmenu.stop
-        >按住说话</Button
-      >
+      <div class="recorder-btn" ref="recordBtn" v-touch:press="startHandler" v-touch:release="stopHandler" @contextmenu.stop>
+          <slot>
+            <Button type="primary" >按住说话</Button>
+          </slot>
+        </div>
     </div>
-    <div>
       <div class="wave-view-wrapper" v-show="recording">
         <div class="wave-view-content" ref="waveView"></div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -25,12 +25,13 @@
     sessionId: propTypes.string,
     isMobile: propTypes.bool,
     getASRUrlParams: propTypes.func,
+    waveColor: propTypes.string,
   });
 
   const waveView = ref();
   const recordBtn = ref();
 
-const { recording, recStop, recStart, rec, connect } = useRecorder({waveView, callMode: false,userVoiceParsed: props.userVoiceParsed,getUrlParams: props.getASRUrlParams});
+const { recording, recStop, recStart, rec, connect } = useRecorder({waveView, callMode: false,userVoiceParsed: props.userVoiceParsed,getUrlParams: props.getASRUrlParams,waveColor:props.waveColor});
   const touching = ref(false);
 
   function mouseupHandler() {
@@ -64,23 +65,25 @@ const { recording, recStop, recStart, rec, connect } = useRecorder({waveView, ca
     e.preventDefault();
   }
   onMounted(() => {
-    unref(recordBtn).$el.addEventListener('contextmenu', forbideContextmenu);
+    unref(recordBtn).addEventListener('contextmenu', forbideContextmenu);
   });
   onBeforeUnmount(() => {
-    unref(recordBtn).$el.removeEventListener('contextmenu', forbideContextmenu);
+    unref(recordBtn).removeEventListener('contextmenu', forbideContextmenu);
   });
 </script>
 
 <style lang="less" scoped>
+  .recorder-wrap {
+    position: relative;
+  }
   .record-container.active {
     background: rgba(0, 0, 0, 0.1);
     color: rgba(0, 0, 0, 0.25);
   }
   .wave-view-wrapper {
     position: absolute;
-    top: -100px;
-    left: 50%;
-    margin-left: -36px;
+    margin-left: -70px;
+    top: -5px;
     width: 72px;
     height: 53px;
   }

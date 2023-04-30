@@ -39,7 +39,7 @@ async function connectWebsocket({ onOpen, onMessage, getUrlParams }: { onOpen: (
   return ws;
 }
 
-export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams }) {
+export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams, waveColor }) {
   const recording = ref(false);
   const rec = ref();
   let wave,
@@ -112,7 +112,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams 
     unref(rec).open(
       function () {
         if (waveView) {
-          wave = Recorder.FrequencyHistogramView(recordConfig.waveViewOptions);
+          wave = Recorder.FrequencyHistogramView({ ...recordConfig.waveViewOptions, ...waveColor ? { linear: [0, waveColor, 0.5, waveColor, 1, waveColor] } : {} });
           unref(waveView).appendChild(wave.elem);
         }
         reclog('已打开:' + type + ' ' + sampleRate + 'hz ' + bitRate + 'kbps', 2);
