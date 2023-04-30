@@ -10,7 +10,7 @@ import { IStance } from './types';
 import { eventBus } from '@/utils';
 const captured = ref(false);
 const cameraLoaded = ref(false);
-const stanceData = ref<Array<IStance>>(null);
+const stanceData = ref<Array<IStance>>();
 const cameraError = ref(false);
 const algoOn = ref(false);
 const algoFn = reactive({
@@ -20,7 +20,7 @@ const algoFn = reactive({
 export function useAlgoData() {
   function resetCaptured() {
     captured.value = false;
-    stanceData.value = null;
+    stanceData.value = undefined;
   }
   function resetCamera() {
     cameraError.value = false;

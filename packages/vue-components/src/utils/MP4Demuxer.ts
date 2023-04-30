@@ -10,7 +10,7 @@ class MP4Source {
   _onChunk: Function;
   _onEnd: Function;
   track: any;
-  seeking: false;
+  seeking: boolean = false;
   keySampleNumber = 0;
 
   constructor(url, onChunk, onEnd, onReady) {
@@ -227,7 +227,7 @@ export class MP4Demuxer {
 // 视频播放解码应用层实现
 let demuxer: MP4Demuxer,
   canPlay = false,
-  chunks = [],
+  chunks: any[] = [],
   firstFrame = 0,
   displayFrameOffset = 0,
   gotFirstFrame = false,

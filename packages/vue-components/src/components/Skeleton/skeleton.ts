@@ -23,11 +23,11 @@ const highligtPointStrokeColor = 'rgba(67, 222, 178, 1)';
 
 type SkeletonSetting = DeepPartial<
   ReturnType<typeof realtimeSkeletonSettings> &
-    ReturnType<typeof playbackSkeletonSettings> &
-    ReturnType<typeof cognizeSkeletonSettings>
+  ReturnType<typeof playbackSkeletonSettings> &
+  ReturnType<typeof cognizeSkeletonSettings>
 >;
 
-function getSkeletonSetting(type: SkeletonType): SkeletonSetting {
+function getSkeletonSetting(type: SkeletonType): any {
   switch (type) {
     case SkeletonType.realtime:
       return realtimeSkeletonSettings();
@@ -70,15 +70,15 @@ export function skeletonDraw({
   ) => {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     if (skeletonData.length === 0 || skeletonData[0].length === 0) return;
-    const connections = part ? parts[part] : lines.connections;
-    const usedPoints = part ? flatten(parts[part]) : flatten(lines.connections);
-    let pointsWidth = points.width;
-    let linesWidth = lines.width;
+    const connections = part ? parts[part] : lines!.connections;
+    const usedPoints = part ? flatten(parts[part]) : flatten(lines!.connections);
+    let pointsWidth = points!.width;
+    let linesWidth = lines!.width;
     if (centered) {
       centerPoint = [canvasWidth / 2, canvasHeight / 2];
       // 先计算参考点(所有点的几何中心)，从而可以使用ctx.transform设置偏移量
       // 然后计算缩放值，使得骨骼图恰好撑满画布的高度
-      const allpoints = flatten(
+      const allpoints: any = flatten(
         skeletonData.map((points) => {
           if (part) {
             return points.filter(
@@ -90,8 +90,8 @@ export function skeletonDraw({
         })
       );
       centerPoint = [
-        meanBy(allpoints, (point) => point[0]),
-        meanBy(allpoints, (point) => point[1]),
+        meanBy(allpoints, (point: any) => point[0]),
+        meanBy(allpoints, (point: any) => point[1]),
       ];
       const rangeY = [allpoints[0][1], allpoints[1][1]];
       const rangeX = [allpoints[0][0], allpoints[1][0]];
@@ -114,8 +114,8 @@ export function skeletonDraw({
         (canvasWidth - 200) / distanceX,
         maxScale
       );
-      pointsWidth = points.width.map((item) => item / (canvasScale * scale));
-      linesWidth = linesWidth / (canvasScale * scale);
+      pointsWidth = points!.width.map((item: any) => item / (canvasScale * scale));
+      linesWidth = linesWidth! / (canvasScale * scale);
       ctx.translate(canvasWidth / 2, canvasHeight / 2);
       ctx.scale(scale, scale);
     }
@@ -123,7 +123,7 @@ export function skeletonDraw({
     for (const keypoints of skeletonData) {
       const action = actionData && actionData[idx]?.data;
       if (keypoints.length === 0) continue;
-      ctx.lineWidth = linesWidth;
+      ctx.lineWidth = linesWidth!;
 
       // 画线
       for (let i = 0; i < connections.length; i++) {

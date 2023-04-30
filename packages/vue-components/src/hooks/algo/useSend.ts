@@ -10,7 +10,7 @@ import { IStartAlgo, CONFIGURATION_FILE } from './types';
 import { useAlgoData } from './useAlgoData';
 import { applicationDeps } from '@/preload';
 export function useSend() {
-  const CONSOLE = applicationDeps.createScopeLog('use-send');
+  const CONSOLE = applicationDeps.createScopeLog!('use-send');
   const { algoFn } = useAlgoData();
   /**
    * 开启人脸检测

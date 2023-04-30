@@ -20,8 +20,8 @@ import Content from './Content.vue';
 const noRenderNodeTypes = ['fieldset', 'array', 'link']
 
 const props = defineProps({
-  tree: propTypes.custom<FormTree>((v) => v instanceof FormTree),
-  node: propTypes.custom<FormNode>((v) => v instanceof FormNode),
+  tree: propTypes.custom<FormTree>((v) => v instanceof FormTree).isRequired,
+  node: propTypes.custom<FormNode>((v) => v instanceof FormNode).isRequired,
   values: propTypes.any
 })
 

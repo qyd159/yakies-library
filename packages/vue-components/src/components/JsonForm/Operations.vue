@@ -23,7 +23,7 @@ import { applyArrayPath, setObjKey, getObjKey } from './utils';
 import { eventBus } from '@/utils'
 
 const props = defineProps({
-  node: propTypes.custom<FormNode>((v) => v instanceof FormNode),
+  node: propTypes.custom<FormNode>((v) => v instanceof FormNode).isRequired,
   values: propTypes.any
 })
 
@@ -51,7 +51,7 @@ function delItem(node: FormNode) {
   const key = applyArrayPath(node.key, node.arrayPath)
   const value = getObjKey(props.values, key)
   if (value) {
-    value.splice(removedChild.childPos, 1)
+    value.splice(removedChild!.childPos, 1)
   }
   eventBus.emit('formUpdate', { key, value })
 }

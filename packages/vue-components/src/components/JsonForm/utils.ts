@@ -22,9 +22,9 @@ import { isUndefined, isNull, isArray } from 'lodash';
 export function getObjKey(obj, key, ignoreArrays = false) {
   var innerobj = obj;
   var keyparts = key.split(".");
-  var subkey = null;
-  var arrayMatch = null;
-  var prop = null;
+  var subkey: any;
+  var arrayMatch: any;
+  var prop: any;
 
   for (var i = 0; i < keyparts.length; i++) {
     if ((innerobj === null) || (typeof innerobj !== "object")) return null;
@@ -79,9 +79,9 @@ export function getObjKey(obj, key, ignoreArrays = false) {
 export function setObjKey(obj, key, value) {
   var innerobj = obj;
   var keyparts = key.split(".");
-  var subkey = null;
-  var arrayMatch = null;
-  var prop = null;
+  var subkey: string;
+  var arrayMatch: any;
+  var prop: any;
 
   for (var i = 0; i < keyparts.length - 1; i++) {
     subkey = keyparts[i];
@@ -233,14 +233,14 @@ export function applyArrayPath(key, arrayPath) {
  * @param {String} str The string to slugify
  * @return {String} The slugified string.
  */
- export function slugify(str) {
+export function slugify(str) {
   return str.replace(/\ /g, '_');
 }
 
- /**
-   * Returns true if given property is directly property of an object
-   */
-export function hasOwnProperty (obj, prop) {
+/**
+  * Returns true if given property is directly property of an object
+  */
+export function hasOwnProperty(obj, prop) {
   return typeof obj === 'object' && obj.hasOwnProperty(prop);
 }
 
@@ -261,7 +261,7 @@ export function hasOwnProperty (obj, prop) {
  * @param {Number} depth The array depth
  * @return {String} The path to the key truncated to the given depth.
  */
-export function truncateToArrayDepth (key, arrayDepth) {
+export function truncateToArrayDepth(key, arrayDepth) {
   var depth = 0;
   var pos = 0;
   if (!key) return null;

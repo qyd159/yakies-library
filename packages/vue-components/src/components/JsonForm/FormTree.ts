@@ -13,10 +13,10 @@ import { elementTypes } from './elementTypes'
  */
 export default class FormTree {
   eventhandlers = [];
-  root = null;
-  formDesc = null;
+  root?: FormNode;
+  formDesc: any = null;
   domRoot;
-  form = null;
+  form: any = null;
   constructor(form) {
     this.form = form;
   }
@@ -102,7 +102,7 @@ export default class FormTree {
       if (formElement === '*') {
         each(this.formDesc.schema.properties, (element, key) => {
           if (!this.formDesc.skipedFields.includes(key))
-            this.root.appendChild(this.buildFromLayout({
+            this.root!.appendChild(this.buildFromLayout({
               key: key
             }));
         });
@@ -113,7 +113,7 @@ export default class FormTree {
             key: formElement
           };
         }
-        this.root.appendChild(this.buildFromLayout(formElement));
+        this.root!.appendChild(this.buildFromLayout(formElement));
       }
     });
   };
@@ -132,10 +132,10 @@ export default class FormTree {
    * @return {Object} The node that matches the element.
    */
   buildFromLayout(formElement, context = null) {
-    var schemaElement = null;
-    var node = new FormNode();
-    var view = null;
-    var key = null;
+    let schemaElement: any = null;
+    const node = new FormNode();
+    let view: any = null;
+    let key: any;
 
     // The form element parameter directly comes from the initial
     // JSONForm object. We'll make a shallow copy of it and of its children
@@ -414,7 +414,7 @@ export default class FormTree {
    * @function
    */
   computeInitialValues() {
-    this.root.computeInitialValues(this.formDesc.value);
+    this.root!.computeInitialValues(this.formDesc.value);
   };
 
 
@@ -428,7 +428,7 @@ export default class FormTree {
   render(domRoot) {
     if (!domRoot) return;
     this.domRoot = domRoot;
-    this.root.render();
+    // this.root!.render();
 
     // If the schema defines required fields, flag the form with the
     // "jsonform-hasrequired" class for styling purpose
@@ -459,7 +459,7 @@ export default class FormTree {
 
   validate(noErrorDisplay = false) {
 
-    var values = this.root.getFormValues();
+    var values = this.root!.getFormValues();
     var errors;
 
     var options = this.formDesc;
@@ -506,7 +506,7 @@ export default class FormTree {
       }
       return false;
     };
-    var values = this.root.getFormValues();
+    var values = this.root!.getFormValues();
     var options = this.formDesc;
 
     var brk = false;

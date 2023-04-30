@@ -5,19 +5,19 @@ interface FrameItem {
   timestamp: number;
 }
 export default class Player {
-  duration: number;
+  duration = 0;
   marker: string = 'playback';
-  timestamps: number[];
-  timescale: 1;
-  endCallback: Function;
+  timestamps: number[] = [];
+  timescale = 1;
+  endCallback: any;
   ready_frames: FrameItem[] = [];
   render_frames: FrameItem[] = [];
   totalFrames = 100;
-  delays = [];
+  delays: any[] = [];
   underflow = true;
   time_base = 0;
   frame_index = 0;
-  prevFrame = null;
+  prevFrame: any;
   init(endCallback) {
     this.reset();
     this.endCallback = endCallback;
@@ -50,7 +50,7 @@ export default class Player {
       this.ready_frames.length > 0
         ? this.ready_frames[this.ready_frames.length - 1].timestamp
         : 0;
-    const popFrames = [];
+    const popFrames: any[] = [];
     while (frame.timestamp < prevtime && this.ready_frames.length > 0) {
       popFrames.unshift(this.ready_frames.pop());
       if (this.ready_frames.length === 0) {
@@ -100,7 +100,7 @@ export default class Player {
       return;
     }
     this.prevFrame && this.prevFrame.frame.close();
-    let frame = this.ready_frames.shift();
+    let frame = this.ready_frames.shift()!;
     this.underflow = false;
 
     // Based on the frame's timestamp calculate how much of real time waiting

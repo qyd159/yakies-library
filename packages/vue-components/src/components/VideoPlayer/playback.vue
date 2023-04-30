@@ -22,7 +22,7 @@ import { propTypes } from "@/utils/propTypes";
 import { applicationDeps } from "../../preload";
 
 const { createScopeLog } = applicationDeps;
-const CONSOLE = createScopeLog("play-back");
+const CONSOLE = createScopeLog!("play-back");
 const videoWidth = ref(1920);
 const videoHeight = ref(1080);
 const isHovered = ref(false);
@@ -141,7 +141,7 @@ function run() {
 }
 
 async function init() {
-  videoEl.value.src = props.source;
+  videoEl.value.src = props.source!;
   // videoEl.value.addEventListener('timeupdate', (event) => {
   //   console.log('timeupdate' + videoEl.value.currentTime);
   // });

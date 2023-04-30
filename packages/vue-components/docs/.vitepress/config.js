@@ -5,6 +5,16 @@ import { createSvgIconsPlugin} from 'vite-plugin-svg-icons';
 import mdItCustomAttrs  from 'markdown-it-custom-attrs'
 import { configStyleImportPlugin } from '../../build/vite/plugin/styleImport';
 import { generateModifyVars } from '../../build/generate/generateModifyVars';
+import { RequestInterceptor } from 'node-request-interceptor';
+import withDefaultInterceptors from 'node-request-interceptor/lib/presets/default';
+
+const interceptor = new RequestInterceptor(withDefaultInterceptors);
+
+interceptor.use((req) => {
+  // Will print to stdout any outgoing requests
+  // without affecting their responses
+  console.info('%s %s', req.method, req.url.href);
+});
 
 function pathResolve(dir) {
   return path.resolve(process.cwd(), '.', dir);
@@ -13,7 +23,7 @@ export default defineConfig({
   title: '组件库文档',
   description: '整理日常前端组件',
   themeConfig: {
-    repo: 'https://gitlab.yakies.cn/chumahtung/yakies-library.git',
+    repo: 'https://gitlab.yakies.cn/yakies/yakies-library.git',
     sidebar: [
       {
         text: '介绍',
@@ -99,5 +109,6 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ['@lottiefiles/lottie-player','lodash']
-  }
+  },
+  debug: true
 });

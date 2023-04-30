@@ -19,7 +19,7 @@ module.exports = async function (argv) {
       if (result && result.found) {
         merge(settings, require(path.join(result.path, 'settings')));
       }
-      resolve();
+      resolve(null);
     });
   });
 

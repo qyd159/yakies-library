@@ -17,7 +17,7 @@ const colors = {
 
 const palette = (function (palette) {
   let canvas = document.createElement('canvas'),
-    ctx = canvas.getContext('2d'),
+    ctx: CanvasRenderingContext2D = canvas.getContext('2d')!,
     gradient = ctx.createLinearGradient(0, 0, 256, 0);
   canvas.width = 256;
   canvas.height = 1;

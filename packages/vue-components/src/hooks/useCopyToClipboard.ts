@@ -58,7 +58,7 @@ export function copyTextToClipboard(input: string, { target = document.body }: O
   let isSuccess = false;
   try {
     isSuccess = document.execCommand('copy');
-  } catch (e) {
+  } catch (e: any) {
     throw new Error(e);
   }
 

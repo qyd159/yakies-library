@@ -67,16 +67,16 @@ class WebglScreen {
 
     // 激活指定的纹理单元
     gl.activeTexture(gl.TEXTURE0);
-    gl.y = this._createTexture();
-    gl.uniform1i(gl.getUniformLocation(program, 'samplerY'), 0);
+    gl.y = this._createTexture()!;
+    gl.uniform1i(gl.getUniformLocation(program!, 'samplerY'), 0);
 
     gl.activeTexture(gl.TEXTURE1);
-    gl.u = this._createTexture();
-    gl.uniform1i(gl.getUniformLocation(program, 'samplerU'), 1);
+    gl.u = this._createTexture()!;
+    gl.uniform1i(gl.getUniformLocation(program!, 'samplerU'), 1);
 
     gl.activeTexture(gl.TEXTURE2);
-    gl.v = this._createTexture();
-    gl.uniform1i(gl.getUniformLocation(program, 'samplerV'), 2);
+    gl.v = this._createTexture()!;
+    gl.uniform1i(gl.getUniformLocation(program!, 'samplerV'), 2);
   }
   /**
    * 初始化顶点 buffer
@@ -121,7 +121,7 @@ class WebglScreen {
    */
   _compileShader(shaderSource, shaderType) {
     // 创建着色器程序
-    let shader = this.gl.createShader(shaderType);
+    let shader = this.gl.createShader(shaderType)!;
     // 设置着色器的源码
     this.gl.shaderSource(shader, shaderSource);
     // 编译着色器
@@ -145,7 +145,7 @@ class WebglScreen {
    */
   _createProgram(vertexShader, fragmentShader) {
     const gl = this.gl;
-    let program = gl.createProgram();
+    let program = gl.createProgram()!;
 
     // 附上着色器
     gl.attachShader(program, vertexShader);

@@ -5,10 +5,10 @@
       <Collapse v-if="node.formElement && collapsableTypes.includes(node.formElement.type) " style="margin:5px 5px;"
         v-show="node.visible">
         <CollapsePanel :header="node.formElement && node.formElement.title">
-          <NodeContent :node="node" :values="values" />
+          <NodeContent :tree="tree" :node="node" :values="values" />
         </CollapsePanel>
       </Collapse>
-      <NodeContent :node="node" v-else :values="values" />
+      <NodeContent :tree="tree" :node="node" v-else :values="values" />
     </div>
   </div>
 </template>
@@ -22,8 +22,8 @@ import NodeContent from './NodeContent.vue';
 import { Collapse, CollapsePanel } from 'ant-design-vue'
 
 const props = defineProps({
-  tree: propTypes.custom<FormTree>((v) => v instanceof FormTree),
-  node: propTypes.custom<FormNode>((v) => v instanceof FormNode),
+  tree: propTypes.custom<FormTree>((v) => v instanceof FormTree).isRequired,
+  node: propTypes.custom<FormNode>((v) => v instanceof FormNode).isRequired,
   values: propTypes.any
 })
 

@@ -3,8 +3,8 @@ import { setPlaybackInfo, playbackAckReady, playbackStart } from '@/utils/MP4Dem
 import { eventBus } from '@/utils'
 class VideoWorker {
   player: Player;
-  decoder: VideoDecoder;
-  offscreen: HTMLCanvasElement;
+  decoder!: VideoDecoder;
+  offscreen!: HTMLCanvasElement;
   config: any;
   firstFrameIndex = 0;
   displayFrameOffset = 0;
@@ -106,7 +106,7 @@ class VideoWorker {
           this.player.handleFrame(
             {
               frame,
-              timestamp: frame.timestamp * 1e3 / this.player.timescale
+              timestamp: frame.timestamp! * 1e3 / this.player.timescale
               // this.player.timestamps[this.firstFrameIndex + this.decodedFrames],
             },
             ctx

@@ -32,7 +32,7 @@ import { applicationDeps } from '@/preload';
  * @returns
  */
 export function useAlgo(server?: string) {
-  const CONSOLE = applicationDeps.createScopeLog('use-algo');
+  const CONSOLE = applicationDeps.createScopeLog!('use-algo');
   const host = '127.0.0.1';
   const port = '8086';
   const state = reactive({
@@ -87,12 +87,12 @@ export function useAlgo(server?: string) {
                 break;
             }
           } else if (code === ECode.CAMERA_ERROR) {
-            CONSOLE.error(`摄像头异常--CAMERA_ERROR--${error_msg}`);
+            CONSOLE.error!(`摄像头异常--CAMERA_ERROR--${error_msg}`);
             cameraError.value = true;
           }
         } catch (error) {
           cameraError.value = true;
-          CONSOLE.error(`websocket data解析错误`);
+          CONSOLE.error!(`websocket data解析错误`);
         }
       }
     }
@@ -102,7 +102,7 @@ export function useAlgo(server?: string) {
     (status) => {
       if (status === EWebsocketStatus.Closed) {
         if (!unref(algoOn)) return;
-        CONSOLE.error('websocket已断开');
+        CONSOLE.error!('websocket已断开');
         algoOn.value = false;
       } else if (status === EWebsocketStatus.Open) {
         if (unref(algoOn)) return;

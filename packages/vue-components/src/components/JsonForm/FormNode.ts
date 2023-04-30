@@ -17,13 +17,13 @@ export default class FormNode {
   /**
    * The node's ID (may not be set)
    */
-  id = null;
+  id?: string;
 
   name;
   /**
    * The node's key path (may not be set)
    */
-  key = null;
+  key: string = ''
 
   keydash = null;
 
@@ -38,19 +38,19 @@ export default class FormNode {
    * Link to the form element that describes the node's layout
    * (note the form element is shared among nodes in arrays)
    */
-  formElement = null;
+  formElement: any;
 
   /**
    * Link to the schema element that describes the node's value constraints
    * (note the schema element is shared among nodes in arrays)
    */
-  schemaElement = null;
+  schemaElement: any;
 
   /**
    * Pointer to the "view" associated with the node, typically the right
    * object in jsonform.elementTypes
    */
-  view = null;
+  view: any;
 
   /**
    * Node's subtree (if one is defined)
@@ -60,19 +60,19 @@ export default class FormNode {
   /**
    * A pointer to the form tree the node is attached to
    */
-  ownerTree: FormTree = null;
+  ownerTree?: FormTree;
 
   /**
    * A pointer to the parent node of the node in the tree
    */
-  parentNode: FormNode = null;
+  parentNode?: FormNode;
 
   /**
    * Child template for array-like nodes.
    *
    * The child template gets cloned to create new array items.
    */
-  childTemplate: FormNode = null;
+  childTemplate?: FormNode;
 
 
   /**
@@ -81,7 +81,7 @@ export default class FormNode {
    * legend child is kept here and initialized in computeInitialValues
    * when a child sets "valueInLegend"
    */
-  legendChild = null;
+  legendChild: any;
 
 
   /**
@@ -102,7 +102,7 @@ export default class FormNode {
    *
    * @type {Array(Number)}
    */
-  arrayPath = [];
+  arrayPath: any = [];
 
   /**
    * Position of the node in the list of children of its parents
@@ -115,6 +115,8 @@ export default class FormNode {
 
   visible = true;
 
+  legend: any
+
   /**
  * Clones a node
  *
@@ -122,7 +124,7 @@ export default class FormNode {
  * @param {formNode} New parent node to attach the node to
  * @return {formNode} Cloned node
  */
-  clone(parentNode = null) {
+  clone(parentNode?: FormNode) {
     var node = new FormNode();
     node.arrayPath = clone(this.arrayPath);
     node.ownerTree = this.ownerTree;
@@ -338,10 +340,10 @@ export default class FormNode {
    */
   computeInitialValues(values = null, ignoreDefaultValues = false) {
     var self = this;
-    var node = null;
+    var node: FormNode;
     var nbChildren = 1;
     var i = 0;
-    var formData = this.ownerTree.formDesc.tpldata || {};
+    var formData = this.ownerTree!.formDesc.tpldata || {};
 
     // Propagate the array path from the parent node
     // (adding the position of the child for nodes that are direct
@@ -383,17 +385,17 @@ export default class FormNode {
     if (this.formElement) {
       // Compute the ID of the field (if needed)
       if (this.formElement.id) {
-        this.id = applyArrayPath(this.formElement.id, this.arrayPath);
+        this.id = applyArrayPath(this.formElement.id!, this.arrayPath);
       }
       else if (this.view && this.view.array) {
-        this.id = escapeSelector(this.ownerTree.formDesc.prefix) +
+        this.id = escapeSelector(this.ownerTree!.formDesc.prefix) +
           '-elt-counter-' + uniqueId();
       }
       else if (this.parentNode && this.parentNode.view &&
         this.parentNode.view.array) {
         // Array items need an array to associate the right DOM element
         // to the form node when the parent is rendered.
-        this.id = escapeSelector(this.ownerTree.formDesc.prefix) +
+        this.id = escapeSelector(this.ownerTree!.formDesc.prefix) +
           '-elt-counter-' + uniqueId();
       }
       else if ((this.formElement.type === 'button') ||
@@ -401,7 +403,7 @@ export default class FormNode {
         (this.formElement.type === 'question') ||
         (this.formElement.type === 'buttonquestion')) {
         // Buttons do need an id for "onClick" purpose
-        this.id = escapeSelector(this.ownerTree.formDesc.prefix) +
+        this.id = escapeSelector(this.ownerTree!.formDesc.prefix) +
           '-elt-counter-' + uniqueId();
       }
 
@@ -555,11 +557,11 @@ export default class FormNode {
       }
       const nodes = getObjKey(values, this.key)
       nbChildren = nodes ? nodes.length : 0;
-      let childTemplate = this.childTemplate;
+      let childTemplate = this.childTemplate!;
       if (nbChildren > 0 && (childTemplate.schemaElement.type === 'link' || childTemplate.schemaElement.ref)) {
-        const { type, properties } = JSON.parse(JSON.stringify(getSchemaKey(this.ownerTree.formDesc.schema.properties, childTemplate.schemaElement.ref)));
+        const { type, properties } = JSON.parse(JSON.stringify(getSchemaKey(this.ownerTree!.formDesc.schema.properties, childTemplate.schemaElement.ref)));
         Object.assign(childTemplate.schemaElement, { type, properties });
-        childTemplate = this.ownerTree.buildFromLayout({ key: childTemplate.formElement.key })
+        childTemplate = this.ownerTree!.buildFromLayout({ key: childTemplate.formElement.key })
         this.setChildTemplate(childTemplate)
       }
       if (childTemplate.schemaElement.type === 'link') {
@@ -569,7 +571,7 @@ export default class FormNode {
         this.appendChild(childTemplate.clone());
       }
     } else if (this.schemaElement && this.schemaElement.type === 'link') {
-      const { type, properties } = JSON.parse(JSON.stringify(getSchemaKey(this.ownerTree.formDesc.schema.properties, this.schemaElement.ref)));
+      const { type, properties } = JSON.parse(JSON.stringify(getSchemaKey(this.ownerTree!.formDesc.schema.properties, this.schemaElement.ref)));
       Object.assign(this.schemaElement, { type, properties })
     }
     // Case 3 and in any case: recurse through the list of children
@@ -597,7 +599,7 @@ export default class FormNode {
             break;
           }
         }
-        node = node.parentNode;
+        node = node.parentNode!;
       }
     }
   };
@@ -616,9 +618,9 @@ export default class FormNode {
    * @return {Number} The number of items in the array
    */
   getPreviousNumberOfItems(values, arrayPath) {
-    var key = null;
-    var arrayValue = null;
-    var childNumbers = null;
+    var key;
+    var arrayValue;
+    var childNumbers;
     var idx = 0;
 
     if (!values) {
@@ -649,7 +651,7 @@ export default class FormNode {
     else if (this.view.array) {
       // Case 2: node is an array-like node, look for input fields
       // in its child template
-      return this.childTemplate.getPreviousNumberOfItems(values, arrayPath);
+      return this.childTemplate!.getPreviousNumberOfItems(values, arrayPath);
     }
     else {
       // Case 3: node is a leaf or a container,
@@ -681,10 +683,10 @@ export default class FormNode {
    * @return {Object} The object that follows the data schema and matches the
    *  values entered by the user.
    */
-  getFormValues(updateArrayPath) {
-    console.log(this.ownerTree.form.getFieldsValue())
+  getFormValues(updateArrayPath?) {
+    console.log(this.ownerTree!.form.getFieldsValue())
     // The values object that will be returned
-    return this.ownerTree.form.getFieldsValue()
+    return this.ownerTree!.form.getFieldsValue()
 
     if (!this.el) {
       throw new Error('formNode.getFormValues can only be called on nodes that are associated with a DOM element in the tree');
@@ -709,7 +711,7 @@ export default class FormNode {
     // Create the additional array item at the end of the list,
     // using the item template created when tree was initialized
     // (the call to resetValues ensures that 'arrayPath' is correctly set)
-    var child = this.childTemplate.clone();
+    var child = this.childTemplate!.clone();
     this.appendChild(child);
     child.resetValues();
 
@@ -788,13 +790,14 @@ export default class FormNode {
     };
     if (!this.view || !this.view.array) return boundaries;
 
-    function getNodeBoundaries(node: FormNode, initialNode = null) {
-      var schemaKey = null;
-      var arrayKey = null;
+    function getNodeBoundaries(node: FormNode, initialNode: any = null) {
+      var schemaKey: any;
+      var arrayKey = '';
       var boundaries = {
         minItems: -1,
         maxItems: -1
       };
+
       initialNode = initialNode || node;
 
       if (node.view && node.view.array && (node !== initialNode)) {
@@ -816,7 +819,7 @@ export default class FormNode {
           arrayKey = arrayKey.replace(/\[\][^\[\]]*$/, '');
         }
         schemaKey = getSchemaKey(
-          node.ownerTree.formDesc.schema.properties,
+          node.ownerTree!.formDesc.schema.properties,
           arrayKey
         );
         if (!schemaKey) return boundaries;

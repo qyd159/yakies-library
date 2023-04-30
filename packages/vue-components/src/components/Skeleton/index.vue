@@ -30,7 +30,7 @@ const instance = getCurrentInstance();
 const canvasScale = ref(1);
 
 onMounted(() => {
-  const canvasEl = instance.refs.el as HTMLCanvasElement;
+  const canvasEl = instance!.refs.el as HTMLCanvasElement;
   const ctx = canvasEl.getContext('2d');
 
   let draw = skeletonDraw({
@@ -66,7 +66,7 @@ onMounted(() => {
         centered: props.centered,
         canvasScale: canvasScale.value,
         maxScale:
-          ['arms', 'body', 'legs'].indexOf(props.part) !== -1 || !props.part
+          ['arms', 'body', 'legs'].indexOf(props.part!) !== -1 || !props.part
             ? 4
             : undefined,
       });
@@ -79,7 +79,7 @@ onMounted(() => {
     ({
       canvasData: [skeletonData = [], trajectoryData = [], actionData = []],
     }) => {
-      draw(ctx, [skeletonData, trajectoryData, actionData]);
+      draw(ctx!, [skeletonData, trajectoryData, actionData]);
       canvasEl.style.transform = `scale(${props.canvasScale})`;
     },
     { immediate: true }
@@ -87,7 +87,7 @@ onMounted(() => {
 
   // @ts-ignore
   eventBus.on(SKELETON_DATA, ([skeletonData, trajectoryData, actionData]) => {
-    draw(ctx, [skeletonData, trajectoryData, actionData], props.part);
+    draw(ctx!, [skeletonData, trajectoryData, actionData], props.part);
   });
 });
 onUnmounted(() => {

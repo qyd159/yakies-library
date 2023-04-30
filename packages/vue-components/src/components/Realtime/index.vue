@@ -52,11 +52,11 @@ onMounted(() => {
   const pcmPlayer = new PCMPlayer(pcmOption);
 
   const { videoWidth, videoHeight, frameEvent } = props;
-  const videoEl = instance.refs.video as HTMLCanvasElement;
+  const videoEl = instance!.refs.video as HTMLCanvasElement;
   const { width } = videoEl.getBoundingClientRect();
   videoEl.style.height = (videoHeight * width) / videoWidth + 'px';
   scale.value = width / videoWidth;
-  const renderer = initialCanvas(instance.refs.canvas, videoWidth, videoHeight);
+  const renderer = initialCanvas(instance!.refs.canvas, videoWidth, videoHeight);
   frameReceivedHandler = function ({
     type,
     data,
@@ -96,10 +96,10 @@ onMounted(() => {
     }
   };
 
-  eventBus.on(frameEvent, frameReceivedHandler);
+  eventBus.on(frameEvent!, frameReceivedHandler);
 });
 onUnmounted(() => {
-  eventBus.off(props.frameEvent, frameReceivedHandler);
+  eventBus.off(props.frameEvent!, frameReceivedHandler);
 });
 defineExpose({
   video

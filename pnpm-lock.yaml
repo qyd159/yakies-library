@@ -388,6 +388,7 @@ importers:
   packages/vue-components:
     specifiers:
       '@ant-design/icons-vue': ^6.1.0
+      '@iconify/iconify': ^3.1.0
       '@lottiefiles/lottie-player': ^1.5.7
       '@types/dom-webcodecs': ^0.1.5
       '@types/keyv': 3.1.4
@@ -404,6 +405,7 @@ importers:
       markdown-it-custom-attrs: ^1.0.2
       mitt: ^3.0.0
       mp4box: ^0.5.2
+      node-request-interceptor: ^0.6.3
       pinia: ^2.0.32
       primeflex: ^3.1.2
       primeicons: ^5.0.0
@@ -415,7 +417,7 @@ importers:
       vite-plugin-purge-icons: ^0.9.2
       vite-plugin-style-import: ^2.0.0
       vite-plugin-svg-icons: ^2.0.1
-      vitepress: ^1.0.0-alpha.5
+      vitepress: 1.0.0-alpha.27
       vue: ^3.2.37
       vue-tsc: ^0.40.13
       vue-types: ^5.0.2
@@ -435,6 +437,7 @@ importers:
       vue: 3.2.41
       vue-types: 5.0.2_vue@3.2.41
     devDependencies:
+      '@iconify/iconify': 3.1.0
       '@types/dom-webcodecs': 0.1.5
       '@types/keyv': 3.1.4
       '@types/lodash': 4.14.187
@@ -442,6 +445,7 @@ importers:
       consola: 2.15.3
       less: 4.1.3
       markdown-it-custom-attrs: 1.0.2
+      node-request-interceptor: 0.6.3
       primeflex: 3.2.1
       primeicons: 5.0.0
       primevue: 3.18.1_2jw6famotrktt5gw7ifjfdiz5e
@@ -2475,6 +2479,10 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
+
+  /@open-draft/until/1.0.3:
+    resolution: {integrity: sha512-Aq58f5HiWdyDlFffbbSjAlv596h/cOnt2DO1w3DOC7OJ5EHs0hd/nycJfiu9RJbT6Yk6F1knnRRXNSpxoIVZ9Q==}
+    dev: true
 
   /@purge-icons/core/0.9.1:
     resolution: {integrity: sha512-sx8/a30MbbqQVEqhuMPE1wJpdVRRbEmwEPZpFzVkcDixzX4p+R2A0WVxqkb0xfHUBAVQwrSE2SeAyniIQLqbLw==}
@@ -8609,6 +8617,10 @@ packages:
       tslib: 2.4.1
     dev: true
 
+  /headers-utils/1.2.5:
+    resolution: {integrity: sha512-DAzV5P/pk3wTU/8TLZN+zFTDv4Xa1QDTU8pRvovPetcOMbmqq8CwsAvZBLPZHH6usxyy31zMp7I4aCYb6XIf6w==}
+    dev: true
+
   /hexo-pagination/0.1.0:
     resolution: {integrity: sha512-Ji/LYq7xP7cdBdG15CJ4YZZNA/c6Kf64rXj+Jp2bKsC2JTgcBmz+GGkHwpk6aoMHXRP2XraxGcGjXhITr7ooYg==}
     dependencies:
@@ -11532,6 +11544,17 @@ packages:
   /node-releases/2.0.6:
     resolution: {integrity: sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==}
 
+  /node-request-interceptor/0.6.3:
+    resolution: {integrity: sha512-8I2V7H2Ch0NvW7qWcjmS0/9Lhr0T6x7RD6PDirhvWEkUQvy83x8BA4haYMr09r/rig7hcgYSjYh6cd4U7G1vLA==}
+    dependencies:
+      '@open-draft/until': 1.0.3
+      debug: 4.3.4
+      headers-utils: 1.2.5
+      strict-event-emitter: 0.1.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /node-url-utils/0.4.0:
     resolution: {integrity: sha512-cg9J2VQ0nNvrZR+edoDaAoInvGRgi2r/LCSwOwNCgVASBo0rQiDbSwa4s0MpEcpPf1p4qokC14BXMx5TPxSU5w==}
     engines: {node: '>=0.2.x'}
@@ -14002,6 +14025,10 @@ packages:
       fs-extra: 8.1.0
     transitivePeerDependencies:
       - supports-color
+
+  /strict-event-emitter/0.1.0:
+    resolution: {integrity: sha512-8hSYfU+WKLdNcHVXJ0VxRXiPESalzRe7w1l8dg9+/22Ry+iZQUoQuoJ27R30GMD1TiyYINWsIEGY05WrskhSKw==}
+    dev: true
 
   /strict-uri-encode/1.1.0:
     resolution: {integrity: sha512-R3f198pcvnB+5IpnBlRkphuE9n46WyVl8I39W/ZUTZLz4nqSP/oLYUrcnJrw462Ds8he4YKMov2efsTIw1BDGQ==}

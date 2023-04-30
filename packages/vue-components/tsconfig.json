@@ -12,6 +12,7 @@
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
+    "noImplicitAny": false,
     "lib": [
       "dom",
       "esnext",
