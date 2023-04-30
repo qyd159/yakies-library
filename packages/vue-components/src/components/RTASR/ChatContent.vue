@@ -96,6 +96,7 @@
   }
 </script>
 <style lang="less" scoped>
+  @primary-color: #fff;
   .user-talk-item {
     padding: 12px 20px;
     margin: 15px 15px 15px 70px;
