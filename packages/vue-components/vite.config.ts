@@ -1,5 +1,7 @@
-import vue from '@vitejs/plugin-vue';
 import { ConfigEnv, UserConfig, defineConfig } from 'vite';
+import { createVitePlugins } from './build/vite/plugin';
+import { loadEnv } from 'vite';
+import { wrapperEnv } from './build/utils';
 
 const path = require('path');
 
@@ -10,8 +12,13 @@ function pathResolve(dir: string) {
  * @type {import('vite').UserConfig}
  */
 module.exports = defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
+  const env = loadEnv(mode, process.cwd());
+  // The boolean type read by loadEnv is a string. This function can be converted to boolean type
+  const viteEnv = wrapperEnv(env);
+
+  const isBuild = command === 'build';
   return {
-    plugins: [vue()], // to process SFC
+    plugins: createVitePlugins(viteEnv, isBuild), // to process SFC
     resolve: {
       alias: [
         {
@@ -30,7 +37,7 @@ module.exports = defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       },
       rollupOptions: {
         // external modules won't be bundled into your library
-        external: ['vue','ant-design-vue', 'pinia'], // not every external has a global
+        external: ['vue', 'ant-design-vue', 'pinia'], // not every external has a global
         output: {
           // disable warning on src/index.ts using both default and named export
           exports: 'named',
