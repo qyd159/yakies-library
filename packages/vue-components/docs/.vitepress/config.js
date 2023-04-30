@@ -1,5 +1,4 @@
 import {defineConfig} from 'vitepress';
-import purgeIcons from 'vite-plugin-purge-icons';
 import path from 'path';
 import { createSvgIconsPlugin} from 'vite-plugin-svg-icons';
 import mdItCustomAttrs  from 'markdown-it-custom-attrs'
@@ -79,7 +78,7 @@ export default defineConfig({
     css: {
       preprocessorOptions: {
         less: {
-          modifyVars: generateModifyVars(true,pathResolve('../../src/render/design/config.less')),
+          modifyVars: generateModifyVars(true,pathResolve('./docs/.vitepress/design/config.less')),
           javascriptEnabled: true,
         },
       },
@@ -93,7 +92,7 @@ export default defineConfig({
       ],
       dedupe: ['vue', /primevue\/.+/], // avoid error when using dependencies that also use Vue
     },
-    plugins: [purgeIcons(),createSvgIconsPlugin({
+    plugins: [createSvgIconsPlugin({
       iconDirs: [
         path.resolve(process.cwd(), 'src/assets/svg'),
       ],

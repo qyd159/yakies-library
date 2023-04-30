@@ -5,13 +5,12 @@ import 'recorder-core/src/extensions/lib.fft';
 import 'recorder-core/src/extensions/frequency.histogram.view';
 import { RealTimeSendTry, RealTimeSendTryReset } from './RealTimeSender';
 import { mergeAudioBlobs } from './utils';
-import { listAsr } from '/@/fantasy/common/api/generated/chatgpt';
 // 屏蔽网站统计
 Recorder.TrafficImgUrl = '';
 
-async function connectWebsocket(onOpen: () => void, onMessage: (data) => void) {
+async function connectWebsocket({ onOpen, onMessage, getUrlParams }: { onOpen: () => void, onMessage: (data) => void, getUrlParams: () => Promise<any> }) {
   let url = 'wss://rtasr.xfyun.cn/v1/ws';
-  const urlParam = await listAsr();
+  const urlParam = await getUrlParams();
   url = `${url}${urlParam}`;
   const ws = new WebSocket(url);
   ws.onopen = (_e) => {

@@ -390,6 +390,7 @@ importers:
       '@ant-design/icons-vue': ^6.1.0
       '@iconify/iconify': ^3.1.0
       '@lottiefiles/lottie-player': ^1.5.7
+      '@purge-icons/generated': ^0.9.0
       '@types/dom-webcodecs': ^0.1.5
       '@types/keyv': 3.1.4
       '@types/lodash': ^4.14.184
@@ -450,6 +451,7 @@ importers:
       vue-types: 5.0.2_vue@3.2.41
     devDependencies:
       '@iconify/iconify': 3.1.0
+      '@purge-icons/generated': 0.9.0
       '@types/dom-webcodecs': 0.1.5
       '@types/keyv': 3.1.4
       '@types/lodash': 4.14.187

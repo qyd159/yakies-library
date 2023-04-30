@@ -14,18 +14,16 @@
 </template>
 
 <script lang="ts" setup>
-  import { useAppInject } from '/@/hooks/web/useAppInject';
-  import { propTypes } from '/@/utils/propTypes';
+  import { propTypes } from '@/utils/propTypes';
   import { useRecorder } from './hooks';
   import { Button } from 'vant';
   import 'vant/es/button/style';
-
-  const { getIsMobile } = useAppInject();
 
   const props = defineProps({
     aiVoiceReceived: propTypes.func,
     userVoiceParsed: propTypes.func,
     sessionId: propTypes.string,
+    isMobile: propTypes.bool,
   });
 
   const waveView = ref();
@@ -43,7 +41,7 @@
   function stopHandler() {
     if (!unref(touching)) return;
     touching.value = false;
-    if (!unref(getIsMobile)) {
+    if (!props.isMobile) {
       document.removeEventListener('mouseup', mouseupHandler);
     }
     recStop();

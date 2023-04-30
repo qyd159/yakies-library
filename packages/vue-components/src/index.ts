@@ -1,6 +1,5 @@
 import { App } from 'vue';
 import * as components from './components';
-import './assets/main.less';
 
 function install(app: App) {
   for (const key in components) {
