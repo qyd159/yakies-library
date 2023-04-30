@@ -24,12 +24,13 @@
     userVoiceParsed: propTypes.func,
     sessionId: propTypes.string,
     isMobile: propTypes.bool,
+    getASRUrlParams: propTypes.func,
   });
 
   const waveView = ref();
   const recordBtn = ref();
 
-  const { recording, recStop, recStart, rec, connect } = useRecorder(waveView, false, props.userVoiceParsed);
+const { recording, recStop, recStart, rec, connect } = useRecorder({waveView, callMode: false,userVoiceParsed: props.userVoiceParsed,getUrlParams: props.getASRUrlParams});
   const touching = ref(false);
 
   function mouseupHandler() {

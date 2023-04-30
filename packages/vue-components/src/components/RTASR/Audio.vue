@@ -33,8 +33,8 @@
 
 <script lang="ts" setup>
   import { Progress } from 'ant-design-vue';
-  import { propTypes } from '/@/utils/propTypes';
-  import Icon from '/@/components/Icon';
+  import { propTypes } from '@/utils/propTypes';
+  import Icon from '@/components/Icon';
 
   const props = defineProps({
     type: propTypes.string.def('anser'),

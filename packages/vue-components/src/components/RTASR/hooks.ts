@@ -39,7 +39,7 @@ async function connectWebsocket({ onOpen, onMessage, getUrlParams }: { onOpen: (
   return ws;
 }
 
-export function useRecorder(waveView, callMode, userVoiceParsed) {
+export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams }) {
   const recording = ref(false);
   const rec = ref();
   let wave,
@@ -181,39 +181,43 @@ export function useRecorder(waveView, callMode, userVoiceParsed) {
   async function connect() {
     await new Promise((resolve) => {
       connectWebsocket(
-        () => {
-          resolve(null);
-        },
-        (data) => {
-          data = JSON.parse(data);
-          const rtasrResult: any = [];
-          rtasrResult[data.seg_id] = data;
-          rtasrResult.forEach(async (i) => {
-            let str = '';
-            // str += i.cn.st.type == 0 ? '【最终】识别结果：' : '【中间】识别结果：';
-            i.cn.st.rt.forEach((j) => {
-              j.ws.forEach((k) => {
-                k.cw.forEach((l) => {
-                  str += l.w;
+        {
+          onOpen() {
+            resolve(null);
+          },
+          onMessage(data) {
+            data = JSON.parse(data);
+            const rtasrResult: any = [];
+            rtasrResult[data.seg_id] = data;
+            rtasrResult.forEach(async (i) => {
+              let str = '';
+              // str += i.cn.st.type == 0 ? '【最终】识别结果：' : '【中间】识别结果：';
+              i.cn.st.rt.forEach((j) => {
+                j.ws.forEach((k) => {
+                  k.cw.forEach((l) => {
+                    str += l.w;
+                  });
                 });
               });
+              if (i.cn.st.type == 0 && takeoffChunks.length > 0) {
+                // @ts-ignore
+                const { blob } = await mergeAudioBlobs(takeoffChunks);
+                const reader = new FileReader();
+                reader.onloadend = function () {
+                  const base64 = /.+;\s*base64\s*,\s*(.+)$/i.exec(reader.result as string) || [];
+                  userVoiceParsed(base64[0], str);
+                };
+                reader.readAsDataURL(blob);
+                takeoffChunks = [];
+              }
             });
-            if (i.cn.st.type == 0 && takeoffChunks.length > 0) {
-              // @ts-ignore
-              const { blob } = await mergeAudioBlobs(takeoffChunks);
-              const reader = new FileReader();
-              reader.onloadend = function () {
-                const base64 = /.+;\s*base64\s*,\s*(.+)$/i.exec(reader.result as string) || [];
-                userVoiceParsed(base64[0], str);
-              };
-              reader.readAsDataURL(blob);
-              takeoffChunks = [];
-            }
-          });
+          },
+          getUrlParams
         }
       ).then((ws) => (socket.value = ws));
-    });
+    })
   }
+
   onMounted(() => {
     nextTick(recOpen);
   });
