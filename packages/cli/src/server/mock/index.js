@@ -7,7 +7,7 @@ const proxyCacheMiddleware = require('@yakies/proxy-cache-middleware');
 const Axios = require('axios').default;
 const queryString = require('query-string');
 const URL = require('url');
-const { merge } = require('lodash');
+const { merge, isArray } = require('lodash');
 const { gzip, ungzip } = require('node-gzip');
 
 // const interfaceMonitorUrl = 'http://localhost:3100/api/v1/monitor';
@@ -212,7 +212,13 @@ module.exports = async function (req, res, next) {
       }
       res.end();
     }
-    if (proxyMode && req.originalUrl.indexOf(wwwFileMap.proxy.baseApi) === 0) {
+    let baseApi = []
+    if (typeof wwwFileMap.proxy.baseApi === 'string') {
+      baseApi = [wwwFileMap.proxy.baseApi]
+    } else if (isArray(wwwFileMap.proxy.baseApi)) {
+      baseApi = wwwFileMap.proxy.baseApi
+    }
+    if (proxyMode && baseApi.some(api => req.originalUrl.indexOf(api) === 0)) {
       // 是后台请求
       wwwFileMap.apiProxy((err, data) => {
         if (!(data.body instanceof Buffer) && wwwFileMap.proxy.capture) {
