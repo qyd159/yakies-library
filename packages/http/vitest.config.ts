@@ -2,7 +2,7 @@ import { defineConfig } from 'vitest/config';
 import { resolve } from 'path';
 
 function pathResolve(dir: string) {
-  return resolve(process.cwd(), '.', dir);
+  return resolve(__dirname, '.', dir);
 }
 export default defineConfig({
   test: {
@@ -13,14 +13,10 @@ export default defineConfig({
         replacement: pathResolve('.') + '/',
       },
       {
-        find: /^@\//,
+        find: /^\/@\//,
         replacement: pathResolve('src') + '/',
       },
-      {
-        find: /^\/@\//,
-        replacement: pathResolve('src/render') + '/',
-      }
     ],
-    environment: 'jsdom',
+    environment: 'node',
   },
 });
