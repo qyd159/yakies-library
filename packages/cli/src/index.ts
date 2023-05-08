@@ -1,15 +1,14 @@
+import createAppServer from './server/app';
+import _ from './lib/util'
+import './common/bootstrap'
+import settings from './conf/settings';
+
 const Liftoff = require('liftoff');
 const path = require('path');
-const _ = require('./lib/util');
 const portfinder = require('portfinder');
 const { debounce, merge } = require('lodash');
 
-// 加载启动部分
-require('./common/bootstrap');
-
-module.exports = async function (argv) {
-  //执行部分
-  let settings = require('./conf/settings');
+export default async function (argv) {
   let user_path = argv._.length > 0 ? argv._[0] : '';
   argv.r = argv.root = user_path ? user_path : '.';
 
@@ -115,7 +114,7 @@ module.exports = async function (argv) {
   }
 
   const port = +argv.port || settings.port;
-  require('./server/app')(port, argv.root, () => {
+  createAppServer({ port, root: argv.root, useHttps: argv.https }, () => {
     if (!argv.bs) return;
     console.warn('开启browser-sync可能会造成卡顿甚至阻塞，请谨慎使用！');
     const newPath = path.join(process.cwd(), argv.root);

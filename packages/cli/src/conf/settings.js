@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   browserSyncPort: {
     port: 3000,
   },

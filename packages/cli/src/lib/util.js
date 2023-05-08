@@ -1,17 +1,7 @@
-/**
- * fis 中工具类操作集合。{@link https://lodash.com/ lodash} 中所有方法都挂载在此名字空间下面。
- * @param  {String} path
- * @return {String}
- * @example
- *   /a/b//c\d/ -> /a/b/c/d
- * @namespace fis.util
- */
+import path from 'path'
+import fs from 'fs'
+import jsdom from 'jsdom'
 
-const lodash = require('lodash');
-const path = require('path');
-const pth = require('path');
-const fs = require('fs');
-const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const virtualConsole = new jsdom.VirtualConsole();
 
@@ -319,7 +309,7 @@ const handleHtml = function(result, gamesite, type, settings, proxyMode) {
   return dom.serialize();
 };
 
-module.exports = {
+export {
   getAllFiles,
   insertLinkCss,
   insertScript,

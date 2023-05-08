@@ -86,7 +86,7 @@
    };
  }
 
- module.exports = function (options) {
+ export default function (options) {
    var file = options.rewrite_file;
    var parser;
 
@@ -135,12 +135,14 @@
            var target = parseUrl(to);
            req._originalUrl = req.originalUrl || req.url;
            req.originalUrl = req.url = target.pathname + (target.search ? url.search : '');
-           createProxyMiddleware({
+           const proxyOptions ={
              target: target.protocol + '//' + target.host,
              changeOrigin: true,
              // ws: true,
-             logLevel: 'debug'
-           })(req, res, next);
+             logLevel: 'debug',
+             secure: false
+           }
+           createProxyMiddleware(proxyOptions)(req, res, next);
            return;
 
          case 'redirect':

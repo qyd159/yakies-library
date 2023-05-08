@@ -6,7 +6,7 @@
 var path = require('path');
 var fs = require('fs');
 
-module.exports = function(options) {
+export default function(options) {
   var dataroot = options.data_path;
   var rpage = /^\/(?:test|mock)\/(.*\.(js|json|txt))(?:$|\?)/i;
 

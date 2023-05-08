@@ -144,6 +144,7 @@ module.exports = async function (req, res, next) {
         changeOrigin: true,
         // ws: true,
         selfHandleResponse: false,
+        secure: false
       };
       // options.onProxyRes = function (proxyRes, req, res) {
       //   proxyRes.headers['x-added'] = 'foobar' // add new header to response

@@ -1,11 +1,11 @@
-var rewrite = require('./lib/rewrite.js');
-var script = require('./lib/script.js');
+import rewrite from './lib/rewrite.js';
+import script from './lib/script'
 
 function noop(req, res, next) {
   next();
 }
 
-module.exports = function(options) {
+export default function(options) {
   // sub midllewares
   return (
     [rewrite, script]
