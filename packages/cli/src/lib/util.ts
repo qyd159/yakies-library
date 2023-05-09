@@ -1,11 +1,12 @@
 import path from 'path'
 import fs from 'fs'
 import jsdom from 'jsdom'
+import os from 'os'
 
 const { JSDOM } = jsdom;
 const virtualConsole = new jsdom.VirtualConsole();
 
-const getAllFiles = function(root, ignoreDir, fileExt, options) {
+const getAllFiles = function (root, ignoreDir, fileExt, options) {
   if (arguments.length === 3) {
     options = fileExt;
     fileExt = null;
@@ -26,7 +27,7 @@ const getAllFiles = function(root, ignoreDir, fileExt, options) {
       options && options.cwd
         ? fs.readdirSync(path.join(options.cwd, root))
         : fs.readdirSync(root);
-  files.forEach(function(file) {
+  files.forEach(function (file) {
     var pathname = root + '/' + file,
       stat = fs.lstatSync(
         options && options.cwd ? path.join(options.cwd, pathname) : pathname
@@ -66,7 +67,7 @@ const getAllFiles = function(root, ignoreDir, fileExt, options) {
   return res;
 };
 
-const insertLinkCss = function(document, $cssLoader, url) {
+const insertLinkCss = function (document, $cssLoader, url) {
   var linkElm = document.createElement('link');
   linkElm.setAttribute('rel', 'stylesheet');
   linkElm.setAttribute('type', 'text/css');
@@ -74,14 +75,14 @@ const insertLinkCss = function(document, $cssLoader, url) {
   $cssLoader.after(linkElm);
 };
 
-const insertScript = function(document, $jsLoader, url, $) {
+const insertScript = function (document, $jsLoader, url, $) {
   var scriptElm = document.createElement('script');
   scriptElm.setAttribute('type', 'text/javascript');
   scriptElm.setAttribute('src', url);
   $(scriptElm).insertBefore($jsLoader);
 };
 
-const getTemplateJs = function(type, wwwFileMap, proxyMode) {
+const getTemplateJs = function (type, wwwFileMap, proxyMode) {
   let fileMap = proxyMode ? wwwFileMap : wwwFileMap[type];
   if (fileMap.js) {
     return fileMap.js;
@@ -108,7 +109,7 @@ const getTemplateJs = function(type, wwwFileMap, proxyMode) {
   return result;
 };
 
-const getTemplateCss = function(type, wwwFileMap, proxyMode) {
+const getTemplateCss = function (type, wwwFileMap, proxyMode) {
   let fileMap = proxyMode ? wwwFileMap : wwwFileMap[type];
   if (fileMap.css) {
     return fileMap.css;
@@ -135,7 +136,7 @@ const getTemplateCss = function(type, wwwFileMap, proxyMode) {
   return result;
 };
 
-const handleHtml = function(result, gamesite, type, settings, proxyMode) {
+const handleHtml = function (result, gamesite, type, settings, proxyMode) {
   // @ts-ignore
   const wwwFileMap = global.wwwFileMap;
   const dom = new JSDOM(result, { virtualConsole: virtualConsole });
@@ -192,7 +193,7 @@ const handleHtml = function(result, gamesite, type, settings, proxyMode) {
     cssInjector = cssInjector.concat(wwwFileMap[type].cssInjector);
   }
 
-  Array.prototype.map.call(links, function(link) {
+  Array.prototype.map.call(links, function (link) {
     /*替换本地开发用到的css*/
     const prefix = '//' + settings.wwwDeployDomain + '/';
     const index = link.href && link.href.indexOf(prefix);
@@ -230,7 +231,7 @@ const handleHtml = function(result, gamesite, type, settings, proxyMode) {
   }
 
   Array.prototype.map.apply(scripts, [
-    function(script) {
+    function (script) {
       /**
        * 替换本地开发用到的js
        */
@@ -271,12 +272,11 @@ const handleHtml = function(result, gamesite, type, settings, proxyMode) {
     wwwFileMap[type].cssRequires.length > 0
   ) {
     const cssRequires = wwwFileMap[type].cssRequires;
-    for (let i = 0; i < cssRequires.length; i++) {
+    for (const element of cssRequires) {
       insertLinkCss(
         window.document,
         $(cssLoader),
-        '/' + path.join(gamesite, cssRequires[i]),
-        $
+        '/' + path.join(gamesite, element),
       );
     }
   }
@@ -285,7 +285,7 @@ const handleHtml = function(result, gamesite, type, settings, proxyMode) {
    * 替换img标签的源为本地服务器的文件
    */
   const images = window.document.getElementsByTagName('img');
-  Array.prototype.map.call(images, function(image) {
+  Array.prototype.map.call(images, function (image) {
     const prefix = '//' + settings.wwwDeployDomain + '/';
     const index = image.src && image.src.indexOf(prefix);
     const $image = $(image);
@@ -309,9 +309,38 @@ const handleHtml = function(result, gamesite, type, settings, proxyMode) {
   return dom.serialize();
 };
 
+/**
+ * http://nodejs.cn/api/os/os_networkinterfaces.html
+ */
+const isIPV4 = (family: string | number) => {
+  return family === 'IPv4' || family === 4
+}
+
+const getLocalV4Ips = () => {
+  const interfaceDict = os.networkInterfaces()
+  const addresses: string[] = []
+  for (const key in interfaceDict) {
+    const interfaces = interfaceDict[key]
+    if (interfaces) {
+      for (const item of interfaces) {
+        if (isIPV4(item.family)) {
+          addresses.push(item.address)
+        }
+      }
+    }
+  }
+
+  return addresses
+}
+
+const getDefaultHosts = () => {
+  return ['localhost', ...getLocalV4Ips()]
+}
+
 export {
   getAllFiles,
   insertLinkCss,
   insertScript,
-  handleHtml
+  handleHtml,
+  getDefaultHosts
 };

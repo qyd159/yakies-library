@@ -1,29 +1,33 @@
 import { createProxyMiddleware, Options } from 'http-proxy-middleware';
 import devtool from '../devtool';
-
+import { getDefaultHosts } from '../lib/util'
+import { createLogger, LogLevel } from 'vite'
 const express = require('express');
 const url = require('url');
 const path = require('path');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const cors = require('cors');
-const sslify = require('express-sslify');
-const selfsigned = require('selfsigned');
-
-var app = express();
-
-export default function ({ port, root, useHttps = false }, callback) {
+const app = express();
+const Mkcert = require('@yakies/mkcert').default
+export default async function ({ port, root, useHttps = false, logLevel = 'info' as LogLevel }, callback) {
   let server
-  if (useHttps) {
-    // 使用 express-sslify 强制 HTTPS 连接
-    app.use(sslify.HTTPS());
-    // 使用 selfsigned 生成自签名证书
-    const attrs = [{ name: 'commonName', value: 'localhost' }];
-    const pems = selfsigned.generate(attrs, { days: 365 });
+  const allHosts = [...getDefaultHosts()]
+  const uniqueHosts = Array.from(new Set(allHosts)).filter(item => !!item)
 
+  if (useHttps) {
+    console.log(Mkcert)
+    const mkcert = Mkcert.create({
+      logger: createLogger(logLevel, {
+        prefix: 'cli:mkcert'
+      }),
+      source: 'coding',
+    })
+
+    const certificate = await mkcert.install(uniqueHosts)
     // 创建 HTTPS 服务器
     server = require('https').createServer(
-      { key: pems.private, cert: pems.cert },
+      { key: certificate.key && Buffer.from(certificate.key), cert: certificate.cert && Buffer.from(certificate.cert) },
       app
     );
 

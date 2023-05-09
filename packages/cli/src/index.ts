@@ -1,7 +1,7 @@
 import createAppServer from './server/app';
-import _ from './lib/util'
 import './common/bootstrap'
 import settings from './conf/settings';
+import watchFiles from './lib/watchFiles';
 
 const Liftoff = require('liftoff');
 const path = require('path');
@@ -179,7 +179,7 @@ export default async function (argv) {
               }, 500);
           }
         }, 500);
-        require('./lib/watchFiles')(configFile, function (type) {
+        watchFiles(configFile, function (type) {
           if (type === 'change') {
             debounceFunc();
           }
