@@ -1,6 +1,6 @@
 import { createProxyMiddleware, Options } from 'http-proxy-middleware';
 import devtool from '../devtool';
-import { getDefaultHosts } from '../lib/util'
+import { getDefaultHosts, printServerUrls, resolveServerUrls } from '../lib/util'
 import { createLogger, LogLevel } from 'vite'
 const express = require('express');
 const url = require('url');
@@ -10,13 +10,12 @@ const compression = require('compression');
 const cors = require('cors');
 const app = express();
 const Mkcert = require('@yakies/mkcert').default
-export default async function ({ port, root, useHttps = false, logLevel = 'info' as LogLevel }, callback) {
-  let server
-  const allHosts = [...getDefaultHosts()]
-  const uniqueHosts = Array.from(new Set(allHosts)).filter(item => !!item)
 
+export default async function ({ port, root, useHttps = false, logLevel = 'info' as LogLevel, hosts = [] }, callback) {
+  let server
+  const allHosts = [...getDefaultHosts(), ...hosts]
+  const uniqueHosts = Array.from(new Set(allHosts)).filter(item => !!item)
   if (useHttps) {
-    console.log(Mkcert)
     const mkcert = Mkcert.create({
       logger: createLogger(logLevel, {
         prefix: 'cli:mkcert'
@@ -195,8 +194,8 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
   var fs = require('fs');
 
 
-  server.listen(port, '0.0.0.0', function () {
-    console.log(' Listening on http://127.0.0.1:%d', port);
+  server.listen(port, '0.0.0.0', async function () {
+    printServerUrls(await resolveServerUrls(server, { host: hosts[0], port: port, https: useHttps }), false);
     callback();
   });
 

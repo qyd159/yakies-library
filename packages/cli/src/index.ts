@@ -114,7 +114,7 @@ export default async function (argv) {
   }
 
   const port = +argv.port || settings.port;
-  createAppServer({ port, root: argv.root, useHttps: argv.https }, () => {
+  createAppServer({ port, root: argv.root, useHttps: argv.https, hosts: argv.host?.split(',') ?? [] }, () => {
     if (!argv.bs) return;
     console.warn('开启browser-sync可能会造成卡顿甚至阻塞，请谨慎使用！');
     const newPath = path.join(process.cwd(), argv.root);
