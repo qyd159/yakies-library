@@ -1,5 +1,11 @@
 # @yakies/http
 
+## 0.4.0
+
+### Minor Changes
+
+- 去除 path 简写以便无需打包工具
+
 ## 0.3.0
 
 ### Minor Changes

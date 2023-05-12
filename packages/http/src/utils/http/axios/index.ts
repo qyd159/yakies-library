@@ -5,11 +5,11 @@ import type { AxiosResponse } from 'axios';
 import type { RequestOptions, Result } from '../../../../types/axios';
 import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform';
 import { VAxios } from './Axios';
-import { RequestEnum, ResultEnum, ContentTypeEnum, ConfigEnum } from '/@/enums/httpEnum';
-import { isString } from '/@/utils/is';
+import { RequestEnum, ResultEnum, ContentTypeEnum, ConfigEnum } from '../../../enums/httpEnum';
+import { isString } from '../../is';
 import { getTokenFromLocal } from '../../token';
-import { setObjToUrlParams, deepMerge } from '/@/utils';
-import signMd5Utils from '/@/utils/encryption/signMd5Utils';
+import { setObjToUrlParams, deepMerge } from '../../';
+import signMd5Utils from '../../encryption/signMd5Utils';
 import { joinTimestamp, formatRequestDate } from './helper';
 import { get } from 'lodash-es';
 

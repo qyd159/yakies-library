@@ -1,4 +1,4 @@
-import { isObject } from '/@/utils/is';
+import { isObject } from './is';
 
 // update-begin--author:sunjianlei---date:20220408---for: 【VUEN-656】配置外部网址打不开，原因是带了#号，需要替换一下
 export const URL_HASH_TAB = `__AGWE4H__HASH__TAG__PWHRG__`;
