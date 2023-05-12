@@ -195,7 +195,7 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
 
 
   server.listen(port, '0.0.0.0', async function () {
-    printServerUrls(await resolveServerUrls(server, { host: hosts[0], port: port, https: useHttps }), false);
+    printServerUrls(await resolveServerUrls(server, { host: '0.0.0.0', port: port, https: useHttps }), false);
     callback();
   });
 

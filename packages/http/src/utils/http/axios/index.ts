@@ -16,7 +16,7 @@ import { get } from 'lodash-es';
 declare type Recordable<T = any> = Record<string, T>;
 
 const loadingMap = new Map();
-const globSetting = { apiUrl: 'xxx', urlPrefix: '/' };
+const globSetting = { apiUrl: '', urlPrefix: '' };
 const urlPrefix = globSetting.urlPrefix;
 
 /**
@@ -233,4 +233,6 @@ export function createAxios(opt?: Partial<CreateAxiosOptions>) {
     )
   );
 }
-export const defHttp = createAxios();
+const defHttp = createAxios();
+
+export default defHttp;
