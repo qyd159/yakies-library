@@ -1,5 +1,11 @@
 # @yakies/http
 
+## 0.3.0
+
+### Minor Changes
+
+- 重构完成@yakies/http 库
+
 ## 0.2.0
 
 ### Minor Changes
