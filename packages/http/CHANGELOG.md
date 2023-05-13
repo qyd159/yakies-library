@@ -1,5 +1,11 @@
 # @yakies/http
 
+## 0.5.0
+
+### Minor Changes
+
+- 去除 lodash-es 依赖
+
 ## 0.4.0
 
 ### Minor Changes

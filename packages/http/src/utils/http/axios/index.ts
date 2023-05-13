@@ -11,7 +11,7 @@ import { getTokenFromLocal } from '../../token';
 import { setObjToUrlParams, deepMerge } from '../../';
 import signMd5Utils from '../../encryption/signMd5Utils';
 import { joinTimestamp, formatRequestDate } from './helper';
-import { get } from 'lodash-es';
+import { get } from 'lodash';
 
 declare type Recordable<T = any> = Record<string, T>;
 
