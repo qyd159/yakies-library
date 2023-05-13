@@ -7,6 +7,7 @@ if [[ $(git status --porcelain) && $2 != 'direct' ]]; then
   git add .
   git commit -m "${commitMessage}"
   git push origin main
+  pnpm --dir packages/$1 run build
 else
   echo "跳过预处理"
 fi

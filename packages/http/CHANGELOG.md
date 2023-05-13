@@ -1,5 +1,11 @@
 # @yakies/http
 
+## 0.5.1
+
+### Patch Changes
+
+- 修复@yakies/http 使用 tsc 编译后丢失文件
+
 ## 0.5.0
 
 ### Minor Changes
