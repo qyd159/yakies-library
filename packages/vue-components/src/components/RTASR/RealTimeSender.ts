@@ -2,7 +2,7 @@ import Recorder from 'recorder-core';
 import 'recorder-core/src/engine/wav';
 import './utils';
 
-const testSampleRate = 8000;
+const testSampleRate = 16000;
 const SendInterval = 300; // mp3 chunk数据会缓冲，当pcm的累积时长达到这个时长，就会传输发送。这个值在takeoffEncodeChunk实现下，使用0也不会有性能上的影响。
 const testBitRate = 16;
 

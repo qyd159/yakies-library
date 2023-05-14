@@ -16,7 +16,7 @@ import 'recorder-core/src/engine/mp3';
 import 'recorder-core/src/engine/mp3-engine';
 
 const testOutputWavLog = false; // 顺带打一份wav的log，录音后执行mp3、wav合并的demo代码可对比音质
-const testSampleRate = 8000;
+const testSampleRate = 16000;
 const testBitRate = 16;
 
 const SendInterval = 300; // mp3 chunk数据会缓冲，当pcm的累积时长达到这个时长，就会传输发送。这个值在takeoffEncodeChunk实现下，使用0也不会有性能上的影响。

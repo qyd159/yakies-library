@@ -5,6 +5,13 @@ import 'recorder-core/src/extensions/lib.fft';
 import 'recorder-core/src/extensions/frequency.histogram.view';
 import { RealTimeSendTry, RealTimeSendTryReset } from './RealTimeSender';
 import { mergeAudioBlobs } from './utils';
+import PCMTransformWorker from './transformpcm.worker?worker';
+const recorderWorker = new PCMTransformWorker();
+
+const buffer: any[] = []
+recorderWorker.onmessage = function (e) {
+  buffer.push(...e.data.buffer)
+}
 // 屏蔽网站统计
 Recorder.TrafficImgUrl = '';
 
@@ -71,7 +78,10 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
     }
 
     if (pending && powerLevel > -1) return;
-    unref(socket).send(message);
+    recorderWorker.postMessage({
+      command: 'transform',
+      buffer: message
+    })
     if (powerLevel > -1) {
       if (sent.length > 2) {
         sent.shift();
