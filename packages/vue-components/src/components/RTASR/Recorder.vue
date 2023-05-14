@@ -3,7 +3,7 @@
     <div class="py-10 flex justify-center">
       <div class="recorder-btn" ref="recordBtn" v-touch:press="startHandler" v-touch:release="stopHandler" @contextmenu.stop>
           <slot>
-            <Button type="primary" >按住说话</Button>
+            <Button type="primary" :size="buttonSize">按住说话</Button>
           </slot>
         </div>
     </div>
@@ -26,6 +26,7 @@
     isMobile: propTypes.bool,
     getASRUrlParams: propTypes.func,
     waveColor: propTypes.string,
+    buttonSize: propTypes.string.def('normal')
   });
 
   const waveView = ref();
