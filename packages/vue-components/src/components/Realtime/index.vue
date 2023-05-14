@@ -52,6 +52,7 @@ onMounted(() => {
   const pcmPlayer = new PCMPlayer(pcmOption);
 
   const { videoWidth, videoHeight, frameEvent } = props;
+  type Sample = (typeof props)['videoWidth']
   const videoEl = instance!.refs.video as HTMLCanvasElement;
   const { width } = videoEl.getBoundingClientRect();
   videoEl.style.height = (videoHeight * width) / videoWidth + 'px';

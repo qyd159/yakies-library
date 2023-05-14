@@ -1,10 +1,3 @@
-/*
- * @Author: qinyadong
- * @Date: 2022-06-21 18:14:37
- * @LastEditors: qinyadong
- * @LastEditTime: 2022-06-21 18:14:38
- * @FilePath: \aea-client\packages\vue-components\src\utils\propTypes.ts
- */
 import { CSSProperties, VNodeChild } from 'vue';
 import { createTypes, VueTypeValidableDef, VueTypesInterface } from 'vue-types';
 
