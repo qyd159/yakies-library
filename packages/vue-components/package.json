@@ -4,8 +4,7 @@
   "description": "公共前端UI组件",
   "scripts": {
     "dev": "vite build --watch --mode=development",
-    "build": "rimraf dist && npm run gen-types && vite build",
-    "gen-types": "vue-tsc --declaration --emitDeclarationOnly --outDir dist/types",
+    "build": "rimraf dist && vue-tsc && vite build",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs"
@@ -13,7 +12,7 @@
   "peerDependencies": {
     "ant-design-vue": "^3.2.20",
     "vant": "^4.2.0",
-    "vue": "^3.3.2"
+    "vue": "3.2.37"
   },
   "devDependencies": {
     "@iconify/iconify": "^3.1.0",
@@ -39,8 +38,9 @@
     "typescript": "^4.6.3",
     "unplugin-auto-import": "^0.15.3",
     "vant": "^4.2.0",
-    "vite": "^3.0.2",
+    "vite": "^4.3.5",
     "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-imagemin": "^0.6.1",
     "vite-plugin-mkcert": "^1.14.1",
     "vite-plugin-purge-icons": "^0.9.2",
     "vite-plugin-pwa": "^0.14.7",
@@ -48,6 +48,7 @@
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-windicss": "^1.8.10",
     "vitepress": "1.0.0-alpha.27",
+    "vue": "3.2.37",
     "vue-tsc": "^1.6.5"
   },
   "files": [

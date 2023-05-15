@@ -21,7 +21,7 @@ import { eventBus } from '@/utils'
 export default ({
   name: 'Content',
   props: {
-    node: propTypes.custom<FormNode>((v) => v instanceof FormNode),
+    node: propTypes.custom<FormNode>((v) => v instanceof FormNode).isRequired,
     values: propTypes.any
   },
   setup(props, context) {

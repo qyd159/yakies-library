@@ -1,12 +1,10 @@
 import type {
-  ComponentRenderProxy,
   VNode,
   VNodeChild,
   ComponentPublicInstance,
   FunctionalComponent,
   PropType as VuePropType,
 } from 'vue';
-import { IpcRenderer } from 'electron';
 
 declare global {
   const __APP_INFO__: {
@@ -18,48 +16,44 @@ declare global {
     };
     lastBuildTime: string;
   };
-  declare interface Window {
-    // Global vue app instance
-    __APP__: App<Element>;
-    ipcRenderer: IpcRenderer;
-    __VC__MODE: boolean;
-  }
+  // declare interface Window {
+  //   // Global vue app instance
+  //   __APP__: App<Element>;
+  // }
 
   // vue
-  declare type PropType<T> = VuePropType<T>;
-  declare type VueNode = VNodeChild | JSX.Element;
+  type VueNode = VNodeChild | JSX.Element;
 
   export type Writable<T> = {
     -readonly [P in keyof T]: T[P];
   };
 
-  declare type Nullable<T> = T | null;
-  declare type NonNullable<T> = T extends null | undefined ? never : T;
-  declare type Recordable<T = any> = Record<string, T>;
-  declare type ReadonlyRecordable<T = any> = {
+  type Nullable<T> = T | null;
+  type Recordable<T = any> = Record<string, T>;
+  type ReadonlyRecordable<T = any> = {
     readonly [key: string]: T;
   };
-  declare type Indexable<T = any> = {
+  type Indexable<T = any> = {
     [key: string]: T;
   };
-  declare type DeepPartial<T> = {
+  type DeepPartial<T> = {
     [P in keyof T]?: DeepPartial<T[P]>;
   };
-  declare type TimeoutHandle = ReturnType<typeof setTimeout>;
-  declare type IntervalHandle = ReturnType<typeof setInterval>;
+  type TimeoutHandle = ReturnType<typeof setTimeout>;
+  type IntervalHandle = ReturnType<typeof setInterval>;
 
-  declare interface ChangeEvent extends Event {
+  interface ChangeEvent extends Event {
     target: HTMLInputElement;
   }
 
-  declare interface WheelEvent {
+  interface WheelEvent {
     path?: EventTarget[];
   }
   interface ImportMetaEnv extends ViteEnv {
     __: unknown;
   }
 
-  declare interface ViteEnv {
+  interface ViteEnv {
     VITE_PORT: number;
     VITE_USE_MOCK: boolean;
     VITE_USE_PWA: boolean;
@@ -76,26 +70,9 @@ declare global {
     VITE_GENERATE_UI: string;
   }
 
-  declare function parseInt(s: string | number, radix?: number): number;
+  function parseInt(s: string | number, radix?: number): number;
 
-  declare function parseFloat(string: string | number): number;
-
-  namespace JSX {
-    // tslint:disable no-empty-interface
-    type Element = VNode;
-    // tslint:disable no-empty-interface
-    type ElementClass = ComponentRenderProxy;
-    interface ElementAttributesProperty {
-      $props: any;
-    }
-    interface IntrinsicElements {
-      [elem: string]: any;
-    }
-    interface IntrinsicAttributes {
-      [elem: string]: any;
-    }
-  }
-  declare var thirdLib;
+  function parseFloat(string: string | number): number;
 }
 
 declare module 'vue' {

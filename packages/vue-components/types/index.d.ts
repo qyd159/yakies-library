@@ -1,10 +1,3 @@
-/*
- * @Author: qinyadong
- * @Date: 2022-06-21 18:31:12
- * @LastEditors: qinyadong
- * @LastEditTime: 2022-06-21 18:31:12
- * @FilePath: \aea-client\packages\vue-components\types\index.d.ts
- */
 declare interface Fn<T = any, R = T> {
   (...arg: T[]): R;
 }
@@ -32,3 +25,5 @@ declare interface ComponentElRef<T extends HTMLElement = HTMLDivElement> {
 declare type ComponentRef<T extends HTMLElement = HTMLDivElement> = ComponentElRef<T> | null;
 
 declare type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;
+
+type PromiseResult<T> = T extends Promise<infer U> ? U : never;
