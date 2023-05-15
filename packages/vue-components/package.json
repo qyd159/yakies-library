@@ -1,6 +1,6 @@
 {
   "name": "@yakies/vue-components",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "公共前端UI组件",
   "scripts": {
     "dev": "vite build --watch --mode=development",

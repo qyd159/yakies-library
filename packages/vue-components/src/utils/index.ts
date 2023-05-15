@@ -6,7 +6,7 @@ const hexList: string[] = [];
 for (let i = 0; i <= 15; i++) {
   hexList[i] = i.toString(16);
 }
-const eventBus = mitt();
+const eventBus = mitt<any>();
 
 export function buildUUID(): string {
   let uuid = '';

@@ -37,11 +37,6 @@ let realTimeSendTryWavTestSampleRate;
 // =====实时处理核心函数==========
 const RealTimeSendTry = function (chunkBytes, isClose, sendFunc) {
   if (chunkBytes) {
-    if (process.env.NODE_ENV === 'development') {
-      if (chunkBytes instanceof Blob) {
-      }
-    }
-
     // 推入缓冲再说
     realTimeSendTryBytesChunks.push(chunkBytes);
   }

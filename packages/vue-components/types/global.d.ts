@@ -73,6 +73,7 @@ declare global {
   function parseInt(s: string | number, radix?: number): number;
 
   function parseFloat(string: string | number): number;
+  const global: any
 }
 
 declare module 'vue' {

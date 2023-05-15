@@ -16,7 +16,7 @@
 <script lang="ts" setup>
   import { propTypes } from '@/utils/propTypes';
   import { useRecorder } from './hooks';
-  import { Button } from 'vant';
+  import { Button,ButtonSize } from 'vant';
   import 'vant/es/button/style';
 
   const props = defineProps({
@@ -26,7 +26,7 @@
     isMobile: propTypes.bool,
     getASRUrlParams: propTypes.func,
     waveColor: propTypes.string,
-    buttonSize: propTypes.string.def('normal')
+    buttonSize: propTypes.custom<ButtonSize>(() => true).def('normal')
   });
 
   const waveView = ref();

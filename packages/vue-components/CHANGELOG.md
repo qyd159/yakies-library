@@ -1,5 +1,11 @@
 # @yakies/vue-components
 
+## 0.5.0
+
+### Minor Changes
+
+- 解决 vue-component 的 ts 错误
+
 ## 0.4.0
 
 ### Minor Changes
