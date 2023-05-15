@@ -5,8 +5,9 @@ import 'recorder-core/src/extensions/lib.fft';
 import 'recorder-core/src/extensions/frequency.histogram.view';
 import { RealTimeSendTry, RealTimeSendTryReset } from './RealTimeSender';
 import { mergeAudioBlobs } from './utils';
-import PCMTransformWorker from './transformpcm.worker?worker';
-const recorderWorker = new PCMTransformWorker();
+import PCMTransformWorker from './transformpcm.worker?raw';
+
+const recorderWorker = new Worker(URL.createObjectURL(new Blob([PCMTransformWorker], { type: 'application/javascript' })));
 
 const buffer: any[] = []
 recorderWorker.onmessage = function (e) {

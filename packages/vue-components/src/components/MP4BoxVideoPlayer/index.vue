@@ -14,7 +14,7 @@
 <script lang="ts" setup>
 import { ref, onMounted, watch, toRaw, nextTick, computed } from "vue";
 import { propTypes } from "@/utils/propTypes";
-import CanvasWorker from "./worker?worker";
+import CanvasWorker from "./worker?raw";
 import { IconEffect } from "@/components/Icon";
 
 const videoWidth = ref(1920);
@@ -70,7 +70,7 @@ onMounted(() => {
     },
     { immediate: true }
   );
-  canvasWorker = new CanvasWorker();
+  canvasWorker = new Worker(URL.createObjectURL(new Blob([CanvasWorker], { type: 'application/javascript' })));
 
   canvasWorker.addEventListener("message", async ({ data }) => {
     switch (data.type) {
