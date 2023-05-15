@@ -10,7 +10,6 @@ import { configPwaConfig } from './pwa';
 import { configCompressPlugin } from './compress';
 import { configStyleImportPlugin } from './styleImport';
 import { configVisualizerConfig } from './visualizer';
-import { configImageminPlugin } from './imagemin';
 import { configSvgIconsPlugin } from './svgSprite';
 import autoImport from './autoImport';
 
@@ -54,9 +53,6 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
 
   // The following plugins only work in the production environment
   if (isBuild) {
-    // vite-plugin-imagemin
-    VITE_USE_IMAGEMIN && vitePlugins.push(configImageminPlugin());
-
     // rollup-plugin-gzip
     vitePlugins.push(
       configCompressPlugin(VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE),
