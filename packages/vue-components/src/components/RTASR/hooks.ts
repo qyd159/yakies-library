@@ -16,7 +16,7 @@ recorderWorker.onmessage = function (e) {
 // 屏蔽网站统计
 Recorder.TrafficImgUrl = '';
 
-async function connectWebsocket({ onOpen, onMessage, getUrlParams }: { onOpen: () => void, onMessage: (data) => void, getUrlParams: () => Promise<any> }) {
+async function connectWebsocket({ onOpen, onMessage, onClose, getUrlParams }: { onOpen: () => void, onMessage: (data) => void, onClose: () => void, getUrlParams: () => Promise<any> }) {
   let url = 'wss://rtasr.xfyun.cn/v1/ws';
   const urlParam = await getUrlParams();
   url = `${url}${urlParam}`;
@@ -39,15 +39,18 @@ async function connectWebsocket({ onOpen, onMessage, getUrlParams }: { onOpen: (
     }
   };
   ws.onerror = (_e) => {
+    onClose()
     console.log('关闭连接ws.onerror');
   };
   ws.onclose = (_e) => {
+    onClose()
     console.log('关闭连接ws.onclose');
   };
   return ws;
 }
 
 export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams, waveColor }) {
+  let t;
   const recording = ref(false);
   const rec = ref();
   let wave,
@@ -189,12 +192,16 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
     const t = ('0' + now.getHours()).substr(-2) + ':' + ('0' + now.getMinutes()).substr(-2) + ':' + ('0' + now.getSeconds()).substr(-2);
     return t;
   }
+
   async function connect() {
     await new Promise((resolve) => {
       connectWebsocket(
         {
           onOpen() {
             resolve(null);
+          },
+          onClose() {
+            clearInterval(t)
           },
           onMessage(data) {
             data = JSON.parse(data);
@@ -229,8 +236,17 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
     })
   }
 
+  function uploadStream() {
+    setInterval(() => {
+      const audioData = buffer.splice(0, 1280)
+      if (audioData.length > 0) {
+        unref(socket).send(audioData)
+      }
+    }, 40)
+  }
+
   onMounted(() => {
     nextTick(recOpen);
   });
-  return { recording, recStart, recStop, socket, rec, reclog, connect };
+  return { recording, recStart, recStop, socket, rec, reclog, connect, uploadStream };
 }
