@@ -49,6 +49,21 @@ async function connectWebsocket({ onOpen, onMessage, onClose, getUrlParams }: { 
   return ws;
 }
 
+function Int16Array2Float32Array(int16Array) {
+  var data = int16Array;
+  var len = data.length, i = 0;
+  var dataAsFloat32Array = new Float32Array(len);
+
+  while (i < len) {
+    dataAsFloat32Array[i] = convert(data[i++]);
+  }
+  function convert(n) {
+    var v = n < 0 ? n / 32768 : n / 32767;       // convert in range [-32768, 32767]
+    return Math.max(-1, Math.min(1, v)); // clamp
+  }
+  return dataAsFloat32Array
+}
+
 export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams, waveColor }) {
   let t;
   const recording = ref(false);
@@ -84,7 +99,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
     if (pending && powerLevel > -1) return;
     recorderWorker.postMessage({
       command: 'transform',
-      buffer: message
+      buffer: Int16Array2Float32Array(message)
     })
     if (powerLevel > -1) {
       if (sent.length > 2) {
@@ -107,11 +122,11 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
         // RealTimeOnProcessClear(buffers, powerLevel, bufferDuration, bufferSampleRate, newBufferIdx, asyncEnd); // 实时数据处理，清理内存
         powerLevel = powerLevel;
         wave.input(buffers[buffers.length - 1], powerLevel, bufferSampleRate);
-        RealTimeSendTry(unref(rec), false, (blob, encodedBlob) => {
+        RealTimeSendTry(buffers, bufferSampleRate, false, (buffer, blob) => {
           if (!callMode) {
-            takeoffChunks.push(encodedBlob);
+            takeoffChunks.push(blob);
           }
-          handleEmit(blob, powerLevel);
+          handleEmit(buffer, powerLevel);
         }); // 推入实时处理，因为是unknown格式，这里简化函数调用，没有用到buffers和bufferSampleRate，因为这些数据和rec.buffers是完全相同的。
       },
       // takeoffEncodeChunk: function(chunkBytes) {
@@ -138,7 +153,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
   }
   function recStart(callback?) {
     unref(rec).open(() => {
-      RealTimeSendTryReset('wav'); // 重置
+      RealTimeSendTryReset(); // 重置
       unref(rec).start();
       const set = unref(rec).set;
       reclog('录制中：' + set.type + ' ' + set.sampleRate + 'hz ' + set.bitRate + 'kbps');
@@ -153,8 +168,8 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
     unref(rec).stop(
       function (blob, duration) {
         recording.value = false;
-        RealTimeSendTry(rec, true, () => {
-          unref(socket).send('{"end": true}');
+        RealTimeSendTry([], 16, true, () => {
+
         }); // 最后一次发送
         console.log('已录制:', '', {
           blob: blob,
@@ -165,7 +180,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
       function (s) {
         recording.value = false;
         console.log('结束出错：' + s, 1);
-        RealTimeSendTry(rec, true, async () => {
+        RealTimeSendTry([], 16, true, async () => {
           unref(socket).send('{"end": true}');
         }); // 最后一次发送
       },
@@ -199,6 +214,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
         {
           onOpen() {
             resolve(null);
+            uploadStream()
           },
           onClose() {
             clearInterval(t)
@@ -240,7 +256,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
     setInterval(() => {
       const audioData = buffer.splice(0, 1280)
       if (audioData.length > 0) {
-        unref(socket).send(audioData)
+        unref(socket).send(new Int8Array(audioData))
       }
     }, 40)
   }
