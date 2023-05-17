@@ -1,11 +1,19 @@
-import Recorder from 'recorder-core';
-import 'recorder-core/src/engine/pcm';
+import Recorder from '@yakies/recorder';
+import '@yakies/recorder/src/engine/pcm';
 import './utils';
-
+function convertBlock(buffer) { // incoming data is an ArrayBuffer
+  var incomingData = new Uint8Array(buffer); // create a uint8 view on the ArrayBuffer
+  var i, l = incomingData.length; // length, we need this for the loop
+  var outputData = new Float32Array(incomingData.length); // create the Float32Array for output
+  for (i = 0; i < l; i++) {
+    outputData[i] = (incomingData[i] - 128) / 128.0; // convert audio to float
+  }
+  return outputData; // return the Float32Array
+}
 var testSampleRate = 16000;
 var testBitRate = 16;
 
-var SendFrameSize = 3200;/**** 每次发送指定二进制数据长度的数据帧，单位字节，16位pcm取值必须为2的整数倍，8位随意。
+var SendFrameSize = 1280 * 2;/**** 每次发送指定二进制数据长度的数据帧，单位字节，16位pcm取值必须为2的整数倍，8位随意。
 16位16khz的pcm 1秒有：16000hz*16位/8比特=32000字节的数据，默认配置3200字节每秒发送大约10次
 ******/
 
@@ -120,12 +128,13 @@ var TransferUpload = function (number, blobOrNull, duration, blobRec, isClose, f
   if (blobOrNull) {
     var blob = blobOrNull;
     var encTime = blob.encTime;
-
+    blob.arrayBuffer().then(buffer => {
+      console.log(buffer)
+    })
     //*********发送方式一：Base64文本发送***************
     var reader = new FileReader();
     reader.onloadend = function () {
-      const buffer = new Float32Array(reader.result as ArrayBuffer)
-      frameCallback(buffer, blob)
+      frameCallback(reader.result, blob)
       //可以实现
       //WebSocket send(base64) ...
       //WebRTC send(base64) ...

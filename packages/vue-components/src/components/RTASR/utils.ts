@@ -1,4 +1,4 @@
-import Recorder from 'recorder-core';
+import Recorder from '@yakies/recorder';
 
 // =====wav文件合并核心函数==========
 Recorder.WavMerge = function (fileBytesList, True, False) {

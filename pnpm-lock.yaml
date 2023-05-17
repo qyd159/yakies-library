@@ -421,6 +421,7 @@ importers:
       '@vitejs/plugin-vue': ^4.2.1
       '@vitejs/plugin-vue-jsx': ^3.0.1
       '@vueuse/core': ^8.6.0
+      '@yakies/recorder': ^0.1.0
       ant-design-vue: ^3.2.20
       cancelable-promise: ^4.3.1
       color: ^4.2.3
@@ -437,7 +438,6 @@ importers:
       primeflex: ^3.1.2
       primeicons: ^5.0.0
       primevue: ^3.11.1
-      recorder-core: ^1.2.23020100
       rimraf: ^3.0.2
       rollup-plugin-visualizer: ^5.9.0
       smooth-polyline: ^1.0.8
@@ -460,6 +460,7 @@ importers:
       '@ant-design/icons-vue': 6.1.0_vue@3.2.37
       '@lottiefiles/lottie-player': 1.6.0
       '@vueuse/core': 8.9.4_vue@3.2.37
+      '@yakies/recorder': 0.1.0
       cancelable-promise: 4.3.1
       color: 4.2.3
       form-serialize: 0.7.2
@@ -467,7 +468,6 @@ importers:
       mitt: 3.0.0
       mp4box: 0.5.2
       pinia: 2.0.32_sdd75jdcfpnnetb7lau6jf3vqq
-      recorder-core: 1.2.23020100
       smooth-polyline: 1.0.8
       vue-types: 5.0.2_vue@3.2.37
     devDependencies:
@@ -5095,6 +5095,10 @@ packages:
       superagent: 1.8.5
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@yakies/recorder/0.1.0:
+    resolution: {integrity: sha512-z6eTgnbhpEEEZvhci9tuZhqNu7dtm30jYKtPIf0cVK8qaIwIHIeP2rhH3v+CseF159enwme4XriFoM8KXTP6Zg==}
     dev: false
 
   /@yakies/third-lib/0.1.0:
@@ -10118,7 +10122,7 @@ packages:
     resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
     engines: {node: '>= 4.0'}
     os: [darwin]
-    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+    deprecated: The v1 package contains DANGEROUS / INSECURE binaries. Upgrade to safe fsevents v2
     requiresBuild: true
     dependencies:
       bindings: 1.5.0
@@ -11104,7 +11108,7 @@ packages:
       is-extglob: 2.1.1
 
   /is-module/1.0.0:
-    resolution: {integrity: sha1-Mlj7afeMFNW4FdZkM2tM/7ZEFZE=}
+    resolution: {integrity: sha512-51ypPSPCoTEIN9dy5Oy+h4pShgJmPCygKfyRCISBI+JoWT/2oJvK8QPxmwv7b/p239jXrm9M1mlQbyKJ5A152g==}
     dev: true
 
   /is-nan/1.3.2:
@@ -11154,7 +11158,7 @@ packages:
     engines: {node: '>=0.12.0'}
 
   /is-obj/1.0.1:
-    resolution: {integrity: sha1-PkcprB9f3gJc19g6iW2rn09n2w8=}
+    resolution: {integrity: sha512-l4RyHgRqGN4Y3+9JHVrNqO+tN0rV5My76uW5/nuO4K1b6vw5G8d/cmFjP9tRfEsdhZNt0IFdZuK/c2Vr4Nb+Qg==}
     engines: {node: '>=0.10.0'}
     dev: true
 
@@ -11215,7 +11219,7 @@ packages:
       has-tostringtag: 1.0.0
 
   /is-regexp/1.0.0:
-    resolution: {integrity: sha1-/S2INUXEa6xaYz57mgnof6LLUGk=}
+    resolution: {integrity: sha512-7zjFAPO4/gwyQAAgRRmqeEeyIICSdmCqa3tsVHMdBzaXXRiqopZL4Cyghg/XulGWrtABTpbnYYzzIRffLkP4oA==}
     engines: {node: '>=0.10.0'}
     dev: true
 
@@ -12778,7 +12782,7 @@ packages:
     dev: false
 
   /lodash.sortby/4.7.0:
-    resolution: {integrity: sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=}
+    resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
     dev: true
 
   /lodash.startcase/4.4.0:
@@ -14881,10 +14885,6 @@ packages:
       resolve: 1.22.1
     dev: false
 
-  /recorder-core/1.2.23020100:
-    resolution: {integrity: sha512-HUxAPKmP0Q5Rd0Z57ufKGyJmUAB9cZPfe8vg4mckSDwx1JFJ+tln8i+jnGSCOjlKr6tC2UL4ifcWwa7w0jf5pA==}
-    dev: false
-
   /redent/3.0.0:
     resolution: {integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==}
     engines: {node: '>=8'}
@@ -15261,6 +15261,7 @@ packages:
 
   /rollup-plugin-terser/7.0.2_rollup@2.79.1:
     resolution: {integrity: sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ==}
+    deprecated: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-terser
     peerDependencies:
       rollup: ^2.0.0
     dependencies:
@@ -16720,7 +16721,7 @@ packages:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
 
   /tr46/1.0.1:
-    resolution: {integrity: sha1-qLE/1r/SSJUZZ0zN5VujaTtwbQk=}
+    resolution: {integrity: sha512-dTpowEjclQ7Kgx5SdBkqRzVhERQXov8/l9Ft9dVM9fmg0W0KQSVaXX9T4i6twCPNtYiZM53lpSSUAwJbFPOHxA==}
     dependencies:
       punycode: 2.1.1
     dev: true

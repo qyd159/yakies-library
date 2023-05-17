@@ -1,8 +1,8 @@
 import { recordConfig } from './config';
-import Recorder from 'recorder-core';
+import Recorder from '@yakies/recorder';
 // 可选的扩展
-import 'recorder-core/src/extensions/lib.fft';
-import 'recorder-core/src/extensions/frequency.histogram.view';
+import '@yakies/recorder/src/extensions/lib.fft';
+import '@yakies/recorder/src/extensions/frequency.histogram.view';
 import { RealTimeSendTry, RealTimeSendTryReset } from './RealTimeSender';
 import { mergeAudioBlobs } from './utils';
 import PCMTransformWorker from './transformpcm.worker?raw';
@@ -82,6 +82,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
     }
 
     if (pending && powerLevel > -1) return;
+    console.log(message)
     recorderWorker.postMessage({
       command: 'transform',
       buffer: message

@@ -66,6 +66,7 @@
     "@ant-design/icons-vue": "^6.1.0",
     "@lottiefiles/lottie-player": "^1.5.7",
     "@vueuse/core": "^8.6.0",
+    "@yakies/recorder": "^0.1.0",
     "cancelable-promise": "^4.3.1",
     "color": "^4.2.3",
     "form-serialize": "^0.7.2",
@@ -73,7 +74,6 @@
     "mitt": "^3.0.0",
     "mp4box": "^0.5.2",
     "pinia": "^2.0.32",
-    "recorder-core": "^1.2.23020100",
     "smooth-polyline": "^1.0.8",
     "vue-types": "^5.0.2"
   },
