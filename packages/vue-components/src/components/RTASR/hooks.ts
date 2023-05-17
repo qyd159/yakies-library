@@ -49,21 +49,6 @@ async function connectWebsocket({ onOpen, onMessage, onClose, getUrlParams }: { 
   return ws;
 }
 
-function Int16Array2Float32Array(int16Array) {
-  var data = int16Array;
-  var len = data.length, i = 0;
-  var dataAsFloat32Array = new Float32Array(len);
-
-  while (i < len) {
-    dataAsFloat32Array[i] = convert(data[i++]);
-  }
-  function convert(n) {
-    var v = n < 0 ? n / 32768 : n / 32767;       // convert in range [-32768, 32767]
-    return Math.max(-1, Math.min(1, v)); // clamp
-  }
-  return dataAsFloat32Array
-}
-
 export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams, waveColor }) {
   let t;
   const recording = ref(false);
@@ -99,7 +84,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
     if (pending && powerLevel > -1) return;
     recorderWorker.postMessage({
       command: 'transform',
-      buffer: Int16Array2Float32Array(message)
+      buffer: message
     })
     if (powerLevel > -1) {
       if (sent.length > 2) {
@@ -168,9 +153,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
     unref(rec).stop(
       function (blob, duration) {
         recording.value = false;
-        RealTimeSendTry([], 16, true, () => {
-
-        }); // 最后一次发送
+        unref(socket).send('{"end": true}');
         console.log('已录制:', '', {
           blob: blob,
           duration: duration,
@@ -180,9 +163,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
       function (s) {
         recording.value = false;
         console.log('结束出错：' + s, 1);
-        RealTimeSendTry([], 16, true, async () => {
-          unref(socket).send('{"end": true}');
-        }); // 最后一次发送
+        unref(socket).send('{"end": true}');
       },
       true
     ); // 自动close
@@ -233,13 +214,14 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
                   });
                 });
               });
-              if (i.cn.st.type == 0 && takeoffChunks.length > 0) {
+              if (i.cn.st.type === '0' && takeoffChunks.length > 0) {
                 // @ts-ignore
                 const { blob } = await mergeAudioBlobs(takeoffChunks);
                 const reader = new FileReader();
                 reader.onloadend = function () {
                   const base64 = /.+;\s*base64\s*,\s*(.+)$/i.exec(reader.result as string) || [];
                   userVoiceParsed(base64[0], str);
+                  unref(socket).close();
                 };
                 reader.readAsDataURL(blob);
                 takeoffChunks = [];
@@ -253,8 +235,9 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
   }
 
   function uploadStream() {
-    setInterval(() => {
+    t = setInterval(() => {
       const audioData = buffer.splice(0, 1280)
+      console.log(buffer, audioData)
       if (audioData.length > 0) {
         unref(socket).send(new Int8Array(audioData))
       }

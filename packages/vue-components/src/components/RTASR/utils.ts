@@ -149,8 +149,8 @@ export async function mergeAudioBlobs(blobs) {
     Recorder.WavMerge(
       files,
       function (file, duration, info) {
-        info.type = 'wav';
-        resolve({ blob: new Blob([file.buffer], { type: 'audio/wav' }), duration });
+        info.type = 'pcm';
+        resolve({ blob: new Blob([file.buffer], { type: 'audio/pcm' }), duration });
       },
       function (msg) {
         console.log(msg + '，请清除日志后重试', 1);

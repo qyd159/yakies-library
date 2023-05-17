@@ -1,5 +1,5 @@
 import Recorder from 'recorder-core';
-import 'recorder-core/src/engine/wav';
+import 'recorder-core/src/engine/pcm';
 import './utils';
 
 var testSampleRate = 16000;
@@ -124,7 +124,8 @@ var TransferUpload = function (number, blobOrNull, duration, blobRec, isClose, f
     //*********发送方式一：Base64文本发送***************
     var reader = new FileReader();
     reader.onloadend = function () {
-      frameCallback(new Float32Array(reader.result as ArrayBuffer), blob)
+      const buffer = new Float32Array(reader.result as ArrayBuffer)
+      frameCallback(buffer, blob)
       //可以实现
       //WebSocket send(base64) ...
       //WebRTC send(base64) ...
@@ -132,7 +133,7 @@ var TransferUpload = function (number, blobOrNull, duration, blobRec, isClose, f
 
       //这里啥也不干
     };
-    reader.readAsDataURL(blob);
+    reader.readAsArrayBuffer(blob);
 
     //*********发送方式二：Blob二进制发送***************
     //可以实现
