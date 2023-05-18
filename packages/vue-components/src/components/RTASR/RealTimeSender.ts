@@ -1,5 +1,6 @@
 import Recorder from '@yakies/recorder';
 import '@yakies/recorder/src/engine/pcm';
+import '@yakies/recorder/src/engine/wav';
 import './utils';
 
 var testSampleRate = 16000;
@@ -98,11 +99,11 @@ export var RealTimeSendTry = function (buffers, bufferSampleRate, isClose, frame
     , bitRate: testBitRate //需要转换成的比特率
   });
   recMock.mock(pcm, pcmSampleRate);
-  recMock.stop(function (blob, duration, originBuffer) {
+  recMock.stop(function (blob, duration) {
     blob.encTime = Date.now() - encStartTime;
 
     //转码好就推入传输
-    TransferUpload(number, Recorder.PerserveOriginalBuffer ? originBuffer : blob, duration, recMock, false, frameCallback);
+    TransferUpload(number, blob, duration, recMock, false, frameCallback);
 
     //循环调用，继续切分缓冲中的数据帧，直到不够一帧
     RealTimeSendTry([], 0, isClose, frameCallback);

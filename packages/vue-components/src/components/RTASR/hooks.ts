@@ -113,9 +113,8 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
         powerLevel = powerLevel;
         wave.input(buffers[buffers.length - 1], powerLevel, bufferSampleRate);
         if (!callMode) {
-          RealTimeSendTry(buffers, bufferSampleRate, false, (buffer, blob) => {
+          RealTimeSendTry(buffers, bufferSampleRate, false, (blob) => {
             takeoffChunks.push(blob);
-
           }); // 推入实时处理，因为是unknown格式，这里简化函数调用，没有用到buffers和bufferSampleRate，因为这些数据和rec.buffers是完全相同的。
         }
         handleEmit(originBuffer)
@@ -220,7 +219,6 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
                   });
                 });
               });
-              console.log('xxxxxx: ' + i.cn.st.type + 'yyyyyy' + str)
               if (i.cn.st.type === '0' && takeoffChunks.length > 0) {
                 // @ts-ignore
                 const { blob } = await mergeAudioBlobs(takeoffChunks);
@@ -244,8 +242,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
   function uploadStream() {
     t = setInterval(() => {
       const audioData = buffer.splice(0, 1280)
-      console.log(unref(socket).readyState)
-      if (audioData.length > 0) {
+      if (audioData.length > 0 && unref(socket).readyState === 1) {
         unref(socket).send(new Int8Array(audioData))
       }
     }, 40)
