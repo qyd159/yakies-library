@@ -37,7 +37,7 @@ module.exports = defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       },
       rollupOptions: {
         // external modules won't be bundled into your library
-        external: ['vue', 'ant-design-vue', 'pinia'], // not every external has a global
+        external: ['vue', 'ant-design-vue', 'pinia','vant'], // not every external has a global
         output: {
           // disable warning on src/index.ts using both default and named export
           exports: 'named',

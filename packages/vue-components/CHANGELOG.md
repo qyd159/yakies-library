@@ -1,5 +1,11 @@
 # @yakies/vue-components
 
+## 0.5.2
+
+### Patch Changes
+
+- 将 vant 库外部化
+
 ## 0.5.0
 
 ### Minor Changes
