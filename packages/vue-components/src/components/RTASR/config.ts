@@ -1,5 +1,5 @@
 export const recordConfig = {
-  type: 'unknown',
+  type: 'wav',
   bitRate: 16,
   sampleRate: 16000,
   rec: 0,

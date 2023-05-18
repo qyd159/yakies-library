@@ -421,7 +421,7 @@ importers:
       '@vitejs/plugin-vue': ^4.2.1
       '@vitejs/plugin-vue-jsx': ^3.0.1
       '@vueuse/core': ^8.6.0
-      '@yakies/recorder': ^0.1.0
+      '@yakies/recorder': ^0.3.4
       ant-design-vue: ^3.2.20
       cancelable-promise: ^4.3.1
       color: ^4.2.3
@@ -460,7 +460,7 @@ importers:
       '@ant-design/icons-vue': 6.1.0_vue@3.2.37
       '@lottiefiles/lottie-player': 1.6.0
       '@vueuse/core': 8.9.4_vue@3.2.37
-      '@yakies/recorder': 0.1.0
+      '@yakies/recorder': 0.3.4
       cancelable-promise: 4.3.1
       color: 4.2.3
       form-serialize: 0.7.2
@@ -5097,8 +5097,8 @@ packages:
       - supports-color
     dev: false
 
-  /@yakies/recorder/0.1.0:
-    resolution: {integrity: sha512-z6eTgnbhpEEEZvhci9tuZhqNu7dtm30jYKtPIf0cVK8qaIwIHIeP2rhH3v+CseF159enwme4XriFoM8KXTP6Zg==}
+  /@yakies/recorder/0.3.4:
+    resolution: {integrity: sha512-ofIp3+O0sqbcQrAQxpp1PAYu7R69xXRjD9GllrSkfSKop/q7OJHyfmcSs7cLBnVYmO0OxsBhmr5/G2CliMCKvw==}
     dev: false
 
   /@yakies/third-lib/0.1.0:
@@ -10756,7 +10756,7 @@ packages:
     engines: {node: '>= 4'}
 
   /image-size/0.5.5:
-    resolution: {integrity: sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=}
+    resolution: {integrity: sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==}
     engines: {node: '>=0.10.0'}
     hasBin: true
     requiresBuild: true

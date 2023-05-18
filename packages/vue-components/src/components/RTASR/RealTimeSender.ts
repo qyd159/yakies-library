@@ -1,15 +1,7 @@
 import Recorder from '@yakies/recorder';
 import '@yakies/recorder/src/engine/pcm';
 import './utils';
-function convertBlock(buffer) { // incoming data is an ArrayBuffer
-  var incomingData = new Uint8Array(buffer); // create a uint8 view on the ArrayBuffer
-  var i, l = incomingData.length; // length, we need this for the loop
-  var outputData = new Float32Array(incomingData.length); // create the Float32Array for output
-  for (i = 0; i < l; i++) {
-    outputData[i] = (incomingData[i] - 128) / 128.0; // convert audio to float
-  }
-  return outputData; // return the Float32Array
-}
+
 var testSampleRate = 16000;
 var testBitRate = 16;
 
@@ -101,16 +93,16 @@ export var RealTimeSendTry = function (buffers, bufferSampleRate, isClose, frame
   var number = ++realTimeSendTryNumber;
   var encStartTime = Date.now();
   var recMock = Recorder({
-    type: "pcm"
+    type: "wav"
     , sampleRate: testSampleRate //需要转换成的采样率
     , bitRate: testBitRate //需要转换成的比特率
   });
   recMock.mock(pcm, pcmSampleRate);
-  recMock.stop(function (blob, duration) {
+  recMock.stop(function (blob, duration, originBuffer) {
     blob.encTime = Date.now() - encStartTime;
 
     //转码好就推入传输
-    TransferUpload(number, blob, duration, recMock, false, frameCallback);
+    TransferUpload(number, Recorder.PerserveOriginalBuffer ? originBuffer : blob, duration, recMock, false, frameCallback);
 
     //循环调用，继续切分缓冲中的数据帧，直到不够一帧
     RealTimeSendTry([], 0, isClose, frameCallback);
@@ -128,13 +120,14 @@ var TransferUpload = function (number, blobOrNull, duration, blobRec, isClose, f
   if (blobOrNull) {
     var blob = blobOrNull;
     var encTime = blob.encTime;
-    blob.arrayBuffer().then(buffer => {
-      console.log(buffer)
-    })
+    if (Recorder.PerserveOriginalBuffer) {
+      frameCallback && frameCallback(blobOrNull)
+    }
     //*********发送方式一：Base64文本发送***************
     var reader = new FileReader();
     reader.onloadend = function () {
-      frameCallback(reader.result, blob)
+      var base64 = (/.+;\s*base64\s*,\s*(.+)$/i.exec(reader.result as string) || [])[1];
+
       //可以实现
       //WebSocket send(base64) ...
       //WebRTC send(base64) ...
@@ -142,8 +135,7 @@ var TransferUpload = function (number, blobOrNull, duration, blobRec, isClose, f
 
       //这里啥也不干
     };
-    reader.readAsArrayBuffer(blob);
-
+    reader.readAsDataURL(blob);
     //*********发送方式二：Blob二进制发送***************
     //可以实现
     //WebSocket send(blob) ...

@@ -66,7 +66,7 @@
     "@ant-design/icons-vue": "^6.1.0",
     "@lottiefiles/lottie-player": "^1.5.7",
     "@vueuse/core": "^8.6.0",
-    "@yakies/recorder": "^0.1.0",
+    "@yakies/recorder": "^0.3.4",
     "cancelable-promise": "^4.3.1",
     "color": "^4.2.3",
     "form-serialize": "^0.7.2",

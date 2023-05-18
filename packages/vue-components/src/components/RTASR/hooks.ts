@@ -16,6 +16,11 @@ recorderWorker.onmessage = function (e) {
 // 屏蔽网站统计
 Recorder.TrafficImgUrl = '';
 
+// 输出原始的音频数据
+Recorder.PerserveOriginalBuffer = true;
+
+Recorder.CLog = () => { };
+
 async function connectWebsocket({ onOpen, onMessage, onClose, getUrlParams }: { onOpen: () => void, onMessage: (data) => void, onClose: () => void, getUrlParams: () => Promise<any> }) {
   let url = 'wss://rtasr.xfyun.cn/v1/ws';
   const urlParam = await getUrlParams();
@@ -62,7 +67,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
     sent: any = [],
     logs: any = [];
   const pending = false;
-  function handleEmit(message, powerLevel) {
+  function handleEmit(message, powerLevel?) {
     // 表示发送普通json消息
     if (Object.prototype.toString.call(message) === '[object Object]') {
       message = JSON.stringify(message);
@@ -82,7 +87,6 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
     }
 
     if (pending && powerLevel > -1) return;
-    console.log(message)
     recorderWorker.postMessage({
       command: 'transform',
       buffer: message
@@ -104,16 +108,17 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
       type,
       bitRate,
       sampleRate,
-      onProcess(buffers, powerLevel, bufferDuration, bufferSampleRate, _newBufferIdx, _asyncEnd) {
+      onProcess(buffers, powerLevel, bufferDuration, bufferSampleRate, _newBufferIdx, _asyncEnd, originBuffer) {
         // RealTimeOnProcessClear(buffers, powerLevel, bufferDuration, bufferSampleRate, newBufferIdx, asyncEnd); // 实时数据处理，清理内存
         powerLevel = powerLevel;
         wave.input(buffers[buffers.length - 1], powerLevel, bufferSampleRate);
-        RealTimeSendTry(buffers, bufferSampleRate, false, (buffer, blob) => {
-          if (!callMode) {
+        if (!callMode) {
+          RealTimeSendTry(buffers, bufferSampleRate, false, (buffer, blob) => {
             takeoffChunks.push(blob);
-          }
-          handleEmit(buffer, powerLevel);
-        }); // 推入实时处理，因为是unknown格式，这里简化函数调用，没有用到buffers和bufferSampleRate，因为这些数据和rec.buffers是完全相同的。
+
+          }); // 推入实时处理，因为是unknown格式，这里简化函数调用，没有用到buffers和bufferSampleRate，因为这些数据和rec.buffers是完全相同的。
+        }
+        handleEmit(originBuffer)
       },
       // takeoffEncodeChunk: function(chunkBytes) {
       //   // 保留原始的录音数据可直接播放
@@ -215,6 +220,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
                   });
                 });
               });
+              console.log('xxxxxx: ' + i.cn.st.type + 'yyyyyy' + str)
               if (i.cn.st.type === '0' && takeoffChunks.length > 0) {
                 // @ts-ignore
                 const { blob } = await mergeAudioBlobs(takeoffChunks);
@@ -238,7 +244,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
   function uploadStream() {
     t = setInterval(() => {
       const audioData = buffer.splice(0, 1280)
-      console.log(buffer, audioData)
+      console.log(unref(socket).readyState)
       if (audioData.length > 0) {
         unref(socket).send(new Int8Array(audioData))
       }
