@@ -1,3 +1,4 @@
+import clipboardy from 'clipboardy'
 const readline = require('readline');
 
 function codeToSnippetBody(code) {
@@ -17,7 +18,8 @@ export default function (args) {
     console.log('Please enter your code, press "enter" key to finish:');
     rl.on('line', (input) => {
         if (input === 'eof') {
-            console.log('The snippet body is:\n', codeToSnippetBody(code));
+          console.log('The snippet body is:\n', codeToSnippetBody(code));
+          clipboardy.writeSync(codeToSnippetBody(code));
             rl.close();
         } else {
             code += input + '\n';

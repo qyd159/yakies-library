@@ -171,7 +171,7 @@ const getTemplateCss = function (type, wwwFileMap, proxyMode) {
   return result;
 };
 
-const handleHtml = function (result, gamesite, type, settings, proxyMode) {
+const handleHtml = function (result, gamesite, type, settings, proxyMode?) {
   // @ts-ignore
   const wwwFileMap = global.wwwFileMap;
   const dom = new JSDOM(result, { virtualConsole: virtualConsole });

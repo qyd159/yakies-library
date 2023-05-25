@@ -1,7 +1,8 @@
+import * as _ from '../../lib/util'
+import settings from '../../conf/settings';
 const path = require('path');
 const Crawler = require('crawler');
 const bodyParser = require('body-parser');
-const _ = require('../../lib/util');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const proxyCacheMiddleware = require('@yakies/proxy-cache-middleware');
 const Axios = require('axios').default;
@@ -13,7 +14,6 @@ const { gzip, ungzip } = require('node-gzip');
 // const interfaceMonitorUrl = 'http://localhost:3100/api/v1/monitor';
 const interfaceMonitorUrl = 'https://yakies.tech/api/v1/monitor';
 
-let settings = require('../../conf/settings');
 // @ts-ignore
 const wwwFileMap = global.wwwFileMap;
 
@@ -139,7 +139,7 @@ module.exports = async function (req, res, next) {
       return;
     }
     if (!wwwFileMap.apiProxy && !wwwFileMap.pureProxy) {
-      const options = {
+      const options: any = {
         target: parsedTargetUrl.protocol + '//' + parsedTargetUrl.host,
         changeOrigin: true,
         // ws: true,
@@ -159,7 +159,7 @@ module.exports = async function (req, res, next) {
             bodyChunks.push(chunk);
           });
           proxyRes.on('end', () => {
-            const body = Buffer.concat(bodyChunks);
+            const body: any = Buffer.concat(bodyChunks);
             const data = {
               statusCode: proxyRes.statusCode,
               headers: proxyRes.headers,
@@ -190,7 +190,7 @@ module.exports = async function (req, res, next) {
         data.headers['content-type'].includes('text/html') &&
         data.statusCode === 200
       ) {
-        if((proxyMode && wwwFileMap.proxy.gziped) || (wwwFileMap[type] && wwwFileMap[type].proxy && wwwFileMap[type].proxy.gziped)){
+        if ((proxyMode && wwwFileMap.proxy.gziped) || (wwwFileMap[type] && wwwFileMap[type].proxy && wwwFileMap[type].proxy.gziped)) {
           let html = _.handleHtml(
             await ungzip(data.body),
             contextPath,
@@ -199,7 +199,7 @@ module.exports = async function (req, res, next) {
             proxyMode
           );
           res.send(await gzip(html));
-        }else{
+        } else {
           res.send(_.handleHtml(
             data.body,
             contextPath,
@@ -223,7 +223,7 @@ module.exports = async function (req, res, next) {
       // 是后台请求
       wwwFileMap.apiProxy((err, data) => {
         if (!(data.body instanceof Buffer) && wwwFileMap.proxy.capture) {
-          bodyParser.json()(req,res,next)
+          bodyParser.json()(req, res, next)
           Axios.post(
             interfaceMonitorUrl,
             {
