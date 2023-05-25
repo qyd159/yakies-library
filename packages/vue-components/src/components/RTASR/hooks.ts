@@ -225,11 +225,13 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
                 const reader = new FileReader();
                 reader.onloadend = function () {
                   const base64 = /.+;\s*base64\s*,\s*(.+)$/i.exec(reader.result as string) || [];
-                  userVoiceParsed(base64[0], str);
+                  userVoiceParsed(str, base64[0]);
                   unref(socket).close();
                 };
                 reader.readAsDataURL(blob);
                 takeoffChunks = [];
+              } else if (i.cn.st.type === '1') {
+                userVoiceParsed(str);
               }
             });
           },

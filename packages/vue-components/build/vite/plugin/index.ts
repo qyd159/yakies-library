@@ -4,7 +4,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import legacy from '@vitejs/plugin-legacy';
 import purgeIcons from 'vite-plugin-purge-icons';
 import windiCSS from 'vite-plugin-windicss';
-import VitePluginCertificate from 'vite-plugin-mkcert';
 //import vueSetupExtend from 'vite-plugin-vue-setup-extend';
 import { configPwaConfig } from './pwa';
 import { configCompressPlugin } from './compress';
@@ -28,9 +27,6 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
     vueJsx(),
     // support name
     //vueSetupExtend(),
-    VitePluginCertificate({
-      source: 'coding',
-    }),
   ];
 
   // vite-plugin-windicss

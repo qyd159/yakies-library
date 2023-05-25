@@ -59,7 +59,6 @@
     "tslib": "^2.5.0",
     "typescript": "^5.0.4",
     "vite": "^3.0.2",
-    "vite-plugin-mkcert": "^1.14.1",
     "walk-up": "^1.0.2",
     "yargs": "^17.6.2"
   },

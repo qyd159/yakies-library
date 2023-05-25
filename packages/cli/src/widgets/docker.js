@@ -1,10 +1,3 @@
-/*
- * @Author: qinyadong
- * @Date: 2022-04-20 08:16:29
- * @LastEditors: qinyadong
- * @LastEditTime: 2022-04-20 09:30:32
- * @FilePath: /electron-release-server/home/qyd/sambashare/git_repos/yakies/packages/cli/widgets/docker.js
- */
 const childProcess = require('child_process');
 module.exports = function (args) {
   childProcess.spawnSync(

@@ -7,7 +7,6 @@ import typescript from 'rollup-plugin-typescript2';
 import fs from 'fs-extra'
 import path from 'path'
 import externals from 'rollup-plugin-node-externals';
-import alias from '@rollup/plugin-alias';
 import { getAllFiles } from './build/utils.mjs';
 
 fs.ensureDirSync('dist')
@@ -15,30 +14,26 @@ fs.ensureDirSync('dist/widgets')
 fs.ensureDirSync('dist/mock')
 fs.copyFileSync('src/server/mock/server.conf', 'dist/mock/server.conf')
 
-// const widgets = getAllFiles('./src/widgets', null, '.js', {})
-const widgets = []
-const plugins = [
+const widgets = getAllFiles('./src/widgets', null, '.js', {})
+// const widgets = []
+const commonPlugins = [
       json(),
       resolve(),
       commonjs(),
       externals(),
-      alias({
-        entries: [
-          { find: 'vite-plugin-mkcert/dist/mkcert', replacement: 'node_modules/vite-plugin-mkcert/dist/mkcert.mjs' },
-        ]
-      }),
-      terser(),
+      // terser(),
       typescript({
         outDir: "es",
         declaration: true,
         declarationDir: "es",
       })]
+
 export default [
   {
     input: 'src/index.ts',
     plugins: [
       shebang(),
-      ...plugins
+      ...commonPlugins,
     ],
     output: {
       sourcemap: 'inline',
@@ -48,7 +43,7 @@ export default [
   },
   {
     input: 'src/server/mock/index.js',
-    plugins,
+    plugins: [],commonPlugins,
     output: {
       file: 'dist/mock/index.js',
       format: 'cjs',
@@ -58,7 +53,7 @@ export default [
 ].concat(widgets.map(widget => {
   return {
     input: widget.path,
-    plugins,
+    plugins: commonPlugins,
     output: {
       file: `dist/widgets/${path.parse(widget.path).name}.js`,
       format: 'cjs',
