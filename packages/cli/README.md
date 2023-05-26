@@ -34,7 +34,7 @@ rewrite /path/to/api /mock/answer.json
 ```
 
 #### 编译
-使用`ya`命令实现自动化的构建，因为使用rollup一次性打包所有插件会出现堆栈溢出，所用使用runNpmTask脚本实现对插件的逐个打包
+使用`ya`命令实现自动化的构建，因为使用rollup一次性打包所有插件会出现堆栈溢出，所以使用runNpmTask脚本实现对插件的逐个打包
 ```shell
 ya exec runNpmTasks --cwd packages/cli
 ```

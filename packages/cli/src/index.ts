@@ -25,7 +25,7 @@ export default async function (argv) {
   /*根据ya默认配置来执行外部脚本*/
   if (argv._[0] === 'exec') {
     const widgets = require('./widgets');
-    const mode = argv._[1].toLowerCase();
+    const mode = argv._[1];
     if (mode === 'list') {
       for (let widget in widgets) {
         console.log(widget);
