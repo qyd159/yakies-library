@@ -74,6 +74,7 @@ declare global {
 
   function parseFloat(string: string | number): number;
   const global: any
+  const uni: any;
 }
 
 declare module 'vue' {

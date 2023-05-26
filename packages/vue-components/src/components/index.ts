@@ -6,6 +6,7 @@ import Realtime from './Realtime/index.vue';
 import JsonForm from './JsonForm/index.vue'
 import ChatContent from './RTASR/ChatContent.vue'
 import Recorder from './RTASR/Recorder.vue'
+import UniWebview from './UniWebview/index.vue'
 export {
   AlgoClient,
   VLottiePlayer,
@@ -14,7 +15,8 @@ export {
   Realtime,
   JsonForm,
   ChatContent,
-  Recorder
+  Recorder,
+  UniWebview
 }
 
 export * from './Icon'

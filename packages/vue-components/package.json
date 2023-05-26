@@ -63,6 +63,7 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
+    "@dcloudio/uni-webview-js": "^0.0.3",
     "@lottiefiles/lottie-player": "^1.5.7",
     "@vueuse/core": "^8.6.0",
     "@yakies/recorder": "^0.3.4",
