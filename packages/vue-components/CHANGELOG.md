@@ -1,5 +1,11 @@
 # @yakies/vue-components
 
+## 0.6.0
+
+### Minor Changes
+
+- 添加 uniwebview 组件
+
 ## 0.5.2
 
 ### Patch Changes
