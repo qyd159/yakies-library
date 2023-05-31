@@ -1,6 +1,6 @@
 {
   "name": "@yakies/cli",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "yakies命令行工具",
   "main": "index.js",
   "bin": {
