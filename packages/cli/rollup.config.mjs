@@ -10,6 +10,7 @@ import path from 'path'
 import externals from 'rollup-plugin-node-externals';
 import alias from '@rollup/plugin-alias';
 import { getAllFiles } from './build/utils.mjs';
+import replace from '@rollup/plugin-replace';
 
 const argv = minimist(process.argv.slice(2))
 
@@ -18,7 +19,7 @@ fs.ensureDirSync('dist/widgets')
 fs.ensureDirSync('dist/mock')
 fs.copyFileSync('src/server/mock/server.conf', 'dist/mock/server.conf')
 
-const widgets = getAllFiles('./src/widgets', null, '.js', {})
+const widgets = getAllFiles('./src/widgets', null, /\.(js|ts)/, {})
 // const widgets = []
 const commonPlugins = [
   json(),
@@ -67,6 +68,11 @@ const widgetChunks = widgets.map(widget => {
           { find: 'clipboardy', replacement: 'node_modules/clipboardy/index.js' },
         ]
       }) : null,
+      replace({
+        '#! /usr/bin/env node': '',
+        delimiters: ['', ''],
+        include: [/http-server/],
+      }),
       ...commonPlugins
     ],
     output: {
@@ -77,4 +83,10 @@ const widgetChunks = widgets.map(widget => {
   }
 })
 
-export default typeof argv.filter === 'string' && argv.filter.length > 0 ? widgetChunks.filter(item => item.input.indexOf(argv.filter) !== -1) : baseChunks
+const chunks = typeof argv.filter === 'string' && argv.filter.length > 0 ? widgetChunks.filter(item => item.input.indexOf(argv.filter) !== -1) : baseChunks
+
+if (!chunks.length) {
+  throw new Error(`未找到名称为${argv.filter}的任务`)
+}
+
+export default chunks

@@ -22,7 +22,7 @@ export const getAllFiles = function (root, ignoreDir, fileExt, options) {
       options && options.cwd
         ? fs.readdirSync(path.join(options.cwd, root))
         : fs.readdirSync(root);
-  files.forEach(function(file) {
+  files.forEach(function (file) {
     var pathname = root + '/' + file,
       stat = fs.lstatSync(
         options && options.cwd ? path.join(options.cwd, pathname) : pathname
@@ -35,10 +35,11 @@ export const getAllFiles = function (root, ignoreDir, fileExt, options) {
       return;
     }
 
+    const ext = path.parse(pathname).ext;
     if (
       fileExt &&
       !stat.isDirectory() &&
-      fileExt === path.parse(pathname).ext
+      (fileExt === ext || (fileExt instanceof RegExp && fileExt.test(ext)))
     ) {
       res.push({
         path: pathname,

@@ -74,11 +74,11 @@ const getAllFiles = function (root, ignoreDir, fileExt, options) {
     ) {
       return;
     }
-
+    const ext = path.parse(pathname).ext;
     if (
       fileExt &&
       !stat.isDirectory() &&
-      fileExt === path.parse(pathname).ext
+      (fileExt === ext || (fileExt instanceof RegExp && fileExt.test(ext)))
     ) {
       res.push({
         path: pathname,
