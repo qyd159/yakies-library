@@ -62,3 +62,16 @@ export const getAllFiles = function (root, ignoreDir, fileExt, options) {
   });
   return res;
 };
+
+export function removeAndReturnItems(array, condition) {
+  let removedItems = array.filter(condition);
+
+  removedItems.forEach(item => {
+    let index = array.findIndex(el => el.name === item.name);
+    if (index !== -1) {
+      array.splice(index, 1);
+    }
+  });
+
+  return removedItems;
+}

@@ -2,6 +2,7 @@ import createAppServer from './server/app';
 import './common/bootstrap'
 import settings from './conf/settings';
 import watchFiles from './lib/watchFiles';
+import creatProject from './create';
 
 const Liftoff = require('liftoff');
 const path = require('path');
@@ -11,16 +12,6 @@ const { debounce, merge } = require('lodash');
 export default async function (argv) {
   let user_path = argv._.length > 0 ? argv._[0] : '';
   argv.r = argv.root = user_path ? user_path : '.';
-
-  //读取settings.js配置文件
-  await new Promise((resolve) => {
-    require('walk-up')(process.cwd(), 'settings.js', (err, result) => {
-      if (result && result.found) {
-        merge(settings, require(path.join(result.path, 'settings')));
-      }
-      resolve(null);
-    });
-  });
 
   /*根据ya默认配置来执行外部脚本*/
   if (argv._[0] === 'exec') {
@@ -35,6 +26,25 @@ export default async function (argv) {
     }
     return;
   }
+
+  /*通过模版建立项目 */
+  if (argv._[0] === 'create') {
+    creatProject()
+    return;
+  }
+
+  // 下面是ya提供的开发代理服务器
+
+  //读取settings.js配置文件
+  await new Promise((resolve) => {
+    require('walk-up')(process.cwd(), 'settings.js', (err, result) => {
+      if (result && result.found) {
+        merge(settings, require(path.join(result.path, 'settings')));
+      }
+      resolve(null);
+    });
+  });
+
   if (argv.bs) {
     // 预先获取browser-sync能够使用的端口号
     await new Promise((resolve, reject) => {
