@@ -86,7 +86,11 @@
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-replace": "^5.0.2",
     "@rollup/plugin-terser": "^0.4.1",
+<<<<<<< HEAD
     "@types/fs-extra": "^11.0.1",
+=======
+    "@types/express": "^4.17.13",
+>>>>>>> 2625e39 (chore: 添加@types/express)
     "@types/node": "^14.18.33",
     "rollup": "^3.21.5",
     "rollup-plugin-node-externals": "^6.0.0",

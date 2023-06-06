@@ -2,7 +2,8 @@ import { createProxyMiddleware, Options } from 'http-proxy-middleware';
 import devtool from '../devtool';
 import { getDefaultHosts, printServerUrls, resolveServerUrls } from '../lib/util'
 import { createLogger, LogLevel } from 'vite'
-const express = require('express');
+import express from 'express';
+
 const url = require('url');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -114,6 +115,7 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
   app.use(bodyParser.json());
 
   app.use(cors());
+
   // 静态文件输出
   app.use(
     express.static(root ? path.join(cwd, root) : cwd, {
