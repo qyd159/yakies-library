@@ -1,27 +1,28 @@
-export default {
-  rootRoleId: 1,
-  // nodemailer config
-  mailer: {
-    host: 'xxx',
-    port: 80,
-    auth: {
-      user: 'xxx',
-      pass: 'xxx',
+import { defineConfig } from './defineConfig'
+
+export default defineConfig({
+  proxys: [{
+    target: 'https://localhost:3344/',
+    baseApi: '/v1',
+  }],
+  ytt: [
+    {
+      serverUrl: 'https://user-center.yakies.cn/api-json',
+      serverType: 'swagger',
+      outputDir: 'src/fantasy/common/api/generated/netdisk',
+      overwriteRequestFile: false,
+      projects: [
+        {
+          token: '',
+          categories: [
+            {
+              id: 0,
+              prefix: /^\/admin\/netdisk/,
+              prefixReserve: false,
+            },
+          ],
+        },
+      ],
     },
-    secure: false, // or true using 443
-  },
-  // amap config
-  amap: {
-    key: 'xxx',
-  },
-  // jwt sign secret
-  jwt: {
-    secret: process.env.JWT_SECRET || '123456',
-  },
-  redis: {
-    host: `${process.env.HOST || '127.0.0.1'}`, // default value
-    port: 6379, // default value
-    password: 'redis12345',
-    db: 0,
-  },
-};
+  ],
+});

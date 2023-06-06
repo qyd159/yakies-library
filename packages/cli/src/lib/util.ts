@@ -117,8 +117,8 @@ const insertScript = function (document, $jsLoader, url, $) {
   $(scriptElm).insertBefore($jsLoader);
 };
 
-const getTemplateJs = function (type, wwwFileMap, proxyMode) {
-  let fileMap = proxyMode ? wwwFileMap : wwwFileMap[type];
+const getTemplateJs = function (proxy, wwwFileMap) {
+  let fileMap = proxy;
   if (fileMap.js) {
     return fileMap.js;
   }
@@ -131,21 +131,20 @@ const getTemplateJs = function (type, wwwFileMap, proxyMode) {
     loaderTemplate = fileMap.loaderTemplate;
   }
 
-  for (var i = 0; i < loaderTemplate.length; i++) {
+  loaderTemplate.some((item) => {
     if (
-      wwwFileMap.templates[loaderTemplate[i]] &&
-      wwwFileMap.templates[loaderTemplate[i]].js
+      wwwFileMap.templates[item] &&
+      wwwFileMap.templates[item].js
     ) {
-      result = wwwFileMap.templates[loaderTemplate[i]].js;
-      break;
+      result = wwwFileMap.templates[item].js;
     }
-  }
+  })
 
   return result;
 };
 
-const getTemplateCss = function (type, wwwFileMap, proxyMode) {
-  let fileMap = proxyMode ? wwwFileMap : wwwFileMap[type];
+const getTemplateCss = function (proxy, wwwFileMap) {
+  let fileMap = proxy;
   if (fileMap.css) {
     return fileMap.css;
   }
@@ -158,21 +157,19 @@ const getTemplateCss = function (type, wwwFileMap, proxyMode) {
     loaderTemplate = fileMap.loaderTemplate;
   }
 
-  for (var i = 0; i < loaderTemplate.length; i++) {
+  loaderTemplate.some((item) => {
     if (
-      wwwFileMap.templates[loaderTemplate[i]] &&
-      wwwFileMap.templates[loaderTemplate[i]].css
+      wwwFileMap.templates[item] &&
+      wwwFileMap.templates[item].css
     ) {
-      result = wwwFileMap.templates[loaderTemplate[i]].css;
-      break;
+      result = wwwFileMap.templates[item].css;
     }
-  }
+  })
 
   return result;
 };
 
-const handleHtml = function (result, gamesite, type, settings, proxyMode?) {
-  // @ts-ignore
+const handleHtml = function (result, gamesite, proxy) {
   const wwwFileMap = global.wwwFileMap;
   const dom = new JSDOM(result, { virtualConsole: virtualConsole });
   const window = dom.window;
@@ -185,11 +182,10 @@ const handleHtml = function (result, gamesite, type, settings, proxyMode?) {
   !cssLoader && console.warn('您没有在模板里设置cssLoader');
 
   if (
-    !proxyMode &&
-    wwwFileMap[type].jsRequires &&
-    wwwFileMap[type].jsRequires.length > 0
+    proxy.jsRequires &&
+    proxy.jsRequires.length > 0
   ) {
-    const jsRequires = wwwFileMap[type].jsRequires;
+    const jsRequires = proxy.jsRequires;
     for (let i = 0; i < jsRequires.length; i++) {
       insertScript(
         window.document,
@@ -219,18 +215,16 @@ const handleHtml = function (result, gamesite, type, settings, proxyMode?) {
     wwwFileMap.cssInjector = [];
   }
 
-  if (!proxyMode && !wwwFileMap[type].cssInjector) {
-    wwwFileMap[type].cssInjector = [];
+  if (!proxy.cssInjector) {
+    proxy.cssInjector = [];
   }
 
   let cssInjector = wwwFileMap.cssInjector;
-  if (!proxyMode) {
-    cssInjector = cssInjector.concat(wwwFileMap[type].cssInjector);
-  }
+  cssInjector = cssInjector.concat(proxy.cssInjector)
 
   Array.prototype.map.call(links, function (link) {
     /*替换本地开发用到的css*/
-    const prefix = '//' + settings.wwwDeployDomain + '/';
+    const prefix = '//' + wwwFileMap.wwwDeployDomain + '/';
     const index = link.href && link.href.indexOf(prefix);
     if (link.href && index !== -1) {
       const filepath1 = link.href.substring(index + prefix.length);
@@ -252,17 +246,8 @@ const handleHtml = function (result, gamesite, type, settings, proxyMode?) {
    * 替换页面的部分js
    */
 
-  if (!wwwFileMap.jsInjector) {
-    wwwFileMap.jsInjector = [];
-  }
-
-  if (!proxyMode && !wwwFileMap[type].jsInjector) {
-    wwwFileMap[type].jsInjector = [];
-  }
-  let jsInjector = wwwFileMap.jsInjector;
-
-  if (!proxyMode) {
-    jsInjector = jsInjector.concat(wwwFileMap[type].jsInjector);
+  if (!proxy.jsInjector) {
+    proxy.jsInjector = [];
   }
 
   Array.prototype.map.apply(scripts, [
@@ -270,7 +255,7 @@ const handleHtml = function (result, gamesite, type, settings, proxyMode?) {
       /**
        * 替换本地开发用到的js
        */
-      const prefix = '//' + settings.wwwDeployDomain + '/';
+      const prefix = '//' + wwwFileMap.wwwDeployDomain + '/';
       const index = script.src && script.src.indexOf(prefix);
       if (script.src && index !== -1) {
         const filepath1 = script.src.substring(index + prefix.length);
@@ -279,18 +264,18 @@ const handleHtml = function (result, gamesite, type, settings, proxyMode?) {
         }
       }
 
-      if (jsInjector && Array.isArray(jsInjector) && jsInjector.length > 0) {
-        for (let i = 0; i < jsInjector.length; i++) {
-          if (script.src && script.src.indexOf(jsInjector[i].url) !== -1) {
-            script.src = jsInjector[i].target;
+      if (proxy.jsInjector.length > 0) {
+        for (let i = 0; i < proxy.jsInjector.length; i++) {
+          if (script.src && script.src.indexOf(proxy.jsInjector[i].url) !== -1) {
+            script.src = proxy.jsInjector[i].target;
           }
         }
       }
     }
   ]);
 
-  const jsLoaderPath = getTemplateJs(type, wwwFileMap, proxyMode);
-  const cssLoaderPath = getTemplateCss(type, wwwFileMap, proxyMode);
+  const jsLoaderPath = getTemplateJs(proxy, wwwFileMap);
+  const cssLoaderPath = getTemplateCss(proxy, wwwFileMap);
 
   jsLoaderPath &&
     jsLoader &&
@@ -302,11 +287,10 @@ const handleHtml = function (result, gamesite, type, settings, proxyMode?) {
   /*注入新的css*/
 
   if (
-    !proxyMode &&
-    wwwFileMap[type].cssRequires &&
-    wwwFileMap[type].cssRequires.length > 0
+    proxy.cssRequires &&
+    proxy.cssRequires.length > 0
   ) {
-    const cssRequires = wwwFileMap[type].cssRequires;
+    const cssRequires = proxy.cssRequires;
     for (const element of cssRequires) {
       insertLinkCss(
         window.document,
@@ -321,7 +305,7 @@ const handleHtml = function (result, gamesite, type, settings, proxyMode?) {
    */
   const images = window.document.getElementsByTagName('img');
   Array.prototype.map.call(images, function (image) {
-    const prefix = '//' + settings.wwwDeployDomain + '/';
+    const prefix = '//' + wwwFileMap.wwwDeployDomain + '/';
     const index = image.src && image.src.indexOf(prefix);
     const $image = $(image);
     const data_src = $image.attr('data-src');

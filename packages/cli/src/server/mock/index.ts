@@ -1,6 +1,4 @@
 import * as _ from '../../lib/util'
-import settings from '../../conf/settings';
-const path = require('path');
 const Crawler = require('crawler');
 const bodyParser = require('body-parser');
 const { createProxyMiddleware } = require('http-proxy-middleware');
@@ -8,11 +6,10 @@ const proxyCacheMiddleware = require('@yakies/proxy-cache-middleware');
 const Axios = require('axios').default;
 const queryString = require('query-string');
 const URL = require('url');
-const { merge, isArray } = require('lodash');
+const { isArray } = require('lodash');
 const { gzip, ungzip } = require('node-gzip');
 
-// const interfaceMonitorUrl = 'http://localhost:3100/api/v1/monitor';
-const interfaceMonitorUrl = 'https://yakies.tech/api/v1/monitor';
+const interfaceMonitorUrl = 'https://monitor.yakies.cn/api/v1/monitor';
 
 // @ts-ignore
 const wwwFileMap = global.wwwFileMap;
@@ -48,35 +45,32 @@ module.exports = async function (req, res, next) {
     type = type.split('/')[0];
   }
 
-  if (!type) {
-    type = 'index';
-  }
+  const proxy = wwwFileMap.httpPorxy.find(item => item.path ?? '' == type);
 
   let contextPath = './';
-  let proxyMode = !!wwwFileMap.proxy;
 
   if (
-    wwwFileMap[type] &&
-    wwwFileMap[type].url &&
-    wwwFileMap[type].url.indexOf('//') === 0
+    proxy &&
+    proxy.url &&
+    proxy.url.indexOf('//') === 0
   ) {
-    wwwFileMap[type].url = 'http:' + wwwFileMap[type].url;
+    proxy.url = 'http:' + proxy.url;
   }
 
   let result;
 
-  if (wwwFileMap[type] && wwwFileMap[type].url && wwwFileMap[type].prepareUrl) {
+  if (proxy && proxy.url && proxy.prepareUrl) {
     await new Promise((resolve) => {
       //需要先访问某页面后才能访问目标页面
       c.queue({
-        uri: wwwFileMap[type].prepareUrl,
+        uri: proxy.prepareUrl,
         // The global callback won't be called
         callback: function (error, grabedRes, done) {
           if (error) {
             console.log(error);
           } else {
             c.queue({
-              uri: wwwFileMap[type].url,
+              uri: proxy.url,
               // The global callback won't be called
               callback: function (error, grabedRes, done) {
                 if (error) {
@@ -92,10 +86,10 @@ module.exports = async function (req, res, next) {
         },
       });
     });
-  } else if (wwwFileMap[type] && wwwFileMap[type].url) {
+  } else if (proxy && proxy.url) {
     result = await new Promise((resolve) => {
       c.queue({
-        uri: wwwFileMap[type].url,
+        uri: proxy.url,
         // The global callback won't be called
         callback: function (error, grabedRes, done) {
           if (error) {
@@ -107,10 +101,10 @@ module.exports = async function (req, res, next) {
         },
       });
     });
-  } else if ((wwwFileMap[type] && wwwFileMap[type].proxy) || proxyMode) {
+  } else if (proxy) {
     const parsedUrl = URL.parse(req.originalUrl);
     const parsedTargetUrl = URL.parse(
-      proxyMode ? wwwFileMap.proxy.target : wwwFileMap[type].proxy.target
+      proxy.target
     );
     req.url =
       parsedTargetUrl.path +
@@ -120,20 +114,16 @@ module.exports = async function (req, res, next) {
           : ''
         : parsedUrl.search || '');
     if (
-      (proxyMode
-        ? proxyMode && wwwFileMap.proxy.cache
-        : wwwFileMap[type].proxy.cache) &&
+      proxy.cache &&
       (parsedUrl.pathname.endsWith('.css') ||
         parsedUrl.pathname.endsWith('.js'))
     ) {
       // 这里只适用静态资源缓存
       proxyCacheMiddleware({
-        dir: settings.proxyCacheDir || './tmp',
+        dir: wwwFileMap.proxyCacheDir || './tmp',
         defaultDomain: 'dev',
         domain: {
-          dev: proxyMode
-            ? wwwFileMap.proxy.target
-            : wwwFileMap[type].proxy.target,
+          dev: proxy.target,
         },
       })(req, res, next);
       return;
@@ -190,22 +180,18 @@ module.exports = async function (req, res, next) {
         data.headers['content-type'].includes('text/html') &&
         data.statusCode === 200
       ) {
-        if ((proxyMode && wwwFileMap.proxy.gziped) || (wwwFileMap[type] && wwwFileMap[type].proxy && wwwFileMap[type].proxy.gziped)) {
+        if (proxy.gziped) {
           let html = _.handleHtml(
             await ungzip(data.body),
             contextPath,
-            type,
-            settings,
-            proxyMode
+            proxy,
           );
           res.send(await gzip(html));
         } else {
           res.send(_.handleHtml(
             data.body,
             contextPath,
-            type,
-            settings,
-            proxyMode
+            proxy,
           ));
         }
       } else {
@@ -219,7 +205,7 @@ module.exports = async function (req, res, next) {
     } else if (isArray(wwwFileMap.proxy.baseApi)) {
       baseApi = wwwFileMap.proxy.baseApi
     }
-    if (proxyMode && baseApi.some(api => req.originalUrl.indexOf(api) === 0)) {
+    if (proxy && baseApi.some(api => req.originalUrl.indexOf(api) === 0)) {
       // 是后台请求
       wwwFileMap.apiProxy((err, data) => {
         if (!(data.body instanceof Buffer) && wwwFileMap.proxy.capture) {
@@ -274,5 +260,5 @@ module.exports = async function (req, res, next) {
     next();
     return;
   }
-  res.end(_.handleHtml(result, contextPath, type, settings));
+  res.end(_.handleHtml(result, contextPath, proxy));
 };

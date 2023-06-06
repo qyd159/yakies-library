@@ -34,7 +34,6 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
   } else {
     server = require('http').createServer(app);
   }
-  // @ts-ignore
   let wwwFileMap = global.wwwFileMap || {};
   let wsProxy;
   const proxyOptions: Options = {
@@ -74,12 +73,10 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
 
   yog_conf.data_path.push(path.join(cwd, 'mock'));
 
-  // @ts-ignore
   if (!global.wwwFileMap) {
-    // @ts-ignore
     global.wwwFileMap = {};
   }
-  yog_conf.proxy_mode = wwwFileMap && !!wwwFileMap.proxy;
+  yog_conf.proxy_mode = wwwFileMap && wwwFileMap.proxys && wwwFileMap.proxys.length > 0;
 
   if (process.env.NODE_ENV !== 'development') {
     app.use(compression());

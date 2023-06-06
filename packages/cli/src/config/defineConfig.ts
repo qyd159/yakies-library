@@ -1,4 +1,3 @@
-import { LoggerModuleOptions as LoggerConfigOptions } from '@yakies/shared/logger/logger.interface';
 
 /**
  * 用于智能提示
@@ -8,61 +7,21 @@ export function defineConfig(config: IConfig): IConfig {
 }
 
 /**
- * sf-admin 配置
+ * yarc 配置
  */
 export interface IConfig {
-  /**
-   * 管理员角色ID，一旦分配，该角色下分配的管理员都为超级管理员
-   */
-  rootRoleId?: number;
-  /**
-   * 用户鉴权Token密钥
-   */
-  jwt?: JwtConfigOptions;
-  /**
-   * Mysql数据库配置
-   */
-  database?: DataBaseConfigOptions;
-  /**
-   * Redis配置
-   */
-  redis?: RedisConfigOptions;
-  /**
-   * 应用级别日志配置
-   */
-  logger?: LoggerConfigOptions;
-  /**
-   * Swagger文档配置
-   */
-  swagger?: SwaggerConfigOptions;
+  browserSyncPort?: number;
+  dev_ip?: string;
+  port_range?: { port: number, stopPort?: number },
+  port?: number;
+  proxyCacheDir?: string,
+  // http代理
+  httpProxy?: { target: string, baseApi: string, cache?: boolean, path?: string, gziped?: boolean, jsRequires: string[], cssRequires: string[], jsInjector: { url: string, target: string }[] }[],
+  // socket代理
+  socketProxy?: {},
+  ytt?: { serverUrl: string, serverType: 'swagger' | 'yapi', outputDir: string, overwriteRequestFile?: boolean, projects: Project[] }[]
 }
 
 //--------- config interface ------------
 
-export interface JwtConfigOptions {
-  secret: string;
-}
-export interface RedisConfigOptions {
-  host?: string;
-  port?: number | string;
-  password?: string;
-  db?: number;
-}
-
-export interface DataBaseConfigOptions {
-  type?: string;
-  host?: string;
-  port?: number | string;
-  username?: string;
-  password?: string;
-  database?: string;
-  synchronize?: boolean;
-}
-
-export interface SwaggerConfigOptions {
-  enable?: boolean;
-  path?: string;
-  title?: string;
-  desc?: string;
-  version?: string;
-}
+export interface Project { token: string, categories: { id: string | number, prefix: string | RegExp, prefixReserve?: boolean }[] }

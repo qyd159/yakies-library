@@ -44,4 +44,46 @@ export function Uint8ArrayToString(fileData) {
   return dataString;
 }
 
+const punctuations = '、。？?！!；;,，'.split('');
+// const wordLimit = 20;
+
+function punctuationSplit(textArr: string[], punctuation) {
+  const result: string[] = [];
+  for (const text of textArr) {
+    if (text.indexOf(punctuation) !== -1) {
+      let splits = text.split(punctuation);
+      // 清理空元素
+      splits = splits.filter((item) => item);
+      result.push(...splits);
+    } else {
+      result.push(text);
+    }
+  }
+  return result;
+}
+
+// function wordLimitSplit(textArr: string[]) {
+//   const result: string[] = [];
+//   for (const text of textArr) {
+//     if (text.length > wordLimit) {
+//       const len = Math.round((text.length + wordLimit / 2) / wordLimit);
+//       const itemCount = Math.round(text.length / len);
+//       for (let index = 0; index < len; index++) {
+//         result.push(text.substring(index * itemCount, index * itemCount + itemCount));
+//       }
+//     } else {
+//       result.push(text);
+//     }
+//   }
+//   return result;
+// }
+export function splitText(txt, punctuations) {
+  let result: string[] = [txt];
+  for (const punctuation of punctuations) {
+    result = punctuationSplit(result, punctuation);
+  }
+  // result = wordLimitSplit(result);
+  return result;
+}
+
 export { MyUtil, eventBus };
