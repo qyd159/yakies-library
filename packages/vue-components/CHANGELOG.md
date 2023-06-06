@@ -1,5 +1,11 @@
 # @yakies/vue-components
 
+## 0.7.0
+
+### Minor Changes
+
+- feat: 添加一个上传组件
+
 ## 0.6.0
 
 ### Minor Changes
