@@ -1,7 +1,7 @@
 import { createProxyMiddleware, Options } from 'http-proxy-middleware';
 import devtool from '../devtool';
-import { getDefaultHosts, printServerUrls, resolveServerUrls } from '../lib/util'
-import { createLogger, LogLevel } from 'vite'
+import { getDefaultHosts, printServerUrls, resolveServerUrls } from '../lib/util';
+import { createLogger, LogLevel } from 'vite';
 import express from 'express';
 
 const url = require('url');
@@ -10,51 +10,47 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const cors = require('cors');
 const app = express();
-const Mkcert = require('@yakies/mkcert').default
+const Mkcert = require('@yakies/mkcert').default;
 
 export default async function ({ port, root, useHttps = false, logLevel = 'info' as LogLevel, hosts = [] }, callback) {
-  let server
-  const allHosts = [...getDefaultHosts(), ...hosts]
-  const uniqueHosts = Array.from(new Set(allHosts)).filter(item => !!item)
+  let server;
+  const allHosts = [...getDefaultHosts(), ...hosts];
+  const uniqueHosts = Array.from(new Set(allHosts)).filter((item) => !!item);
   if (useHttps) {
     const mkcert = Mkcert.create({
       logger: createLogger(logLevel, {
-        prefix: 'cli:mkcert'
+        prefix: 'cli:mkcert',
       }),
       source: 'coding',
-    })
+    });
 
-    const certificate = await mkcert.install(uniqueHosts)
+    const certificate = await mkcert.install(uniqueHosts);
     // 创建 HTTPS 服务器
     server = require('https').createServer(
       { key: certificate.key && Buffer.from(certificate.key), cert: certificate.cert && Buffer.from(certificate.cert) },
       app
     );
-
   } else {
     server = require('http').createServer(app);
   }
-  let wwwFileMap = global.wwwFileMap || {};
+  let YaConfig = global.YaConfig || {};
   let wsProxy;
   const proxyOptions: Options = {
     changeOrigin: true,
     logLevel: 'debug',
     secure: false,
   };
-  if (wwwFileMap && wwwFileMap.socket) {
-    if (Array.isArray(wwwFileMap.socket)) {
-      wsProxy = wwwFileMap.socket.map((socket) => {
+  if (YaConfig && YaConfig.socket) {
+    if (Array.isArray(YaConfig.socket)) {
+      wsProxy = YaConfig.socket.map((socket) => {
         proxyOptions.target = socket.target;
-        const wsProxyMiddlware = createProxyMiddleware(
-          socket.path,
-          proxyOptions
-        );
+        const wsProxyMiddlware = createProxyMiddleware(socket.path, proxyOptions);
         app.use(wsProxyMiddlware);
         return wsProxyMiddlware;
       });
     } else {
-      proxyOptions.target = wwwFileMap.socket.target;
-      wsProxy = createProxyMiddleware(wwwFileMap.socket.path, proxyOptions);
+      proxyOptions.target = YaConfig.socket.target;
+      wsProxy = createProxyMiddleware(YaConfig.socket.path, proxyOptions);
       app.use(wsProxy);
     }
   }
@@ -63,27 +59,24 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
   var yog_conf = {
     rewrite_file: [path.join(__dirname, 'mock', 'server.conf')],
     data_path: [path.join(__dirname, 'mock')],
-    proxy_mode: false
+    proxy_mode: false,
   };
 
-  yog_conf.rewrite_file.push(
-    path.join(cwd, 'mock', 'server.conf'),
-    path.join(cwd, 'config', 'server.conf'),
-  );
+  yog_conf.rewrite_file.push(path.join(cwd, 'mock', 'server.conf'), path.join(cwd, 'config', 'server.conf'));
 
   yog_conf.data_path.push(path.join(cwd, 'mock'));
 
-  if (!global.wwwFileMap) {
-    global.wwwFileMap = {};
+  if (!global.YaConfig) {
+    global.YaConfig = {};
   }
-  yog_conf.proxy_mode = wwwFileMap && wwwFileMap.proxys && wwwFileMap.proxys.length > 0;
+  yog_conf.proxy_mode = YaConfig && YaConfig.proxys && YaConfig.proxys.length > 0;
 
   if (process.env.NODE_ENV !== 'development') {
     app.use(compression());
   }
 
   app.use(function (req, res, next) {
-    const mockSettings = wwwFileMap.mockSettings;
+    const mockSettings = YaConfig.mockSettings;
     if (mockSettings) {
       const item = mockSettings.find((item) => {
         return req.url.indexOf(item.url) !== -1 && req.method === item.method;
@@ -192,7 +185,6 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
   // Bind to a port
   var fs = require('fs');
 
-
   server.listen(port, '0.0.0.0', async function () {
     printServerUrls(await resolveServerUrls(server, { host: '0.0.0.0', port: port, https: useHttps }), false);
     callback();
@@ -230,10 +222,10 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
       console.log(' Recive quit signal in worker %s.', process.pid);
       sockets.length
         ? sockets.forEach(function (socket) {
-          socket.destroy();
-          finalize();
-        })
+            socket.destroy();
+            finalize();
+          })
         : server.close(finalize);
     });
   })();
-};
+}

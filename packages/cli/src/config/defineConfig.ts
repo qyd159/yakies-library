@@ -1,4 +1,3 @@
-
 /**
  * 用于智能提示
  */
@@ -12,16 +11,40 @@ export function defineConfig(config: IConfig): IConfig {
 export interface IConfig {
   browserSyncPort?: number;
   dev_ip?: string;
-  port_range?: { port: number, stopPort?: number },
+  port_range?: { port: number; stopPort?: number };
   port?: number;
-  proxyCacheDir?: string,
+  proxyCacheDir?: string;
   // http代理
-  httpProxy?: { target: string, baseApi: string, cache?: boolean, path?: string, gziped?: boolean, jsRequires: string[], cssRequires: string[], jsInjector: { url: string, target: string }[] }[],
+  httpProxy?: Proxy[];
   // socket代理
-  socketProxy?: {},
-  ytt?: { serverUrl: string, serverType: 'swagger' | 'yapi', outputDir: string, overwriteRequestFile?: boolean, projects: Project[] }[]
+  socketProxy?: {};
+  ytt?: { serverUrl: string; serverType: 'swagger' | 'yapi'; outputDir: string; overwriteRequestFile?: boolean; projects: Project[] }[];
 }
 
 //--------- config interface ------------
 
-export interface Project { token: string, categories: { id: string | number, prefix: string | RegExp, prefixReserve?: boolean }[] }
+export interface Project {
+  token: string;
+  categories: { id: string | number; prefix: string | RegExp; prefixReserve?: boolean }[];
+}
+
+export interface Proxy {
+  target: string;
+  baseApi: string;
+  cache?: boolean;
+  path?: string;
+  prepareUrl?: string;
+  url?: string;
+  gziped?: boolean;
+  jsRequires: string[];
+  cssRequires: string[];
+  jsInjector: { url: string; target: string }[];
+  name?: string;
+  capture?: boolean;
+  description?: string;
+}
+
+export interface GlobalConfig extends IConfig {
+  apiProxy?: any;
+  pureProxy?: any;
+}

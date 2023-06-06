@@ -1,4 +1,5 @@
-import * as _ from '../../lib/util'
+import { GlobalConfig } from 'src/config/defineConfig';
+import * as _ from '../../lib/util';
 const Crawler = require('crawler');
 const bodyParser = require('body-parser');
 const { createProxyMiddleware } = require('http-proxy-middleware');
@@ -11,8 +12,7 @@ const { gzip, ungzip } = require('node-gzip');
 
 const interfaceMonitorUrl = 'https://monitor.yakies.cn/api/v1/monitor';
 
-// @ts-ignore
-const wwwFileMap = global.wwwFileMap;
+const YaConfig: GlobalConfig = global.YaConfig;
 
 const c = new Crawler({
   maxConnections: 10,
@@ -34,26 +34,17 @@ const c = new Crawler({
 module.exports = async function (req, res, next) {
   // set custom header.
   // res.setHeader('xxxx', 'xxx');
-  let type = req.originalUrl.substring(
-    1,
-    req.originalUrl.indexOf('?') !== -1
-      ? req.originalUrl.indexOf('?')
-      : req.originalUrl.length
-  );
+  let type = req.originalUrl.substring(1, req.originalUrl.indexOf('?') !== -1 ? req.originalUrl.indexOf('?') : req.originalUrl.length);
 
   if (type.indexOf('/') !== -1) {
     type = type.split('/')[0];
   }
 
-  const proxy = wwwFileMap.httpPorxy.find(item => item.path ?? '' == type);
+  const proxy = YaConfig.httpProxy.find((item) => item.path ?? '' == type);
 
   let contextPath = './';
 
-  if (
-    proxy &&
-    proxy.url &&
-    proxy.url.indexOf('//') === 0
-  ) {
+  if (proxy && proxy.url && proxy.url.indexOf('//') === 0) {
     proxy.url = 'http:' + proxy.url;
   }
 
@@ -103,24 +94,12 @@ module.exports = async function (req, res, next) {
     });
   } else if (proxy) {
     const parsedUrl = URL.parse(req.originalUrl);
-    const parsedTargetUrl = URL.parse(
-      proxy.target
-    );
-    req.url =
-      parsedTargetUrl.path +
-      (parsedTargetUrl.search
-        ? parsedUrl.query
-          ? '&' + parsedUrl.query
-          : ''
-        : parsedUrl.search || '');
-    if (
-      proxy.cache &&
-      (parsedUrl.pathname.endsWith('.css') ||
-        parsedUrl.pathname.endsWith('.js'))
-    ) {
+    const parsedTargetUrl = URL.parse(proxy.target);
+    req.url = parsedTargetUrl.path + (parsedTargetUrl.search ? (parsedUrl.query ? '&' + parsedUrl.query : '') : parsedUrl.search || '');
+    if (proxy.cache && (parsedUrl.pathname.endsWith('.css') || parsedUrl.pathname.endsWith('.js'))) {
       // 这里只适用静态资源缓存
       proxyCacheMiddleware({
-        dir: wwwFileMap.proxyCacheDir || './tmp',
+        dir: YaConfig.proxyCacheDir || './tmp',
         defaultDomain: 'dev',
         domain: {
           dev: proxy.target,
@@ -128,20 +107,20 @@ module.exports = async function (req, res, next) {
       })(req, res, next);
       return;
     }
-    if (!wwwFileMap.apiProxy && !wwwFileMap.pureProxy) {
+    if (!YaConfig.apiProxy && !YaConfig.pureProxy) {
       const options: any = {
         target: parsedTargetUrl.protocol + '//' + parsedTargetUrl.host,
         changeOrigin: true,
         // ws: true,
         selfHandleResponse: false,
-        secure: false
+        secure: false,
       };
       // options.onProxyRes = function (proxyRes, req, res) {
       //   proxyRes.headers['x-added'] = 'foobar' // add new header to response
       //   delete proxyRes.headers['x-removed'] // remove header from response
       // }
-      wwwFileMap.pureProxy = createProxyMiddleware(options);
-      wwwFileMap.apiProxy = function (callback) {
+      YaConfig.pureProxy = createProxyMiddleware(options);
+      YaConfig.apiProxy = function (callback) {
         options.selfHandleResponse = true;
         options.onProxyRes = function (proxyRes, userReq) {
           const bodyChunks = [];
@@ -155,10 +134,7 @@ module.exports = async function (req, res, next) {
               headers: proxyRes.headers,
               body,
             };
-            if (
-              data.headers['content-type'] &&
-              data.headers['content-type'].indexOf('application/json') !== -1
-            ) {
+            if (data.headers['content-type'] && data.headers['content-type'].indexOf('application/json') !== -1) {
               data.body = body.toString();
             }
             callback(null, data);
@@ -175,49 +151,37 @@ module.exports = async function (req, res, next) {
         res.append(key, data.headers[key]);
       });
       // modifying html content
-      if (
-        data.headers['content-type'] &&
-        data.headers['content-type'].includes('text/html') &&
-        data.statusCode === 200
-      ) {
+      if (data.headers['content-type'] && data.headers['content-type'].includes('text/html') && data.statusCode === 200) {
         if (proxy.gziped) {
-          let html = _.handleHtml(
-            await ungzip(data.body),
-            contextPath,
-            proxy,
-          );
+          let html = _.handleHtml(await ungzip(data.body), contextPath, proxy);
           res.send(await gzip(html));
         } else {
-          res.send(_.handleHtml(
-            data.body,
-            contextPath,
-            proxy,
-          ));
+          res.send(_.handleHtml(data.body, contextPath, proxy));
         }
       } else {
         res.send(data.body);
       }
       res.end();
     }
-    let baseApi = []
-    if (typeof wwwFileMap.proxy.baseApi === 'string') {
-      baseApi = [wwwFileMap.proxy.baseApi]
-    } else if (isArray(wwwFileMap.proxy.baseApi)) {
-      baseApi = wwwFileMap.proxy.baseApi
+    let baseApi = [];
+    if (typeof proxy.baseApi === 'string') {
+      baseApi = [proxy.baseApi];
+    } else if (isArray(proxy.baseApi)) {
+      baseApi = proxy.baseApi;
     }
-    if (proxy && baseApi.some(api => req.originalUrl.indexOf(api) === 0)) {
+    if (proxy && baseApi.some((api) => req.originalUrl.indexOf(api) === 0)) {
       // 是后台请求
-      wwwFileMap.apiProxy((err, data) => {
-        if (!(data.body instanceof Buffer) && wwwFileMap.proxy.capture) {
-          bodyParser.json()(req, res, next)
+      YaConfig.apiProxy((err, data) => {
+        if (!(data.body instanceof Buffer) && proxy.capture) {
+          bodyParser.json()(req, res, next);
           Axios.post(
             interfaceMonitorUrl,
             {
               url: parsedUrl.pathname,
               query: queryString.stringify(req.query),
               method: req.method,
-              name: wwwFileMap.proxy.name,
-              desc: wwwFileMap.proxy.description,
+              name: proxy.name,
+              desc: proxy.description,
               body: JSON.stringify(req.body),
               token: req.headers.authorization,
               response: data.body,
@@ -246,12 +210,12 @@ module.exports = async function (req, res, next) {
       req.headers['accept'].includes('text/html') &&
       req.method === 'GET'
     ) {
-      wwwFileMap.apiProxy((err, data) => {
+      YaConfig.apiProxy((err, data) => {
         response(data);
       })(req, res, next);
       return;
     } else {
-      wwwFileMap.pureProxy(req, res, next);
+      YaConfig.pureProxy(req, res, next);
     }
     return;
   } else {

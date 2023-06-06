@@ -1,5 +1,5 @@
 import createAppServer from './server/app';
-import './common/bootstrap'
+import './common/bootstrap';
 import watchFiles from './lib/watchFiles';
 import creatProject from './create';
 import loadConfig from './lib/loadConfig';
@@ -28,13 +28,12 @@ export default async function (argv) {
 
   /*通过模版建立项目 */
   if (argv._[0] === 'create') {
-    creatProject()
+    creatProject();
     return;
   }
 
   // 下面是ya提供的开发代理服务器
-  let [config, configFile] = await loadConfig(!!argv.dev)
-
+  let [config, configFile] = await loadConfig(!!argv.dev);
 
   if (argv.bs) {
     // 预先获取browser-sync能够使用的端口号
@@ -62,10 +61,10 @@ export default async function (argv) {
     });
   }
 
-  global.wwwFileMap = merge({}, config)
+  global.YaConfig = merge({}, config);
   if (process.env.service) {
     // electron命令模式，读取sevice环境变量
-    global.wwwFileMap = merge(global.wwwFileMap, {
+    global.YaConfig = merge(global.YaConfig, {
       proxy: JSON.parse(process.env.service),
     });
   }
@@ -95,10 +94,7 @@ export default async function (argv) {
         },
         path.posix.join(newPath, '**/*.html'),
       ],
-      ignore: [
-        path.posix.join(newPath, 'node_modules/**'),
-        path.posix.join(newPath, '**/node_modules/**'),
-      ],
+      ignore: [path.posix.join(newPath, 'node_modules/**'), path.posix.join(newPath, '**/node_modules/**')],
       logFileChanges: true,
       logSnippet: false,
       /**
@@ -141,4 +137,4 @@ export default async function (argv) {
       });
     });
   });
-};
+}
