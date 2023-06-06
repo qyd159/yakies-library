@@ -54,7 +54,7 @@ export default function request<TResponseData>(
         break;
       case Method.POST:
         if (fileUpload) {
-          request = defHttp.uploadFile({ url }, { file: payload.rawData.file, ...payload.rawData }, customOptions);
+          request = defHttp.uploadFile({ url, ...(axiosOptions || {}) }, { file: payload.rawData.file, ...payload.rawData }, customOptions);
         } else {
           request = defHttp.post({ url, data: payload.rawData, ...(axiosOptions || {}) }, customOptions);
         }
