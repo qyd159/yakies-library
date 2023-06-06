@@ -7,6 +7,7 @@ import JsonForm from './JsonForm/index.vue'
 import ChatContent from './RTASR/ChatContent.vue'
 import Recorder from './RTASR/Recorder.vue'
 import UniWebview from './UniWebview/index.vue'
+import Uploader from './Uploader/index.vue'
 export {
   AlgoClient,
   VLottiePlayer,
@@ -16,7 +17,8 @@ export {
   JsonForm,
   ChatContent,
   Recorder,
-  UniWebview
+  UniWebview,
+  Uploader
 }
 
 export * from './Icon'
