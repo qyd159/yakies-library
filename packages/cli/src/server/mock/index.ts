@@ -40,7 +40,7 @@ module.exports = async function (req, res, next) {
     type = type.split('/')[0];
   }
 
-  const proxy = YaConfig.httpProxy.find((item) => item.path ?? '' == type);
+  const proxy = YaConfig.httpProxy?.find((item) => item.path ?? '' == type);
 
   let contextPath = './';
 

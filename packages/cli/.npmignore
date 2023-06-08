@@ -3,6 +3,7 @@ node_modules/
 .git
 .vscode
 .idea
+.cache
 yarn.lock
 src
 tests

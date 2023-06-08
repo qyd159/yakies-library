@@ -1,5 +1,11 @@
 # @yakies/cli
 
+## 0.5.0
+
+### Minor Changes
+
+- 处理静态服务器问题
+
 ## 0.4.0
 
 ### Minor Changes

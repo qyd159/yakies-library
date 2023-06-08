@@ -36,6 +36,7 @@ const commonPlugins = [
     include: "**/*.tpl",
   }),
   typescript({
+    cacheRoot: '.cache',
     outDir: "es",
     declaration: true,
     declarationDir: "es",

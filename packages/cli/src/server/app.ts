@@ -123,8 +123,8 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
   app.use(
     (function () {
       return function (req, res, next) {
-        var pathname = url.parse(req.url).pathname;
-        var fullpath = path.join(cwd, pathname);
+        var pathname = decodeURIComponent(url.parse(req.url).pathname);
+        var fullpath = path.join(cwd, root, pathname);
 
         if (/\/$/.test(pathname) && fs.existsSync(fullpath)) {
           var stat = fs.statSync(fullpath);
