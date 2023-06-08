@@ -36,9 +36,10 @@ export interface Proxy {
   prepareUrl?: string;
   url?: string;
   gziped?: boolean;
-  jsRequires: string[];
-  cssRequires: string[];
-  jsInjector: { url: string; target: string }[];
+  jsRequires?: string[];
+  cssRequires?: string[];
+  jsInjector?: { url: string; target: string }[];
+  cssInjector?: { url: string; target: string }[];
   name?: string;
   capture?: boolean;
   description?: string;

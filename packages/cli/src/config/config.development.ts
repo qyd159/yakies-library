@@ -1,10 +1,12 @@
-import { defineConfig } from './defineConfig'
+import { defineConfig } from './defineConfig';
 
 export default defineConfig({
-  proxys: [{
-    target: 'https://localhost:3344/',
-    baseApi: '/v1',
-  }],
+  httpProxy: [
+    {
+      target: 'https://localhost:3344/',
+      baseApi: '/v1',
+    },
+  ],
   ytt: [
     {
       serverUrl: 'https://user-center.yakies.cn/api-json',
