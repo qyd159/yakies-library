@@ -65,7 +65,7 @@ export default async function (argv) {
   if (process.env.service) {
     // electron命令模式，读取sevice环境变量
     global.YaConfig = merge(global.YaConfig, {
-      proxy: JSON.parse(process.env.service),
+      httpProxy: JSON.parse(process.env.service),
     });
   }
 

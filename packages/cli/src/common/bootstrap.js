@@ -1,3 +1,3 @@
 process.on('message', mockSettings => {
-  wwwFileMap.mockSettings = mockSettings;
+  YaConfig.mockSettings = mockSettings;
 });

@@ -40,7 +40,7 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
     logLevel: 'debug',
     secure: false,
   };
-  if (YaConfig && YaConfig.socket) {
+  if (YaConfig?.socket) {
     if (Array.isArray(YaConfig.socket)) {
       wsProxy = YaConfig.socket.map((socket) => {
         proxyOptions.target = socket.target;
@@ -56,7 +56,7 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
   }
 
   const cwd = process.cwd();
-  var yog_conf = {
+  const yog_conf = {
     rewrite_file: [path.join(__dirname, 'mock', 'server.conf')],
     data_path: [path.join(__dirname, 'mock')],
     proxy_mode: false,
@@ -69,7 +69,7 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
   if (!global.YaConfig) {
     global.YaConfig = {};
   }
-  yog_conf.proxy_mode = YaConfig && YaConfig.proxys && YaConfig.proxys.length > 0;
+  yog_conf.proxy_mode = YaConfig?.httpProxy?.length > 0;
 
   if (process.env.NODE_ENV !== 'development') {
     app.use(compression());
@@ -182,9 +182,9 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
     console.log(err);
   });
 
-  // Bind to a port
-  var fs = require('fs');
+  const fs = require('fs');
 
+  // Bind to a port
   server.listen(port, '0.0.0.0', async function () {
     printServerUrls(await resolveServerUrls(server, { host: '0.0.0.0', port: port, https: useHttps }), false);
     callback();
@@ -200,18 +200,18 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
 
   // 在接收到关闭信号的时候，关闭所有的 socket 连接。
   (function () {
-    var sockets = [];
+    const sockets = [];
 
     server.on('connection', function (socket) {
       sockets.push(socket);
 
       socket.on('close', function () {
-        var idx = sockets.indexOf(socket);
+        const idx = sockets.indexOf(socket);
         ~idx && sockets.splice(idx, 1);
       });
     });
 
-    var finalize = function () {
+    const finalize = function () {
       // Disconnect from cluster master
       process.disconnect && process.disconnect();
       process.exit(0);

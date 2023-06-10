@@ -40,17 +40,18 @@ module.exports = async function (req, res, next) {
     type = type.split('/')[0];
   }
 
-  const proxy = YaConfig.httpProxy?.find((item) => item.path ?? '' == type);
+  const proxy_mode = YaConfig.httpProxy?.some((item) => !item.path);
+  const proxy = proxy_mode ? YaConfig.httpProxy?.find((item) => !item.path) : YaConfig.httpProxy?.find((item) => item.path ?? '' == type);
 
   let contextPath = './';
 
-  if (proxy && proxy.url && proxy.url.indexOf('//') === 0) {
+  if (proxy?.url?.indexOf('//') === 0) {
     proxy.url = 'http:' + proxy.url;
   }
 
   let result;
 
-  if (proxy && proxy.url && proxy.prepareUrl) {
+  if (proxy?.url && proxy.prepareUrl) {
     await new Promise((resolve) => {
       //需要先访问某页面后才能访问目标页面
       c.queue({
@@ -77,7 +78,7 @@ module.exports = async function (req, res, next) {
         },
       });
     });
-  } else if (proxy && proxy.url) {
+  } else if (proxy?.url) {
     result = await new Promise((resolve) => {
       c.queue({
         uri: proxy.url,
