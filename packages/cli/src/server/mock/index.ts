@@ -32,16 +32,10 @@ const c = new Crawler({
 });
 
 module.exports = async function (req, res, next) {
-  // set custom header.
-  // res.setHeader('xxxx', 'xxx');
-  let type = req.originalUrl.substring(1, req.originalUrl.indexOf('?') !== -1 ? req.originalUrl.indexOf('?') : req.originalUrl.length);
-
-  if (type.indexOf('/') !== -1) {
-    type = type.split('/')[0];
-  }
-
-  const proxy_mode = YaConfig.httpProxy?.some((item) => !item.path);
-  const proxy = proxy_mode ? YaConfig.httpProxy?.find((item) => !item.path) : YaConfig.httpProxy?.find((item) => item.path ?? '' == type);
+  const proxy_api = YaConfig.httpProxy?.some((item) => req.originalUrl.indexOf(item.baseApi) === 0);
+  const proxy = proxy_api
+    ? YaConfig.httpProxy?.find((item) => req.originalUrl.indexOf(item.baseApi) === 0)
+    : YaConfig.httpProxy?.find((item) => !item.baseApi);
 
   let contextPath = './';
 
@@ -110,7 +104,7 @@ module.exports = async function (req, res, next) {
     }
     if (!YaConfig.apiProxy && !YaConfig.pureProxy) {
       const options: any = {
-        target: parsedTargetUrl.protocol + '//' + parsedTargetUrl.host,
+        target: parsedTargetUrl.protocol + '//' + parsedTargetUrl.host + parsedTargetUrl.path,
         changeOrigin: true,
         // ws: true,
         selfHandleResponse: false,
@@ -121,8 +115,10 @@ module.exports = async function (req, res, next) {
       //   delete proxyRes.headers['x-removed'] // remove header from response
       // }
       YaConfig.pureProxy = createProxyMiddleware(options);
-      YaConfig.apiProxy = function (callback) {
+      YaConfig.apiProxy = (proxy, callback) => {
+        const parsedTargetUrl = URL.parse(proxy.target);
         options.selfHandleResponse = true;
+        options.target = parsedTargetUrl.protocol + '//' + parsedTargetUrl.host + parsedTargetUrl.path;
         options.onProxyRes = function (proxyRes, userReq) {
           const bodyChunks = [];
           proxyRes.on('data', (chunk) => {
@@ -153,7 +149,7 @@ module.exports = async function (req, res, next) {
       });
       // modifying html content
       if (data.headers['content-type'] && data.headers['content-type'].includes('text/html') && data.statusCode === 200) {
-        if (proxy.gziped) {
+        if (proxy.gziped || data.headers['content-encoding'] === 'gzip') {
           let html = _.handleHtml(await ungzip(data.body), contextPath, proxy);
           res.send(await gzip(html));
         } else {
@@ -164,16 +160,11 @@ module.exports = async function (req, res, next) {
       }
       res.end();
     }
-    let baseApi = [];
-    if (typeof proxy.baseApi === 'string') {
-      baseApi = [proxy.baseApi];
-    } else if (isArray(proxy.baseApi)) {
-      baseApi = proxy.baseApi;
-    }
-    if (proxy && baseApi.some((api) => req.originalUrl.indexOf(api) === 0)) {
+    if (proxy && req.originalUrl.indexOf(proxy.baseApi) === 0) {
       // 是后台请求
-      YaConfig.apiProxy((err, data) => {
+      YaConfig.apiProxy(proxy, (err, data) => {
         if (!(data.body instanceof Buffer) && proxy.capture) {
+          const parsedUrl = URL.parse(req.originalUrl);
           bodyParser.json()(req, res, next);
           Axios.post(
             interfaceMonitorUrl,
@@ -211,7 +202,7 @@ module.exports = async function (req, res, next) {
       req.headers['accept'].includes('text/html') &&
       req.method === 'GET'
     ) {
-      YaConfig.apiProxy((err, data) => {
+      YaConfig.apiProxy(proxy, (err, data) => {
         response(data);
       })(req, res, next);
       return;

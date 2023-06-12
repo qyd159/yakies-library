@@ -30,9 +30,8 @@ export interface Project {
 
 export interface Proxy {
   target: string;
-  baseApi: string;
+  baseApi?: string;
   cache?: boolean;
-  path?: string;
   prepareUrl?: string;
   url?: string;
   gziped?: boolean;
@@ -43,6 +42,7 @@ export interface Proxy {
   name?: string;
   capture?: boolean;
   description?: string;
+  useHttps?: boolean;
 }
 
 export interface GlobalConfig extends IConfig {
