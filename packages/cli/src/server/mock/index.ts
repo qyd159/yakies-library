@@ -10,7 +10,7 @@ const URL = require('url');
 const { isArray } = require('lodash');
 const { gzip, ungzip } = require('node-gzip');
 
-const interfaceMonitorUrl = 'https://monitor.yakies.cn/api/v1/monitor';
+const interfaceMonitorUrl = 'https://mock-manager.yakies.cn/monitor';
 
 const YaConfig: GlobalConfig = global.YaConfig;
 
