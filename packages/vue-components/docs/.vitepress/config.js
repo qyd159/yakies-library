@@ -1,11 +1,12 @@
-import {defineConfig} from 'vitepress';
+import { defineConfig } from 'vitepress';
 import path from 'path';
-import { createSvgIconsPlugin} from 'vite-plugin-svg-icons';
-import mdItCustomAttrs  from 'markdown-it-custom-attrs'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import mdItCustomAttrs from 'markdown-it-custom-attrs'
 import { configStyleImportPlugin } from '../../build/vite/plugin/styleImport';
 import { generateModifyVars } from '../../build/generate/generateModifyVars';
 import { RequestInterceptor } from 'node-request-interceptor';
 import withDefaultInterceptors from 'node-request-interceptor/lib/presets/default';
+import autoImport from '../../build/vite/plugin/autoImport';
 
 const interceptor = new RequestInterceptor(withDefaultInterceptors);
 
@@ -49,6 +50,7 @@ export default defineConfig({
         items: [
           { text: 'Icon', link: '/components/icon' },
           { text: 'VLottiePlayer', link: '/components/lottie_player' },
+          { text: 'Tags', link: '/components/tags' },
         ],
       },
       {
@@ -59,26 +61,26 @@ export default defineConfig({
       },
     ],
   },
-  markdown:{
+  markdown: {
     config: (md) => {
-        // use more markdown-it plugins!
-        md.use(mdItCustomAttrs, 'image', {
-            'data-fancybox': "gallery"
-        })
-        }
-    },
-  head:[
-      [
-          "link",
-          { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" },
-      ],
-      ["script", { src: "https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js" }],
+      // use more markdown-it plugins!
+      md.use(mdItCustomAttrs, 'image', {
+        'data-fancybox': "gallery"
+      })
+    }
+  },
+  head: [
+    [
+      "link",
+      { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" },
+    ],
+    ["script", { src: "https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js" }],
   ],
   vite: {
     css: {
       preprocessorOptions: {
         less: {
-          modifyVars: generateModifyVars(true,pathResolve('./docs/.vitepress/design/config.less')),
+          modifyVars: generateModifyVars(true, pathResolve('./docs/.vitepress/design/config.less')),
           javascriptEnabled: true,
         },
       },
@@ -87,6 +89,10 @@ export default defineConfig({
       alias: [
         {
           find: /@\//,
+          replacement: pathResolve('src') + '/',
+        },
+        {
+          find: /\/@\//,
           replacement: pathResolve('src') + '/',
         },
       ],
@@ -99,15 +105,15 @@ export default defineConfig({
       svgoOptions: false,
       // default
       symbolId: 'icon-[dir]-[name]',
-    }),configStyleImportPlugin()],
+    }), configStyleImportPlugin(), ...autoImport],
     server: {
-      fs:{
-        strict:false
+      fs: {
+        strict: false
       }
     }
   },
   optimizeDeps: {
-    include: ['@lottiefiles/lottie-player','lodash']
+    include: ['@lottiefiles/lottie-player', 'lodash']
   },
   debug: true
 });
