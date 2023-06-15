@@ -48,4 +48,5 @@ export interface Proxy {
 export interface GlobalConfig extends IConfig {
   apiProxy?: any;
   pureProxy?: any;
+  token?: string;
 }

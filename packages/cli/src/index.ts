@@ -68,6 +68,7 @@ export default async function (argv) {
     global.YaConfig = merge(global.YaConfig, {
       httpProxy: JSON.parse(serviceConfig.httpProxy || '[]').concat([{ target: serviceConfig.target }]),
       useHttps: !!serviceConfig.https,
+      token: serviceConfig.token,
     });
   }
 

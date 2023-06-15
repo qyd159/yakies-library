@@ -181,6 +181,9 @@ module.exports = async function (req, res, next) {
             },
             {
               responseType: 'json',
+              headers: {
+                Authorization: YaConfig.token,
+              },
             }
           ).then(
             (res) => {
