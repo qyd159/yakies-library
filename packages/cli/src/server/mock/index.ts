@@ -188,7 +188,6 @@ module.exports = async function (req, res, next) {
           ).then(
             (res) => {
               if (res.data.code !== 0) {
-                console.log(res.data);
               }
             },
             (err) => {
