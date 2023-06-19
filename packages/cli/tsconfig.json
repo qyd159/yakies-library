@@ -16,6 +16,8 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
+    "declaration": true,
+    "declarationDir": "dist/types",
     "typeRoots": [
       "./src/types",
       "./node_modules/@types"

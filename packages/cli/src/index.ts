@@ -3,10 +3,13 @@ import './common/bootstrap';
 import watchFiles from './lib/watchFiles';
 import creatProject from './create';
 import loadConfig from './lib/loadConfig';
+import { IConfig } from './config/defineConfig';
 
 const path = require('path');
 const portfinder = require('portfinder');
 const { debounce, merge } = require('lodash');
+
+export { IConfig };
 
 export default async function (argv) {
   let user_path = argv._.length > 0 ? argv._[0] : '';

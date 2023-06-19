@@ -2,13 +2,15 @@
   "name": "@yakies/cli",
   "version": "0.5.0",
   "description": "yakies命令行工具",
-  "main": "index.js",
+  "main": "dist/bundle.js",
   "bin": {
     "ya": "bin/ya.js"
   },
+  "types": "dist/types",
   "scripts": {
     "dev": "rollup -c rollup.config.mjs --watch --dev",
-    "build": "rollup -c rollup.config.mjs"
+    "build": "rollup -c rollup.config.mjs",
+    "tsc": "tsc --emitDeclarationOnly"
   },
   "author": "chumahtung",
   "license": "ISC",
