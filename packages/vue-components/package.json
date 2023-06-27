@@ -72,11 +72,13 @@
     "color": "^4.2.3",
     "form-serialize": "^0.7.2",
     "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "mitt": "^3.0.0",
     "mp4box": "^0.5.2",
     "pinia": "^2.0.32",
     "smooth-polyline": "^1.0.8",
-    "vue-types": "^5.0.2"
+    "vue-types": "^5.0.2",
+    "yakies-library": "link:C:/projects/yakies-library"
   },
   "publishConfig": {
     "registry": "https://nexus.yakies.cn/repository/hosted/"

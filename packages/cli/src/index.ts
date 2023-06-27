@@ -72,6 +72,7 @@ export default async function (argv) {
       httpProxy: JSON.parse(serviceConfig.httpProxy || '[]').concat([{ target: serviceConfig.target }]),
       useHttps: !!serviceConfig.https,
       token: serviceConfig.token,
+      cache: serviceConfig.cache,
     });
   }
 

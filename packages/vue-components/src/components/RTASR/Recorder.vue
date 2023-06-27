@@ -2,21 +2,21 @@
   <div class="recorder-wrap disable-selection">
     <div class="py-10 flex justify-center">
       <div class="recorder-btn" ref="recordBtn" v-touch:press="startHandler" v-touch:release="stopHandler" @contextmenu.stop>
-          <slot>
-            <Button type="primary" :size="buttonSize">按住说话</Button>
-          </slot>
-        </div>
-    </div>
-      <div class="wave-view-wrapper" v-show="recording">
-        <div class="wave-view-content" ref="waveView"></div>
+        <slot>
+          <Button type="default" :size="buttonSize">按住说话</Button>
+        </slot>
       </div>
+    </div>
+    <div class="wave-view-wrapper" v-show="recording">
+      <div class="wave-view-content" ref="waveView"></div>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
   import { propTypes } from '@/utils/propTypes';
   import { useRecorder } from './hooks';
-  import { Button,ButtonSize } from 'vant';
+  import { Button, ButtonSize } from 'vant';
   import 'vant/es/button/style';
 
   const props = defineProps({
@@ -26,13 +26,19 @@
     isMobile: propTypes.bool,
     getASRUrlParams: propTypes.func,
     waveColor: propTypes.string,
-    buttonSize: propTypes.custom<ButtonSize>(() => true).def('normal')
+    buttonSize: propTypes.custom<ButtonSize>(() => true).def('normal'),
   });
 
   const waveView = ref();
   const recordBtn = ref();
 
-const { recording, recStop, recStart, rec, connect } = useRecorder({waveView, callMode: false,userVoiceParsed: props.userVoiceParsed,getUrlParams: props.getASRUrlParams,waveColor:props.waveColor});
+  const { recording, recStop, recStart, rec, connect } = useRecorder({
+    waveView,
+    callMode: false,
+    userVoiceParsed: props.userVoiceParsed,
+    getUrlParams: props.getASRUrlParams,
+    waveColor: props.waveColor,
+  });
   const touching = ref(false);
 
   function mouseupHandler() {

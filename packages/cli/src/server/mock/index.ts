@@ -91,7 +91,7 @@ module.exports = async function (req, res, next) {
     const parsedUrl = URL.parse(req.originalUrl);
     const parsedTargetUrl = URL.parse(proxy.target);
     req.url = parsedTargetUrl.path + (parsedTargetUrl.search ? (parsedUrl.query ? '&' + parsedUrl.query : '') : parsedUrl.search || '');
-    if (proxy.cache && (parsedUrl.pathname.endsWith('.css') || parsedUrl.pathname.endsWith('.js'))) {
+    if (YaConfig.cache && (parsedUrl.pathname.endsWith('.css') || parsedUrl.pathname.endsWith('.js'))) {
       // 这里只适用静态资源缓存
       proxyCacheMiddleware({
         dir: YaConfig.proxyCacheDir || './tmp',

@@ -49,4 +49,5 @@ export interface GlobalConfig extends IConfig {
   apiProxy?: any;
   pureProxy?: any;
   token?: string;
+  cache?: boolean;
 }
