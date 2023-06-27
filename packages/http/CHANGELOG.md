@@ -1,5 +1,11 @@
 # @yakies/http
 
+## 0.5.2
+
+### Patch Changes
+
+- 添加 patch 方法
+
 ## 0.5.1
 
 ### Patch Changes
