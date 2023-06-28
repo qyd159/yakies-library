@@ -18,6 +18,5 @@ module.exports = function (esFile) {
     // 从虚拟环境中获取导出的内容
     const exported = context.exports;
 
-    console.log(exported);
     return exported
 }

@@ -4,7 +4,7 @@ import consola from 'consola';
 import loadBaseConfig from '../config/configuration';
 import { IConfig } from '../config/defineConfig';
 import { merge } from 'vtils';
-import esm2cjs from './esm2common';
+import ts2cjs from './ts2common';
 export default async function (isDev: boolean = false): Promise<[IConfig, string]> {
   let cwd!: string;
   let configTSFile!: string;
@@ -30,7 +30,7 @@ export default async function (isDev: boolean = false): Promise<[IConfig, string
 
   const baseConfig = loadBaseConfig(isDev);
 
-  const config: IConfig = merge(baseConfig, esm2cjs(configFile));
+  const config: IConfig = merge(baseConfig, ts2cjs(configFile));
 
   return [config, configFile];
 }

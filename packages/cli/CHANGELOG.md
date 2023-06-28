@@ -1,5 +1,11 @@
 # @yakies/cli
 
+## 0.6.1
+
+### Patch Changes
+
+- 支持读取 ts 配置文件
+
 ## 0.6.0
 
 ### Minor Changes
