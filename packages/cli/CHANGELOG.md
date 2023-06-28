@@ -1,5 +1,11 @@
 # @yakies/cli
 
+## 0.6.0
+
+### Minor Changes
+
+- 支持 esmodule 配置文件
+
 ## 0.5.0
 
 ### Minor Changes
