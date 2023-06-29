@@ -1,5 +1,11 @@
 # @yakies/vue-components
 
+## 0.8.2
+
+### Patch Changes
+
+- 修复 sass 编译错误
+
 ## 0.8.1
 
 ### Patch Changes
