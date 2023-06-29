@@ -1,5 +1,11 @@
 # @yakies/vue-components
 
+## 0.8.1
+
+### Patch Changes
+
+- 修复 DragResize 组件编译问题
+
 ## 0.8.0
 
 ### Minor Changes
