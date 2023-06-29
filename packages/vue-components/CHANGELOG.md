@@ -1,5 +1,11 @@
 # @yakies/vue-components
 
+## 0.8.0
+
+### Minor Changes
+
+- 添加 DragResize 组件
+
 ## 0.7.0
 
 ### Minor Changes
