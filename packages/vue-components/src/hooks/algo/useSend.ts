@@ -1,10 +1,3 @@
-/*
- * @Author: tan jia wen
- * @Date: 2022-04-24 20:12:49
- * @LastEditors: tan jia wen
- * @LastEditTime: 2022-07-06 18:00:06
- * @FilePath: \pmh-aea-client\packages\vue-components\src\hooks\algo\useSend.ts
- */
 import { EAlgoSendCommand } from './enum';
 import { IStartAlgo, CONFIGURATION_FILE } from './types';
 import { useAlgoData } from './useAlgoData';
@@ -23,10 +16,7 @@ export function useSend() {
    * 开启算法评测
    * @param {IStartAlgo} data 参数
    */
-  const startAlgo = (
-    command: 'aeac1_algo' | 'aeaa1_algo',
-    data: IStartAlgo = {}
-  ) => {
+  const startAlgo = (command: 'aeac1_algo' | 'aeaa1_algo', data: IStartAlgo = {}) => {
     handleCommand(command, '开启算法评测', {
       library_path: CONFIGURATION_FILE.LIBRARY_PATH,
       joint_scheme_path: CONFIGURATION_FILE.JOINT_SCHEME_PATH,
