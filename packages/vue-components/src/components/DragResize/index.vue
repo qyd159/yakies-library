@@ -752,10 +752,10 @@
         }
 
         const limits = {
-          left: { min: parentLim, max: left + (width - minWidth) },
-          right: { min: parentLim, max: right + (width - minWidth) },
-          top: { min: parentLim, max: top + (height - minHeight) },
-          bottom: { min: parentLim, max: bottom + (height - minHeight) },
+          left: { min: parentLim, max: Math.min(left + (width - minWidth), maxWidth) },
+          right: { min: parentLim, max: Math.min(right + (width - minWidth), maxWidth) },
+          top: { min: parentLim, max: Math.min(top + (height - minHeight), maxHeight) },
+          bottom: { min: parentLim, max: Math.min(bottom + (height - minHeight), maxHeight) },
         } as any;
 
         if (this.aspectRatio) {
@@ -871,7 +871,7 @@
     },
   };
 </script>
-<style lang="less" scoped>
+<style lang="less">
   .vdr {
     position: absolute;
     box-sizing: border-box;
