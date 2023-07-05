@@ -77,8 +77,7 @@
     "mp4box": "^0.5.2",
     "pinia": "^2.0.32",
     "smooth-polyline": "^1.0.8",
-    "vue-types": "^5.0.2",
-    "yakies-library": "link:C:/projects/yakies-library"
+    "vue-types": "^5.0.2"
   },
   "publishConfig": {
     "registry": "https://nexus.yakies.cn/repository/hosted/"

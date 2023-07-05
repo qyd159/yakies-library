@@ -752,7 +752,7 @@
         }
 
         const limits = {
-          left: { min: parentLim, max: Math.min(left + (width - minWidth), maxWidth) },
+          left: { min: parentLim, max: Math.min(left + (width - minWidth), left + (maxWidth - width)) },
           right: { min: parentLim, max: Math.min(right + (width - minWidth), maxWidth) },
           top: { min: parentLim, max: Math.min(top + (height - minHeight), maxHeight) },
           bottom: { min: parentLim, max: Math.min(bottom + (height - minHeight), maxHeight) },

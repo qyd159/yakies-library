@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
@@ -34,7 +34,7 @@ importers:
         version: 0.1.4
       axios:
         specifier: ^1.3.4
-        version: 1.4.0
+        version: 1.4.0(debug@4.3.4)
       axios-extra:
         specifier: 0.0.5
         version: 0.0.5
@@ -94,7 +94,7 @@ importers:
         version: 5.0.0
       http-proxy:
         specifier: ^1.18.1
-        version: 1.18.1
+        version: 1.18.1(debug@4.3.4)
       http-proxy-middleware:
         specifier: ^2.0.6
         version: 2.0.6(@types/express@4.17.17)
@@ -196,7 +196,7 @@ importers:
         version: 5.1.3
       vite:
         specifier: ^3.0.2
-        version: 3.2.7(@types/node@14.18.51)
+        version: 3.2.7(@types/node@17.0.45)(less@4.1.3)(terser@5.18.0)
       vtils:
         specifier: ^4.78.0
         version: 4.79.0(react-dom@18.2.0)(react@18.2.0)
@@ -271,8 +271,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(@babel/preset-env@7.22.5)
       '@yakies/third-lib':
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^1.1.3
+        version: 1.1.3
       acorn:
         specifier: ^8.5.0
         version: 8.8.2
@@ -664,6 +664,9 @@ importers:
       '@lottiefiles/lottie-player':
         specifier: ^1.5.7
         version: 1.7.1
+      '@vant/use':
+        specifier: ^1.5.2
+        version: 1.5.2(vue@3.2.37)
       '@vueuse/core':
         specifier: ^8.6.0
         version: 8.9.4(vue@3.2.37)
@@ -1056,7 +1059,7 @@ packages:
       '@babel/traverse': 7.22.5
       '@babel/types': 7.22.5
       convert-source-map: 1.9.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.0
@@ -1135,7 +1138,7 @@ packages:
       '@babel/core': 7.22.5
       '@babel/helper-compilation-targets': 7.22.5(@babel/core@7.22.5)
       '@babel/helper-plugin-utils': 7.22.5
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       lodash.debounce: 4.0.8
       resolve: 1.22.2
       semver: 6.3.0
@@ -2286,7 +2289,7 @@ packages:
       '@babel/helper-split-export-declaration': 7.22.5
       '@babel/parser': 7.22.5
       '@babel/types': 7.22.5
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -3109,7 +3112,6 @@ packages:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.18
-    dev: true
 
   /@jridgewell/sourcemap-codec@1.4.14:
     resolution: {integrity: sha512-XPSJHWmi394fuUuzDnGz1wiKqWfo1yXecHQMRf2l6hztTO+nPru658AyDngaBe7isIxEkRsPR3FZh+s7iVa4Uw==}
@@ -3318,7 +3320,7 @@ packages:
     dependencies:
       '@iconify/iconify': 2.1.2
       axios: 0.26.1(debug@4.3.4)
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       fast-glob: 3.2.12
       fs-extra: 10.1.0
     transitivePeerDependencies:
@@ -3833,7 +3835,7 @@ packages:
       '@babel/runtime-corejs3': 7.22.5
       '@swagger-api/apidom-core': 0.70.0
       '@types/ramda': 0.29.2
-      axios: 1.4.0
+      axios: 1.4.0(debug@4.3.4)
       minimatch: 7.4.6
       process: 0.11.10
       ramda: 0.29.0
@@ -4327,13 +4329,12 @@ packages:
     resolution: {integrity: sha512-hB+czUG+aHtjhaEmCJDuXOep0YTZjdlRR+4MSmIFnkCQIxJaXLQdSsR90XWvAI2yvKUI7TCGqR8pQg2RtvkMHw==}
     dev: true
 
-  /@vant/use@1.5.1(vue@3.2.37):
-    resolution: {integrity: sha512-Zxd7lDz/LliVYEQi3PR9a8CQa/kGCVzF0u9hqDMaTlgXlbG0wHMFPllrcG0ThR6bfs8xrYVuSFM9pJn6HSoUGQ==}
+  /@vant/use@1.5.2(vue@3.2.37):
+    resolution: {integrity: sha512-CBK61iT568dCHUwFFsErGbW6/5tmrPnZJKGtcSy7Tjcrmws8Ku+YZo7IUFD9Xkj9MfSJ4pfhQ7pU2KouP5Cojg==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
       vue: 3.2.37
-    dev: true
 
   /@vitejs/plugin-legacy@4.0.4(terser@5.18.0)(vite@4.3.9):
     resolution: {integrity: sha512-UwVfkMfUEszbQ2vs3RDfiDxxvYnIjmtIrGxTnxRev5Sh8ZoDpieV2dwvTUB7zXKJpfRsOgimM6MxQ65VDHJeQw==}
@@ -4719,7 +4720,7 @@ packages:
   /@windicss/config@1.9.0:
     resolution: {integrity: sha512-QO4+udbmDIgZwAi89tqUt5nGwBq3IgyELjLn83twZXiIqzOw+77ecCuM0oPSbzWmIbCqXq3wRQHd6Z1u5E/5zQ==}
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       jiti: 1.18.2
       windicss: 3.5.6
     transitivePeerDependencies:
@@ -4731,7 +4732,7 @@ packages:
     dependencies:
       '@antfu/utils': 0.7.4
       '@windicss/config': 1.9.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       fast-glob: 3.2.12
       magic-string: 0.30.0
       micromatch: 4.0.5
@@ -4752,9 +4753,9 @@ packages:
     dependencies:
       '@octokit/rest': 19.0.11
       axios: 1.4.0(debug@4.3.4)
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       picocolors: 1.0.0
-      vite: 3.2.7(@types/node@14.18.51)
+      vite: 3.2.7(@types/node@17.0.45)(less@4.1.3)(terser@5.18.0)
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -4791,8 +4792,8 @@ packages:
     resolution: {integrity: sha512-ofIp3+O0sqbcQrAQxpp1PAYu7R69xXRjD9GllrSkfSKop/q7OJHyfmcSs7cLBnVYmO0OxsBhmr5/G2CliMCKvw==}
     dev: false
 
-  /@yakies/third-lib@0.1.0:
-    resolution: {integrity: sha512-28L58D0LlrVWce/Cfb7ElmzVlCY1tIYbWQwiDjQRAb402oo3U6hOUQMylqK0rcGJ5OSLL9PYg+PwpOAnveezzQ==}
+  /@yakies/third-lib@1.1.3:
+    resolution: {integrity: sha512-ikLBp0+mzTPpx+YS0iit1yOxdSvhQdfsqu2s6mSe+9WgTFsi3PV1BSJSl6o5Ruhoc3e8wnyAyPp9sDsHeSiYEQ==}
     dev: false
 
   /a-sync-waterfall@1.0.1:
@@ -4852,7 +4853,7 @@ packages:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
     engines: {node: '>= 6.0.0'}
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -5341,16 +5342,6 @@ packages:
       follow-redirects: 1.15.2(debug@4.3.4)
     transitivePeerDependencies:
       - debug
-
-  /axios@1.4.0:
-    resolution: {integrity: sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==}
-    dependencies:
-      follow-redirects: 1.15.2
-      form-data: 4.0.0
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
-    dev: false
 
   /axios@1.4.0(debug@4.3.4):
     resolution: {integrity: sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==}
@@ -7226,7 +7217,6 @@ packages:
     resolution: {integrity: sha512-1j20GZTsvKNkc4BY3NpMOM8tt///wY3FpIzozTOFO2ffuZcV61nojHXVKIy3WM+7ADCy5FVhdZYHYDdgTU0yJw==}
     dependencies:
       is-what: 3.14.1
-    dev: true
 
   /copy-descriptor@0.1.1:
     resolution: {integrity: sha512-XgZ0pFcakEUlbwQEVNg3+QAis1FyTL3Qel9FYy8pSkQqoG3PNoT0bOCQtOXcOkur21r2Eq2kI+IE+gsmAEVlYw==}
@@ -7930,17 +7920,6 @@ packages:
       supports-color: 8.1.1
     dev: true
 
-  /debug@4.3.4:
-    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
-    engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-    dependencies:
-      ms: 2.1.2
-
   /debug@4.3.4(supports-color@8.1.1):
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
     engines: {node: '>=6.0'}
@@ -8459,7 +8438,7 @@ packages:
     resolution: {integrity: sha512-GyKPDyoEha+XZ7iEqam49vz6auPnNJ9ZBfy89f+rMMas8AuiMWOZ9PVzu8xb9ZC6rafUqiGHSCfu22ih66E+1g==}
     dependencies:
       '@socket.io/component-emitter': 3.1.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       engine.io-parser: 5.0.7
       ws: 8.11.0
       xmlhttprequest-ssl: 2.0.0
@@ -8575,7 +8554,6 @@ packages:
     requiresBuild: true
     dependencies:
       prr: 1.0.1
-    dev: true
 
   /error-ex@1.3.2:
     resolution: {integrity: sha512-7dFHNmqeFSEt2ZBsCriorKnn3Z2pj+fd9kmI6QoWw4//DL+icEBfc0U7qJCisqrTsKTjw4fNFy2pW9OqStD84g==}
@@ -9643,7 +9621,7 @@ packages:
     engines: {node: '>= 10.17.0'}
     hasBin: true
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       get-stream: 5.2.0
       yauzl: 2.10.0
     optionalDependencies:
@@ -9969,16 +9947,6 @@ packages:
       uglify-js: 2.8.29
     dev: false
 
-  /follow-redirects@1.15.2:
-    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    dev: false
-
   /follow-redirects@1.15.2(debug@4.3.4):
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
     engines: {node: '>=4.0'}
@@ -9988,7 +9956,7 @@ packages:
       debug:
         optional: true
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
 
   /follow-redirects@1.5.10:
     resolution: {integrity: sha512-0V5l4Cizzvqt5D44aTXbFZz+FtyXV1vrDN6qrelxtfYQKW0KO0W2T/hkE8xvGa/540LkZlkaUjO4ailYTFtHVQ==}
@@ -10331,7 +10299,7 @@ packages:
     dependencies:
       '@tootallnate/once': 1.1.2
       data-uri-to-buffer: 3.0.1
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       file-uri-to-path: 2.0.0
       fs-extra: 8.1.0
       ftp: 0.3.10
@@ -10796,7 +10764,7 @@ packages:
     dependencies:
       '@tootallnate/once': 1.1.2
       agent-base: 6.0.2
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -10811,7 +10779,7 @@ packages:
     dependencies:
       '@types/express': 4.17.17
       '@types/http-proxy': 1.17.11
-      http-proxy: 1.18.1
+      http-proxy: 1.18.1(debug@4.3.4)
       is-glob: 4.0.3
       is-plain-obj: 3.0.0
       micromatch: 4.0.5
@@ -10827,17 +10795,6 @@ packages:
       requires-port: 1.0.0
     dev: false
 
-  /http-proxy@1.18.1:
-    resolution: {integrity: sha512-7mz/721AbnJwIVbnaSv1Cz3Am0ZLT/UBwkC92VlxhXv/k/BBQfM2fXElQNC27BVGr0uwUpplYPQM9LnaBMR5NQ==}
-    engines: {node: '>=8.0.0'}
-    dependencies:
-      eventemitter3: 4.0.7
-      follow-redirects: 1.15.2
-      requires-port: 1.0.0
-    transitivePeerDependencies:
-      - debug
-    dev: false
-
   /http-proxy@1.18.1(debug@4.3.4):
     resolution: {integrity: sha512-7mz/721AbnJwIVbnaSv1Cz3Am0ZLT/UBwkC92VlxhXv/k/BBQfM2fXElQNC27BVGr0uwUpplYPQM9LnaBMR5NQ==}
     engines: {node: '>=8.0.0'}
@@ -10847,7 +10804,6 @@ packages:
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
-    dev: true
 
   /http-server@14.1.1:
     resolution: {integrity: sha512-+cbxadF40UXd9T01zUHgA+rlo2Bg1Srer4+B4NwIHdaGxAGGv59nYRnGGDJ9LBk7alpS0US+J+bLLdQOOkJq4A==}
@@ -10859,7 +10815,7 @@ packages:
       corser: 2.0.1
       he: 1.2.0
       html-encoding-sniffer: 3.0.0
-      http-proxy: 1.18.1
+      http-proxy: 1.18.1(debug@4.3.4)
       mime: 1.6.0
       minimist: 1.2.8
       opener: 1.5.2
@@ -10898,7 +10854,7 @@ packages:
     engines: {node: '>= 6'}
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -10950,7 +10906,6 @@ packages:
     resolution: {integrity: sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==}
     engines: {node: '>=0.10.0'}
     hasBin: true
-    dev: true
 
   /immutable@3.8.2:
     resolution: {integrity: sha512-15gZoQ38eYjEjxkorfbcgBKBL6R7T459OuK+CpcWt7O3KF4uPCx2tD0uFETlUDIyo+1789crbMhTvQBSR5yBMg==}
@@ -11089,7 +11044,7 @@ packages:
     engines: {node: '>=6'}
     dependencies:
       cluster-key-slot: 1.1.2
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       denque: 1.5.1
       lodash.defaults: 4.2.0
       lodash.flatten: 4.4.0
@@ -11545,7 +11500,6 @@ packages:
 
   /is-what@3.14.1:
     resolution: {integrity: sha512-sNxgpk9793nzSs7bA6JQJGeIuRBQhAaNGG77kzYQgMkrID+lS6SlK07K5LaptscDlSaIgH+GPFzf+d75FVxozA==}
-    dev: true
 
   /is-windows@1.0.2:
     resolution: {integrity: sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==}
@@ -12794,7 +12748,6 @@ packages:
       source-map: 0.6.1
     transitivePeerDependencies:
       - supports-color
-    dev: true
 
   /leven@3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
@@ -13128,7 +13081,7 @@ packages:
     engines: {node: '>=8.0'}
     dependencies:
       date-format: 4.0.14
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       flatted: 3.2.7
       rfdc: 1.3.0
       streamroller: 3.1.5
@@ -13875,7 +13828,6 @@ packages:
       sax: 1.2.4
     transitivePeerDependencies:
       - supports-color
-    dev: true
     optional: true
 
   /negotiator@0.6.3:
@@ -13982,7 +13934,7 @@ packages:
     resolution: {integrity: sha512-8I2V7H2Ch0NvW7qWcjmS0/9Lhr0T6x7RD6PDirhvWEkUQvy83x8BA4haYMr09r/rig7hcgYSjYh6cd4U7G1vLA==}
     dependencies:
       '@open-draft/until': 1.0.3
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       headers-utils: 1.2.5
       strict-event-emitter: 0.1.0
     transitivePeerDependencies:
@@ -14419,7 +14371,7 @@ packages:
     dependencies:
       '@tootallnate/once': 1.1.2
       agent-base: 6.0.2
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       get-uri: 3.0.2
       http-proxy-agent: 4.0.1
       https-proxy-agent: 5.0.1
@@ -14523,7 +14475,6 @@ packages:
   /parse-node-version@1.0.1:
     resolution: {integrity: sha512-3YHlOa/JgH6Mnpr05jP9eDG254US9ek25LyIxZlDItp2iJtwyaXQb57lBYLdT3MowkUFYEV2XXNAYIPlESvJlA==}
     engines: {node: '>= 0.10'}
-    dev: true
 
   /parse-passwd@1.0.0:
     resolution: {integrity: sha512-1Y1A//QUXEZK7YKz+rD9WydcE1+EuPr6ZBgKecAB8tmoW6UFv0NREVJe1p+jRxtThkcbbKkfwIbWJe/IeE6m2Q==}
@@ -15081,7 +15032,7 @@ packages:
     engines: {node: '>= 8'}
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       http-proxy-agent: 4.0.1
       https-proxy-agent: 5.0.1
       lru-cache: 5.1.1
@@ -15098,7 +15049,6 @@ packages:
 
   /prr@1.0.1:
     resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==}
-    dev: true
 
   /pseudomap@1.0.2:
     resolution: {integrity: sha512-b/YwNhb8lk1Zz2+bXXpS/LK9OisiZZ1SNsSLxN1x2OXVEhW2Ckr/7mWE5vrC1ZTiJlD9g19jWszTmJsB+oEpFQ==}
@@ -16473,7 +16423,7 @@ packages:
     engines: {node: '>=10.0.0'}
     dependencies:
       '@socket.io/component-emitter': 3.1.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       engine.io-client: 6.4.0
       socket.io-parser: 4.2.4
     transitivePeerDependencies:
@@ -16518,7 +16468,7 @@ packages:
     engines: {node: '>=10.0.0'}
     dependencies:
       '@socket.io/component-emitter': 3.1.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -16572,7 +16522,7 @@ packages:
     engines: {node: '>= 6'}
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       socks: 2.7.1
     transitivePeerDependencies:
       - supports-color
@@ -16852,7 +16802,7 @@ packages:
     engines: {node: '>=8.0'}
     dependencies:
       date-format: 4.0.14
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       fs-extra: 8.1.0
     transitivePeerDependencies:
       - supports-color
@@ -17095,7 +17045,7 @@ packages:
     dependencies:
       component-emitter: 1.3.0
       cookiejar: 2.1.4
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       fast-safe-stringify: 2.1.1
       form-data: 2.5.1
       formidable: 1.2.6
@@ -17373,7 +17323,6 @@ packages:
       acorn: 8.8.2
       commander: 2.20.3
       source-map-support: 0.5.21
-    dev: true
 
   /test-exclude@6.0.0:
     resolution: {integrity: sha512-cAGWPIyOHU6zlmg88jwm7VRyXnMN7iV68OGAbYDk/Mh/xC/pzVPlQtY6ngoIH/5/tciuhGfvESU8GrHrcxD56w==}
@@ -18191,7 +18140,7 @@ packages:
       vue: ^3.0.0
     dependencies:
       '@vant/popperjs': 1.3.0
-      '@vant/use': 1.5.1(vue@3.2.37)
+      '@vant/use': 1.5.2(vue@3.2.37)
       '@vue/shared': 3.3.4
       vue: 3.2.37
     dev: true
@@ -18223,7 +18172,7 @@ packages:
     hasBin: true
     dependencies:
       cac: 6.7.14
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       mlly: 1.3.0
       pathe: 1.1.1
       picocolors: 1.0.0
@@ -18244,7 +18193,7 @@ packages:
       vite: '>=2.0.0'
     dependencies:
       chalk: 4.1.2
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       fs-extra: 10.1.0
       vite: 4.3.9(@types/node@17.0.45)(less@4.1.3)(terser@5.18.0)
     transitivePeerDependencies:
@@ -18274,7 +18223,7 @@ packages:
       workbox-window: ^6.5.4
     dependencies:
       '@rollup/plugin-replace': 5.0.2(rollup@3.25.1)
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       fast-glob: 3.2.12
       pretty-bytes: 6.1.0
       rollup: 3.25.1
@@ -18307,7 +18256,7 @@ packages:
     dependencies:
       '@types/svgo': 2.6.4
       cors: 2.8.5
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       etag: 1.8.1
       fs-extra: 10.1.0
       pathe: 0.2.0
@@ -18324,47 +18273,13 @@ packages:
       vite: ^2.0.1 || ^3.0.0 || ^4.0.0
     dependencies:
       '@windicss/plugin-utils': 1.9.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       kolorist: 1.8.0
       vite: 4.3.9(@types/node@17.0.45)(less@4.1.3)(terser@5.18.0)
       windicss: 3.5.6
     transitivePeerDependencies:
       - supports-color
     dev: true
-
-  /vite@3.2.7(@types/node@14.18.51):
-    resolution: {integrity: sha512-29pdXjk49xAP0QBr0xXqu2s5jiQIXNvE/xwd0vUizYT2Hzqe4BksNNoWllFVXJf4eLZ+UlVQmXfB4lWrc+t18g==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      '@types/node': 14.18.51
-      esbuild: 0.15.18
-      postcss: 8.4.24
-      resolve: 1.22.2
-      rollup: 2.79.1
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: false
 
   /vite@3.2.7(@types/node@17.0.45)(less@4.1.3)(terser@5.18.0):
     resolution: {integrity: sha512-29pdXjk49xAP0QBr0xXqu2s5jiQIXNvE/xwd0vUizYT2Hzqe4BksNNoWllFVXJf4eLZ+UlVQmXfB4lWrc+t18g==}
@@ -18400,7 +18315,6 @@ packages:
       terser: 5.18.0
     optionalDependencies:
       fsevents: 2.3.2
-    dev: true
 
   /vite@4.3.9(@types/node@17.0.45)(less@4.1.3)(terser@5.18.0):
     resolution: {integrity: sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==}
@@ -18433,39 +18347,6 @@ packages:
       postcss: 8.4.24
       rollup: 3.25.1
       terser: 5.18.0
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
-  /vite@4.3.9(@types/node@20.3.1):
-    resolution: {integrity: sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      '@types/node': 20.3.1
-      esbuild: 0.17.19
-      postcss: 8.4.24
-      rollup: 3.25.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -18526,14 +18407,14 @@ packages:
       acorn: 8.8.2
       acorn-walk: 8.2.0
       chai: 4.3.7
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       local-pkg: 0.4.3
       source-map: 0.6.1
       strip-literal: 1.0.1
       tinybench: 2.5.0
       tinypool: 0.3.1
       tinyspy: 1.1.1
-      vite: 4.3.9(@types/node@20.3.1)
+      vite: 4.3.9(@types/node@17.0.45)(less@4.1.3)(terser@5.18.0)
     transitivePeerDependencies:
       - less
       - sass
@@ -18587,7 +18468,7 @@ packages:
       cac: 6.7.14
       chai: 4.3.7
       concordance: 5.0.4
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       local-pkg: 0.4.3
       magic-string: 0.30.0
       pathe: 1.1.1
