@@ -2,10 +2,8 @@
 
 if [[ $(git status --porcelain) && $2 != 'direct' ]]; then
   pnpm changeset version
-  echo "请输入提交信息: "
-  read commitMessage
   git add .
-  git commit -m "${commitMessage}"
+  git commit
   git push origin main
   pnpm --dir packages/$1 run build
 else
