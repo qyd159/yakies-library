@@ -892,7 +892,7 @@
   },
   };
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
   .vdr {
     position: absolute;
     box-sizing: border-box;

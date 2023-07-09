@@ -10,9 +10,10 @@ export const recordConfig = {
   waveViewOptions: {
     width: 50,
     height: 45,
-    lineCount: 9,
+    lineCount: 4,
     position: 0,
     minHeight: 5,
+    mirrorEnable: true,
     stripeEnable: false,
     linear: [0, 'rgba(255,255,255,1)', 0.5, 'rgba(255,255,255,1)', 1, 'rgba(255,255,255,1)'],
   },

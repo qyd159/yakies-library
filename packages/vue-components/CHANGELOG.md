@@ -1,5 +1,11 @@
 # @yakies/vue-components
 
+## 0.8.3
+
+### Patch Changes
+
+- 优化 dragresize 及 rtrsa 组件
+
 ## 0.8.2
 
 ### Patch Changes
