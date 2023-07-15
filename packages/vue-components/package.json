@@ -1,6 +1,6 @@
 {
   "name": "@yakies/vue-components",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "description": "公共前端UI组件",
   "scripts": {
     "dev": "vite build --watch --mode=development",
@@ -13,7 +13,7 @@
   "peerDependencies": {
     "ant-design-vue": "^3.2.20",
     "vant": "^4.2.0",
-    "vue": "3.2.37"
+    "vue": "3.3.4"
   },
   "devDependencies": {
     "@iconify/iconify": "^3.1.0",
@@ -48,7 +48,6 @@
     "vite-plugin-windicss": "^1.8.10",
     "vitepress": "1.0.0-alpha.27",
     "vitest": "^0.31.4",
-    "vue": "3.2.37",
     "vue-tsc": "^1.6.5"
   },
   "files": [
@@ -77,6 +76,7 @@
     "mp4box": "^0.5.2",
     "pinia": "^2.0.32",
     "smooth-polyline": "^1.0.8",
+    "uuid": "^9.0.0",
     "vue-types": "^5.0.2"
   },
   "publishConfig": {

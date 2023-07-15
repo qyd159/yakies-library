@@ -22,6 +22,7 @@
   </div>
 </template>
 <script lang="js">
+  import { v4 as uuid} from 'uuid'
   /** Tips： 本组件为 https://github.com/kirillmurashov/vue-drag-resize copy
    *  为了拓展 props 以实现忽略部分元素进行事件监听的效果
    */
@@ -221,6 +222,7 @@
         right: null,
         bottom: null,
         minHeight: null,
+        _uid: uuid(),
       };
     },
 

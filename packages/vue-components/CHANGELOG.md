@@ -1,5 +1,11 @@
 # @yakies/vue-components
 
+## 0.8.5
+
+### Patch Changes
+
+- 添加 uuid,更新 vue
+
 ## 0.8.4
 
 ### Patch Changes
