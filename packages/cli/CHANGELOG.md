@@ -1,5 +1,11 @@
 # @yakies/cli
 
+## 0.7.0
+
+### Minor Changes
+
+- 发布 cli 新版
+
 ## 0.6.1
 
 ### Patch Changes
