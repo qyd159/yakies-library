@@ -1,5 +1,11 @@
 # @yakies/graph
 
+## 0.3.1
+
+### Patch Changes
+
+- graph 添加 npmignore
+
 ## 0.3.0
 
 ### Minor Changes
