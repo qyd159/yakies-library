@@ -1,5 +1,6 @@
 # @yakies/vue-components
 
+<<<<<<< HEAD
 ## 0.8.5
 
 ### Patch Changes
@@ -36,6 +37,8 @@
 
 - 添加 DragResize 组件
 
+=======
+>>>>>>> parent of 21a8adb... feat: 添加DragResize组
 ## 0.7.0
 
 ### Minor Changes
