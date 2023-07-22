@@ -15,6 +15,7 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    "outDir": "./dist",
     "baseUrl": ".",
     "declaration": true,
     "declarationDir": "dist/types",

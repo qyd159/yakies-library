@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "module": "ES2015",
-    "moduleResolution": "node",
+    "module": "ES2020",
+    "moduleResolution": "Bundler",
     "target": "es6",
     "lib": [
       "dom",
@@ -10,6 +10,7 @@
     ],
     "noImplicitAny": false,
     "emitDecoratorMetadata": true,
+    "outDir": "./dist",
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,

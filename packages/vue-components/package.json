@@ -1,10 +1,6 @@
 {
   "name": "@yakies/vue-components",
-<<<<<<< HEAD
   "version": "0.8.5",
-=======
-  "version": "0.7.0",
->>>>>>> parent of 21a8adb... feat: 添加DragResize组
   "description": "公共前端UI组件",
   "scripts": {
     "dev": "vite build --watch --mode=development",

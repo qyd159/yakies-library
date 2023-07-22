@@ -9,8 +9,7 @@
   "types": "dist/types",
   "scripts": {
     "dev": "rollup -c rollup.config.mjs --watch --dev",
-    "build": "rollup -c rollup.config.mjs && tsc",
-    "tsc": "tsc --emitDeclarationOnly"
+    "build": "rollup -c rollup.config.mjs && tsc"
   },
   "author": "chumahtung",
   "license": "ISC",
