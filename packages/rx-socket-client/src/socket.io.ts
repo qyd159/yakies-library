@@ -8,7 +8,7 @@ export function connect(hostPath, options: Partial<ManagerOptions & SocketOption
   const parsedUrl = new URL(hostPath);
   const scheme = parsedUrl.protocol === 'http:' ? 'ws://' : 'wss://';
   const host = parsedUrl.host;
-  const socket = io(host || `${scheme}${host}`, { ...options, path: parsedUrl.pathname });
+  const socket = io(`${scheme}${host}`, { ...options, path: parsedUrl.pathname });
   const socket$ = of(socket);
   connect$ = socket$.pipe(
     switchMap((socket) =>
@@ -19,7 +19,7 @@ export function connect(hostPath, options: Partial<ManagerOptions & SocketOption
       )
     )
   );
-  return connect$
+  return connect$;
 }
 
 // Stream of connections

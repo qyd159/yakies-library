@@ -1,5 +1,11 @@
 # @yakies/rx-socket-client
 
+## 1.6.1
+
+### Patch Changes
+
+- 修复 socket 连接配置错误
+
 ## 1.6.0
 
 ### Minor Changes
