@@ -3,7 +3,7 @@ import type { RequestFunctionParams } from 'yapi-to-typescript';
 import { Method } from 'yapi-to-typescript';
 import { defHttp } from '/@/utils/http/axios';
 import type { RequestOptions as axioRequestOptions } from '/#/axios';
-import { fromPairs } from 'lodash-es';
+import { fromPair, get } from 'lodash-es';
 
 export interface RequestOptions {
   /**
@@ -71,12 +71,18 @@ export default function request<TResponseData>(
       default:
         break;
     }
-    try {
-      const data = await request;
-      // 具体请求逻辑
-      resolve(data);
-    } catch (e) {
-      reject(e);
-    }
+    request
+      .then(
+        (data) => {
+          // 具体请求逻辑
+          resolve(options.dataKey ? get(data.data, options.dataKey) : data);
+        },
+        (e) => {
+          reject(e);
+        },
+      )
+      .catch((e) => {
+        reject(e);
+      });
   });
 }
