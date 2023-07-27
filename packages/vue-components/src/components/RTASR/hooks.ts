@@ -212,7 +212,8 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
                   });
                 });
               });
-              if ( +i.cn.st.type === 0 && takeoffChunks.length > 0) {
+              if (+i.cn.st.type === 0 && takeoffChunks.length > 0) {
+                // @ts-ignore
                 const { blob } = await mergeAudioBlobs(takeoffChunks);
                 userVoiceParsed('SentenceEnd',str, blob);
                 takeoffChunks = [];

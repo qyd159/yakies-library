@@ -1,5 +1,11 @@
 # @yakies/vue-components
 
+## 0.8.7
+
+### Patch Changes
+
+- 修复 asr 组件 ts error
+
 ## 0.8.6
 
 ### Patch Changes
