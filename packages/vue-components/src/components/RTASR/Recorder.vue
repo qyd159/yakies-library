@@ -29,6 +29,8 @@
     buttonSize: propTypes.custom<ButtonSize>(() => true).def('normal'),
   });
 
+  const emit = defineEmits(['close','open']);
+
   const waveView = ref();
   const recordBtn = ref();
 
@@ -57,6 +59,12 @@
     }
     recStop();
   }
+function openhandler() { 
+  emit('open')
+}
+function closeHandler() { 
+  emit('close')
+}
 
   function startHandler() {
     touching.value = true;
@@ -64,7 +72,7 @@
       document.addEventListener('mouseup', mouseupHandler);
     }
     nextTick(async () => {
-      await connect();
+      await connect(openhandler,closeHandler);
       if(touching.value) {
         recStart(() => {
           recording.value = true;

@@ -1,6 +1,13 @@
 # @yakies/vue-components
 
+## 0.8.6
+
+### Patch Changes
+
+- 优化 asr 语音交互
+
 <<<<<<< HEAD
+
 ## 0.8.5
 
 ### Patch Changes
@@ -38,7 +45,9 @@
 - 添加 DragResize 组件
 
 =======
->>>>>>> parent of 21a8adb... feat: 添加DragResize组
+
+> > > > > > > parent of 21a8adb... feat: 添加 DragResize 组
+
 ## 0.7.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
   "name": "@yakies/vue-components",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "description": "公共前端UI组件",
   "scripts": {
     "dev": "vite build --watch --mode=development",
@@ -65,7 +65,7 @@
     "@ant-design/icons-vue": "^6.1.0",
     "@dcloudio/uni-webview-js": "^0.0.3",
     "@lottiefiles/lottie-player": "^1.5.7",
-    "@vueuse/core": "^8.6.0",
+    "@vueuse/core": "^10.2.1",
     "@yakies/recorder": "^0.3.4",
     "cancelable-promise": "^4.3.1",
     "color": "^4.2.3",

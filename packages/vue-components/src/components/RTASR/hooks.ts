@@ -24,10 +24,6 @@ Recorder.CLog = () => { };
 
 let status,send,close,open
 async function connectWebsocket({ onOpen, onMessage, onClose, getUrlParams }: { onOpen: () => void, onMessage: (data) => void, onClose: () => void, getUrlParams: () => Promise<any> }) {
-  if (open) { 
-    open();
-    return;
-  }
   let url = 'wss://rtasr.xfyun.cn/v1/ws';
   const urlParam = await getUrlParams();
   url = `${url}${urlParam}`;
@@ -36,6 +32,13 @@ async function connectWebsocket({ onOpen, onMessage, onClose, getUrlParams }: { 
   send = socketInst.send;
   close = socketInst.close;
   open = socketInst.open;
+  watch(socketInst.ws, (socket) => { 
+    if (socket) {
+      socket!.onclose = () => { 
+        onClose()
+      }
+    }
+  }, {immediate:true})
   watch(socketInst.data, (data) => {
     const jsonData = JSON.parse(data);
     if (jsonData.action == 'started') {
@@ -179,8 +182,9 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
     return t;
   }
 
-  async function connect() {
-    if (open) {
+  async function connect(openHandler,closeHandler) {
+    if (open) { 
+      open();
       return;
     }
     await new Promise((resolve) => {
@@ -189,9 +193,11 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
           onOpen() {
             resolve(null);
             uploadStream()
+            openHandler()
           },
           onClose() {
             clearInterval(t)
+            closeHandler()
           },
           onMessage(data) {
             data = JSON.parse(data);
@@ -206,19 +212,12 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
                   });
                 });
               });
-              if (i.cn.st.type === '0' && takeoffChunks.length > 0) {
-                // @ts-ignore
+              if ( +i.cn.st.type === 0 && takeoffChunks.length > 0) {
                 const { blob } = await mergeAudioBlobs(takeoffChunks);
-                const reader = new FileReader();
-                reader.onloadend = function () {
-                  const base64 = /.+;\s*base64\s*,\s*(.+)$/i.exec(reader.result as string) || [];
-                  userVoiceParsed(str, base64[0]);
-                  close();
-                };
-                reader.readAsDataURL(blob);
+                userVoiceParsed('SentenceEnd',str, blob);
                 takeoffChunks = [];
-              } else if (i.cn.st.type === '1') {
-                userVoiceParsed(str);
+              } else if (+i.cn.st.type === 1) {
+                userVoiceParsed('TranscriptionResultChanged',str);
               }
             });
           },
@@ -231,7 +230,8 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
   function uploadStream() {
     t = setInterval(() => {
       const audioData = buffer.splice(0, 1280)
-      if (audioData.length > 0 && unref(status) === 1) {
+      console.log(unref(status))
+      if (audioData.length > 0 && unref(status) === 'OPEN') {
         send(new Int8Array(audioData))
       }
     }, 40)
