@@ -47,6 +47,8 @@
     }
   }
 
+  let timer: any = null;
+
   function stopHandler() {
     if (!unref(touching)) return;
     touching.value = false;
@@ -63,9 +65,11 @@
     }
     nextTick(async () => {
       await connect();
-      recStart(() => {
-        recording.value = true;
-      });
+      if(touching.value) {
+        recStart(() => {
+          recording.value = true;
+        });
+      }
     });
   }
   function forbideContextmenu(e) {

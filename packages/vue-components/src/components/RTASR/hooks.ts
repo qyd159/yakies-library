@@ -6,6 +6,7 @@ import '@yakies/recorder/src/extensions/frequency.histogram.view';
 import { RealTimeSendTry, RealTimeSendTryReset } from './RealTimeSender';
 import { mergeAudioBlobs } from './utils';
 import PCMTransformWorker from './transformpcm.worker?raw';
+import { useWebSocket } from '@vueuse/core';
 
 const recorderWorker = new Worker(URL.createObjectURL(new Blob([PCMTransformWorker], { type: 'application/javascript' })));
 
@@ -21,16 +22,22 @@ Recorder.PerserveOriginalBuffer = true;
 
 Recorder.CLog = () => { };
 
+let status,send,close,open
 async function connectWebsocket({ onOpen, onMessage, onClose, getUrlParams }: { onOpen: () => void, onMessage: (data) => void, onClose: () => void, getUrlParams: () => Promise<any> }) {
+  if (open) { 
+    open();
+    return;
+  }
   let url = 'wss://rtasr.xfyun.cn/v1/ws';
   const urlParam = await getUrlParams();
   url = `${url}${urlParam}`;
-  const ws = new WebSocket(url);
-  ws.onopen = (_e) => {
-    console.log('连接已建立');
-  };
-  ws.onmessage = (e) => {
-    const jsonData = JSON.parse(e.data);
+  const socketInst = useWebSocket(url)
+  status = socketInst.status;
+  send = socketInst.send;
+  close = socketInst.close;
+  open = socketInst.open;
+  watch(socketInst.data, (data) => {
+    const jsonData = JSON.parse(data);
     if (jsonData.action == 'started') {
       // 握手成功
       console.log('握手成功');
@@ -42,16 +49,7 @@ async function connectWebsocket({ onOpen, onMessage, onClose, getUrlParams }: { 
       // 连接发生错误
       console.log('出错了:', jsonData);
     }
-  };
-  ws.onerror = (_e) => {
-    onClose()
-    console.log('关闭连接ws.onerror');
-  };
-  ws.onclose = (_e) => {
-    onClose()
-    console.log('关闭连接ws.onclose');
-  };
-  return ws;
+  })
 }
 
 export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams, waveColor }) {
@@ -61,8 +59,6 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
   let wave,
     // 保留录音数据
     takeoffChunks: any[] = [];
-  // 建立socket连接
-  const socket = ref();
   const toSend: any = [],
     sent: any = [],
     logs: any = [];
@@ -70,8 +66,6 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
   function handleEmit(message, powerLevel?) {
     // 表示发送普通json消息
     if (Object.prototype.toString.call(message) === '[object Object]') {
-      message = JSON.stringify(message);
-      unref(socket).emit(['command', message]);
       return;
     }
 
@@ -119,14 +113,6 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
         }
         handleEmit(originBuffer)
       },
-      // takeoffEncodeChunk: function(chunkBytes) {
-      //   // 保留原始的录音数据可直接播放
-      //   takeoffChunks.push(chunkBytes);
-      //   // 接管实时转码，推入实时处理
-      //   // RealTimeSendTry(chunkBytes, false, blob => {
-      //   //   that.eventStub.emit(blob);
-      //   // });
-      // },
     });
     unref(rec).open(
       function () {
@@ -158,7 +144,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
     unref(rec).stop(
       function (blob, duration) {
         recording.value = false;
-        unref(socket).send('{"end": true}');
+        send('{"end": true}');
         console.log('已录制:', '', {
           blob: blob,
           duration: duration,
@@ -168,7 +154,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
       function (s) {
         recording.value = false;
         console.log('结束出错：' + s, 1);
-        unref(socket).send('{"end": true}');
+        send('{"end": true}');
       },
       true
     ); // 自动close
@@ -185,7 +171,6 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
       down: 0,
       down64Val: '',
     });
-    // console.log(msg, res);
   }
 
   function _getTime() {
@@ -195,6 +180,9 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
   }
 
   async function connect() {
+    if (open) {
+      return;
+    }
     await new Promise((resolve) => {
       connectWebsocket(
         {
@@ -211,7 +199,6 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
             rtasrResult[data.seg_id] = data;
             rtasrResult.forEach(async (i) => {
               let str = '';
-              // str += i.cn.st.type == 0 ? '【最终】识别结果：' : '【中间】识别结果：';
               i.cn.st.rt.forEach((j) => {
                 j.ws.forEach((k) => {
                   k.cw.forEach((l) => {
@@ -226,7 +213,7 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
                 reader.onloadend = function () {
                   const base64 = /.+;\s*base64\s*,\s*(.+)$/i.exec(reader.result as string) || [];
                   userVoiceParsed(str, base64[0]);
-                  unref(socket).close();
+                  close();
                 };
                 reader.readAsDataURL(blob);
                 takeoffChunks = [];
@@ -237,15 +224,15 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
           },
           getUrlParams
         }
-      ).then((ws) => (socket.value = ws));
+      );
     })
   }
 
   function uploadStream() {
     t = setInterval(() => {
       const audioData = buffer.splice(0, 1280)
-      if (audioData.length > 0 && unref(socket).readyState === 1) {
-        unref(socket).send(new Int8Array(audioData))
+      if (audioData.length > 0 && unref(status) === 1) {
+        send(new Int8Array(audioData))
       }
     }, 40)
   }
@@ -253,5 +240,5 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
   onMounted(() => {
     nextTick(recOpen);
   });
-  return { recording, recStart, recStop, socket, rec, reclog, connect, uploadStream };
+  return { recording, recStart, recStop, rec, reclog, connect, uploadStream };
 }

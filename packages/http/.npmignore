@@ -1,0 +1,11 @@
+node_modules/
+.gitignore
+.git
+.vscode
+.idea
+.cache
+yarn.lock
+src
+tests
+build
+rollup.config.mjs

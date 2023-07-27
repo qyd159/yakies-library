@@ -9,6 +9,7 @@ import Recorder from './RTASR/Recorder.vue';
 import UniWebview from './UniWebview/index.vue';
 import Uploader from './Uploader/index.vue';
 import Tags from './Tags/index.vue';
-export { AlgoClient, VLottiePlayer, MP4BoxVideoPlayer, VideoPlayer, Realtime, JsonForm, ChatContent, Recorder, UniWebview, Uploader, Tags };
+import DragResize from './DragResize/index.vue';
+export { AlgoClient, VLottiePlayer, MP4BoxVideoPlayer, VideoPlayer, Realtime, JsonForm, ChatContent, Recorder, UniWebview, Uploader, Tags, DragResize };
 
 export * from './Icon';
