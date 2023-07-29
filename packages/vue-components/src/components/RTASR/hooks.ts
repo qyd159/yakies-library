@@ -183,10 +183,6 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
   }
 
   async function connect(openHandler,closeHandler) {
-    if (open) { 
-      open();
-      return;
-    }
     await new Promise((resolve) => {
       connectWebsocket(
         {
@@ -215,10 +211,10 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
               if (+i.cn.st.type === 0 && takeoffChunks.length > 0) {
                 // @ts-ignore
                 const { blob } = await mergeAudioBlobs(takeoffChunks);
-                userVoiceParsed('SentenceEnd',str, blob);
+                userVoiceParsed('SentenceEnd', str, blob);
                 takeoffChunks = [];
               } else if (+i.cn.st.type === 1) {
-                userVoiceParsed('TranscriptionResultChanged',str);
+                userVoiceParsed('TranscriptionResultChanged', str);
               }
             });
           },
