@@ -1,5 +1,11 @@
 # @yakies/vue-components
 
+## 0.8.9
+
+### Patch Changes
+
+- 优化 asr 组件
+
 ## 0.8.8
 
 ### Patch Changes

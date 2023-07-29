@@ -22,18 +22,18 @@ Recorder.PerserveOriginalBuffer = true;
 
 Recorder.CLog = () => { };
 
-let status,send,close,open
+let ws:WebSocket,send,close,open
 async function connectWebsocket({ onOpen, onMessage, onClose, getUrlParams }: { onOpen: () => void, onMessage: (data) => void, onClose: () => void, getUrlParams: () => Promise<any> }) {
   let url = 'wss://rtasr.xfyun.cn/v1/ws';
   const urlParam = await getUrlParams();
   url = `${url}${urlParam}`;
   const socketInst = useWebSocket(url)
-  status = socketInst.status;
   send = socketInst.send;
   close = socketInst.close;
   open = socketInst.open;
   watch(socketInst.ws, (socket) => { 
     if (socket) {
+      ws = socket;
       socket!.onclose = () => { 
         onClose()
       }
@@ -192,7 +192,6 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
             openHandler()
           },
           onClose() {
-            clearInterval(t)
             closeHandler()
           },
           onMessage(data) {
@@ -227,9 +226,11 @@ export function useRecorder({ waveView, callMode, userVoiceParsed, getUrlParams,
   function uploadStream() {
     t = setInterval(() => {
       const audioData = buffer.splice(0, 1280)
-      console.log(unref(status))
-      if (audioData.length > 0 && unref(status) === 'OPEN') {
+      if (audioData.length > 0 && ws && ws.readyState === 1) {
         send(new Int8Array(audioData))
+      }
+      if (ws.readyState === 3) { 
+          clearInterval(t)
       }
     }, 40)
   }
