@@ -17,17 +17,17 @@
     "@types/jest": "^27.5.2",
     "@types/node": "^17.0.45",
     "esbuild": "^0.14.54",
-    "esbuild-node-externals": "^1.5.0",
+    "esbuild-node-externals": "^1.8.0",
     "esmo": "^0.14.1",
     "jest": "^27.5.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.5"
   },
   "dependencies": {
     "axios": "^0.26.1",
-    "dayjs": "^1.11.7",
+    "dayjs": "^1.11.9",
     "localStorage": "^1.0.4",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
-    "qs": "^6.11.1"
+    "qs": "^6.11.2"
   }
 }

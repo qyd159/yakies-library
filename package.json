@@ -12,10 +12,10 @@
     "coverage": "vitest run --coverage"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.26.0",
-    "vitest": "^0.25.1",
+    "@changesets/cli": "^2.26.2",
     "nx": "16.5.5",
-    "nx-cloud": "latest"
+    "nx-cloud": "latest",
+    "vitest": "^0.25.8"
   },
   "keywords": [
     "components",

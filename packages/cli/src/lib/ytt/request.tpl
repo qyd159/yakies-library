@@ -55,6 +55,13 @@ export default function request<TResponseData>(
       case Method.POST:
         if (fileUpload) {
           request = defHttp.uploadFile({ url, ...(axiosOptions || {}) }, { file: payload.rawData.file, ...payload.rawData }, customOptions);
+        } else if (options.isFormData) {
+          const formData = new FormData();
+          Object.keys(payload.rawData).forEach((key) => {
+            formData.append(key, payload.rawData[key]);
+          });
+          request = defHttp.post(url, data: formData, ...(axiosOptions || {}) }, customOptions });
+          break;
         } else {
           request = defHttp.post({ url, data: payload.rawData, ...(axiosOptions || {}) }, customOptions);
         }
