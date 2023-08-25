@@ -1,5 +1,11 @@
 # @yakies/vue-components
 
+## 0.8.10
+
+### Patch Changes
+
+- 添加 uniapp 双向通信支持
+
 ## 0.8.9
 
 ### Patch Changes

@@ -6,6 +6,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import './UniWebview'
+import {eventBus} from '@/utils'
 
 document.addEventListener('UniAppJSBridgeReady', function() {
     uni.webView.getEnv(function(res) {
@@ -14,6 +15,9 @@ document.addEventListener('UniAppJSBridgeReady', function() {
     // uni.webView.navigateTo(...)
 });
 
+window.msgFromUniapp = function (data) { 
+    eventBus.emit('msgFromUniapp', data)
+}
 export default defineComponent({
     setup () {
         return {}

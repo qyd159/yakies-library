@@ -16,10 +16,11 @@ declare global {
     };
     lastBuildTime: string;
   };
-  // declare interface Window {
-  //   // Global vue app instance
-  //   __APP__: App<Element>;
-  // }
+  declare interface Window {
+    // Global vue app instance
+    __APP__: App<Element>;
+    msgFromUniapp: any;
+  }
 
   // vue
   type VueNode = VNodeChild | JSX.Element;
