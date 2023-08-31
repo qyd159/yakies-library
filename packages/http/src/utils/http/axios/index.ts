@@ -236,3 +236,5 @@ export function createAxios(opt?: Partial<CreateAxiosOptions>) {
 const defHttp = createAxios();
 
 export default defHttp;
+
+export {RequestOptions, Result}

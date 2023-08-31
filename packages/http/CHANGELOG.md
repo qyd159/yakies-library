@@ -1,5 +1,11 @@
 # @yakies/http
 
+## 0.5.5
+
+### Patch Changes
+
+- 导出 RequestOptions
+
 ## 0.5.2
 
 ### Patch Changes
