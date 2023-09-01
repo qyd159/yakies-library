@@ -1,5 +1,11 @@
 # @yakies/http
 
+## 0.5.7
+
+### Patch Changes
+
+- add axiosRequestConfig export
+
 ## 0.5.6
 
 ### Patch Changes
