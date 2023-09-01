@@ -237,4 +237,4 @@ const defHttp = createAxios();
 
 export default defHttp;
 
-export {RequestOptions, Result}
+export {RequestOptions, Result, Recordable}

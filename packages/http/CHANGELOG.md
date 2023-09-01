@@ -1,5 +1,11 @@
 # @yakies/http
 
+## 0.5.6
+
+### Patch Changes
+
+- 导出 Recordable
+
 ## 0.5.5
 
 ### Patch Changes
