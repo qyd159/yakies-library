@@ -4,7 +4,7 @@ import { generate } from '@ant-design/colors';
 // @ts-ignore: typo
 import { getThemeVariables } from 'ant-design-vue/dist/theme';
 
-const primaryColor = '#0960bd';
+const primaryColor = '#5D5FEF';
 
 function generateAntColors(color: string, theme: 'default' | 'dark' = 'default') {
   return generate(color, {

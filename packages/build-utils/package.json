@@ -1,6 +1,6 @@
 {
   "name": "@yakies/build-utils",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "vite plugins",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -17,7 +17,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "test": "node test/index.js",
-    "pretest": "npm run build"
+    "pretest": "npm run build",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
