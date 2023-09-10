@@ -46,7 +46,7 @@ const FRAMEWORKS: Framework[] = [
     color: yellow,
     variants: [
       {
-        name: 'rolluo-ts',
+        name: 'rollup-ts',
         display: 'TypeScript',
         color: blue,
       },
@@ -60,6 +60,7 @@ const TEMPLATES = FRAMEWORKS.map(
 
 const renameFiles: Record<string, string | undefined> = {
   _gitignore: '.gitignore',
+  _npmignore: '.npmignore',
 }
 
 const defaultTargetDir = 'vite-project'

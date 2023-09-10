@@ -1,6 +1,6 @@
 packages:
   # all packages in subdirs of packages/
   - "packages/**"
-  - "!packages/create-ya/**"
+  - "!packages/create-ya/template-**"
   # exclude packages that are inside test directories
   - "!**/test/**"
