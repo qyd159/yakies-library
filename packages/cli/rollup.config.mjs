@@ -23,7 +23,8 @@ fs.copyFileSync('src/server/mock/server.conf', 'dist/mock/server.conf')
 const widgets = getAllFiles('./src/widgets', null, /\.(js|ts)/, {})
 // const widgets = []
 const devPlugins = []
-const buildPlugins = [terser()]
+// const buildPlugins = [terser()]
+const buildPlugins = []
 const commonPlugins = [
   json(),
   resolve(),
@@ -90,7 +91,7 @@ const widgetChunks = widgets.map(widget => {
     output: {
       file: `dist/widgets/${path.parse(widget.path).name}.js`,
       format: 'cjs',
-      sourcemap: 'inline',
+      sourcemap: true,
     },
   }
 })

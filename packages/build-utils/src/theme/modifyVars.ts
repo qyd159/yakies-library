@@ -1,4 +1,3 @@
-import { resolve } from 'node:path';
 
 import { generate } from '@ant-design/colors';
 // @ts-ignore: typo
@@ -15,7 +14,7 @@ function generateAntColors(color: string, theme: 'default' | 'dark' = 'default')
 /**
  * less global variable
  */
-export function generateModifyVars() {
+export function generateModifyVars(hackLessVars: string) {
   const palettes = generateAntColors(primaryColor);
   const primary = palettes[5];
 
@@ -29,7 +28,7 @@ export function generateModifyVars() {
   return {
     ...modifyVars,
     // reference:  Avoid repeated references
-    hack: `${modifyVars.hack} @import (reference) "${resolve('src/design/config.less')}";`,
+    hack: `${modifyVars.hack} @import (reference) "${hackLessVars}";`,
     'primary-color': primary,
     ...primaryColorObj,
     'info-color': primary,
