@@ -14,7 +14,7 @@ function generateAntColors(color: string, theme: 'default' | 'dark' = 'default')
 /**
  * less global variable
  */
-export function generateModifyVars(hackLessVars: string) {
+export function generateModifyVars(hackVarsLessFilePath: string) {
   const palettes = generateAntColors(primaryColor);
   const primary = palettes[5];
 
@@ -28,7 +28,7 @@ export function generateModifyVars(hackLessVars: string) {
   return {
     ...modifyVars,
     // reference:  Avoid repeated references
-    hack: `${modifyVars.hack} @import (reference) "${hackLessVars}";`,
+    hack: `${modifyVars.hack} @import (reference) "${hackVarsLessFilePath}";`,
     'primary-color': primary,
     ...primaryColorObj,
     'info-color': primary,
