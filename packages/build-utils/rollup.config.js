@@ -57,7 +57,7 @@ description: ${pkg.description}
 // 共用的 rollup 配置
 const shareConf = {
 	input: input,
-	external: getDependencieNames(pkg),  //移除 package.json 中所有的依赖包
+	// external: getDependencieNames(pkg),  //移除 package.json 中所有的依赖包
 	plugins: [
 		// 使用node解析算法查找模块
 		resolve({
