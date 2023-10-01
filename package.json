@@ -20,5 +20,8 @@
   "keywords": [
     "components",
     "utilities"
-  ]
+  ],
+  "dependencies": {
+    "@commitlint/config-conventional": "^17.7.0"
+  }
 }
