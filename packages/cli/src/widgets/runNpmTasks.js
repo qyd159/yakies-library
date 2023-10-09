@@ -3,7 +3,7 @@ const _ = require("../lib/util");
 const { spawn } = require('child_process');
 
 module.exports = function (args) {
-  const widgets = _.getAllFiles(args.dir ?? __dirname, null, '.js', {})
+  const widgets = _.getAllFiles(path.join(process.cwd(), args.cwd ?? '', 'src/widgets'), null, '.js', {})
   // 定义要依次执行的 npm 命令参数列表
   const tasks = widgets.map(item => path.parse(item.path).name);
   // 递归函数，用于依次执行 npm 命令列表中的命令

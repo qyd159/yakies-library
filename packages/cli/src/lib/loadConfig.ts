@@ -18,17 +18,15 @@ export default async function (isDev: boolean = false): Promise<[IConfig, string
   configFile = configTSFileExist ? configTSFile : configJSFile;
 
   const configFileExists = fs.existsSync(configFile);
+  const baseConfig = loadBaseConfig(isDev);
 
   if (!configFileExists) {
     console.error(
-      `没找到配置文件:${configFile}
-            }`
+      `没找到配置文件:${configFile}`
     );
-    return [{}, null];
+    return [baseConfig, null];
   }
   consola.success(`找到配置文件: ${configFile}`);
-
-  const baseConfig = loadBaseConfig(isDev);
 
   const config: IConfig = merge(baseConfig, ts2cjs(configFile));
 

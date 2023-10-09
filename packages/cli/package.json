@@ -1,6 +1,6 @@
 {
   "name": "@yakies/cli",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "yakies命令行工具",
   "main": "dist/bundle.js",
   "bin": {
@@ -18,7 +18,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.22.5",
     "@gitbeaker/node": "^34.7.0",
     "@yakies/mkcert": "^0.2.2",
-    "@yakies/proxy-cache-middleware": "^0.1.4",
+    "@yakies/proxy-cache-middleware": "^0.2.0",
     "axios": "^1.4.0",
     "axios-extra": "0.0.5",
     "base64-img": "^1.0.4",

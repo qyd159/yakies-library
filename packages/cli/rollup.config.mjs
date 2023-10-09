@@ -98,9 +98,9 @@ const widgetChunks = widgets.map(widget => {
 
 baseChunks.push(...removeAndReturnItems(widgetChunks, widget => ['index', 'runNpmTasks', 'ytt'].indexOf(widget.name) !== -1))
 
-const chunks = typeof argv.filter === 'string' && argv.filter.length > 0 ? widgetChunks.filter(item => item.input.indexOf(argv.filter) !== -1) : baseChunks
+const chunks = argv.filter?.length > 0 ? widgetChunks.filter(item => item.input.indexOf(argv.filter) !== -1) : baseChunks
 
-if (!chunks.length) {
+if (argv.filter?.length > 0 && !chunks.length) {
   throw new Error(`未找到名称为${argv.filter}的任务`)
 }
 
