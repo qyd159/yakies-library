@@ -1,10 +1,3 @@
-/*
- * @Author: qinyadong
- * @Date: 2022-06-20 20:03:21
- * @LastEditors: qinyadong
- * @LastEditTime: 2022-06-20 20:04:48
- * @FilePath: \universal-vite-vue3\packages\api\src\fetch\token.ts
- */
 export const TOKEN_STORAGE_KEY = 'token';
 export const TOKEN_REFRESH_STORAGE_KEY = 'refresh-token';
 export const USERNAME_STORAGE_KEY = 'username';
