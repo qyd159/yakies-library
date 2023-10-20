@@ -3,7 +3,7 @@ declare type Recordable<T = any> = Record<string, T>;
 export type ErrorMessageMode = 'none' | 'modal' | 'message' | undefined;
 export type SuccessMessageMode = 'none' | 'success' | 'error' | undefined;
 
-export interface RequestOptions {
+export type RequestOptions = {
   // 将请求参数拼接到url
   joinParamsToUrl?: boolean;
   // 格式化请求参数时间
@@ -25,6 +25,8 @@ export interface RequestOptions {
   withToken?: boolean;
   // 返回key对应的值
   dataKey?: string;
+  // 请求是否显示wrapperLoading
+  loading?: boolean
 }
 
 export interface Result<T = any> {
