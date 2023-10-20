@@ -3,7 +3,7 @@ import type { RequestFunctionParams } from 'yapi-to-typescript';
 import { Method } from 'yapi-to-typescript';
 import defHttp from './';
 import {RequestOptions as AxiosRequestOptions} from './axios'
-import { fromPairs, get } from 'lodash-es';
+import { fromPairs, get } from 'lodash';
 
 interface RequestOptions {
   /**
