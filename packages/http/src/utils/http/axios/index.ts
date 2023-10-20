@@ -2,7 +2,7 @@
 // The axios configuration can be changed according to the project, just change the file, other files can be left unchanged
 
 import type { AxiosResponse,AxiosRequestConfig } from 'axios';
-import type { RequestOptions, Result } from '../../../../types/axios';
+import type { RequestOptions, Result } from '../../../axios';
 import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform';
 import { VAxios } from './Axios';
 import { RequestEnum, ResultEnum, ContentTypeEnum, ConfigEnum } from '../../../enums/httpEnum';
