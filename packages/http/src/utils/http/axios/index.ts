@@ -2,7 +2,7 @@
 // The axios configuration can be changed according to the project, just change the file, other files can be left unchanged
 
 import type { AxiosResponse,AxiosRequestConfig } from 'axios';
-import type { RequestOptions, Result } from '../../../axios';
+import type { RequestOptions, Result } from '../../../types';
 import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform';
 import { VAxios } from './Axios';
 import { RequestEnum, ResultEnum, ContentTypeEnum, ConfigEnum } from '../../../enums/httpEnum';
@@ -11,7 +11,7 @@ import { getTokenFromLocal } from '../../token';
 import { setObjToUrlParams, deepMerge } from '../../';
 import signMd5Utils from '../../encryption/signMd5Utils';
 import { joinTimestamp, formatRequestDate } from './helper';
-import { get } from 'lodash';
+import { get } from 'lodash-es';
 
 declare type Recordable<T = any> = Record<string, T>;
 
