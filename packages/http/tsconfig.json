@@ -19,5 +19,8 @@
   "exclude": [
     "dist",
     "dev"
+  ],
+  "include": [
+    "src/**/*.ts"
   ]
 }
