@@ -19,6 +19,15 @@ const loadingMap = new Map();
 const globSetting = { apiUrl: '', urlPrefix: '' };
 const urlPrefix = globSetting.urlPrefix;
 
+export class RequestError extends Error {
+  constructor(message: string, data: any) {
+    super(message)
+    this.data = data;
+  }
+  data: any
+}
+
+
 /**
  * @description: 数据处理，方便区分多种处理方式
  */
@@ -72,7 +81,8 @@ const transform: AxiosTransform = {
         }
     }
 
-    throw new Error(timeoutMsg || '请求失败，请稍后再试');
+    throw new RequestError(timeoutMsg || '请求失败，请稍后再试', data);
+
   },
 
   // 请求之前处理config
