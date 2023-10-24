@@ -22,13 +22,13 @@ interface RequestOptions {
   errorCaptured?: (err) => void,
 }
 
-export const createRequest = (baseUrl: string) => <TResponseData>(
-  payload: RequestFunctionParams,
-  options: RequestOptions & AxiosRequestOptions= {
+export const createRequest = (baseUrl: string,defaultOptions: RequestOptions =  {
     server: 'prod',
     fileUpload: false,
     axiosOptions: {timeout: 180 * 1000}
-  },
+  } ) => <TResponseData>(
+  payload: RequestFunctionParams,
+  options: RequestOptions & AxiosRequestOptions= defaultOptions 
 ): Promise<TResponseData>  => {
   return new Promise<TResponseData>((resolve, reject) => {
     // 基本地址
