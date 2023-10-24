@@ -19,6 +19,7 @@ interface RequestOptions {
   // 是否文件上传
   fileUpload?: boolean;
   axiosOptions?: AxiosRequestConfig;
+  errorCaptured?: (err) => void,
 }
 
 export const createRequest = (baseUrl: string) => <TResponseData>(
@@ -104,6 +105,7 @@ export const createRequest = (baseUrl: string) => <TResponseData>(
         },
       )
       .catch((e) => {
+        options.errorCaptured?.(e)
         reject(e);
       });
   });
