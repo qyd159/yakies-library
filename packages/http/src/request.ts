@@ -101,6 +101,7 @@ export const createRequest = (baseUrl: string,defaultOptions: RequestOptions =  
           resolve(options.dataKey ? get(data.data, options.dataKey) : data);
         },
         (e) => {
+          options.errorCaptured?.(e)
           reject(e);
         },
       )
