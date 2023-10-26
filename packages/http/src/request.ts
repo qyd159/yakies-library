@@ -85,7 +85,7 @@ export const createRequest =
       request!
         .then(
           (data) => {
-            if (options.isReturnNativeResponse || !options.isTransformResponse) {
+            if (options.isReturnNativeResponse || (typeof options.isTransformResponse !== 'undefined' && !options.isTransformResponse)) {
               resolve(data);
             } else {
               let { result } = data;
