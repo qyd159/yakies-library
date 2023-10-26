@@ -1,7 +1,7 @@
 // axios配置  可自行根据项目进行更改，只需更改该文件即可，其他文件可以不动
 // The axios configuration can be changed according to the project, just change the file, other files can be left unchanged
 
-import type { AxiosResponse,AxiosRequestConfig } from 'axios';
+import type { AxiosResponse, AxiosRequestConfig } from 'axios';
 import type { RequestOptions, Result } from '../../../types';
 import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform';
 import { VAxios } from './Axios';
@@ -21,12 +21,11 @@ const urlPrefix = globSetting.urlPrefix;
 
 export class RequestError extends Error {
   constructor(message: string, data: any) {
-    super(message)
+    super(message);
     this.data = data;
   }
-  data: any
+  data: any;
 }
-
 
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -55,17 +54,10 @@ const transform: AxiosTransform = {
     }
     //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
     const { code, message } = data;
-    let { result } = data;
-    if (!result) {
-      result = data.data;
-    }
     // 这里逻辑可以根据项目进行修改
     const hasSuccess = data && Reflect.has(data, 'code') && (code === ResultEnum.SUCCESS || code === 200);
     if (hasSuccess) {
-      if (dataKey) {
-        return get(data, dataKey);
-      }
-      return result;
+      return data;
     }
 
     // 在此处根据自己项目的实际情况对不同的code执行不同的操作
@@ -82,7 +74,6 @@ const transform: AxiosTransform = {
     }
 
     throw new RequestError(timeoutMsg || '请求失败，请稍后再试', data);
-
   },
 
   // 请求之前处理config
@@ -247,4 +238,4 @@ const defHttp = createAxios();
 
 export default defHttp;
 
-export {RequestOptions, Result, Recordable,AxiosRequestConfig}
+export { RequestOptions, Result, Recordable, AxiosRequestConfig };

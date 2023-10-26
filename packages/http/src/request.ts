@@ -85,8 +85,19 @@ export const createRequest =
       request!
         .then(
           (data) => {
-            // 具体请求逻辑
-            resolve(options.dataKey ? get(data.data, options.dataKey) : data);
+            if (options.isReturnNativeResponse || !options.isTransformResponse) {
+              resolve(data);
+            } else {
+              let { result } = data;
+              if (!result) {
+                result = data.data;
+              }
+              if (options.dataKey) {
+                resolve(get(data, options.dataKey));
+              } else {
+                resolve(result);
+              }
+            }
           },
           (e) => {
             options.errorCaptured?.(e);
