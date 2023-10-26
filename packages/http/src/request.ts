@@ -2,7 +2,7 @@ import type { AxiosRequestConfig } from 'axios';
 import type { RequestFunctionParams } from 'yapi-to-typescript';
 import { Method } from 'yapi-to-typescript';
 import defHttp from './';
-import {RequestOptions as AxiosRequestOptions} from './types'
+import { RequestOptions as AxiosRequestOptions } from './types';
 import { fromPairs, get, merge } from 'lodash-es';
 
 interface RequestOptions {
@@ -19,96 +19,83 @@ interface RequestOptions {
   // 是否文件上传
   fileUpload?: boolean;
   axiosOptions?: AxiosRequestConfig;
-  errorCaptured?: (err) => void,
+  errorCaptured?: (err) => void;
 }
 
-export const createRequest = (baseUrl: string,defaultOptions: RequestOptions =  {
-    server: 'prod',
-    fileUpload: false,
-    axiosOptions: {timeout: 180 * 1000}
-  } ) => <TResponseData>(
-  payload: RequestFunctionParams,
-  options: RequestOptions & AxiosRequestOptions= defaultOptions 
-  ): Promise<TResponseData> => {
-  options = merge(defaultOptions, options)
-  return new Promise<TResponseData>((resolve, reject) => {
-    // 基本地址
-    // const baseUrl =
-    //   options.server === 'mock'
-    //     ? payload.mockUrl
-    //     : options.server === 'dev'
-    //     ? payload.devUrl
-    //     : payload.prodUrl;
-    // const baseUrl = 'http://yakies.cn:17860';
-    // const baseUrl = 'https://sd.yakies.cn';
-    const {
-      server: _server,
-      fileUpload,
-      axiosOptions,
-      ...customOptions
-    } = options;
-
-    // 请求地址
-    const url = `${baseUrl}${
-      payload.path.indexOf('?') !== -1
-        ? payload.path.substring(0, payload.path.indexOf('?'))
-        : payload.path
-    }`.replace(/\{(.*?)\}/g, function (_match, _$1) {
-      return payload.rawData as unknown as string;
-    });
-    let request: Promise<any>;
-    switch (payload.method) {
-      case Method.GET:
-        request = defHttp.get(
-          {
-            url,
-            params: fromPairs(
-              payload.queryNames.map((key) => [key, payload.rawData?.[key]]),
-            ),
-          },
-          customOptions,
-        );
-        break;
-      case Method.POST:
-        if (fileUpload) {
-          request = defHttp.uploadFile(
-            { url, ...(axiosOptions || {}) },
-            { file: payload.rawData.file, ...payload.rawData },
-            customOptions,
-          );
-        } else {
-          request = defHttp.post(
-            { url, data: payload.rawData, ...(axiosOptions || {}) },
-            customOptions,
-          );
-        }
-        break;
-      case Method.PUT:
-        request = defHttp.put({ url, data: payload.rawData });
-        break;
-      case Method.PATCH:
-        request = defHttp.patch({ url, data: payload.rawData });
-        break;
-      case Method.DELETE:
-        request = defHttp.delete({ url, params: payload.rawData });
-        break;
-      default:
-        break;
+export const createRequest =
+  (
+    baseUrl: string,
+    defaultOptions: RequestOptions = {
+      server: 'prod',
+      fileUpload: false,
+      axiosOptions: { timeout: 180 * 1000 },
     }
-    request!
-      .then(
-        (data) => {
-          // 具体请求逻辑
-          resolve(options.dataKey ? get(data.data, options.dataKey) : data);
-        },
-        (e) => {
-          options.errorCaptured?.(e)
+  ) =>
+  <TResponseData>(payload: RequestFunctionParams, options: RequestOptions & AxiosRequestOptions = defaultOptions): Promise<TResponseData> => {
+    options = merge({}, defaultOptions, options);
+    return new Promise<TResponseData>((resolve, reject) => {
+      // 基本地址
+      // const baseUrl =
+      //   options.server === 'mock'
+      //     ? payload.mockUrl
+      //     : options.server === 'dev'
+      //     ? payload.devUrl
+      //     : payload.prodUrl;
+      // const baseUrl = 'http://yakies.cn:17860';
+      // const baseUrl = 'https://sd.yakies.cn';
+      const { server: _server, fileUpload, axiosOptions, ...customOptions } = options;
+
+      // 请求地址
+      const url = `${baseUrl}${payload.path.indexOf('?') !== -1 ? payload.path.substring(0, payload.path.indexOf('?')) : payload.path}`.replace(
+        /\{(.*?)\}/g,
+        function (_match, _$1) {
+          return payload.rawData as unknown as string;
+        }
+      );
+      let request: Promise<any>;
+      switch (payload.method) {
+        case Method.GET:
+          request = defHttp.get(
+            {
+              url,
+              params: fromPairs(payload.queryNames.map((key) => [key, payload.rawData?.[key]])),
+            },
+            customOptions
+          );
+          break;
+        case Method.POST:
+          if (fileUpload) {
+            request = defHttp.uploadFile({ url, ...(axiosOptions || {}) }, { file: payload.rawData.file, ...payload.rawData }, customOptions);
+          } else {
+            request = defHttp.post({ url, data: payload.rawData, ...(axiosOptions || {}) }, customOptions);
+          }
+          break;
+        case Method.PUT:
+          request = defHttp.put({ url, data: payload.rawData });
+          break;
+        case Method.PATCH:
+          request = defHttp.patch({ url, data: payload.rawData });
+          break;
+        case Method.DELETE:
+          request = defHttp.delete({ url, params: payload.rawData });
+          break;
+        default:
+          break;
+      }
+      request!
+        .then(
+          (data) => {
+            // 具体请求逻辑
+            resolve(options.dataKey ? get(data.data, options.dataKey) : data);
+          },
+          (e) => {
+            options.errorCaptured?.(e);
+            reject(e);
+          }
+        )
+        .catch((e) => {
+          options.errorCaptured?.(e);
           reject(e);
-        },
-      )
-      .catch((e) => {
-        options.errorCaptured?.(e)
-        reject(e);
-      });
-  });
-}
+        });
+    });
+  };
