@@ -3,7 +3,7 @@ import type { RequestFunctionParams } from 'yapi-to-typescript';
 import { Method } from 'yapi-to-typescript';
 import defHttp from './';
 import {RequestOptions as AxiosRequestOptions} from './types'
-import { fromPairs, get } from 'lodash-es';
+import { fromPairs, get, merge } from 'lodash-es';
 
 interface RequestOptions {
   /**
@@ -29,7 +29,8 @@ export const createRequest = (baseUrl: string,defaultOptions: RequestOptions =  
   } ) => <TResponseData>(
   payload: RequestFunctionParams,
   options: RequestOptions & AxiosRequestOptions= defaultOptions 
-): Promise<TResponseData>  => {
+  ): Promise<TResponseData> => {
+  options = merge(defaultOptions, options)
   return new Promise<TResponseData>((resolve, reject) => {
     // 基本地址
     // const baseUrl =
