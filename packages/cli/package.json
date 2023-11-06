@@ -60,6 +60,7 @@
     "node-cmd-promise": "^1.0.0",
     "node-gzip": "^1.1.2",
     "node-html-parser": "^1.4.9",
+    "node-rtsp-stream": "^0.0.9",
     "opener": "^1.5.2",
     "ora": "^3.4.0",
     "pdf2pic": "^1.4.0",

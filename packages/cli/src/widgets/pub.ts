@@ -1,8 +1,10 @@
-import { exec }  from 'child_process';
+import { exec } from 'child_process';
 
 export default function (args) {
-  const command = `cd ${args.dir} && /bin/zsh -i -c 'source ~/.zshrc; ya_pub'`;
-  const child = exec(command,(error, stdout, stderr) => {
+  const command = `${
+    args.dir ? 'cd ' + args.dir + '&&' : ''
+  }/bin/zsh -i -c 'source ~/.zshrc.local; npm publish --registry=https://nexus.yakies.cn/repository/hosted/'`;
+  const child = exec(command, (error, stdout, stderr) => {
     if (error) {
       console.error(`执行出错: ${error}`);
       return;
@@ -15,6 +17,4 @@ export default function (args) {
 
   // 将子进程的 stderr 连接到父进程的 stderr
   child.stderr.pipe(process.stderr);
-
-
 }
