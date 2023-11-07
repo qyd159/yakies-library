@@ -11,158 +11,158 @@
  * ```
  */
 
- var fs = require('fs');
- var parseUrl = require('url').parse;
- const { createProxyMiddleware } = require('http-proxy-middleware');
+var fs = require('fs');
+var parseUrl = require('url').parse;
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
- function escapeHtml(html) {
-   return String(html)
-     .replace(/&/g, '&amp;')
-     .replace(/"/g, '&quot;')
-     .replace(/'/g, '&#39;')
-     .replace(/</g, '&lt;')
-     .replace(/>/g, '&gt;');
- }
+function escapeHtml(html) {
+  return String(html)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
 
- function rewriteParser(file) {
-   var rules = [];
+function rewriteParser(file) {
+  var rules = [];
 
-   function Ruler(type, reg, to) {
-     return {
-       type: type,
-       reg: reg,
-       to: to,
-     };
-   }
+  function Ruler(type, reg, to) {
+    return {
+      type: type,
+      reg: reg,
+      to: to,
+    };
+  }
 
-   if (!Array.isArray(file)) {
-     file = [file];
-   }
+  if (!Array.isArray(file)) {
+    file = [file];
+  }
 
-   file.forEach(function (file) {
-     if (!fs.existsSync(file)) {
-       return null;
-     }
+  file.forEach(function (file) {
+    if (!fs.existsSync(file)) {
+      return null;
+    }
 
-     var content = fs.readFileSync(file, 'utf-8');
-     var lines = content.split(/\r\n|\n/);
-     var rrule = /^(rewrite|redirect|proxy)\s+([^\s]+)\s+([^\s]+)$/i;
+    var content = fs.readFileSync(file, 'utf-8');
+    var lines = content.split(/\r\n|\n/);
+    var rrule = /^(rewrite|redirect|proxy)\s+([^\s]+)\s+([^\s]+)$/i;
 
-     lines.forEach(function (line) {
-       var m = rrule.exec(line);
+    lines.forEach(function (line) {
+      var m = rrule.exec(line);
 
-       if (!m) {
-         return;
-       }
+      if (!m) {
+        return;
+      }
 
-       rules.push(new Ruler(m[1].toLowerCase(), new RegExp(m[2], 'i'), m[3]));
-     });
-   });
+      rules.push(new Ruler(m[1].toLowerCase(), new RegExp(m[2], 'i'), m[3]));
+    });
+  });
 
-   return {
-     match: function (url) {
-       var found;
+  return {
+    match: function (url) {
+      var found;
 
-       var arr = [url.path, url.pathname];
+      var arr = [url.path, url.pathname];
 
-       rules.every(function (ruler) {
-         arr.every(function (url) {
-           var m = url.match(ruler.reg);
+      rules.every(function (ruler) {
+        arr.every(function (url) {
+          var m = url.match(ruler.reg);
 
-           if (m) {
-             found = ruler;
-             found.match = m;
-             return false;
-           }
+          if (m) {
+            found = ruler;
+            found.match = m;
+            return false;
+          }
 
-           return !found;
-         });
+          return !found;
+        });
 
-         return !found;
-       });
+        return !found;
+      });
 
-       return found;
-     },
-   };
- }
+      return found;
+    },
+  };
+}
 
- export default function (options) {
-   var file = options.rewrite_file;
-   var parser;
+export default function (options) {
+  var file = options.rewrite_file;
+  var parser;
 
-   // todo cache the file.
-   function lazyload() {
-     // 每次都加载好了，server.conf 有可能经常改动。
-     parser = /*parser || */ rewriteParser(file);
-   }
+  // todo cache the file.
+  function lazyload() {
+    // 每次都加载好了，server.conf 有可能经常改动。
+    parser = /*parser || */ rewriteParser(file);
+  }
 
-   /* var proxy = httpProxy.createProxyServer({
-         changeOrigin: true,
-         autoRewrite: true
-     }); */
+  /* var proxy = httpProxy.createProxyServer({
+        changeOrigin: true,
+        autoRewrite: true
+    }); */
 
-   const isMultipartRequest = (req) => {
-     const contentTypeHeader = req.headers['content-type'];
-     return contentTypeHeader && contentTypeHeader.indexOf('multipart') > -1;
-   };
+  const isMultipartRequest = (req) => {
+    const contentTypeHeader = req.headers['content-type'];
+    return contentTypeHeader && contentTypeHeader.indexOf('multipart') > -1;
+  };
 
-   /* proxy.on('error', function(error, req, res) {
-         var json;
-         console.log('proxy error', error);
-         if (!res.headersSent) {
-             res.writeHead(500, { 'content-type': 'application/json' });
-         }
+  /* proxy.on('error', function(error, req, res) {
+        var json;
+        console.log('proxy error', error);
+        if (!res.headersSent) {
+            res.writeHead(500, { 'content-type': 'application/json' });
+        }
 
-         json = { error: 'proxy_error', reason: error.message };
-         res.end(JSON.stringify(json));
-     }); */
+        json = { error: 'proxy_error', reason: error.message };
+        res.end(JSON.stringify(json));
+    }); */
 
-   return function (req, res, next) {
-     lazyload();
-     var url = parseUrl(req.url);
-     var ruler = parser && parser.match(url);
-     if (ruler) {
-       var to = ruler.to.replace(/\$(\d+)/g, function (all, index) {
-         return ruler.match[index] || '';
-       });
+  return function (req, res, next) {
+    lazyload();
+    var url = parseUrl(req.url);
+    var ruler = parser && parser.match(url);
+    if (ruler) {
+      var to = ruler.to.replace(/\$(\d+)/g, function (all, index) {
+        return ruler.match[index] || '';
+      });
 
-       switch (ruler.type) {
-         case 'rewrite':
-           req.originalUrl = req.originalUrl || req.url;
-           req.url = to;
-           break;
-         case 'proxy':
-           var target = parseUrl(to);
-           req._originalUrl = req.originalUrl || req.url;
-           req.originalUrl = req.url = target.pathname + (target.search ? url.search : '');
-           const proxyOptions ={
-             target: target.protocol + '//' + target.host,
-             changeOrigin: true,
-             // ws: true,
-             logLevel: 'debug',
-             secure: false
-           }
-           createProxyMiddleware(proxyOptions)(req, res, next);
-           return;
+      switch (ruler.type) {
+        case 'rewrite':
+          req.originalUrl = req.originalUrl || req.url;
+          req.url = to;
+          break;
+        case 'proxy':
+          var target = parseUrl(to);
+          req._originalUrl = req.originalUrl || req.url;
+          req.originalUrl = req.url = target.pathname + (target.search ? url.search : '');
+          const proxyOptions = {
+            target: target.protocol + '//' + target.host,
+            changeOrigin: true,
+            // ws: true,
+            logLevel: 'debug',
+            secure: false
+          }
+          createProxyMiddleware(proxyOptions)(req, res, next);
+          return;
 
-         case 'redirect':
-         default:
-           res.statusCode = 303;
-           res.setHeader('Content-Type', 'text/html; charset=utf-8');
-           res.setHeader('Location', to);
-           res.end(
-             'Redirecting to <a href="' +
-               escapeHtml(to) +
-               '">' +
-               escapeHtml(to) +
-               '</a>\n'
-           );
-           return;
-       }
-     } else if (options.proxy_mode) {
-       req.originalUrl = req.originalUrl || req.url;
-       req.url = '/mock/index.js';
-     }
-     next();
-   };
- };
+        case 'redirect':
+        default:
+          res.statusCode = 303;
+          res.setHeader('Content-Type', 'text/html; charset=utf-8');
+          res.setHeader('Location', to);
+          res.end(
+            'Redirecting to <a href="' +
+            escapeHtml(to) +
+            '">' +
+            escapeHtml(to) +
+            '</a>\n'
+          );
+          return;
+      }
+    } else if (options.proxy_mode) {
+      req.originalUrl = req.originalUrl || req.url;
+      req.url = '/mock/index.js';
+    }
+    next();
+  };
+};

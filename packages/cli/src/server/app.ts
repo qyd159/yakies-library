@@ -44,13 +44,13 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
     if (Array.isArray(YaConfig.socket)) {
       wsProxy = YaConfig.socket.map((socket) => {
         proxyOptions.target = socket.target;
-        const wsProxyMiddlware = createProxyMiddleware(socket.path, proxyOptions);
+        const wsProxyMiddlware = createProxyMiddleware(socket.path || '/socket.io', proxyOptions);
         app.use(wsProxyMiddlware);
         return wsProxyMiddlware;
       });
     } else {
       proxyOptions.target = YaConfig.socket.target;
-      wsProxy = createProxyMiddleware(YaConfig.socket.path, proxyOptions);
+      wsProxy = createProxyMiddleware(YaConfig.socket.path || '/socket.io', proxyOptions);
       app.use(wsProxy);
     }
   }
