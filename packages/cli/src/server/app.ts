@@ -3,6 +3,8 @@ import devtool from '../devtool';
 import { getDefaultHosts, printServerUrls, resolveServerUrls } from '../lib/util';
 import { createLogger, LogLevel } from 'vite';
 import express from 'express';
+import type * as httpProxy from 'http-proxy';
+import type * as net from 'net';
 
 const url = require('url');
 const path = require('path');
@@ -11,6 +13,7 @@ const compression = require('compression');
 const cors = require('cors');
 const app = express();
 const Mkcert = require('@yakies/mkcert').default;
+const fs = require('fs');
 
 export default async function ({ port, root, useHttps = false, logLevel = 'info' as LogLevel, hosts = [] }, callback) {
   let server;
@@ -37,19 +40,37 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
   let wsProxy;
   const proxyOptions: Options = {
     changeOrigin: true,
-    logLevel: 'debug',
+    logLevel: 'info',
     secure: false,
+    onProxyReqWs(proxyReq, req, target: net.Socket, options: httpProxy.ServerOptions, head: any) {
+      console.log(head.toString());
+      target.on('data', (message: string) => {
+        // 在此处处理，可能修改目标 WebSocket 传入的消息
+        // console.log('Message from target WebSocket server: ', message.toString());
+      });
+    },
+    onOpen(proxySocket: net.Socket) {
+      proxySocket.on('data', (data) => {
+        console.log(data.toString());
+      });
+    },
   };
   if (YaConfig?.socket) {
     if (Array.isArray(YaConfig.socket)) {
       wsProxy = YaConfig.socket.map((socket) => {
         proxyOptions.target = socket.target;
+        if (socket.debug) {
+          proxyOptions.logLevel = 'debug';
+        }
         const wsProxyMiddlware = createProxyMiddleware(socket.path || '/socket.io', proxyOptions);
         app.use(wsProxyMiddlware);
         return wsProxyMiddlware;
       });
     } else {
       proxyOptions.target = YaConfig.socket.target;
+      if (YaConfig.socket.debug) {
+        proxyOptions.logLevel = 'debug';
+      }
       wsProxy = createProxyMiddleware(YaConfig.socket.path || '/socket.io', proxyOptions);
       app.use(wsProxy);
     }
@@ -88,9 +109,10 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
     }
     next();
   });
+  var accessLogStream = fs.createWriteStream(path.join(process.cwd(), 'access.log'), { flags: 'a' });
 
   // logger
-  app.use(require('morgan')('combined'));
+  app.use(require('morgan')('combined', { stream: accessLogStream }));
 
   // server.conf 功能
   // 支持 test/ 目录下面 .js js 脚本功能和 json 预览功能。
@@ -181,8 +203,6 @@ export default async function ({ port, root, useHttps = false, logLevel = 'info'
   app.use(function (err, req, res, next) {
     console.log(err);
   });
-
-  const fs = require('fs');
 
   // Bind to a port
   server.listen(port, '0.0.0.0', async function () {

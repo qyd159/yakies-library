@@ -17,7 +17,7 @@ export interface IConfig {
   // http代理
   httpProxy?: Proxy[];
   // socket代理
-  socketProxy?: {};
+  socketProxy?: SocketProxy | SocketProxy[];
   ytt?: { serverUrl: string; serverType: 'swagger' | 'yapi'; outputDir: string; overwriteRequestFile?: boolean; projects: Project[] }[];
 }
 
@@ -32,6 +32,7 @@ export interface Proxy {
   target: string;
   baseApi?: string;
   cache?: boolean;
+  debug?: boolean;
   prepareUrl?: string;
   url?: string;
   gziped?: boolean;
@@ -43,6 +44,12 @@ export interface Proxy {
   capture?: boolean;
   description?: string;
   useHttps?: boolean;
+}
+export interface SocketProxy {
+  target: string;
+  debug?: boolean;
+  capture?: boolean;
+  description?: string;
 }
 
 export interface GlobalConfig extends IConfig {

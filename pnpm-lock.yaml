@@ -276,6 +276,9 @@ importers:
       walk-up:
         specifier: ^1.0.2
         version: 1.0.2
+      ws:
+        specifier: ^8.14.2
+        version: 8.14.2
       xlsx:
         specifier: ^0.18.5
         version: 0.18.5

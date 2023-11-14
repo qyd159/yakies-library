@@ -1,6 +1,6 @@
 {
   "name": "@yakies/http",
-  "version": "0.8.1",
+  "version": "0.90",
   "description": "跨前后端的http api调用库,基于axios",
   "keywords": [
     "full stack"

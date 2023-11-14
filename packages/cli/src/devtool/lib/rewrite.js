@@ -139,7 +139,7 @@ export default function (options) {
             target: target.protocol + '//' + target.host,
             changeOrigin: true,
             // ws: true,
-            logLevel: 'debug',
+            logLevel: options.debug ? 'debug' : 'info',
             secure: false
           }
           createProxyMiddleware(proxyOptions)(req, res, next);

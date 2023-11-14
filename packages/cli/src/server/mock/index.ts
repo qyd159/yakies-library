@@ -7,7 +7,6 @@ const proxyCacheMiddleware = require('@yakies/proxy-cache-middleware');
 const Axios = require('axios').default;
 const queryString = require('query-string');
 const URL = require('url');
-const { isArray } = require('lodash');
 const { gzip, ungzip } = require('node-gzip');
 
 const interfaceMonitorUrl = 'https://mock-manager.yakies.cn/monitor';
@@ -106,7 +105,6 @@ module.exports = async function (req, res, next) {
       const options: any = {
         target: parsedTargetUrl.protocol + '//' + parsedTargetUrl.host + parsedTargetUrl.path,
         changeOrigin: true,
-        // ws: true,
         selfHandleResponse: false,
         secure: false,
       };
