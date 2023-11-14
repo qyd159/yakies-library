@@ -13,45 +13,45 @@ export interface SearchListRes<T> {
   meta: any;
 }
 
-const localStorage = typeof localStorage === 'undefined' ? require('localStorage') : localStorage;
+const ls = typeof localStorage === 'undefined' ? require('localStorage') : localStorage;
 
 /**
  * token保存到本地
  * @param token
  */
 export function setTokenToLocal(token: string) {
-  localStorage.setItem(TOKEN_STORAGE_KEY, token);
+  ls.setItem(TOKEN_STORAGE_KEY, token);
 }
 export function setRefreshTokenToLocal(refreshToken: string) {
-  localStorage.setItem(TOKEN_REFRESH_STORAGE_KEY, refreshToken);
+  ls.setItem(TOKEN_REFRESH_STORAGE_KEY, refreshToken);
 }
 /**
  * 从本地获取token
  */
 export function getTokenFromLocal() {
-  return localStorage.getItem(TOKEN_STORAGE_KEY);
+  return ls.getItem(TOKEN_STORAGE_KEY);
 }
 export function getRefreshTokenFromLocal() {
-  return localStorage.getItem(TOKEN_REFRESH_STORAGE_KEY);
+  return ls.getItem(TOKEN_REFRESH_STORAGE_KEY);
 }
 /**
  * 清除本地token
  */
 export function clearToken() {
-  localStorage.removeItem(TOKEN_STORAGE_KEY);
-  localStorage.removeItem(USERNAME_STORAGE_KEY);
-  localStorage.removeItem(TOKEN_REFRESH_STORAGE_KEY);
+  ls.removeItem(TOKEN_STORAGE_KEY);
+  ls.removeItem(USERNAME_STORAGE_KEY);
+  ls.removeItem(TOKEN_REFRESH_STORAGE_KEY);
 }
 
 /**
  * 用户名保存到本地
  */
 export function setUsernameToLocal(username: string) {
-  localStorage.setItem(USERNAME_STORAGE_KEY, username);
+  ls.setItem(USERNAME_STORAGE_KEY, username);
 }
 /**
  * 从本地获取用户名
  */
 export function getUsernameFromLocal() {
-  return localStorage.getItem(USERNAME_STORAGE_KEY);
+  return ls.getItem(USERNAME_STORAGE_KEY);
 }
