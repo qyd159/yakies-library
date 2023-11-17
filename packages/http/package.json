@@ -23,7 +23,7 @@
     "axios": "^0.26.1",
     "dayjs": "^1.11.9",
     "localStorage": "^1.0.4",
-    "lodash-es": "^4.17.21",
+    "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "qs": "^6.11.2",
     "yapi-to-typescript": "^3.37.0"

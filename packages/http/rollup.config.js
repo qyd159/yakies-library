@@ -53,12 +53,11 @@ description: ${pkg.description}
 };
 
 
-const external = getDependencieNames(pkg);
-external.deleteItems('lodash-es');  //移除 lodash-es
+
 // 共用的 rollup 配置
 const shareConf = {
 	input: input,
-	external,  //移除 package.json 中所有的依赖包
+	external: getDependencieNames(pkg),  //移除 package.json 中所有的依赖包
 	plugins: [
 		// 使用node解析算法查找模块
 		resolve({
@@ -107,30 +106,6 @@ export default [
 			可以以 AMD 或 CommonJS 模块的方式引入，也可以用 <script> 标签直接引入;
 			由于包中删除了依赖，所以若以 <script> 标签的方式引入，则需要用 <script> 标签的方式先将其依赖引入
 			*/
-			{
-				...shareOutput,
-				format: 'umd',
-				name: pkgName,  //驼峰格式的 pkg.name
-				plugins: [terser()]     //压缩代码
-			} // umd
 		]
-	},
-
-	/*
-	适合直接执行的构建
-	特点：
-	   - 可用 <script> 标签直接引入
-	   - 将所有依赖都构建在了一起
-	   - 对代码进行了压缩
-	*/
-	{
-		...shareConf,
-		external: getDependencieNames(pkg, "peerDependencies"),   //只移除 peerDependencies 中的依赖
-		output: {
-			...shareOutput,
-			format: 'iife',
-			name: pkgName,  //驼峰格式的 pkg.name
-			plugins: [terser()]     //压缩代码
-		}  // iife
 	}
 ];
