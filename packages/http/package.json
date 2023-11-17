@@ -1,6 +1,6 @@
 {
   "name": "@yakies/http",
-  "version": "0.10.3",
+  "version": "0.10.4",
   "description": "用于在浏览器端或nodejs端请求接口",
   "main": "dist/http.cjs.js",
   "types": "types/index.d.ts",
@@ -17,6 +17,15 @@
     "dev": "rollup -c -w",
     "test": "node test/index.js",
     "pretest": "npm run build"
+  },
+   "dependencies": {
+    "axios": "^0.26.1",
+    "dayjs": "^1.11.9",
+    "localStorage": "^1.0.4",
+    "lodash-es": "^4.17.21",
+    "md5": "^2.3.0",
+    "qs": "^6.11.2",
+    "yapi-to-typescript": "^3.37.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
