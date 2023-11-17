@@ -1,36 +1,38 @@
 {
   "name": "@yakies/http",
-  "version": "0.9.3",
-  "description": "跨前后端的http api调用库,基于axios",
-  "keywords": [
-    "full stack"
+  "version": "0.10.0",
+  "description": "用于在浏览器端或nodejs端请求接口",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "types/index.d.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "files": [
+    "dist/[^.]*",
+    "types/[^.]*",
+    "docs/[^.]*",
+    "doc/[^.]*"
   ],
-  "homepage": "",
-  "license": "ISC",
-  "main": "dist/index.js",
   "scripts": {
-    "dev": "npm run build -- --watch",
-    "build": "tsc -d --outDir dist",
-    "test": "vitest"
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "node test/index.js",
+    "pretest": "npm run build"
   },
   "devDependencies": {
-    "@types/jest": "^27.5.2",
-    "@types/lodash-es": "^4.17.8",
-    "@types/md5": "^2.3.4",
-    "@types/qs": "^6.9.9",
-    "esbuild": "^0.14.54",
-    "esbuild-node-externals": "^1.8.0",
-    "esmo": "^0.14.1",
-    "jest": "^27.5.1",
-    "typescript": "^4.9.5"
-  },
-  "dependencies": {
-    "axios": "^0.26.1",
-    "dayjs": "^1.11.9",
-    "localStorage": "^1.0.4",
-    "lodash-es": "^4.17.21",
-    "md5": "^2.3.0",
-    "qs": "^6.11.2",
-    "yapi-to-typescript": "^3.37.0"
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^11.0.1",
+    "@rollup/plugin-typescript": "^8.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
+    "eslint": "^7.15.0",
+    "package-tls": "^1.2.2",
+    "path": "^0.12.7",
+    "rollup": "^2.35.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "ts-node": "^9.1.1",
+    "tslib": "^2.0.3",
+    "typescript": "^4.1.3"
   }
 }

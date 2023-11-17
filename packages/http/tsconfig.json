@@ -12,15 +12,11 @@
     "downlevelIteration": true,
     "strict": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "noImplicitAny": false
+    "resolveJsonModule":true,
+    "esModuleInterop": true
   },
   "exclude": [
     "dist",
     "dev"
-  ],
-  "include": [
-    "src/**/*.ts"
   ]
 }
