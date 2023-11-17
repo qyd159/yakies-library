@@ -1,8 +1,9 @@
 {
   "name": "@yakies/http",
-  "version": "0.10.4",
+  "version": "0.10.5",
   "description": "用于在浏览器端或nodejs端请求接口",
   "main": "dist/http.cjs.js",
+  "module": "dist/http.es.js",
   "types": "types/index.d.ts",
   "sideEffects": false,
   "license": "MIT",
@@ -18,7 +19,7 @@
     "test": "node test/index.js",
     "pretest": "npm run build"
   },
-   "dependencies": {
+  "dependencies": {
     "axios": "^0.26.1",
     "dayjs": "^1.11.9",
     "localStorage": "^1.0.4",
