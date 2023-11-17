@@ -14,7 +14,7 @@ export interface SearchListRes<T> {
 }
 
 let ls:any = typeof localStorage === 'undefined' ? (async () => {
-  ls= await import('localStorage');
+  ls= (await import('localStorage')).default;
   // 使用导入的模块
 })()
  : localStorage;
