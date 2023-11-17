@@ -13,7 +13,11 @@ export interface SearchListRes<T> {
   meta: any;
 }
 
-const ls = typeof localStorage === 'undefined' ? require('localStorage') : localStorage;
+let ls:any = typeof localStorage === 'undefined' ? (async () => {
+  ls= await import('localStorage');
+  // 使用导入的模块
+})()
+ : localStorage;
 
 /**
  * token保存到本地
