@@ -1,9 +1,9 @@
 {
   "name": "@yakies/http",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "用于在浏览器端或nodejs端请求接口",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
+  "main": "dist/http.cjs.js",
+  "module": "dist/http.es.js",
   "types": "types/index.d.ts",
   "sideEffects": false,
   "license": "MIT",

@@ -109,7 +109,7 @@ export default [
 			{
 				...shareOutput,
 				format: 'umd',
-				name: 'index',  //驼峰格式的 pkg.name
+				name: pkgName,  //驼峰格式的 pkg.name
 				plugins: [terser()]     //压缩代码
 			} // umd
 		]
