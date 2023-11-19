@@ -1,5 +1,5 @@
 // 从JSON树对象中筛选出深度为2的树
-const _ = require('lodash');
+const _ = require('vtils');
 const path = require('path');
 const fs = require('fs');
 function traverseObj(obj, childrenProp, level) {
@@ -16,7 +16,7 @@ function traverseObj(obj, childrenProp, level) {
   }
   return obj;
 }
-module.exports = function(args) {
+module.exports = function (args) {
   const { f, level, d } = args;
   const jsonData = require(path.join(process.cwd(), f));
   traverseObj(jsonData, 'children', level);

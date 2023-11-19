@@ -6,7 +6,7 @@ import { IConfig } from './config/defineConfig';
 
 const path = require('path');
 const portfinder = require('portfinder');
-const { debounce, merge } = require('lodash');
+const { debounce, merge } = require('vtils');
 
 export { IConfig };
 

@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import { merge } from 'vtils';
 import DefaultConfig from './config.default';
 import { IConfig } from './defineConfig';
 

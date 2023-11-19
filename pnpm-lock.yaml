@@ -192,9 +192,6 @@ importers:
       liftoff:
         specifier: ^3.1.0
         version: 3.1.0
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
       log4js:
         specifier: ^6.9.1
         version: 6.9.1
