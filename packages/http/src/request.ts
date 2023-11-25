@@ -25,7 +25,7 @@ interface RequestOptions {
 export const createRequest =
   (
     baseUrl: string,
-    defaultOptions: RequestOptions = {
+    defaultOptions: RequestOptions & AxiosRequestOptions = {
       server: 'prod',
       fileUpload: false,
       axiosOptions: { timeout: 180 * 1000 },
