@@ -31,7 +31,7 @@ export declare class VAxios {
      * 文件上传
      */
     uploadFile<T = any>(config: AxiosRequestConfig, params: UploadFileParams, options?: RequestOptions): Promise<T>;
-    supportFormData(config: AxiosRequestConfig): any;
+    supportFormData(config: AxiosRequestConfig): AxiosRequestConfig<any>;
     get<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T>;
     post<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T>;
     put<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T>;

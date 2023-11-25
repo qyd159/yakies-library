@@ -1,4 +1,5 @@
 import type { AxiosRequestConfig } from 'axios';
+import type { RequestFunctionParams } from 'yapi-to-typescript';
 import { RequestOptions as AxiosRequestOptions } from './types';
 interface RequestOptions {
     /**
@@ -15,5 +16,5 @@ interface RequestOptions {
     axiosOptions?: AxiosRequestConfig;
     errorCaptured?: (err: any) => void;
 }
-export declare const createRequest: (baseUrl: string, defaultOptions?: RequestOptions) => <TResponseData>(payload: RequestFunctionParams, options?: RequestOptions & AxiosRequestOptions) => Promise<TResponseData>;
+export declare const createRequest: (baseUrl: string, defaultOptions?: RequestOptions & AxiosRequestOptions) => <TResponseData>(payload: RequestFunctionParams, options?: RequestOptions & AxiosRequestOptions) => Promise<TResponseData>;
 export {};
