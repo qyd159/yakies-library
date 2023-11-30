@@ -14,11 +14,13 @@
 *.sln
 *.sw*
 
+
 #Mac系统中用来存储文件夹的显示属性的文件
 .DS_Store
 
 # svn的仓库目录
 .svn
+
 
 # 前端项目
 # package-lock.json 是 npm 包锁定文件;如果希望所有协作开发人员的 npm 包的版本完全一致，则可以不忽略该文件
@@ -29,11 +31,11 @@ yarn-debug.log*
 yarn-error.log*
 selenium-debug.log
 dist
-types
 
 # 本地环境文件
 .env.local
 .env.*.local
+
 
 # 应用安装包
 *.apk

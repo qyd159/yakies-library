@@ -1,9 +1,15 @@
+[git仓库]: https://github.com/GuoBinyong/index
+[issues]: https://github.com/GuoBinyong/index/issues
+[码云仓库]: https://gitee.com/guobinyong/index
+[library-webpack-template]: https://github.com/GuoBinyong/library-webpack-template
+[Git并行工作流程规范]: https://www.jianshu.com/p/d7a3a4935440
+
+> 构建过程是复杂的前端项目必不可少的环节；但 业务代码 与 公用代码（如：封装的库、组件、工具等被复用的代码）的构建需求是不一样的；我发现很多 npm 贡献者都没意识到这一点，他们用传统的业务项目的 webpack 配置 去打包 公用代码，虽然能运行，但实际潜藏着许多问题，甚至都不经过编译构建，直接发布单纯的源码到 npm 上；由于本人经常封装一些东西，为了方便，就分别使用 rollup 和 webpack 开发并配置了专门用于构建公共代码的配置模板；本仓库是 rollup 版本的配置模板；webpack 版本的配置模板请看 [library-webpack-template][]
+
 # 目录
 
 <!-- TOC -->
 
-- [目录](#目录)
-- [内容](#内容)
 - [1. 简介](#1-简介)
 - [2. 分支介绍](#2-分支介绍)
 - [3. 使用](#3-使用)
@@ -17,11 +23,11 @@
 - [7. 构建工具的选择](#7-构建工具的选择)
 - [8. 公共代码构建的配置目标](#8-公共代码构建的配置目标)
 - [9. 组织结构](#9-组织结构)
-- [10. npm 包管理配置文件](#10-npm-包管理配置文件)
-- [11. Rollup 配置文件](#11-rollup-配置文件)
-- [12. TypeScript 配置文件](#12-typescript-配置文件)
+- [10. npm 包管理配置文件](#10-npm包管理配置文件)
+- [11. Rollup 配置文件](#11-rollup配置文件)
+- [12. TypeScript 配置文件](#12-typescript配置文件)
 - [13. 代码检查](#13-代码检查)
-- [14. 项目文档 Readme](#14-项目文档-readme)
+- [14. 项目文档 Readme](#14-项目文档readme)
 
 <!-- /TOC -->
 

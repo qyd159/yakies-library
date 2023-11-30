@@ -49,7 +49,7 @@ description: ${pkg.description}
 	// 输出文件的存放目录；只用于会生成多个 chunks 的时候
 	dir: "./",
 	// 生成 chunks 名字的格式
-	entryFileNames: `${outputDir}/index.[format].js`
+	entryFileNames: `${outputDir}/${removeScope(pkg.name)}.[format].js`
 };
 
 
@@ -57,7 +57,7 @@ description: ${pkg.description}
 // 共用的 rollup 配置
 const shareConf = {
 	input: input,
-	// external: getDependencieNames(pkg),  //移除 package.json 中所有的依赖包
+	external: getDependencieNames(pkg),  //移除 package.json 中所有的依赖包
 	plugins: [
 		// 使用node解析算法查找模块
 		resolve({
@@ -109,7 +109,7 @@ export default [
 			{
 				...shareOutput,
 				format: 'umd',
-				name: pkgName,  //驼峰格式的 pkg.name
+				name: 'index',  //驼峰格式的 pkg.name
 				plugins: [terser()]     //压缩代码
 			} // umd
 		]
