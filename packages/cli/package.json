@@ -72,6 +72,7 @@
     "requirejs": "^2.3.6",
     "rimraf": "^2.7.1",
     "selfsigned": "^2.1.1",
+    "sharp": "^0.31.3",
     "svg2png-wasm": "^1.4.0",
     "tslib": "^2.6.0",
     "typescript": "^5.1.6",
