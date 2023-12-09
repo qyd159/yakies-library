@@ -1,6 +1,6 @@
 {
   "name": "@yakies/http",
-  "version": "0.10.9",
+  "version": "0.11.0",
   "description": "用于在浏览器端或nodejs端请求接口",
   "main": "dist/http.cjs.js",
   "module": "dist/http.es.js",
