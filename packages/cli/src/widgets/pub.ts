@@ -3,7 +3,7 @@ import { exec } from 'child_process';
 export default function (args) {
   const command = `${
     args.dir ? 'cd ' + args.dir + '&&' : ''
-  }/bin/zsh -i -c 'source ~/.zshrc.local; npm publish --registry=https://nexus.yakies.cn/repository/hosted/'`;
+  }npm publish --registry=https://nexus.yakies.cn/repository/hosted/`;
   const child = exec(command, (error, stdout, stderr) => {
     if (error) {
       console.error(`执行出错: ${error}`);

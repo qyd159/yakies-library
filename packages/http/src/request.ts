@@ -71,13 +71,13 @@ export const createRequest =
           }
           break;
         case Method.PUT:
-          request = defHttp.put({ url, data: payload.rawData });
+          request = defHttp.put({ url, data: payload.rawData,...(axiosOptions || {}) });
           break;
         case Method.PATCH:
-          request = defHttp.patch({ url, data: payload.rawData });
+          request = defHttp.patch({ url, data: payload.rawData,...(axiosOptions || {}) });
           break;
         case Method.DELETE:
-          request = defHttp.delete({ url, params: payload.rawData });
+          request = defHttp.delete({ url, params: payload.rawData,...(axiosOptions || {}) });
           break;
         default:
           break;
