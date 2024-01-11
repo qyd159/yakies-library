@@ -3,12 +3,13 @@ import { map, switchMap, mergeMap } from 'rxjs/operators';
 import { io, SocketOptions, ManagerOptions } from 'socket.io-client';
 // Initialise Socket.IO and wrap in observable
 let connect$!: Observable<any>;
+export let socket: any;
 
 export function connect(hostPath, options: Partial<ManagerOptions & SocketOptions> = { transports: ['websocket'] }) {
   const parsedUrl = new URL(hostPath);
   const scheme = parsedUrl.protocol === 'http:' ? 'ws://' : 'wss://';
   const host = parsedUrl.host;
-  const socket = io(`${scheme}${host}`, { ...options, path: parsedUrl.pathname });
+  socket = io(`${scheme}${host}`, { ...options, path: parsedUrl.pathname });
   const socket$ = of(socket);
   connect$ = socket$.pipe(
     switchMap((socket) =>
@@ -22,6 +23,11 @@ export function connect(hostPath, options: Partial<ManagerOptions & SocketOption
   return connect$;
 }
 
+export function close() {
+  if (socket) {
+    socket.close();
+  }
+}
 // Stream of connections
 
 // On connection, listen for event
