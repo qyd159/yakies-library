@@ -1,3 +1,4 @@
+import { VAxios } from './utils/http/axios/Axios';
 declare type Recordable<T = any> = Record<string, T>;
 export type ErrorMessageMode = 'none' | 'modal' | 'message' | undefined;
 export type SuccessMessageMode = 'none' | 'success' | 'error' | undefined;
@@ -14,6 +15,7 @@ export type RequestOptions = {
     withToken?: boolean;
     dataKey?: string;
     loading?: boolean;
+    axiosInstance?: VAxios;
 };
 export interface Result<T = any> {
     code: number;
