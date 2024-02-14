@@ -51,6 +51,7 @@
     "keymirror": "^0.1.1",
     "kolorist": "^1.8.0",
     "liftoff": "^3.1.0",
+    "lodash": "^4.17.21",
     "log4js": "^6.9.1",
     "minimist": "^1.2.8",
     "mkdirp": "^0.5.6",

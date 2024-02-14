@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
@@ -138,6 +138,9 @@ importers:
       liftoff:
         specifier: ^3.1.0
         version: 3.1.0
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       log4js:
         specifier: ^6.9.1
         version: 6.9.1
@@ -11519,7 +11522,7 @@ packages:
     dev: false
 
   /lodash@3.10.1:
-    resolution: {integrity: sha1-W/Rejkm6QYnhfUgnid/RW9FAt7Y=}
+    resolution: {integrity: sha512-9mDDwqVIma6OZX79ZlDACZl8sBm0TEnkf99zV3iMA4GzkIT/9hiqP5mY0HoT1iNLCrKc/R1HByV+yJfRWVJryQ==}
     dev: false
 
   /lodash@4.17.21:

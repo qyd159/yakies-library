@@ -1,3 +1,5 @@
+import { VAxios } from './utils/http/axios/Axios';
+
 declare type Recordable<T = any> = Record<string, T>;
 
 export type ErrorMessageMode = 'none' | 'modal' | 'message' | undefined;
@@ -26,8 +28,10 @@ export type RequestOptions = {
   // 返回key对应的值
   dataKey?: string;
   // 请求是否显示wrapperLoading
-  loading?: boolean
-}
+  loading?: boolean;
+  // axios示例，使用createAxios创建
+  axiosInstance?: VAxios;
+};
 
 export interface Result<T = any> {
   code: number;

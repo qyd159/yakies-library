@@ -52,10 +52,11 @@ export const createRequest =
           return payload.rawData as unknown as string;
         }
       );
+      const vAxios = options.axiosInstance || defHttp;
       let request: Promise<any>;
       switch (payload.method) {
         case Method.GET:
-          request = defHttp.get(
+          request = vAxios.get(
             {
               url,
               params: fromPairs(payload.queryNames.map((key) => [key, payload.rawData?.[key]])),
@@ -65,19 +66,19 @@ export const createRequest =
           break;
         case Method.POST:
           if (fileUpload) {
-            request = defHttp.uploadFile({ url, ...(axiosOptions || {}) }, { file: payload.rawData.file, ...payload.rawData }, customOptions);
+            request = vAxios.uploadFile({ url, ...(axiosOptions || {}) }, { file: payload.rawData.file, ...payload.rawData }, customOptions);
           } else {
-            request = defHttp.post({ url, data: payload.rawData, ...(axiosOptions || {}) }, customOptions);
+            request = vAxios.post({ url, data: payload.rawData, ...(axiosOptions || {}) }, customOptions);
           }
           break;
         case Method.PUT:
-          request = defHttp.put({ url, data: payload.rawData,...(axiosOptions || {}) });
+          request = vAxios.put({ url, data: payload.rawData, ...(axiosOptions || {}) }, customOptions);
           break;
         case Method.PATCH:
-          request = defHttp.patch({ url, data: payload.rawData,...(axiosOptions || {}) });
+          request = vAxios.patch({ url, data: payload.rawData, ...(axiosOptions || {}) }, customOptions);
           break;
         case Method.DELETE:
-          request = defHttp.delete({ url, params: payload.rawData,...(axiosOptions || {}) });
+          request = vAxios.delete({ url, params: payload.rawData, ...(axiosOptions || {}) }, customOptions);
           break;
         default:
           break;

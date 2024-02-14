@@ -16,7 +16,10 @@ export default function (args) {
       if (line && !line.startsWith('#')) {
         // 拆分键值对
         const [key, value] = line.split('=');
-        obj[key] = value;
+        obj[key.trim()] = value
+          .trim()
+          .replace(/^"(.*)"$/, '$1')
+          .replace(/^'(.*)'$/, '$1');
       }
       return obj;
     }, {});
