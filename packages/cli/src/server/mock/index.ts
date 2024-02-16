@@ -31,8 +31,11 @@ const c = new Crawler({
 });
 
 module.exports = async function (req, res, next) {
+  const proxy_url = YaConfig.httpProxy?.some((item) => req.originalUrl === item.url);
   const proxy_api = YaConfig.httpProxy?.some((item) => req.originalUrl.indexOf(item.baseApi) === 0);
-  const proxy = proxy_api
+  const proxy = proxy_url
+    ? YaConfig.httpProxy?.find((item) => req.originalUrl === item.url)
+    : proxy_api
     ? YaConfig.httpProxy?.find((item) => req.originalUrl.indexOf(item.baseApi) === 0)
     : YaConfig.httpProxy?.find((item) => !item.baseApi);
 
@@ -44,7 +47,7 @@ module.exports = async function (req, res, next) {
 
   let result;
 
-  if (proxy?.url && proxy.prepareUrl) {
+  if (proxy_url && proxy.prepareUrl) {
     await new Promise((resolve) => {
       //需要先访问某页面后才能访问目标页面
       c.queue({
@@ -71,10 +74,10 @@ module.exports = async function (req, res, next) {
         },
       });
     });
-  } else if (proxy?.url) {
+  } else if (proxy_url) {
     result = await new Promise((resolve) => {
       c.queue({
-        uri: proxy.url,
+        uri: proxy.target + proxy.url,
         // The global callback won't be called
         callback: function (error, grabedRes, done) {
           if (error) {
@@ -86,7 +89,7 @@ module.exports = async function (req, res, next) {
         },
       });
     });
-  } else if (proxy) {
+  } else if (proxy && !proxy.jsRequires.includes(req.originalUrl) && !proxy.cssRequires.includes(req.originalUrl)) {
     const parsedUrl = URL.parse(req.originalUrl);
     const parsedTargetUrl = URL.parse(proxy.target);
     req.url = parsedTargetUrl.path + (parsedTargetUrl.search ? (parsedUrl.query ? '&' + parsedUrl.query : '') : parsedUrl.search || '');
@@ -105,8 +108,13 @@ module.exports = async function (req, res, next) {
       const options: any = {
         target: parsedTargetUrl.protocol + '//' + parsedTargetUrl.host + parsedTargetUrl.path,
         changeOrigin: true,
-        selfHandleResponse: false,
         secure: false,
+        onError(err, req, res, target) {
+          res.writeHead(500, {
+            'Content-Type': 'text/plain',
+          });
+          res.end('Something went wrong. And we are reporting a custom error message.');
+        },
       };
       // options.onProxyRes = function (proxyRes, req, res) {
       //   proxyRes.headers['x-added'] = 'foobar' // add new header to response
@@ -115,27 +123,28 @@ module.exports = async function (req, res, next) {
       YaConfig.pureProxy = createProxyMiddleware(options);
       YaConfig.apiProxy = (proxy, callback) => {
         const parsedTargetUrl = URL.parse(proxy.target);
-        options.selfHandleResponse = true;
-        options.target = parsedTargetUrl.protocol + '//' + parsedTargetUrl.host + parsedTargetUrl.path;
-        options.onProxyRes = function (proxyRes, userReq) {
-          const bodyChunks = [];
-          proxyRes.on('data', (chunk) => {
-            bodyChunks.push(chunk);
-          });
-          proxyRes.on('end', () => {
-            const body: any = Buffer.concat(bodyChunks);
-            const data = {
-              statusCode: proxyRes.statusCode,
-              headers: proxyRes.headers,
-              body,
-            };
-            if (data.headers['content-type'] && data.headers['content-type'].indexOf('application/json') !== -1) {
-              data.body = body.toString();
-            }
-            callback(null, data);
-          });
-        };
-        return createProxyMiddleware(options);
+        return createProxyMiddleware({
+          ...options,
+          target: parsedTargetUrl.protocol + '//' + parsedTargetUrl.host + parsedTargetUrl.path,
+          onProxyRes(proxyRes, userReq) {
+            const bodyChunks = [];
+            proxyRes.on('data', (chunk) => {
+              bodyChunks.push(chunk);
+            });
+            proxyRes.on('end', () => {
+              const body: any = Buffer.concat(bodyChunks);
+              const data = {
+                statusCode: proxyRes.statusCode,
+                headers: proxyRes.headers,
+                body,
+              };
+              if (data.headers['content-type'] && data.headers['content-type'].indexOf('application/json') !== -1) {
+                data.body = body.toString();
+              }
+              callback(null, data);
+            });
+          },
+        });
       };
     }
     async function response(data) {

@@ -101,7 +101,8 @@ const insertScript = function (document, $jsLoader, url, $) {
   var scriptElm = document.createElement('script');
   scriptElm.setAttribute('type', 'text/javascript');
   scriptElm.setAttribute('src', url);
-  $(scriptElm).insertBefore($jsLoader);
+  if ($jsLoader.length > 0) $(scriptElm).insertBefore($jsLoader);
+  else document.head.appendChild(scriptElm);
 };
 
 const getTemplateJs = function (proxy, YaConfig) {
