@@ -2,7 +2,7 @@ import { removeScope, getBaseNameOfHumpFormat, getDependencieNames, toStringTag 
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
-import { terser } from "rollup-plugin-terser";
+// import { terser } from "rollup-plugin-terser";
 import { dirname } from "path"
 import pkg from './package.json';
 
@@ -26,7 +26,7 @@ import typescript from '@rollup/plugin-typescript';
 
 const input = 'src/index.ts';   // 输入（入口）文件
 const outputDir = dirname(pkg.main || "dist/*");    //输出目录
-const pkgName = getBaseNameOfHumpFormat(pkg.name);  //驼峰格式的 pkg.name
+// const pkgName = getBaseNameOfHumpFormat(pkg.name);  //驼峰格式的 pkg.name
 const extensions = ['.tsx', '.ts', '.jsx', '.mjs', '.js', '.json', '.node'];  // 默认查找的文件扩展名
 
 
