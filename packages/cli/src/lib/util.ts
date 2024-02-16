@@ -94,7 +94,8 @@ const insertLinkCss = function (document, $cssLoader, url) {
   linkElm.setAttribute('rel', 'stylesheet');
   linkElm.setAttribute('type', 'text/css');
   linkElm.setAttribute('href', url);
-  $cssLoader.after(linkElm);
+  if ($cssLoader.length > 0) $cssLoader.after(linkElm);
+  else document.head.appendChild(linkElm);
 };
 
 const insertScript = function (document, $jsLoader, url, $) {
