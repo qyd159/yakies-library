@@ -31,20 +31,15 @@ const c = new Crawler({
 });
 
 module.exports = async function (req, res, next) {
-  const proxy_url = YaConfig.httpProxy?.some((item) => req.originalUrl === item.url);
+  const proxy_url = YaConfig.httpProxy?.some((item) => item.urls.includes(req.originalUrl));
   const proxy_api = YaConfig.httpProxy?.some((item) => req.originalUrl.indexOf(item.baseApi) === 0);
   const proxy = proxy_url
-    ? YaConfig.httpProxy?.find((item) => req.originalUrl === item.url)
+    ? YaConfig.httpProxy?.find((item) => item.urls.includes(req.originalUrl))
     : proxy_api
     ? YaConfig.httpProxy?.find((item) => req.originalUrl.indexOf(item.baseApi) === 0)
     : YaConfig.httpProxy?.find((item) => !item.baseApi);
 
   let contextPath = './';
-
-  if (proxy?.url?.indexOf('//') === 0) {
-    proxy.url = 'http:' + proxy.url;
-  }
-
   let result;
 
   if (proxy_url && proxy.prepareUrl) {
@@ -58,7 +53,7 @@ module.exports = async function (req, res, next) {
             console.log(error);
           } else {
             c.queue({
-              uri: proxy.url,
+              uri: proxy.target + req.originalUrl,
               // The global callback won't be called
               callback: function (error, grabedRes, done) {
                 if (error) {
@@ -77,7 +72,7 @@ module.exports = async function (req, res, next) {
   } else if (proxy_url) {
     result = await new Promise((resolve) => {
       c.queue({
-        uri: proxy.target + proxy.url,
+        uri: proxy.target + req.originalUrl,
         // The global callback won't be called
         callback: function (error, grabedRes, done) {
           if (error) {

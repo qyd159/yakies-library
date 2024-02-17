@@ -34,7 +34,7 @@ export interface Proxy {
   cache?: boolean;
   debug?: boolean;
   prepareUrl?: string;
-  url?: string;
+  urls?: string[];
   gziped?: boolean;
   jsRequires?: string[];
   cssRequires?: string[];
