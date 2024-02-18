@@ -33,7 +33,21 @@ class JPEGTransform extends Transform {
 export default function (args) {
   const jpegTransform = new JPEGTransform();
 
-  const params = ['-i', 'rtsp://10.13.3.16:1554/rtp/20231128_2', '-vf', 'fps=1/1', '-f', 'image2pipe', '-vcodec', 'mjpeg', '-'];
+  const params = [
+    '-i',
+    'rtsp://admin:dmai2022@192.168.2.38:554/h265/ch1/main/av_stream',
+    '-f',
+    'image2pipe',
+    '-vcodec',
+    'mjpeg',
+    '-q:v',
+    '5',
+    '-vsync',
+    'drop',
+    '-vf',
+    'fps=15',
+    '-',
+  ];
   console.log(['ffmepg'].concat(params).join(' '));
   const ffmpeg = spawn('ffmpeg', params);
 
