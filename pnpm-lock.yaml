@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -284,6 +284,12 @@ importers:
       ts-node:
         specifier: ^8.10.2
         version: 8.10.2(typescript@5.1.6)
+
+  packages/cli/packages/cli:
+    dependencies:
+      vtils:
+        specifier: ^4.79.0
+        version: 4.85.3(react-dom@18.2.0)(react@18.2.0)
 
   packages/create-ya:
     devDependencies:

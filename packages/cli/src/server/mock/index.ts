@@ -31,10 +31,10 @@ const c = new Crawler({
 });
 
 module.exports = async function (req, res, next) {
-  const proxy_url = YaConfig.httpProxy?.some((item) => item.urls.includes(req.originalUrl));
+  const proxy_url = YaConfig.httpProxy?.some((item) => item.urls?.includes(req.originalUrl));
   const proxy_api = YaConfig.httpProxy?.some((item) => req.originalUrl.indexOf(item.baseApi) === 0);
   const proxy = proxy_url
-    ? YaConfig.httpProxy?.find((item) => item.urls.includes(req.originalUrl))
+    ? YaConfig.httpProxy?.find((item) => item.urls?.includes(req.originalUrl))
     : proxy_api
     ? YaConfig.httpProxy?.find((item) => req.originalUrl.indexOf(item.baseApi) === 0)
     : YaConfig.httpProxy?.find((item) => !item.baseApi);
@@ -84,7 +84,7 @@ module.exports = async function (req, res, next) {
         },
       });
     });
-  } else if (proxy && !proxy.jsRequires.includes(req.originalUrl) && !proxy.cssRequires.includes(req.originalUrl)) {
+  } else if (proxy && !proxy.jsRequires?.includes(req.originalUrl) && !proxy.cssRequires?.includes(req.originalUrl)) {
     const parsedUrl = URL.parse(req.originalUrl);
     const parsedTargetUrl = URL.parse(proxy.target);
     req.url = parsedTargetUrl.path + (parsedTargetUrl.search ? (parsedUrl.query ? '&' + parsedUrl.query : '') : parsedUrl.search || '');
