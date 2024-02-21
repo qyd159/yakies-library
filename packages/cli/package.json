@@ -1,6 +1,6 @@
 {
   "name": "@yakies/cli",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "yakies命令行工具",
   "main": "dist/bundle.js",
   "bin": {
@@ -43,6 +43,7 @@
     "http-proxy-middleware": "^2.0.6",
     "http-server": "^14.1.1",
     "inline-source": "^6.2.0",
+    "isolated-vm": "^4.7.2",
     "javascript-obfuscator": "^0.18.8",
     "jquery": "^3.7.0",
     "js-yaml": "^4.1.0",
@@ -106,6 +107,7 @@
     "ts-node": "^8.10.2"
   },
   "optionalDependencies": {
+    "@builder.io/gpt-crawler": "^1.4.0",
     "sharp": "^0.31.3"
   }
 }

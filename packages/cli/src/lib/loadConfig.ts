@@ -21,14 +21,12 @@ export default async function (isDev: boolean = false): Promise<[IConfig, string
   const baseConfig = loadBaseConfig(isDev);
 
   if (!configFileExists) {
-    console.error(
-      `没找到配置文件:${configFile}`
-    );
+    console.error(`没找到配置文件:${configFile}`);
     return [baseConfig, null];
   }
   consola.success(`找到配置文件: ${configFile}`);
 
-  const config: IConfig = merge(baseConfig, ts2cjs(configFile));
+  const config: IConfig = merge(baseConfig, await ts2cjs(configFile));
 
   return [config, configFile];
 }
