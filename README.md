@@ -1,4 +1,7 @@
 ### yakies-library
 
-工具、组件库
-utilities and components
+公共工具、插件 utilities and plugins
+
+#### 如何创建一个新的库？
+
+pnpm create ya

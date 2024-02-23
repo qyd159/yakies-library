@@ -5,7 +5,7 @@
   "author": "qinyadong <qyd159@163.com>",
   "private": true,
   "license": "MIT",
-  "description": "公共工具、组件库",
+  "description": "公共工具、插件等",
   "scripts": {
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "vitest",
