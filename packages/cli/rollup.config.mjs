@@ -30,7 +30,7 @@ const commonPlugins = [
   resolve(),
   commonjs(),
   externals({
-    exclude: ['clipboardy']
+    exclude: ['clipboardy', 'crypto-random-string']
   }),
   string({
     // 导入 .tpl 和 .glsl 文件
@@ -77,6 +77,10 @@ const widgetChunks = widgets.map(widget => {
       widget.path.indexOf('codeToSnippetBody') !== -1 ? alias({
         entries: [
           { find: 'clipboardy', replacement: 'node_modules/clipboardy/index.js' },
+        ]
+      }) : widget.path.indexOf('cryptoRandomString') !== -1 ? alias({
+        entries: [
+          { find: 'crypto-random-string', replacement: 'node_modules/crypto-random-string/index.js' },
         ]
       }) : null,
       replace({

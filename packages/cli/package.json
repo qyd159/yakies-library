@@ -108,6 +108,10 @@
   },
   "optionalDependencies": {
     "@builder.io/gpt-crawler": "^1.4.0",
-    "sharp": "^0.31.3"
+    "@yakies/http": "workspace:^",
+    "axios-cookiejar-support": "^5.0.0",
+    "crypto-random-string": "^5.0.0",
+    "sharp": "^0.31.3",
+    "tough-cookie": "^4.1.3"
   }
 }
