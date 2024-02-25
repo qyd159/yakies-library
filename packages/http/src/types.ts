@@ -31,6 +31,7 @@ export type RequestOptions = {
   loading?: boolean;
   // axios示例，使用createAxios创建
   axiosInstance?: VAxios;
+  customToken?: string;
 };
 
 export interface Result<T = any> {

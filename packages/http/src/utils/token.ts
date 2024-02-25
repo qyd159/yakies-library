@@ -1,5 +1,6 @@
 export const TOKEN_STORAGE_KEY = 'token';
 export const TOKEN_REFRESH_STORAGE_KEY = 'refresh-token';
+export const TOKEN_ACCESS_STORAGE_KEY = 'access-token';
 export const USERNAME_STORAGE_KEY = 'username';
 
 export interface ServicesRes<T> {
@@ -13,11 +14,13 @@ export interface SearchListRes<T> {
   meta: any;
 }
 
-let ls:any = typeof localStorage === 'undefined' ? (async () => {
-  ls= (await import('localStorage')).default;
-  // 使用导入的模块
-})()
- : localStorage;
+let ls: any =
+  typeof localStorage === 'undefined'
+    ? (async () => {
+        ls = (await import('localStorage')).default;
+        // 使用导入的模块
+      })()
+    : localStorage;
 
 /**
  * token保存到本地
@@ -25,6 +28,9 @@ let ls:any = typeof localStorage === 'undefined' ? (async () => {
  */
 export function setTokenToLocal(token: string) {
   ls.setItem(TOKEN_STORAGE_KEY, token);
+}
+export function setAccessTokenToLocal(token: string) {
+  ls.setItem(TOKEN_ACCESS_STORAGE_KEY, token);
 }
 export function setRefreshTokenToLocal(refreshToken: string) {
   ls.setItem(TOKEN_REFRESH_STORAGE_KEY, refreshToken);
@@ -34,6 +40,9 @@ export function setRefreshTokenToLocal(refreshToken: string) {
  */
 export function getTokenFromLocal() {
   return ls.getItem(TOKEN_STORAGE_KEY);
+}
+export function getAccessTokenFromLocal() {
+  return ls.getItem(TOKEN_ACCESS_STORAGE_KEY);
 }
 export function getRefreshTokenFromLocal() {
   return ls.getItem(TOKEN_REFRESH_STORAGE_KEY);

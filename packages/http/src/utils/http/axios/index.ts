@@ -131,7 +131,7 @@ const transform: AxiosTransform = {
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
       // jwt token
       config.headers.Authorization = options.authenticationScheme ? `${options.authenticationScheme} ${token}` : token;
-      config.headers[ConfigEnum.TOKEN] = token;
+      config.headers[ConfigEnum.TOKEN] = config.requestOptions?.customToken;
       //--update-begin--author:liusq---date:20210831---for:将签名和时间戳，添加在请求接口 Header
 
       // update-begin--author:taoyan---date:20220421--for: VUEN-410【签名改造】 X-TIMESTAMP牵扯
