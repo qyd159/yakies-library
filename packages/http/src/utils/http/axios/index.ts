@@ -7,11 +7,10 @@ import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform';
 import { VAxios } from './Axios';
 import { RequestEnum, ResultEnum, ContentTypeEnum, ConfigEnum } from '../../../enums/httpEnum';
 import { isString } from '../../is';
-import { getTokenFromLocal } from '../../token';
+import { getAccessTokenFromLocal, getTokenFromLocal } from '../../token';
 import { setObjToUrlParams, deepMerge } from '../../';
 import signMd5Utils from '../../encryption/signMd5Utils';
 import { joinTimestamp, formatRequestDate } from './helper';
-import { get } from 'lodash';
 
 declare type Recordable<T = any> = Record<string, T>;
 
@@ -131,7 +130,7 @@ const transform: AxiosTransform = {
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
       // jwt token
       config.headers.Authorization = options.authenticationScheme ? `${options.authenticationScheme} ${token}` : token;
-      config.headers[ConfigEnum.TOKEN] = config.requestOptions?.customToken;
+      config.headers[ConfigEnum.TOKEN] = getAccessTokenFromLocal();
       //--update-begin--author:liusq---date:20210831---for:将签名和时间戳，添加在请求接口 Header
 
       // update-begin--author:taoyan---date:20220421--for: VUEN-410【签名改造】 X-TIMESTAMP牵扯
