@@ -1,6 +1,6 @@
 {
   "name": "@yakies/cli",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "description": "yakies命令行工具",
   "main": "dist/bundle.js",
   "bin": {
