@@ -59,6 +59,7 @@ export const createRequest =
           request = vAxios.get(
             {
               url,
+              ...(axiosOptions || {}),
               params: fromPairs(payload.queryNames.map((key) => [key, payload.rawData?.[key]])),
             },
             customOptions
@@ -66,7 +67,8 @@ export const createRequest =
           break;
         case Method.POST:
           if (fileUpload) {
-            request = vAxios.uploadFile({ url, ...(axiosOptions || {}) }, { file: payload.rawData.file, ...payload.rawData }, customOptions);
+            const { file, filePropertyName, ...data } = payload.rawData;
+            request = defHttp.uploadFile({ url, ...(axiosOptions || {}) }, { file, filePropertyName, data }, customOptions);
           } else {
             request = vAxios.post({ url, data: payload.rawData, ...(axiosOptions || {}) }, customOptions);
           }

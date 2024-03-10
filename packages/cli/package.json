@@ -1,6 +1,6 @@
 {
   "name": "@yakies/cli",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "description": "yakies命令行工具",
   "main": "dist/bundle.js",
   "bin": {
@@ -108,7 +108,6 @@
   },
   "optionalDependencies": {
     "@builder.io/gpt-crawler": "^1.4.0",
-    "@yakies/http": "workspace:^",
     "axios-cookiejar-support": "^5.0.0",
     "crypto-random-string": "^5.0.0",
     "sharp": "^0.31.3",
