@@ -15,7 +15,7 @@ export * from './axiosTransform';
  * @description:  axios module
  */
 export class VAxios {
-  private axiosInstance: AxiosInstance;
+  axiosInstance: AxiosInstance;
   private readonly options: CreateAxiosOptions;
 
   constructor(options: CreateAxiosOptions) {
