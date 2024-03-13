@@ -20,7 +20,7 @@ export class VAxios {
 
   constructor(options: CreateAxiosOptions) {
     this.options = options;
-    this.axiosInstance = axios.create(options);
+    this.axiosInstance = options.instance || axios.create(options);
     this.setupInterceptors();
   }
 
