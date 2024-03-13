@@ -14,7 +14,7 @@ import { joinTimestamp, formatRequestDate } from './helper';
 
 declare type Recordable<T = any> = Record<string, T>;
 
-const loadingMap = new Map();
+// const loadingMap = new Map();
 const globSetting = { apiUrl: '', urlPrefix: '' };
 const urlPrefix = globSetting.urlPrefix;
 
@@ -124,7 +124,7 @@ const transform: AxiosTransform = {
   /**
    * @description: 请求拦截器处理
    */
-  requestInterceptors: (config: Recordable, options) => {
+  requestInterceptors: (config, options) => {
     // 请求之前处理config
     const token = (config as Recordable)?.customToken || getTokenFromLocal();
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {

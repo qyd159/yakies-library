@@ -12,8 +12,9 @@
     "downlevelIteration": true,
     "strict": true,
     "moduleResolution": "node",
-    "resolveJsonModule":true,
-    "esModuleInterop": true
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false
   },
   "exclude": [
     "dist",

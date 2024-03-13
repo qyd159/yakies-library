@@ -1,6 +1,6 @@
 {
   "name": "@yakies/http",
-  "version": "0.18.0",
+  "version": "1.0.0",
   "description": "用于在浏览器端或nodejs端请求接口",
   "main": "dist/http.cjs.js",
   "module": "dist/http.es.js",
@@ -20,7 +20,7 @@
     "pretest": "npm run build"
   },
   "dependencies": {
-    "axios": "^0.26.1",
+    "axios": "^1.6.5",
     "dayjs": "^1.11.9",
     "localStorage": "^1.0.4",
     "lodash": "^4.17.21",
@@ -34,6 +34,7 @@
     "@rollup/plugin-node-resolve": "^11.0.1",
     "@rollup/plugin-typescript": "^8.0.0",
     "@types/lodash": "^4.14.202",
+    "@types/qs": "^6.9.12",
     "@typescript-eslint/eslint-plugin": "^4.10.0",
     "@typescript-eslint/parser": "^4.10.0",
     "eslint": "^7.15.0",

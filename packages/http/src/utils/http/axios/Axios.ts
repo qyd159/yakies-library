@@ -1,4 +1,4 @@
-import type { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+import type { AxiosRequestConfig, InternalAxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import type { RequestOptions, Result, UploadFileParams } from '../../../types';
 import type { CreateAxiosOptions } from './axiosTransform';
 import axios from 'axios';
@@ -73,19 +73,22 @@ export class VAxios {
     const axiosCanceler = new AxiosCanceler();
 
     // 请求侦听器配置处理
-    this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
-      // If cancel repeat request is turned on, then cancel repeat request is prohibited
-      // @ts-ignore
-      const { ignoreCancelToken } = config.requestOptions;
+    this.axiosInstance.interceptors.request.use(
+      (config: InternalAxiosRequestConfig) => {
+        // If cancel repeat request is turned on, then cancel repeat request is prohibited
+        // @ts-ignore
+        const { ignoreCancelToken } = config.requestOptions;
 
-      const ignoreCancel = ignoreCancelToken !== undefined ? ignoreCancelToken : this.options.requestOptions?.ignoreCancelToken;
+        const ignoreCancel = ignoreCancelToken !== undefined ? ignoreCancelToken : this.options.requestOptions?.ignoreCancelToken;
 
-      !ignoreCancel && axiosCanceler.addPending(config);
-      if (requestInterceptors && isFunction(requestInterceptors)) {
-        config = requestInterceptors(config, this.options);
-      }
-      return config;
-    }, undefined);
+        !ignoreCancel && axiosCanceler.addPending(config);
+        if (requestInterceptors && isFunction(requestInterceptors)) {
+          config = requestInterceptors(config, this.options);
+        }
+        return config;
+      },
+      () => {}
+    );
 
     // 请求拦截器错误捕获
     requestInterceptorsCatch &&
