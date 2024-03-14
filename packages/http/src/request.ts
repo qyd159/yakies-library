@@ -20,6 +20,7 @@ interface RequestOptions {
   fileUpload?: boolean;
   axiosOptions?: AxiosRequestConfig;
   errorCaptured?: (err) => void;
+  baseUrl?: string;
 }
 
 export const createRequest =
@@ -46,12 +47,11 @@ export const createRequest =
       const { server: _server, fileUpload, axiosOptions, ...customOptions } = options;
 
       // 请求地址
-      const url = `${baseUrl}${payload.path.indexOf('?') !== -1 ? payload.path.substring(0, payload.path.indexOf('?')) : payload.path}`.replace(
-        /\{(.*?)\}/g,
-        function (_match, _$1) {
-          return payload.rawData as unknown as string;
-        }
-      );
+      const url = `${options.baseUrl ?? baseUrl}${
+        payload.path.indexOf('?') !== -1 ? payload.path.substring(0, payload.path.indexOf('?')) : payload.path
+      }`.replace(/\{(.*?)\}/g, function (_match, _$1) {
+        return payload.rawData as unknown as string;
+      });
       const vAxios = options.axiosInstance || defHttp;
       let request: Promise<any>;
       switch (payload.method) {
