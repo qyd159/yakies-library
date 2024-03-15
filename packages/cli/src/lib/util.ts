@@ -156,6 +156,7 @@ const handleHtml = function (result, gamesite, proxy) {
   const YaConfig = global.YaConfig;
   const dom = new JSDOM(result, { virtualConsole: virtualConsole });
   const window = dom.window;
+  const document = window.document;
   const $ = require('jquery')(window);
 
   let jsLoader = window.document.getElementById('jsLoader');
@@ -289,6 +290,31 @@ const handleHtml = function (result, gamesite, proxy) {
       }
     }
   });
+  // 修改tdk
+  if (proxy.headers?.title) {
+    // 替换title标签的内容
+    const titleTag = document.querySelector('title');
+    if (titleTag) {
+      titleTag.textContent = proxy.headers?.title;
+    }
+  }
+
+  if (proxy.headers?.description) {
+    // 替换meta description的内容
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', proxy.headers.description);
+    }
+  }
+
+  if (proxy.headers?.keywords) {
+    // 替换meta keywords的内容
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+      metaKeywords.setAttribute('content', proxy.headers.keywords);
+    }
+  }
+
   return dom.serialize();
 };
 

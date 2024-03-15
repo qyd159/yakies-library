@@ -40,6 +40,7 @@ export interface Proxy {
   cssRequires?: string[];
   jsInjector?: { url: string; target: string }[];
   cssInjector?: { url: string; target: string }[];
+  headers?: { title?: string; description?: string; keywords?: string };
   name?: string;
   capture?: boolean;
   description?: string;
