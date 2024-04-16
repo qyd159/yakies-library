@@ -1,8 +1,8 @@
 import { GlobalConfig } from 'src/config/defineConfig';
 import * as _ from '../../lib/util';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 const Crawler = require('crawler');
 const bodyParser = require('body-parser');
-const { createProxyMiddleware } = require('http-proxy-middleware');
 const proxyCacheMiddleware = require('@yakies/proxy-cache-middleware');
 const Axios = require('axios').default;
 const queryString = require('query-string');
@@ -122,22 +122,13 @@ module.exports = async function (req, res, next) {
           ...options,
           target: parsedTargetUrl.protocol + '//' + parsedTargetUrl.host + parsedTargetUrl.path,
           onProxyRes(proxyRes, userReq) {
-            const bodyChunks = [];
-            proxyRes.on('data', (chunk) => {
-              bodyChunks.push(chunk);
-            });
-            proxyRes.on('end', () => {
-              const body: any = Buffer.concat(bodyChunks);
-              const data = {
-                statusCode: proxyRes.statusCode,
-                headers: proxyRes.headers,
-                body,
-              };
-              if (data.headers['content-type'] && data.headers['content-type'].indexOf('application/json') !== -1) {
-                data.body = body.toString();
-              }
-              callback(null, data);
-            });
+            const data = {
+              statusCode: proxyRes.statusCode,
+              headers: proxyRes.headers,
+              // TODO 获取body内容
+              // body: proxyRes.,
+            };
+            callback(null, data);
           },
         });
       };

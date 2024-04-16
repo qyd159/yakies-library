@@ -68,7 +68,7 @@ export const createRequest =
         case Method.POST:
           if (fileUpload) {
             const { file, filePropertyName, ...data } = payload.rawData;
-            request = defHttp.uploadFile({ url, ...(axiosOptions || {}) }, { file, filePropertyName, data }, customOptions);
+            request = vAxios.uploadFile({ url, ...(axiosOptions || {}) }, { file, filePropertyName, data }, customOptions);
           } else {
             request = vAxios.post({ url, data: payload.rawData, ...(axiosOptions || {}) }, customOptions);
           }
