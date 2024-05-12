@@ -1,5 +1,5 @@
-const axios = require('axios');
-const { exec } = require('child_process');
+import axios from 'axios';
+import { exec } from 'child_process';
 
 const srcRegistry = 'https://nexus.yakies.cn/repository/hosted'; // 源A的URL
 const destRegistry = 'https://npm.yakies.cn/repository/hosted'; // 源B的URL
