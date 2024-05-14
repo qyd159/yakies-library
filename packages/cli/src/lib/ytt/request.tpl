@@ -1,95 +1,15 @@
-import type { AxiosRequestConfig } from 'axios';
-import type { RequestFunctionParams } from 'yapi-to-typescript';
-import { Method } from 'yapi-to-typescript';
-import { defHttp } from '/@/utils/http/axios';
-import type { RequestOptions as axioRequestOptions } from '/#/axios';
-import { fromPair, get } from 'vtils';
+import { router } from '@/router';
+import { createAxios, createRequest, setTokenToLocal } from '@yakies/http';
 
-export interface RequestOptions {
-  /**
-   * 使用的服务器。
-   *
-   * - `prod`: 生产服务器
-   * - `dev`: 测试服务器
-   * - `mock`: 模拟服务器
-   *
-   * @default prod
-   */
-  server?: 'prod' | 'dev' | 'mock';
-  headers?: Recordable;
-  fileUpload?: boolean;
-  axiosOptions?: AxiosRequestConfig;
-}
-
-export default function request<TResponseData>(
-  payload: RequestFunctionParams,
-  options: RequestOptions & axioRequestOptions = {
-    server: 'prod',
-    fileUpload: false,
-  }
-): Promise<TResponseData> {
-  return new Promise<TResponseData>(async (resolve, reject) => {
-    // 基本地址
-    const baseUrl = options.server === 'mock' ? payload.mockUrl : options.server === 'dev' ? payload.devUrl : payload.prodUrl;
-    const { server: _server, fileUpload, axiosOptions, ...customOptions } = options;
-
-    // 请求地址
-    const url = `${baseUrl}${payload.path.indexOf('?') !== -1 ? payload.path.substring(0, payload.path.indexOf('?')) : payload.path}`.replace(
-      /\{(.*?)\}/g,
-      function (_match, _$1) {
-        return payload.rawData as unknown as string;
-      }
-    );
-    let request;
-    switch (payload.method) {
-      case Method.GET:
-        request = defHttp.get(
-          {
-            url,
-            params: fromPairs(payload.queryNames.map((key) => [key, payload.rawData?.[key]])),
-            headers: options.headers,
-          },
-          customOptions
-        );
-        break;
-      case Method.POST:
-        if (fileUpload) {
-          request = defHttp.uploadFile({ url, ...(axiosOptions || {}) }, { file: payload.rawData.file, ...payload.rawData }, customOptions);
-        } else if (options.isFormData) {
-          const formData = new FormData();
-          Object.keys(payload.rawData).forEach((key) => {
-            formData.append(key, payload.rawData[key]);
-          });
-          request = defHttp.post(url, data: formData, ...(axiosOptions || {}) }, customOptions });
-          break;
-        } else {
-          request = defHttp.post({ url, data: payload.rawData, ...(axiosOptions || {}) }, customOptions);
-        }
-        break;
-      case Method.PUT:
-        request = defHttp.put({ url, data: payload.rawData });
-        break;
-      case Method.PATCH:
-        request = defHttp.patch({ url, data: payload.rawData });
-        break;
-      case Method.DELETE:
-        request = defHttp.delete({ url, params: payload.rawData });
-        break;
-      default:
-        break;
+export default createRequest('/chat-api', {
+  errorCaptured: (err) => {
+    if (err.data?.code === 11002 || err.data?.code === 11001) {
+      setTokenToLocal('');
+      router.push('/login');
     }
-    request
-      .then(
-        (data) => {
-          // 具体请求逻辑
-          resolve(options.dataKey ? get(data.data, options.dataKey) : data);
-        },
-        (e) => {
-          reject(e);
-        },
-      )
-      .catch((e) => {
-        reject(e);
-      });
-  });
-}
+  },
+  joinTime: false,
+  axiosInstance: createAxios({
+    authenticationScheme: 'Bearer',
+  }),
+});
