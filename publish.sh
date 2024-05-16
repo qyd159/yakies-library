@@ -12,5 +12,5 @@ fi
 if [ $1 = "all" ]; then
   pnpm publish -r
 else
-  pnpm publish --filter $1 --registry 'https://nexus.yakies.cn/repository/hosted/' --no-git-checks
+  pnpm publish --filter $1 --registry 'https://npm.yakies.cn/repository/hosted/' --no-git-checks
 fi
