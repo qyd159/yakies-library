@@ -1,10 +1,10 @@
 {
   "name": "@yakies/llm-client",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "构建与chatgpt-api服务通信的通用前端库，支持web和小程序",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
-  "types": "types/index.d.ts",
+  "main": "dist/llm-client.cjs.js",
+  "module": "dist/llm-client.es.js",
+  "types": "types/llm-client.d.ts",
   "sideEffects": false,
   "license": "MIT",
   "files": [
