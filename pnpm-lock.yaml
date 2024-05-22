@@ -659,14 +659,20 @@ importers:
   packages/llm-client:
     dependencies:
       '@yakies/http':
-        specifier: ^1.1.1
-        version: 1.1.1(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^1.1.2
+        version: 1.1.2(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@yakies/rx-socket-client':
-        specifier: ^1.7.0
-        version: 1.7.0
+        specifier: ^1.8.0
+        version: 1.8.0
       async-wait-until:
         specifier: ^2.0.12
         version: 2.0.12
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
+      markdown-it:
+        specifier: ^14.1.0
+        version: 14.1.0
       openai:
         specifier: ^4.47.1
         version: 4.47.1(encoding@0.1.13)
@@ -3102,8 +3108,8 @@ packages:
     engines: {node: '>12.0'}
     hasBin: true
 
-  '@yakies/http@1.1.1':
-    resolution: {integrity: sha512-xQYc9DyOdJGEBpmK4lUJEDlDugYJogu+IJsh7rb1cNkbDdoUPFriGPZ60wVobbOlBjmoXPYA+qOkWtmXJAnRNg==}
+  '@yakies/http@1.1.2':
+    resolution: {integrity: sha512-bz6w0EIywSERCdzWcG7e3lp77gU43cJCP1seL29dFMK1ThmxD3RiUVd9zrMZ0puIebuYhnkA6oXGShjj/GfIDg==}
 
   '@yakies/mkcert@0.2.2':
     resolution: {integrity: sha512-GXW5gtS2AH24bFpwFcWzQEvYIgEOWYWKtg06MXsROw0Vjji0ohV381nt3MdSQt06+KFe1CnAGSmqPtw1n2HL+Q==}
@@ -3118,8 +3124,8 @@ packages:
     resolution: {integrity: sha512-RPweX8rHTlLn3ewQsjhMaaCmilsow5qaa6L2OYnPtJnvkiOGK6uzXNtFnc/RUlazn3hcsLolEyYsMX36vw2TBA==}
     engines: {node: '>=0.10.0'}
 
-  '@yakies/rx-socket-client@1.7.0':
-    resolution: {integrity: sha512-molo0WgERjCpDJQlM+YSdInngPsoqxROOQ5vrWDSFcisjDH6PkeLVmTsqRmxPDzHV2btm17oQwG3k2nCARKH5w==}
+  '@yakies/rx-socket-client@1.8.0':
+    resolution: {integrity: sha512-2cwlf2O1eRuTh6p5I8ZN+2eBFpiaGM+LGsbA5N+Qxth3IF/MxEeqNJYdY9IExOjFgLfaeKFPKsTVDcP7Dk9fwg==}
 
   '@yarnpkg/lockfile@1.1.0':
     resolution: {integrity: sha512-GpSwvyXOcOOlV70vbnzjj4fW5xW/FdUF6nQEt1ENy7m4ZCczi1+/buVUPAqmGfqznsORNFzUMjctTIp8a9tuCQ==}
@@ -7366,6 +7372,9 @@ packages:
   linkedom@0.16.11:
     resolution: {integrity: sha512-WgaTVbj7itjyXTsCvgerpneERXShcnNJF5VIV+/4SLtyRLN+HppPre/WDHRofAr2IpEuujSNgJbCBd5lMl6lRw==}
 
+  linkify-it@5.0.0:
+    resolution: {integrity: sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==}
+
   lint-staged@11.2.6:
     resolution: {integrity: sha512-Vti55pUnpvPE0J9936lKl0ngVeTdSZpEdTNhASbkaWX7J5R9OEifo1INBGQuGW4zmy6OG+TcWPJ3m5yuy5Q8Tg==}
     hasBin: true
@@ -7618,6 +7627,10 @@ packages:
     resolution: {integrity: sha512-4y7uGv8bd2WdM9vpQsiQNo41Ln1NvhvDRuVt0k2JZQ+ezN2uaQes7lZeZ+QQUHOLQAtDaBJ+7wCbi+ab/KFs+w==}
     engines: {node: '>=0.10.0'}
 
+  markdown-it@14.1.0:
+    resolution: {integrity: sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg==}
+    hasBin: true
+
   math-random@1.0.4:
     resolution: {integrity: sha512-rUxjysqif/BZQH2yhd5Aaq7vXMSx9NdEsQcyA07uEzIvxgI7zIr33gGsh+RU0/XjmQpCW7RsVof1vlkvQVCK5A==}
 
@@ -7641,6 +7654,9 @@ packages:
 
   mdn-data@2.0.30:
     resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}
+
+  mdurl@2.0.0:
+    resolution: {integrity: sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w==}
 
   media-typer@0.3.0:
     resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}
@@ -8871,6 +8887,10 @@ packages:
 
   pump@3.0.0:
     resolution: {integrity: sha512-LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww==}
+
+  punycode.js@2.3.1:
+    resolution: {integrity: sha512-uxFIHU0YlHYhDQtV4R9J6a52SLx28BCjT+4ieh7IGbgwVJWO+km431c4yRlREUAsAmt/uMjQUyQHNEPf0M39CA==}
+    engines: {node: '>=6'}
 
   punycode@1.4.1:
     resolution: {integrity: sha512-jmYNElW7yvO7TV33CjSmvSiE2yco3bV2czu/OzDKdMNVZQWfxCblURLhf+47syQRBntjfLdd/H0egrzIG+oaFQ==}
@@ -10425,6 +10445,9 @@ packages:
 
   ua-parser-js@0.7.22:
     resolution: {integrity: sha512-YUxzMjJ5T71w6a8WWVcMGM6YWOTX27rCoIQgLXiWaxqXSx9D7DNjiGWn1aJIRSQ5qr0xuhra77bSIh6voR/46Q==}
+
+  uc.micro@2.1.0:
+    resolution: {integrity: sha512-ARDJmphmdvUk6Glw7y9DQ2bFkKBHwQHLi2lsaH6PPmz/Ka9sFOBsBluozhDltWmnv9u/cF6Rt87znRTPV+yp/A==}
 
   ufo@1.5.3:
     resolution: {integrity: sha512-Y7HYmWaFwPUmkoQCUIAYpKqkOf+SbVj/2fJJZ4RJMCfZp0rTGwRbzQD+HghfnhKOjL9E01okqz+ncJskGYfBNw==}
@@ -13750,7 +13773,7 @@ snapshots:
       - undici
       - utf-8-validate
 
-  '@yakies/http@1.1.1(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@yakies/http@1.1.2(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       axios: 1.6.8(debug@4.3.4)
       dayjs: 1.11.11
@@ -13810,7 +13833,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@yakies/rx-socket-client@1.7.0':
+  '@yakies/rx-socket-client@1.8.0':
     dependencies:
       '@types/jsdom': 16.2.15
       '@types/mocha': 8.2.3
@@ -19399,6 +19422,10 @@ snapshots:
       uhyphen: 0.2.0
     optional: true
 
+  linkify-it@5.0.0:
+    dependencies:
+      uc.micro: 2.1.0
+
   lint-staged@11.2.6:
     dependencies:
       cli-truncate: 2.1.0
@@ -19658,6 +19685,15 @@ snapshots:
     dependencies:
       object-visit: 1.0.1
 
+  markdown-it@14.1.0:
+    dependencies:
+      argparse: 2.0.1
+      entities: 4.5.0
+      linkify-it: 5.0.0
+      mdurl: 2.0.0
+      punycode.js: 2.3.1
+      uc.micro: 2.1.0
+
   math-random@1.0.4: {}
 
   md5.js@1.3.5:
@@ -19685,6 +19721,8 @@ snapshots:
   mdn-data@2.0.28: {}
 
   mdn-data@2.0.30: {}
+
+  mdurl@2.0.0: {}
 
   media-typer@0.3.0: {}
 
@@ -21107,6 +21145,8 @@ snapshots:
     dependencies:
       end-of-stream: 1.4.4
       once: 1.4.0
+
+  punycode.js@2.3.1: {}
 
   punycode@1.4.1: {}
 
@@ -23055,6 +23095,8 @@ snapshots:
   ua-parser-js@0.7.17: {}
 
   ua-parser-js@0.7.22: {}
+
+  uc.micro@2.1.0: {}
 
   ufo@1.5.3: {}
 

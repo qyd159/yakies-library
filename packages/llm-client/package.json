@@ -37,9 +37,11 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
-    "@yakies/http": "^1.1.1",
-    "@yakies/rx-socket-client": "^1.7.0",
+    "@yakies/http": "^1.1.2",
+    "@yakies/rx-socket-client": "^1.8.0",
     "async-wait-until": "^2.0.12",
+    "lodash-es": "^4.17.21",
+    "markdown-it": "^14.1.0",
     "openai": "^4.47.1",
     "uuid": "^9.0.1",
     "vue": "^3.4.27"

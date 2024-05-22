@@ -109,27 +109,9 @@ export default [
 			{
 				...shareOutput,
 				format: 'umd',
-				name: 'index',  //驼峰格式的 pkg.name
+				name: pkgName,  //驼峰格式的 pkg.name
 				plugins: [terser()]     //压缩代码
 			} // umd
 		]
-	},
-
-	/*
-	适合直接执行的构建
-	特点：
-	   - 可用 <script> 标签直接引入
-	   - 将所有依赖都构建在了一起
-	   - 对代码进行了压缩
-	*/
-	{
-		...shareConf,
-		external: getDependencieNames(pkg, "peerDependencies"),   //只移除 peerDependencies 中的依赖
-		output: {
-			...shareOutput,
-			format: 'iife',
-			name: pkgName,  //驼峰格式的 pkg.name
-			plugins: [terser()]     //压缩代码
-		}  // iife
 	}
 ];

@@ -1,9 +1,8 @@
 {
   "name": "@yakies/rx-socket-client",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "",
   "main": "dist/index.js",
-  "module": "src/index.ts",
   "scripts": {
     "dev": "npm run copy-files && tsc -d --outDir dist --watch",
     "build": "npm run copy-files && tsc -d --outDir dist",

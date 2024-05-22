@@ -5,14 +5,17 @@ import { getTokenFromLocal } from '@yakies/http'
 import { formatDate, processMarkdown, promisifyIpc, receivedCallbacks } from './util'
 import type { ModelType } from './shared'
 import { botName, getModelInfo, isImgModel, modelCategories } from './shared'
-import { usechatStore } from '~/store/modules/chat'
-import { useUserStore } from '~/store/modules/user'
+import {
+  createHelloWorld,
+} from './api/generated/chatgpt'
+import {unref, ref, computed, nextTick} from 'vue'
+import {isArray} from 'lodash-es'
 
 function normalizeAnswer(text) {
   return text
 }
 
-let session_id:string
+let session_id
 
 export function useChatSocket({
   records,
@@ -27,16 +30,20 @@ export function useChatSocket({
   model,
   role,
   imgSize,
-  initialRequest
+  chatStore,
+  userStore,
+  backToLogin,
+  message
 }) {
   let lastQuestion
   const socket = ref()
   const chatgpt_id = ref()
   const dialog_id = ref()
   const socketInst = ref()
-  const router = useRouter()
-  const userStore = useUserStore()
-  const chatStore = usechatStore()
+/* The line `const router = useRouter()` is importing the `useRouter` function from a library or module
+and assigning it to the variable `router`. This function is typically used in Vue.js applications to
+access the router instance and perform navigation-related tasks, such as programmatically navigating
+to different routes within the application. */
   const useGptContext = computed(() => chatStore.gptContext)
   const modelInfo = computed(() => getModelInfo(unref(model)))
   const organizedModels = computed(() => {
@@ -63,7 +70,7 @@ export function useChatSocket({
       { autoConnect: true, reconnection: true, reconnectionDelay: 1000, transports: ['websocket'], query: { token: getTokenFromLocal() } },
       async (raw_socket) => {
         socketInst.value = raw_socket
-        session_id = await initialRequest({})
+        session_id = await createHelloWorld({})
         unref(socket).emit(['sign', { id: session_id }])
         retrieveModels()
       },
@@ -105,7 +112,7 @@ export function useChatSocket({
     })
     unref(socket).on('error', (data) => {
       if (data === '会话已失效')
-        router.replace('/login')
+        backToLogin()
 
       if (data?.code === 'ECONNRESET') {
         Object.assign(unref(records)[unref(records).length - 1], {
@@ -198,7 +205,7 @@ export function useChatSocket({
         }
       }
       if (error.message === '登录身份已过期')
-        router.replace('/login')
+        backToLogin()
     }
     finally {
       responseLoading[request_id] = false
