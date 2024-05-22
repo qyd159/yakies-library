@@ -656,6 +656,73 @@ importers:
         specifier: ^4.1.3
         version: 4.9.5
 
+  packages/llm-client:
+    dependencies:
+      '@yakies/http':
+        specifier: ^1.1.1
+        version: 1.1.1(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@yakies/rx-socket-client':
+        specifier: ^1.7.0
+        version: 1.7.0
+      async-wait-until:
+        specifier: ^2.0.12
+        version: 2.0.12
+      openai:
+        specifier: ^4.47.1
+        version: 4.47.1(encoding@0.1.13)
+      uuid:
+        specifier: ^9.0.1
+        version: 9.0.1
+      vue:
+        specifier: ^3.4.27
+        version: 3.4.27(typescript@4.9.5)
+    devDependencies:
+      '@rollup/plugin-commonjs':
+        specifier: ^17.0.0
+        version: 17.1.0(rollup@2.79.1)
+      '@rollup/plugin-json':
+        specifier: ^4.1.0
+        version: 4.1.0(rollup@2.79.1)
+      '@rollup/plugin-node-resolve':
+        specifier: ^11.0.1
+        version: 11.2.1(rollup@2.79.1)
+      '@rollup/plugin-typescript':
+        specifier: ^8.0.0
+        version: 8.5.0(rollup@2.79.1)(tslib@2.6.2)(typescript@4.9.5)
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^4.10.0
+        version: 4.33.0(@typescript-eslint/parser@4.33.0(eslint@7.32.0)(typescript@4.9.5))(eslint@7.32.0)(typescript@4.9.5)
+      '@typescript-eslint/parser':
+        specifier: ^4.10.0
+        version: 4.33.0(eslint@7.32.0)(typescript@4.9.5)
+      '@yakies/cli':
+        specifier: ^0.15.0
+        version: 0.15.0(@types/express@4.17.21)(@types/node@20.12.8)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.0)
+      eslint:
+        specifier: ^7.15.0
+        version: 7.32.0
+      package-tls:
+        specifier: ^1.2.2
+        version: 1.3.2
+      path:
+        specifier: ^0.12.7
+        version: 0.12.7
+      rollup:
+        specifier: ^2.35.1
+        version: 2.79.1
+      rollup-plugin-terser:
+        specifier: ^7.0.2
+        version: 7.0.2(rollup@2.79.1)
+      ts-node:
+        specifier: ^9.1.1
+        version: 9.1.1(typescript@4.9.5)
+      tslib:
+        specifier: ^2.0.3
+        version: 2.6.2
+      typescript:
+        specifier: ^4.1.3
+        version: 4.9.5
+
   packages/rx-socket-client:
     dependencies:
       '@types/jsdom':
@@ -2859,6 +2926,9 @@ packages:
   '@types/mocha@9.1.1':
     resolution: {integrity: sha512-Z61JK7DKDtdKTWwLeElSEBcWGRLY8g95ic5FoQqI9CMx0ns/Ghep3B4DfcEimiKMvtamNVULVNKEsiwV3aQmXw==}
 
+  '@types/node-fetch@2.6.11':
+    resolution: {integrity: sha512-24xFj9R5+rfQJLRyM56qh+wnVSYhyXC2tkoBndtY0U+vubqNsYXGjufB2nn8Q6gt0LrARwL6UBtMCSVCwl4B1g==}
+
   '@types/node-forge@1.3.11':
     resolution: {integrity: sha512-FQx220y22OKNTqaByeBGqHWYz4cl94tpcxeFdvBo3wjG6XPBuZ0BNgNZRV5J5TFmmcsJ4IzsLkmGRiQbnYsBEQ==}
 
@@ -2867,6 +2937,9 @@ packages:
 
   '@types/node@14.18.63':
     resolution: {integrity: sha512-fAtCfv4jJg+ExtXhvCkCqUKZ+4ok/JQk01qDKhL5BDDoS3AxKXhV5/MAVUZyQnSEd2GT92fkgZl0pz0Q0AzcIQ==}
+
+  '@types/node@18.19.33':
+    resolution: {integrity: sha512-NR9+KrpSajr2qBVp/Yt5TU/rp+b5Mayi3+OlMlcg2cVCfRmcG5PWZ7S4+MG9PZ5gWBoc9Pd0BKSRViuBCRPu0A==}
 
   '@types/node@20.12.8':
     resolution: {integrity: sha512-NU0rJLJnshZWdE/097cdCBbyW1h4hEg0xpovcoAQYHl8dnEyp/NAOiE45pvc+Bd1Dt+2r94v2eGFpQJ4R7g+2w==}
@@ -2992,8 +3065,45 @@ packages:
     resolution: {integrity: sha512-ButUPz9E9cXMLgvAW8aLAKKJJsPu1dY1/l/E8xzLFuysowXygs6GBcyunK9rnGC4zTsnIc2mQo71rGw9U+Ykug==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
 
+  '@vue/compiler-core@3.4.27':
+    resolution: {integrity: sha512-E+RyqY24KnyDXsCuQrI+mlcdW3ALND6U7Gqa/+bVwbcpcR3BRRIckFoz7Qyd4TTlnugtwuI7YgjbvsLmxb+yvg==}
+
+  '@vue/compiler-dom@3.4.27':
+    resolution: {integrity: sha512-kUTvochG/oVgE1w5ViSr3KUBh9X7CWirebA3bezTbB5ZKBQZwR2Mwj9uoSKRMFcz4gSMzzLXBPD6KpCLb9nvWw==}
+
+  '@vue/compiler-sfc@3.4.27':
+    resolution: {integrity: sha512-nDwntUEADssW8e0rrmE0+OrONwmRlegDA1pD6QhVeXxjIytV03yDqTey9SBDiALsvAd5U4ZrEKbMyVXhX6mCGA==}
+
+  '@vue/compiler-ssr@3.4.27':
+    resolution: {integrity: sha512-CVRzSJIltzMG5FcidsW0jKNQnNRYC8bT21VegyMMtHmhW3UOI7knmUehzswXLrExDLE6lQCZdrhD4ogI7c+vuw==}
+
+  '@vue/reactivity@3.4.27':
+    resolution: {integrity: sha512-kK0g4NknW6JX2yySLpsm2jlunZJl2/RJGZ0H9ddHdfBVHcNzxmQ0sS0b09ipmBoQpY8JM2KmUw+a6sO8Zo+zIA==}
+
+  '@vue/runtime-core@3.4.27':
+    resolution: {integrity: sha512-7aYA9GEbOOdviqVvcuweTLe5Za4qBZkUY7SvET6vE8kyypxVgaT1ixHLg4urtOlrApdgcdgHoTZCUuTGap/5WA==}
+
+  '@vue/runtime-dom@3.4.27':
+    resolution: {integrity: sha512-ScOmP70/3NPM+TW9hvVAz6VWWtZJqkbdf7w6ySsws+EsqtHvkhxaWLecrTorFxsawelM5Ys9FnDEMt6BPBDS0Q==}
+
+  '@vue/server-renderer@3.4.27':
+    resolution: {integrity: sha512-dlAMEuvmeA3rJsOMJ2J1kXU7o7pOxgsNHVr9K8hB3ImIkSuBrIdy0vF66h8gf8Tuinf1TK3mPAz2+2sqyf3KzA==}
+    peerDependencies:
+      vue: 3.4.27
+
+  '@vue/shared@3.4.27':
+    resolution: {integrity: sha512-DL3NmY2OFlqmYYrzp39yi3LDkKxa5vZVwxWdQ3rG0ekuWscHraeIbnI8t+aZK7qhYqEqWKTUdijadunb9pnrgA==}
+
   '@xobotyi/scrollbar-width@1.9.5':
     resolution: {integrity: sha512-N8tkAACJx2ww8vFMneJmaAgmjAG1tnVBZJRLRcx061tmsLRZHSEZSLuGWnwPtunsSLvSqXQ2wfp7Mgqg1I+2dQ==}
+
+  '@yakies/cli@0.15.0':
+    resolution: {integrity: sha512-pA0TnHSfcCTL+9vMXdaFT3RkMOPXAPRtIMWCjo0b0w+EBOb0svVYEwGxxyYgox8bHCC7uIoK3MzRSVpWd6Qs+g==}
+    engines: {node: '>12.0'}
+    hasBin: true
+
+  '@yakies/http@1.1.1':
+    resolution: {integrity: sha512-xQYc9DyOdJGEBpmK4lUJEDlDugYJogu+IJsh7rb1cNkbDdoUPFriGPZ60wVobbOlBjmoXPYA+qOkWtmXJAnRNg==}
 
   '@yakies/mkcert@0.2.2':
     resolution: {integrity: sha512-GXW5gtS2AH24bFpwFcWzQEvYIgEOWYWKtg06MXsROw0Vjji0ohV381nt3MdSQt06+KFe1CnAGSmqPtw1n2HL+Q==}
@@ -3007,6 +3117,9 @@ packages:
   '@yakies/proxy-cache-middleware@0.2.0':
     resolution: {integrity: sha512-RPweX8rHTlLn3ewQsjhMaaCmilsow5qaa6L2OYnPtJnvkiOGK6uzXNtFnc/RUlazn3hcsLolEyYsMX36vw2TBA==}
     engines: {node: '>=0.10.0'}
+
+  '@yakies/rx-socket-client@1.7.0':
+    resolution: {integrity: sha512-molo0WgERjCpDJQlM+YSdInngPsoqxROOQ5vrWDSFcisjDH6PkeLVmTsqRmxPDzHV2btm17oQwG3k2nCARKH5w==}
 
   '@yarnpkg/lockfile@1.1.0':
     resolution: {integrity: sha512-GpSwvyXOcOOlV70vbnzjj4fW5xW/FdUF6nQEt1ENy7m4ZCczi1+/buVUPAqmGfqznsORNFzUMjctTIp8a9tuCQ==}
@@ -3022,6 +3135,10 @@ packages:
   abab@2.0.6:
     resolution: {integrity: sha512-j2afSsaIENvHZN2B8GOpF566vZ5WVk5opAiMTvWgaQT8DkbOqsTfvNAvHoRGU2zzP8cPoqys+xHTRDWW8L+/BA==}
     deprecated: Use your platform's native atob() and btoa() methods instead
+
+  abort-controller@3.0.0:
+    resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}
+    engines: {node: '>=6.5'}
 
   accepts@1.3.8:
     resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
@@ -3071,6 +3188,10 @@ packages:
   agent-base@7.1.1:
     resolution: {integrity: sha512-H0TSyFNDMomMNJQBn8wFV5YC/2eJ+VXECwOadZJT554xP6cODZHPX3H9QMQECxvrgiSOP1pHjy1sMWQVYJOUOA==}
     engines: {node: '>= 14'}
+
+  agentkeepalive@4.5.0:
+    resolution: {integrity: sha512-5GG/5IbQQpC9FpkRGsSvZI5QYeSCzlJHdpBQntCsuTOxhKD8lqKhrleg2Yi7yvMIf82Ycmmqln9U8V9qwEiJew==}
+    engines: {node: '>= 8.0.0'}
 
   aggregate-error@3.1.0:
     resolution: {integrity: sha512-4I7Td01quW/RpocfNayFdFVk1qSuoh0E7JrbRJ16nH01HhKFQ88INq9Sd+nd72zqRySlr9BmDA8xlEJ6vJMrYA==}
@@ -3294,6 +3415,10 @@ packages:
 
   async-limiter@1.0.1:
     resolution: {integrity: sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==}
+
+  async-wait-until@2.0.12:
+    resolution: {integrity: sha512-SXy/vDs6UPJMG6YeEYOQ4ilA/JnGxk187KPGqFx9O+qVxsjkSl+jH+3P50qSNyMpEmDgr8qOFGOKCJckWb1i7A==}
+    engines: {node: '>= 0.12.0', npm: '>= 1.0.0'}
 
   async@1.5.2:
     resolution: {integrity: sha512-nSVgobk4rv61R9PUSDtYt7mPVB2olxNR5RWJcAsH676/ef11bUZwvu7+RGYrYauVdDPcO519v68wRhXQtxsV9w==}
@@ -5455,6 +5580,10 @@ packages:
   event-stream@3.3.4:
     resolution: {integrity: sha512-QHpkERcGsR0T7Qm3HNJSyXKEEj8AHNxkY3PK8TS2KJvQ7NiSHe3DDpwVKKtoYprL/AreyzFBeIkBIWChAqn60g==}
 
+  event-target-shim@5.0.1:
+    resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}
+    engines: {node: '>=6'}
+
   eventemitter3@1.2.0:
     resolution: {integrity: sha512-DOFqA1MF46fmZl2xtzXR3MPCRsXqgoFqdXcrCVYM3JNnfUeHTm/fh/v/iU7gBFpwkuBmoJPAm5GuhdDfSEJMJA==}
 
@@ -5787,6 +5916,9 @@ packages:
 
   forever-agent@0.6.1:
     resolution: {integrity: sha512-j0KLYPhm6zeac4lz3oJ3o65qvgQCcPubiyotZrXqEaG4hNagNYO8qdlUrX5vwqv9ohqeT/Z3j6+yW067yWWdUw==}
+
+  form-data-encoder@1.7.2:
+    resolution: {integrity: sha512-qfqtYan3rxrnCk1VYaA4H+Ms9xdpPqvLZa6xmMgFvhO32x7/3J/ExcTd6qpxM0vH2GdMI+poehyBZvqfMTto8A==}
 
   form-data-encoder@1.9.0:
     resolution: {integrity: sha512-rahaRMkN8P8d/tgK/BLPX+WBVM27NbvdXBxqQujBtkDAIFspaRqN7Od7lfdGQA6KAD+f82fYCLBq1ipvcu8qLw==}
@@ -6333,6 +6465,9 @@ packages:
   human-signals@2.1.0:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
+
+  humanize-ms@1.2.1:
+    resolution: {integrity: sha512-Fl70vYtsAFb/C06PTS9dZBo7ihau+Tu/DNCk/OyHhea07S+aeMWpFFkUaXRa8fI+ScZbEI8dfSxwY7gxZ9SAVQ==}
 
   hyphenate-style-name@1.0.4:
     resolution: {integrity: sha512-ygGZLjmXfPHj+ZWh6LwbC37l43MhfztxetbFCoYTM2VjkIUpeHgSNn7QIyVFj7YQ1Wl9Cbw5sholVJPzWvC2MQ==}
@@ -8056,6 +8191,10 @@ packages:
   open@8.4.2:
     resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==}
     engines: {node: '>=12'}
+
+  openai@4.47.1:
+    resolution: {integrity: sha512-WWSxhC/69ZhYWxH/OBsLEirIjUcfpQ5+ihkXKp06hmeYXgBBIUCa9IptMzYx6NdkiOCsSGYCnTIsxaic3AjRCQ==}
+    hasBin: true
 
   opencollective@1.0.3:
     resolution: {integrity: sha512-YBRI0Qa8+Ui0/STV1qYuPrJm889PT3oCPHMVoL+8Y3nwCffj7PSrB2NlGgrhgBKDujxTjxknHWJ/FiqOsYcIDw==}
@@ -10453,6 +10592,10 @@ packages:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
 
+  uuid@9.0.1:
+    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    hasBin: true
+
   v8-compile-cache@2.3.0:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}
 
@@ -10576,6 +10719,14 @@ packages:
   vtils@4.113.3:
     resolution: {integrity: sha512-qx3S9f/At8I4b44JiVaHCptMnRTVKGmd7vk4sElsnzy31f1iXYrOOUl0UvpYp41Y7g97V1HrHLDQa9ZIN3BeMw==}
 
+  vue@3.4.27:
+    resolution: {integrity: sha512-8s/56uK6r01r1icG/aEOHqyMVxd1bkYcSe9j8HcKtr/xTOFWvnzIVTehNW+5Yt89f+DLBe4A569pnZLS5HzAMA==}
+    peerDependencies:
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   w3c-hr-time@1.0.2:
     resolution: {integrity: sha512-z8P5DvDNjKDoFIHK7q8r8lackT6l+jo/Ye3HOle7l9nICP9lf1Ci25fy9vHd0JOWewkIFzXIEig3TdKT7JQ5fQ==}
     deprecated: Use your platform's native performance.now() and performance.timeOrigin.
@@ -10596,6 +10747,10 @@ packages:
 
   wcwidth@1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
+
+  web-streams-polyfill@3.3.3:
+    resolution: {integrity: sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==}
+    engines: {node: '>= 8'}
 
   web-streams-polyfill@4.0.0-beta.3:
     resolution: {integrity: sha512-QW95TCTaHmsYfHDybGMwO5IJIM93I/6vTRk+daHTWFPhwh+C8Cg7j7XyKrwrj8Ib6vYXe0ocYNrmzY4xAAN6ug==}
@@ -12047,7 +12202,7 @@ snapshots:
       tslib: 2.6.2
     optionalDependencies:
       playwright: 1.43.1
-      puppeteer: 21.11.0(encoding@0.1.13)(typescript@5.4.5)
+      puppeteer: 21.11.0(encoding@0.1.13)(typescript@4.9.5)
     optional: true
 
   '@crawlee/browser@3.9.2(playwright@1.43.1)(puppeteer@21.11.0(encoding@0.1.13)(typescript@5.4.5))':
@@ -13253,6 +13408,11 @@ snapshots:
 
   '@types/mocha@9.1.1': {}
 
+  '@types/node-fetch@2.6.11':
+    dependencies:
+      '@types/node': 14.18.63
+      form-data: 4.0.0
+
   '@types/node-forge@1.3.11':
     dependencies:
       '@types/node': 14.18.63
@@ -13260,6 +13420,10 @@ snapshots:
   '@types/node@12.20.55': {}
 
   '@types/node@14.18.63': {}
+
+  '@types/node@18.19.33':
+    dependencies:
+      undici-types: 5.26.5
 
   '@types/node@20.12.8':
     dependencies:
@@ -13430,7 +13594,177 @@ snapshots:
   '@vladfrangu/async_event_emitter@2.2.4':
     optional: true
 
+  '@vue/compiler-core@3.4.27':
+    dependencies:
+      '@babel/parser': 7.24.5
+      '@vue/shared': 3.4.27
+      entities: 4.5.0
+      estree-walker: 2.0.2
+      source-map-js: 1.2.0
+
+  '@vue/compiler-dom@3.4.27':
+    dependencies:
+      '@vue/compiler-core': 3.4.27
+      '@vue/shared': 3.4.27
+
+  '@vue/compiler-sfc@3.4.27':
+    dependencies:
+      '@babel/parser': 7.24.5
+      '@vue/compiler-core': 3.4.27
+      '@vue/compiler-dom': 3.4.27
+      '@vue/compiler-ssr': 3.4.27
+      '@vue/shared': 3.4.27
+      estree-walker: 2.0.2
+      magic-string: 0.30.10
+      postcss: 8.4.38
+      source-map-js: 1.2.0
+
+  '@vue/compiler-ssr@3.4.27':
+    dependencies:
+      '@vue/compiler-dom': 3.4.27
+      '@vue/shared': 3.4.27
+
+  '@vue/reactivity@3.4.27':
+    dependencies:
+      '@vue/shared': 3.4.27
+
+  '@vue/runtime-core@3.4.27':
+    dependencies:
+      '@vue/reactivity': 3.4.27
+      '@vue/shared': 3.4.27
+
+  '@vue/runtime-dom@3.4.27':
+    dependencies:
+      '@vue/runtime-core': 3.4.27
+      '@vue/shared': 3.4.27
+      csstype: 3.1.3
+
+  '@vue/server-renderer@3.4.27(vue@3.4.27(typescript@4.9.5))':
+    dependencies:
+      '@vue/compiler-ssr': 3.4.27
+      '@vue/shared': 3.4.27
+      vue: 3.4.27(typescript@4.9.5)
+
+  '@vue/shared@3.4.27': {}
+
   '@xobotyi/scrollbar-width@1.9.5': {}
+
+  '@yakies/cli@0.15.0(@types/express@4.17.21)(@types/node@20.12.8)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.0)':
+    dependencies:
+      '@babel/core': 7.24.5
+      '@babel/plugin-transform-modules-commonjs': 7.24.1(@babel/core@7.24.5)
+      '@gitbeaker/node': 34.7.0
+      '@yakies/http': link:packages/http
+      '@yakies/mkcert': 0.2.2(encoding@0.1.13)(vite@3.2.10(@types/node@20.12.8)(terser@5.31.0))
+      '@yakies/proxy-cache-middleware': 0.2.0
+      axios: 1.6.8(debug@4.3.4)
+      axios-extra: 0.0.5
+      axios-header-interceptor: 1.0.1(axios@1.6.8)
+      base64-img: 1.0.4
+      body-parser: 1.20.2
+      browser-sync: 2.26.7
+      chalk: 4.1.2
+      chokidar: 1.7.0
+      clipboardy: 3.0.0
+      compression: 1.7.4
+      consola: 2.15.3
+      contra: 1.9.4
+      copy-dir: 0.3.0
+      cors: 2.8.5
+      crawler: 1.5.0
+      cross-spawn: 7.0.3
+      dev-ip: 1.0.1
+      eazy-logger: 3.1.0
+      express: 4.19.2
+      extract-zip: 2.0.1
+      form-data: 4.0.0
+      fs-extra: 5.0.0
+      http-proxy: 1.18.1
+      http-proxy-middleware: 2.0.6(@types/express@4.17.21)
+      http-server: 14.1.1
+      inline-source: 6.2.0
+      isolated-vm: 4.7.2
+      javascript-obfuscator: 0.18.8
+      jquery: 3.7.1
+      js-yaml: 4.1.0
+      jsdom: 16.7.0
+      json2css: 5.2.2
+      keymirror: 0.1.1
+      kolorist: 1.8.0
+      liftoff: 3.1.0
+      lodash: 4.17.21
+      log4js: 6.9.1
+      minimist: 1.2.8
+      mkdirp: 0.5.6
+      morgan: 1.10.0
+      nan: 2.19.0
+      node-cmd-promise: 1.0.0
+      node-gzip: 1.1.2
+      node-html-parser: 1.4.9
+      node-request-interceptor: 0.6.3
+      node-rtsp-stream: 0.0.9
+      opener: 1.5.2
+      ora: 3.4.0
+      pdf2pic: 1.4.0
+      picocolors: 1.0.0
+      portfinder: 1.0.32
+      prompts: 2.4.2
+      puppeteer: 21.11.0(encoding@0.1.13)(typescript@4.9.5)
+      puppeteer-core: 21.11.0(encoding@0.1.13)
+      query-string: 6.14.1
+      requirejs: 2.3.6
+      rimraf: 2.7.1
+      selfsigned: 2.4.1
+      stream-throttle: 0.1.3
+      svg2png-wasm: 1.4.1
+      tslib: 2.6.2
+      typescript: 5.4.5
+      vite: 3.2.10(@types/node@20.12.8)(terser@5.31.0)
+      vtils: 4.113.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      walk-up: 1.0.2
+      ws: 8.17.0
+      xlsx: 0.18.5
+      yapi-to-typescript: 3.37.1(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      yargs: 17.7.2
+    optionalDependencies:
+      '@builder.io/gpt-crawler': 1.4.0(puppeteer@21.11.0(encoding@0.1.13)(typescript@5.4.5))
+      axios-cookiejar-support: 5.0.1(axios@1.6.8)(tough-cookie@4.1.4)
+      crypto-random-string: 5.0.0
+      sharp: 0.31.3
+      tough-cookie: 4.1.4
+    transitivePeerDependencies:
+      - '@types/express'
+      - '@types/node'
+      - bufferutil
+      - canvas
+      - debug
+      - encoding
+      - less
+      - react
+      - react-dom
+      - sass
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - undici
+      - utf-8-validate
+
+  '@yakies/http@1.1.1(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      axios: 1.6.8(debug@4.3.4)
+      dayjs: 1.11.11
+      localStorage: 1.0.4
+      lodash: 4.17.21
+      md5: 2.3.0
+      qs: 6.12.1
+      yapi-to-typescript: 3.37.1(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    transitivePeerDependencies:
+      - debug
+      - encoding
+      - react
+      - react-dom
+      - supports-color
 
   '@yakies/mkcert@0.2.2(encoding@0.1.13)(vite@3.2.10(@types/node@14.18.63)(terser@5.31.0))':
     dependencies:
@@ -13439,6 +13773,17 @@ snapshots:
       debug: 4.3.4(supports-color@8.1.1)
       picocolors: 1.0.0
       vite: 3.2.10(@types/node@14.18.63)(terser@5.31.0)
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
+  '@yakies/mkcert@0.2.2(encoding@0.1.13)(vite@3.2.10(@types/node@20.12.8)(terser@5.31.0))':
+    dependencies:
+      '@octokit/rest': 19.0.13(encoding@0.1.13)
+      axios: 1.6.8(debug@4.3.4)
+      debug: 4.3.4(supports-color@8.1.1)
+      picocolors: 1.0.0
+      vite: 3.2.10(@types/node@20.12.8)(terser@5.31.0)
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -13465,6 +13810,25 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@yakies/rx-socket-client@1.7.0':
+    dependencies:
+      '@types/jsdom': 16.2.15
+      '@types/mocha': 8.2.3
+      '@types/node': 14.18.63
+      ignore-styles: 5.0.1
+      jsdom: 16.7.0
+      lodash-es: 4.17.21
+      queueing-subject: 1.0.0(rxjs@7.8.1)
+      rxjs: 7.8.1
+      rxjs-websockets: 9.0.0(rxjs@7.8.1)
+      socket.io-client: 4.7.5
+      xml-formatter: 2.6.1
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
+
   '@yarnpkg/lockfile@1.1.0': {}
 
   '@yarnpkg/parsers@3.0.0-rc.46':
@@ -13477,6 +13841,10 @@ snapshots:
       argparse: 2.0.1
 
   abab@2.0.6: {}
+
+  abort-controller@3.0.0:
+    dependencies:
+      event-target-shim: 5.0.1
 
   accepts@1.3.8:
     dependencies:
@@ -13518,6 +13886,10 @@ snapshots:
       debug: 4.3.4(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
+
+  agentkeepalive@4.5.0:
+    dependencies:
+      humanize-ms: 1.2.1
 
   aggregate-error@3.1.0:
     dependencies:
@@ -13724,6 +14096,8 @@ snapshots:
   async-each@1.0.6: {}
 
   async-limiter@1.0.1: {}
+
+  async-wait-until@2.0.12: {}
 
   async@1.5.2: {}
 
@@ -15196,6 +15570,15 @@ snapshots:
       path-type: 4.0.0
       yaml: 1.10.2
 
+  cosmiconfig@9.0.0(typescript@4.9.5):
+    dependencies:
+      env-paths: 2.2.1
+      import-fresh: 3.3.0
+      js-yaml: 4.1.0
+      parse-json: 5.2.0
+    optionalDependencies:
+      typescript: 4.9.5
+
   cosmiconfig@9.0.0(typescript@5.4.5):
     dependencies:
       env-paths: 2.2.1
@@ -16636,6 +17019,8 @@ snapshots:
       through: 2.3.8
     optional: true
 
+  event-target-shim@5.0.1: {}
+
   eventemitter3@1.2.0: {}
 
   eventemitter3@4.0.0: {}
@@ -17077,6 +17462,8 @@ snapshots:
 
   forever-agent@0.6.1: {}
 
+  form-data-encoder@1.7.2: {}
+
   form-data-encoder@1.9.0: {}
 
   form-data-encoder@2.1.4:
@@ -17338,7 +17725,7 @@ snapshots:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.0.5
+      minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
 
@@ -17761,6 +18148,10 @@ snapshots:
   human-id@1.0.2: {}
 
   human-signals@2.1.0: {}
+
+  humanize-ms@1.2.1:
+    dependencies:
+      ms: 2.1.3
 
   hyphenate-style-name@1.0.4: {}
 
@@ -19964,6 +20355,19 @@ snapshots:
       is-docker: 2.2.1
       is-wsl: 2.2.0
 
+  openai@4.47.1(encoding@0.1.13):
+    dependencies:
+      '@types/node': 18.19.33
+      '@types/node-fetch': 2.6.11
+      abort-controller: 3.0.0
+      agentkeepalive: 4.5.0
+      form-data-encoder: 1.7.2
+      formdata-node: 4.4.1
+      node-fetch: 2.7.0(encoding@0.1.13)
+      web-streams-polyfill: 3.3.3
+    transitivePeerDependencies:
+      - encoding
+
   opencollective@1.0.3:
     dependencies:
       babel-polyfill: 6.23.0
@@ -20720,6 +21124,18 @@ snapshots:
       - bufferutil
       - encoding
       - supports-color
+      - utf-8-validate
+
+  puppeteer@21.11.0(encoding@0.1.13)(typescript@4.9.5):
+    dependencies:
+      '@puppeteer/browsers': 1.9.1
+      cosmiconfig: 9.0.0(typescript@4.9.5)
+      puppeteer-core: 21.11.0(encoding@0.1.13)
+    transitivePeerDependencies:
+      - bufferutil
+      - encoding
+      - supports-color
+      - typescript
       - utf-8-validate
 
   puppeteer@21.11.0(encoding@0.1.13)(typescript@5.4.5):
@@ -22827,6 +23243,8 @@ snapshots:
 
   uuid@8.3.2: {}
 
+  uuid@9.0.1: {}
+
   v8-compile-cache@2.3.0: {}
 
   v8-compile-cache@2.4.0: {}
@@ -22958,6 +23376,16 @@ snapshots:
       - react-dom
       - supports-color
 
+  vue@3.4.27(typescript@4.9.5):
+    dependencies:
+      '@vue/compiler-dom': 3.4.27
+      '@vue/compiler-sfc': 3.4.27
+      '@vue/runtime-dom': 3.4.27
+      '@vue/server-renderer': 3.4.27(vue@3.4.27(typescript@4.9.5))
+      '@vue/shared': 3.4.27
+    optionalDependencies:
+      typescript: 4.9.5
+
   w3c-hr-time@1.0.2:
     dependencies:
       browser-process-hrtime: 1.0.0
@@ -22982,6 +23410,8 @@ snapshots:
   wcwidth@1.0.1:
     dependencies:
       defaults: 1.0.4
+
+  web-streams-polyfill@3.3.3: {}
 
   web-streams-polyfill@4.0.0-beta.3: {}
 
