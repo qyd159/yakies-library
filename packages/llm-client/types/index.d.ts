@@ -1,5 +1,5 @@
 import type { ModelType } from './shared';
-export declare function useChatSocket({ records, responseLoading, responsingText, autoScrollEnabled, scrollToBottom, voiceTextPopoverVisible, content, responsing, setContent, model, role, imgSize, chatStore, userStore, backToLogin, message }: {
+export declare function useChatSocket({ records, responseLoading, responsingText, autoScrollEnabled, scrollToBottom, voiceTextPopoverVisible, content, responsing, setContent, model, role, imgSize, chatStore, userStore, backToLogin, message, initSession }: {
     records: any;
     responseLoading: any;
     responsingText: any;
@@ -16,6 +16,7 @@ export declare function useChatSocket({ records, responseLoading, responsingText
     userStore: any;
     backToLogin: any;
     message: any;
+    initSession: any;
 }): {
     init: () => Promise<void>;
     chatgpt_id: import("vue").Ref<any>;

@@ -1,12 +1,7 @@
-import markdownIt from 'markdown-it'
 import {unref} from 'vue'
 
 const SIGN_REGEXP = /([yMdhsm])(\1*)/g
 const DEFAULT_PATTERN = 'yyyy-MM-dd'
-
-export const md = markdownIt({
-  breaks: true,
-})
 
 function padding(s, len) {
   len = len - (`${s}`).length

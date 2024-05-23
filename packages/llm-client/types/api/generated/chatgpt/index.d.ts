@@ -261,7 +261,7 @@ export type FetchChatResponse = any;
  */
 export declare const fetchChat: {
     (requestData: FetchChatRequest, ...args: RequestFunctionRestArgs<any>): any;
-    requestConfig: RequestConfig<"http://127.0.0.1:50505/mock/0", "", "", "/chat", "data", string, "s" | "limit" | "page" | "user" | "model" | "category" | "dialog_id", false>;
+    requestConfig: RequestConfig<"http://127.0.0.1:50505/mock/0", "", "", "/chat", "data", string, "s" | "model" | "user" | "limit" | "page" | "category" | "dialog_id", false>;
 };
 /**
  * 接口 \/chat 的 **请求类型**
@@ -437,7 +437,7 @@ export type FetchChatAdjacentResponse = any;
  */
 export declare const fetchChatAdjacent: {
     (requestData: FetchChatAdjacentRequest, ...args: RequestFunctionRestArgs<any>): any;
-    requestConfig: RequestConfig<"http://127.0.0.1:50505/mock/0", "", "", "/chat/adjacent", "data", string, "dialog_id" | "id" | "total", false>;
+    requestConfig: RequestConfig<"http://127.0.0.1:50505/mock/0", "", "", "/chat/adjacent", "data", string, "id" | "dialog_id" | "total", false>;
 };
 /**
  * 接口 \/dialog 的 **请求类型**
@@ -967,7 +967,7 @@ export type FetchPictureResponse = any;
  */
 export declare const fetchPicture: {
     (requestData: FetchPictureRequest, ...args: RequestFunctionRestArgs<any>): any;
-    requestConfig: RequestConfig<"http://127.0.0.1:50505/mock/0", "", "", "/picture", "data", string, "s" | "limit" | "page" | "user" | "model" | "category" | "dialog_id", false>;
+    requestConfig: RequestConfig<"http://127.0.0.1:50505/mock/0", "", "", "/picture", "data", string, "s" | "model" | "user" | "limit" | "page" | "category" | "dialog_id", false>;
 };
 /**
  * 接口 \/picture\/{id} 的 **请求类型**
