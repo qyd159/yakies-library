@@ -10,6 +10,7 @@ import {
 } from './api/generated/chatgpt'
 import {unref, ref, computed, nextTick} from 'vue'
 import {isArray} from 'lodash-es'
+import SocketClient from '@yakies/rx-socket-client'
 
 function normalizeAnswer(text) {
   return text
@@ -63,7 +64,6 @@ to different routes within the application. */
   const exhausted = computed(() => chatStore.getGptTokens.consumed >= chatStore.getGptTokens.total)
 
   async function init() {
-    const SocketClient = (await import('@yakies/rx-socket-client')).default
     socket.value = new SocketClient(
       // 生产环境临时使用chatgpt.yakies.cn, 腾讯云cdn不支持代理websocket,会有10s超时的限制，后面使用系统字典配置
       `${window.location.protocol}//gateway.yakies.cn/chatgpt/socket.io`,
