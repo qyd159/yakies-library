@@ -5,9 +5,6 @@ import { getTokenFromLocal } from '@yakies/http'
 import { formatDate, processMarkdown, promisifyIpc, receivedCallbacks } from './util'
 import type { ModelType } from './shared'
 import { botName, getModelInfo, isImgModel, modelCategories } from './shared'
-import {
-  createHelloWorld,
-} from './api/generated/chatgpt'
 import {unref, ref, computed, nextTick} from 'vue'
 import {isArray} from 'lodash-es'
 import SocketClient from '@yakies/rx-socket-client'
@@ -34,7 +31,8 @@ export function useChatSocket({
   chatStore,
   userStore,
   backToLogin,
-  message
+  message,
+  initSession
 }) {
   let lastQuestion
   const socket = ref()
@@ -70,7 +68,7 @@ to different routes within the application. */
       { autoConnect: true, reconnection: true, reconnectionDelay: 1000, transports: ['websocket'], query: { token: getTokenFromLocal() } },
       async (raw_socket) => {
         socketInst.value = raw_socket
-        session_id = await createHelloWorld({})
+        session_id = await initSession({})
         unref(socket).emit(['sign', { id: session_id }])
         retrieveModels()
       },
