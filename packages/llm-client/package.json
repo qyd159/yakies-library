@@ -1,6 +1,6 @@
 {
   "name": "@yakies/llm-client",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "构建与chatgpt-api服务通信的通用前端库，支持web和小程序",
   "main": "dist/llm-client.cjs.js",
   "module": "dist/llm-client.es.js",

@@ -263,3 +263,5 @@ to different routes within the application. */
 
   return { init, chatgpt_id, dialog_id, createAIRequest, sendMsg, stopGeneration, retrieveModels, organizedModels, socketInst }
 }
+
+export * from './shared'

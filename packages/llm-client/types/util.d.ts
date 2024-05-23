@@ -1,4 +1,3 @@
-export declare const md: any;
 export declare function getQueryStringByName(name: any): string;
 export declare const formatDate: {
     format(date: any, pattern: any): any;
