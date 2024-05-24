@@ -9,7 +9,7 @@ export let socket: any;
 export function connect(hostPath, options: Partial<ManagerOptions & SocketOptions> = { transports: ['websocket'] }) {
   const parsedUrl = new SimpleURL(hostPath);
   const scheme = parsedUrl.protocol === 'http:' ? 'ws://' : 'wss://';
-  const host = parsedUrl.host;
+  const host = parsedUrl.hostname + (parsedUrl.port ? `:${parsedUrl.port}` : '');
   socket = io(`${scheme}${host}`, { ...options, path: parsedUrl.pathname });
   const socket$ = of(socket);
   connect$ = socket$.pipe(

@@ -1,47 +1,54 @@
 export default class SimpleURL {
-    _url: any;
-    protocol: string;
-    hostname: string;
-    port: string;
-    pathname: string;
-    search: string;
-    hash: string;
-    host: string;
+    protocol: any;
+    hostname: any;
+    port: any;
+    pathname: any;
+    search: any;
+    hash: any;
     constructor(url) {
-        this._url = url;
-        this._parseUrl();
+      this._parseUrl(url);
     }
-
-    _parseUrl() {
-        const parser = document.createElement('a');
-        parser.href = this._url;
-        
-        this.protocol = parser.protocol;
-        this.hostname = parser.hostname;
-        this.port = parser.port;
-        this.pathname = parser.pathname.startsWith('/') ? parser.pathname : '/' + parser.pathname;
-        this.search = parser.search;
-        this.hash = parser.hash;
-        this.host = this.hostname + (this.port ? ':' + this.port : '');
+  
+    _parseUrl(url) {
+      const pattern = /^(?:(\w+):\/\/)?([^\/:]+)(?::(\d+))?(\/[^?#]*)?(\?[^#]*)?(#.*)?$/;
+      const matches = url.match(pattern) || [];
+  
+      this.protocol = matches[1] || '';
+      this.hostname = matches[2] || '';
+      this.port = matches[3] || '';
+      this.pathname = matches[4] || '/';
+      this.search = matches[5] || '';
+      this.hash = matches[6] || '';
     }
-
+  
     get href() {
-        return `${this.protocol}//${this.host}${this.pathname}${this.search}${this.hash}`;
+      const portPart = this.port ? `:${this.port}` : '';
+      const protocolPart = this.protocol ? `${this.protocol}://` : '';
+      
+      return `${protocolPart}${this.hostname}${portPart}${this.pathname}${this.search}${this.hash}`;
     }
-
-    set href(value) {
-        this._url = value;
-        this._parseUrl();
+  
+    set href(url) {
+      this._parseUrl(url);
     }
-
+  
     toString() {
-        return this.href;
+      return this.href;
     }
-
-    // 示例：简化版的searchParams设置
+  
     setSearchParams(key, value) {
-        const searchParams = new URLSearchParams(this.search);
-        searchParams.set(key, value);
-        this.search = '?' + searchParams.toString(); // 确保search以?开头
+      const searchParams = this._parseSearchParams(this.search);
+      searchParams[key] = value;
+      this.search = '?' + Object.entries(searchParams).map(([k, v]:any) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&');
     }
-}
+  
+    _parseSearchParams(search) {
+      if (!search) return {};
+  
+      return search.substring(1).split('&').reduce((params, pair) => {
+        const [key, value] = pair.split('=').map(decodeURIComponent);
+        params[key] = value;
+        return params;
+      }, {});
+    }
+  }
