@@ -64,7 +64,7 @@ to different routes within the application. */
   async function init() {
     socket.value = new SocketClient(
       // 生产环境临时使用chatgpt.yakies.cn, 腾讯云cdn不支持代理websocket,会有10s超时的限制，后面使用系统字典配置
-      `${window.location.protocol}//gateway.yakies.cn/chatgpt/socket.io`,
+      `${(window?.location.protocol)??'https:'}//gateway.yakies.cn/chatgpt/socket.io`,
       { autoConnect: true, reconnection: true, reconnectionDelay: 1000, transports: ['websocket'], query: { token: getTokenFromLocal() } },
       async (raw_socket) => {
         socketInst.value = raw_socket

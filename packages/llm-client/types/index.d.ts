@@ -37,3 +37,4 @@ export declare function useChatSocket({ records, responseLoading, responsingText
     }[]>;
     socketInst: import("vue").Ref<any>;
 };
+export * from './shared';
