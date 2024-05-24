@@ -1,6 +1,6 @@
 {
   "name": "@yakies/llm-client",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "构建与chatgpt-api服务通信的通用前端库，支持web和小程序",
   "main": "dist/llm-client.cjs.js",
   "module": "dist/llm-client.es.js",
@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@yakies/http": "^1.1.2",
-    "@yakies/rx-socket-client": "^1.9.0",
+    "@yakies/rx-socket-client": "^1.10.0",
     "async-wait-until": "^2.0.12",
     "lodash-es": "^4.17.21",
     "markdown-it": "^14.1.0",
