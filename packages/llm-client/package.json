@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@yakies/http": "^1.1.2",
-    "@yakies/rx-socket-client": "^1.8.0",
+    "@yakies/rx-socket-client": "^1.9.0",
     "async-wait-until": "^2.0.12",
     "lodash-es": "^4.17.21",
     "markdown-it": "^14.1.0",
