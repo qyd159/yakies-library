@@ -1,6 +1,6 @@
 {
   "name": "@yakies/http",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "用于在浏览器端或nodejs端请求接口",
   "main": "dist/http.cjs.js",
   "module": "dist/http.es.js",
@@ -22,7 +22,6 @@
   "dependencies": {
     "axios": "^1.6.5",
     "dayjs": "^1.11.9",
-    "localStorage": "^1.0.4",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "qs": "^6.11.2",
