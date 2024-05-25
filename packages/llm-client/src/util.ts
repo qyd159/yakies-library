@@ -84,8 +84,8 @@ export async function promisifyIpc(request_id, sendData, emit, callback?) {
     let messageInterval
     let prevReceivedTime = performance.now()
     const t = setInterval(() => {
-      // 两次消息的返回时长超过10秒，主动放弃
-      if (messageInterval > 10e3) {
+      // 两次消息的返回时长超过20秒，主动放弃
+      if (messageInterval > 20e3) {
         clearInterval(t)
         // eslint-disable-next-line prefer-promise-reject-errors
         reject('timeout')
