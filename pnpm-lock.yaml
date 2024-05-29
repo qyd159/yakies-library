@@ -591,9 +591,6 @@ importers:
       dayjs:
         specifier: ^1.11.9
         version: 1.11.11
-      localStorage:
-        specifier: ^1.0.4
-        version: 1.0.4
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -662,8 +659,8 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@yakies/rx-socket-client':
-        specifier: ^1.8.0
-        version: 1.8.0
+        specifier: ^1.10.0
+        version: 1.10.0
       async-wait-until:
         specifier: ^2.0.12
         version: 2.0.12
@@ -971,6 +968,12 @@ importers:
 
   packages/vite-plugins:
     dependencies:
+      chokidar:
+        specifier: ^1.7.0
+        version: 1.7.0
+      fs-extra:
+        specifier: ^5.0.0
+        version: 5.0.0
       magic-string:
         specifier: ^0.30.7
         version: 0.30.10
@@ -990,6 +993,12 @@ importers:
       '@rollup/plugin-typescript':
         specifier: ^8.0.0
         version: 8.5.0(rollup@2.79.1)(tslib@2.6.2)(typescript@4.9.5)
+      '@types/chokidar':
+        specifier: ^2.1.3
+        version: 2.1.3
+      '@types/fs-extra':
+        specifier: ^11.0.1
+        version: 11.0.4
       '@typescript-eslint/eslint-plugin':
         specifier: ^4.10.0
         version: 4.33.0(@typescript-eslint/parser@4.33.0(eslint@7.32.0)(typescript@4.9.5))(eslint@7.32.0)(typescript@4.9.5)
@@ -2815,6 +2824,10 @@ packages:
   '@types/chai@4.3.16':
     resolution: {integrity: sha512-PatH4iOdyh3MyWtmHVFXLWCCIhUbopaltqddG9BzB+gMIzee2MJrvd+jouii9Z3wzQJruGWAm7WOMjgfG8hQlQ==}
 
+  '@types/chokidar@2.1.3':
+    resolution: {integrity: sha512-6qK3xoLLAhQVTucQGHTySwOVA1crHRXnJeLwqK6KIFkkKa2aoMFXh+WEi8PotxDtvN6MQJLyYN9ag9P6NLV81w==}
+    deprecated: This is a stub types definition. chokidar provides its own type definitions, so you do not need this installed.
+
   '@types/color-convert@2.0.3':
     resolution: {integrity: sha512-2Q6wzrNiuEvYxVQqhh7sXM2mhIhvZR/Paq4FdsQkOMgWsCIkKvSGj8Le1/XalulrmgOzPMqNa0ix+ePY4hTrfg==}
 
@@ -3124,8 +3137,8 @@ packages:
     resolution: {integrity: sha512-RPweX8rHTlLn3ewQsjhMaaCmilsow5qaa6L2OYnPtJnvkiOGK6uzXNtFnc/RUlazn3hcsLolEyYsMX36vw2TBA==}
     engines: {node: '>=0.10.0'}
 
-  '@yakies/rx-socket-client@1.8.0':
-    resolution: {integrity: sha512-2cwlf2O1eRuTh6p5I8ZN+2eBFpiaGM+LGsbA5N+Qxth3IF/MxEeqNJYdY9IExOjFgLfaeKFPKsTVDcP7Dk9fwg==}
+  '@yakies/rx-socket-client@1.10.0':
+    resolution: {integrity: sha512-I4WySzs2+y5MONvPkPcUfcUjCCJw8OIdD1MG+xPwhqT1qB/+CIyb4dmcowRfLTIusgVi0s3lIzMsEggckUXLTg==}
 
   '@yarnpkg/lockfile@1.1.0':
     resolution: {integrity: sha512-GpSwvyXOcOOlV70vbnzjj4fW5xW/FdUF6nQEt1ENy7m4ZCczi1+/buVUPAqmGfqznsORNFzUMjctTIp8a9tuCQ==}
@@ -12225,7 +12238,7 @@ snapshots:
       tslib: 2.6.2
     optionalDependencies:
       playwright: 1.43.1
-      puppeteer: 21.11.0(encoding@0.1.13)(typescript@4.9.5)
+      puppeteer: 21.11.0(encoding@0.1.13)(typescript@5.4.5)
     optional: true
 
   '@crawlee/browser@3.9.2(playwright@1.43.1)(puppeteer@21.11.0(encoding@0.1.13)(typescript@5.4.5))':
@@ -13298,6 +13311,12 @@ snapshots:
 
   '@types/chai@4.3.16': {}
 
+  '@types/chokidar@2.1.3':
+    dependencies:
+      chokidar: 1.7.0
+    transitivePeerDependencies:
+      - supports-color
+
   '@types/color-convert@2.0.3':
     dependencies:
       '@types/color-name': 1.1.4
@@ -13347,7 +13366,7 @@ snapshots:
   '@types/glob@8.1.0':
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.12.8
+      '@types/node': 14.18.63
 
   '@types/graceful-fs@4.1.9':
     dependencies:
@@ -13833,7 +13852,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@yakies/rx-socket-client@1.8.0':
+  '@yakies/rx-socket-client@1.10.0':
     dependencies:
       '@types/jsdom': 16.2.15
       '@types/mocha': 8.2.3
